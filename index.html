@@ -248,18 +248,13 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
 
 /* ---- Booking ---- */
 .book{border:1px solid var(--rule-dark);border-radius:5px;background:#1B1F28;
-  padding:clamp(20px,2.6vw,32px);display:grid;gap:clamp(16px,2vw,24px)}
-.slotgrid{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(78px,1fr))}
-.slot{padding:11px 8px;border:1px solid #333846;border-radius:3px;background:#161920;
-  color:#C7C2BB;font-size:13px;text-align:center;line-height:1.35;
-  transition:border-color .15s var(--ease),background .15s var(--ease),color .15s var(--ease)}
-.slot b{display:block;font-size:15px;color:#EFEBE5;font-family:var(--serif)}
-.slot:hover{border-color:var(--tan-lt);color:#EFEBE5}
-.slot[aria-pressed="true"]{background:var(--tan);border-color:var(--tan);color:#12151B}
-.slot[aria-pressed="true"] b{color:#12151B}
+  padding:clamp(24px,3vw,40px);display:grid;gap:clamp(14px,1.8vw,20px);justify-items:start}
 .book-lab{font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--tan-lt)}
-.book-out{display:flex;flex-wrap:wrap;gap:12px;align-items:center;
-  border-top:1px solid var(--rule-dark);padding-top:clamp(14px,1.8vw,20px)}
+.book-line{font-family:var(--serif);font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.34;
+  color:#F1EDE7;max-width:24ch}
+.book-note{font-size:13.5px;color:#8E8A84;max-width:36ch;line-height:1.55}
+.btn-wide{width:100%;justify-content:center;padding:17px 28px;font-size:16px}
+@media (min-width:520px){.btn-wide{width:auto;min-width:17rem}}
 
 /* ---- Full value model, moved here from the product ---- */
 .calc-grid{display:grid;gap:clamp(20px,2.6vw,40px)}
@@ -679,25 +674,19 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
     </div>
 
     <div class="book rv d2">
-      <div class="stack tight">
-        <p class="book-lab"><span class="de">1 · Tag wählen</span><span class="en">1 · Pick a day</span></p>
-        <div class="slotgrid" id="days"></div>
-      </div>
-      <div class="stack tight">
-        <p class="book-lab"><span class="de">2 · Uhrzeit wählen</span><span class="en">2 · Pick a time</span></p>
-        <div class="slotgrid" id="times"></div>
-      </div>
-      <div class="book-out">
-        <a class="btn btn-primary" id="gcal" href="#" target="_blank" rel="noopener">
-          <span class="de">In Google Kalender eintragen</span><span class="en">Add to Google Calendar</span>
-        </a>
-        <a class="btn btn-ghost" id="cly" href="https://calendly.com/closewise/20min" target="_blank" rel="noopener">
-          <span class="de">Alle Zeiten in Calendly</span><span class="en">All times in Calendly</span>
-        </a>
-      </div>
-      <p class="small" style="color:#8E8A84;margin:0" id="pick">
-        <span class="de">Wählen Sie Tag und Uhrzeit — der Termin wird vorausgefüllt.</span>
-        <span class="en">Pick a day and a time — the invite is pre-filled.</span>
+      <p class="book-lab"><span class="de">Termin</span><span class="en">Book a call</span></p>
+      <p class="book-line">
+        <span class="de">Sie wählen einen Zeitpunkt, der Ihnen passt — direkt in unserem Kalender.</span>
+        <span class="en">You pick a time that suits you — straight from our calendar.</span>
+      </p>
+      <!-- Replace CALENDLY_URL below with the real scheduling link. -->
+      <a class="btn btn-primary btn-wide" href="https://calendly.com/closewise/20min"
+         target="_blank" rel="noopener">
+        <span class="de">Freie Zeiten ansehen</span><span class="en">See available times</span>
+      </a>
+      <p class="book-note">
+        <span class="de">20 Minuten · Videocall · Sie brauchen nur den Kassenexport eines Abends.</span>
+        <span class="en">20 minutes · video call · all you need is one evening's POS export.</span>
       </p>
     </div>
   </div>
@@ -755,7 +744,7 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
       var l = b.getAttribute("data-lang");
       root.setAttribute("data-lang", l); root.setAttribute("lang", l);
       btns.forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-      buildDays(); paintBooking(); calc();
+      calc();
     });
   });
 
@@ -911,79 +900,6 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
   });
   calc();
 
-  /* ---- Booking: pick a slot, hand it to Google Calendar ---- */
-  var daysEl = document.getElementById("days"), timesEl = document.getElementById("times");
-  var gcal = document.getElementById("gcal"), pick = document.getElementById("pick");
-  var TIMES = ["09:00","11:00","14:00","16:00","18:00"];
-  var chosenDay = null, chosenTime = null;
-
-  function nextWeekdays(n) {
-    var out = [], d = new Date(); d.setHours(0,0,0,0);
-    while (out.length < n) {
-      d.setDate(d.getDate() + 1);
-      if (d.getDay() !== 0 && d.getDay() !== 6) out.push(new Date(d));
-    }
-    return out;
-  }
-  function buildDays() {
-    var loc = isEN() ? "en-GB" : "de-DE";
-    daysEl.innerHTML = "";
-    nextWeekdays(4).forEach(function (d, idx) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "slot";
-      b.setAttribute("aria-pressed", String(chosenDay ? +chosenDay === +d : idx === 0));
-      b.innerHTML = "<b>" + d.toLocaleDateString(loc, { weekday: "short" }) + "</b>" +
-        d.toLocaleDateString(loc, { day: "2-digit", month: "2-digit" });
-      b.addEventListener("click", function () {
-        chosenDay = d;
-        [].slice.call(daysEl.children).forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-        paintBooking();
-      });
-      if (idx === 0 && !chosenDay) chosenDay = d;
-      daysEl.appendChild(b);
-    });
-  }
-  function buildTimes() {
-    timesEl.innerHTML = "";
-    TIMES.forEach(function (t, idx) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "slot";
-      b.innerHTML = "<b>" + t + "</b>";
-      b.setAttribute("aria-pressed", String(chosenTime ? chosenTime === t : idx === 2));
-      b.addEventListener("click", function () {
-        chosenTime = t;
-        [].slice.call(timesEl.children).forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-        paintBooking();
-      });
-      if (idx === 2 && !chosenTime) chosenTime = t;
-      timesEl.appendChild(b);
-    });
-  }
-  function stamp(d, hhmm, addMin) {
-    var p = hhmm.split(":");
-    var x = new Date(d); x.setHours(+p[0], +p[1] + (addMin || 0), 0, 0);
-    var z = function (n) { return String(n).padStart(2, "0"); };
-    return "" + x.getFullYear() + z(x.getMonth() + 1) + z(x.getDate()) + "T" +
-      z(x.getHours()) + z(x.getMinutes()) + "00";
-  }
-  function paintBooking() {
-    if (!chosenDay || !chosenTime) return;
-    var title = isEN() ? "Closewise — 20 min intro" : "Closewise — 20 Min Kennenlernen";
-    var det = isEN()
-      ? "Twenty minutes. Bring one evening's POS export and we reconcile it live."
-      : "Zwanzig Minuten. Bringen Sie den Kassenexport eines Abends mit — wir rechnen ihn live durch.";
-    gcal.href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-      "&text=" + encodeURIComponent(title) +
-      "&dates=" + stamp(chosenDay, chosenTime) + "/" + stamp(chosenDay, chosenTime, 20) +
-      "&ctz=Europe/Berlin" +
-      "&details=" + encodeURIComponent(det) +
-      "&location=" + encodeURIComponent("Video call");
-    var loc = isEN() ? "en-GB" : "de-DE";
-    var when = chosenDay.toLocaleDateString(loc, { weekday: "long", day: "numeric", month: "long" });
-    pick.textContent = (isEN() ? "Selected: " : "Gewählt: ") + when + ", " + chosenTime +
-      (isEN() ? " · 20 minutes, Berlin time" : " Uhr · 20 Minuten, Berliner Zeit");
-  }
-  buildDays(); buildTimes(); paintBooking();
 })();
 </script>
 
