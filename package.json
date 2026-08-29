@@ -1,0 +1,8 @@
+{
+  "name": "closewise-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Closewise — Berlin landing page",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node server.js" }
+}
