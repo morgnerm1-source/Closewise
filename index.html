@@ -160,9 +160,13 @@ a{color:inherit;text-decoration:none}
 /* ---- Hero ---- */
 .hero{padding:clamp(48px,7.5vh,98px) 0 clamp(28px,4vh,48px);scroll-margin-top:78px}
 .hero-top{display:grid;gap:clamp(20px,3vw,50px);align-items:start}
-@media (min-width:960px){.hero-top{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
-.hero .display{max-width:15ch}
-.hero-right{display:flex;flex-direction:column;gap:clamp(17px,2.1vw,26px);padding-top:clamp(4px,1.1vw,12px)}
+@media (min-width:1000px){
+  .hero-top{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center;
+    gap:clamp(28px,3.6vw,64px)}
+}
+.hero-left{display:flex;flex-direction:column;gap:clamp(16px,2vw,26px);min-width:0}
+.hero .display{max-width:13ch}
+.hero .lede{max-width:40ch}
 
 /* ---- Metrics ---- */
 .metrics{display:grid;gap:clamp(18px,2.8vw,44px);padding:clamp(24px,3.2vw,40px) 0;
@@ -343,35 +347,35 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-top">
-      <h1 class="display rv" data-t="heroH1"></h1>
-      <div class="hero-right rv d1">
-        <p class="lede" data-t="heroSub"></p>
-        <div class="btns">
+      <div class="hero-left">
+        <h1 class="display rv" data-t="heroH1"></h1>
+        <p class="lede rv d1" data-t="heroSub"></p>
+        <div class="btns rv d2">
           <a class="btn btn-solid btn-lg" href="#termin" data-t="ctaBook"></a>
           <a class="btn btn-line btn-lg" href="https://closewise-production.up.railway.app" target="_blank" rel="noopener" data-t="ctaDemo"></a>
         </div>
       </div>
-    </div>
 
-    <div class="rv d2" style="margin-top:clamp(32px,5vh,62px)">
-      <div class="demo" id="demo" aria-hidden="true">
-        <div class="demo-bar">
-          <span class="demo-t" data-t="demoTitle"></span>
-          <span class="demo-count" id="demoCount">0 / 14</span>
-        </div>
-        <div class="demo-rows" id="demoRows"></div>
-        <div class="demo-foot">
-          <span id="demoFoot"></span>
-          <span class="demo-count" id="demoMs"></span>
+      <div class="rv d2">
+        <div class="demo" id="demo" aria-hidden="true">
+          <div class="demo-bar">
+            <span class="demo-t" data-t="demoTitle"></span>
+            <span class="demo-count" id="demoCount">0 / 14</span>
+          </div>
+          <div class="demo-rows" id="demoRows"></div>
+          <div class="demo-foot">
+            <span id="demoFoot"></span>
+            <span class="demo-count" id="demoMs"></span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="metrics rv d3" style="margin-top:clamp(28px,4vh,50px)">
+    <div class="metrics rv d3" style="margin-top:clamp(30px,4.5vh,56px)">
       <div class="metric"><span class="v">39 → 7</span><span class="k" data-t="m1"></span></div>
       <div class="metric"><span class="v" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
       <div class="metric"><span class="v" id="mYear">11.000 €</span><span class="k" data-t="m3"></span></div>
-      <div class="metric"><span class="v">0,3 ms</span><span class="k" data-t="m4"></span></div>
+      <div class="metric"><span class="v" id="mMs">0,3 ms</span><span class="k" data-t="m4"></span></div>
     </div>
   </div>
 </section>
@@ -1292,6 +1296,7 @@ disclaimer:"الصور تعرض بيانات توضيحية؛ الأرقام ت�
     document.getElementById("mYear").textContent = money(11000);
     document.getElementById("nNight").textContent = money(30);
     document.getElementById("nYear").textContent = money(11000);
+    document.getElementById("mMs").textContent = ms();
     paintDemo();
     calc();
   }
@@ -1303,20 +1308,27 @@ disclaimer:"الصور تعرض بيانات توضيحية؛ الأرقام ت�
   [].forEach.call(document.querySelectorAll(".rv"), function (el) { io.observe(el); });
 
   /* ---- The night reconciling itself ---- */
+  // Amounts are numbers, not strings: they are formatted in the reader's
+  // language every time the language changes.
   var CHECKS = [
-    ["REST-114","12","84,20",0],["REST-115","4","156,90",0],["REST-116","27","42,50",0],
-    ["REST-117","B3","28,80",1],["REST-118","9","212,40",0],["REST-119","31","67,15",0],
-    ["REST-120","18","95,60",0],["REST-121","6","552,77",1],["REST-122","B1","39,90",0],
-    ["REST-123","22","128,35",0],["REST-124","15","74,05",0],["REST-125","8","302,32",1],
-    ["REST-126","B5","51,70",0],["REST-127","2","88,45",0]
+    ["REST-114","12",84.20,0],["REST-115","4",156.90,0],["REST-116","27",42.50,0],
+    ["REST-117","B3",28.80,1],["REST-118","9",212.40,0],["REST-119","31",67.15,0],
+    ["REST-120","18",95.60,0],["REST-121","6",552.77,1],["REST-122","B1",39.90,0],
+    ["REST-123","22",128.35,0],["REST-124","15",74.05,0],["REST-125","8",302.32,1],
+    ["REST-126","B5",51.70,0],["REST-127","2",88.45,0]
   ];
+  function money2(n) {
+    return new Intl.NumberFormat(LOC[lang], { style:"currency", currency:"EUR",
+      minimumFractionDigits:2, maximumFractionDigits:2 }).format(n);
+  }
+  function ms() { return nf(0.3, 1) + " ms"; }
   var rowsEl = document.getElementById("demoRows");
   var count = document.getElementById("demoCount"), foot = document.getElementById("demoFoot"),
       msEl = document.getElementById("demoMs"), ROW = 30;
   CHECKS.forEach(function (c) {
     var r = document.createElement("div"); r.className = "drow";
     r.innerHTML = '<span>' + c[0] + '</span><span class="nm">' + c[1] + '</span>' +
-      '<span class="am">' + c[2] + ' €</span><span class="st"><span class="pill ' +
+      '<span class="am"></span><span class="st"><span class="pill ' +
       (c[3] ? "no" : "ok") + '"></span></span>';
     rowsEl.appendChild(r);
   });
@@ -1327,9 +1339,11 @@ disclaimer:"الصور تعرض بيانات توضيحية؛ الأرقام ت�
 
   function paintDemo() {
     rows.forEach(function (r, n) {
+      r.querySelector(".am").textContent = money2(CHECKS[n][2]);
       var p = r.querySelector(".pill");
       if (p.classList.contains("show")) p.textContent = CHECKS[n][3] ? T[lang].demoNo : T[lang].demoOk;
     });
+    if (msEl.textContent) msEl.textContent = ms();
     if (finished) foot.innerHTML = T[lang].demoDone;
     else if (!timer) foot.textContent = T[lang].demoReady;
   }
@@ -1342,7 +1356,7 @@ disclaimer:"الصور تعرض بيانات توضيحية؛ الأرقام ت�
   function finish() {
     sweep.classList.remove("on"); finished = true;
     foot.innerHTML = T[lang].demoDone;
-    msEl.textContent = "0,3 ms";
+    msEl.textContent = ms();
     count.textContent = rows.length + " / " + rows.length;
   }
   function run() {
