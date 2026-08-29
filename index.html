@@ -198,6 +198,8 @@ figcaption{font-size:13px;color:var(--ink-3)}
   padding:clamp(20px,2.6vw,34px);display:grid;gap:clamp(16px,2vw,26px)}
 .sec.cream .calc{background:#FBF8F4}
 .calc-lab{display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-size:14px;color:var(--ink-2)}
+.calc-lab label{min-width:0}
+.calc-lab b{white-space:nowrap;flex:none}
 .calc-lab b{font-family:var(--serif);font-size:clamp(1.2rem,1.7vw,1.5rem);color:var(--ink)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:20px;background:none;cursor:pointer}
 input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--rule);border-radius:2px}
@@ -258,6 +260,41 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
 .book-lab{font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--tan-lt)}
 .book-out{display:flex;flex-wrap:wrap;gap:12px;align-items:center;
   border-top:1px solid var(--rule-dark);padding-top:clamp(14px,1.8vw,20px)}
+
+/* ---- Full value model, moved here from the product ---- */
+.calc-grid{display:grid;gap:clamp(20px,2.6vw,40px)}
+@media (min-width:940px){.calc-grid{grid-template-columns:minmax(0,19rem) minmax(0,1fr);align-items:start}}
+.calc-panel{border:1px solid var(--rule);border-radius:4px;background:#FBF8F4;
+  padding:clamp(18px,2.2vw,26px);display:grid;gap:clamp(13px,1.6vw,18px)}
+.calc-hero{border:1px solid var(--rule);border-radius:4px;background:#FBF8F4;
+  padding:clamp(20px,2.6vw,32px)}
+.calc-hero .v{font-family:var(--serif);font-size:clamp(2.2rem,4.4vw,3.5rem);line-height:1;
+  color:var(--green);display:block}
+.calc-hero .s{margin-top:10px;color:var(--ink-2);font-size:clamp(.95rem,1.15vw,1.08rem)}
+.calc-hero hr{border:0;height:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding-top:2px;margin:clamp(16px,2vw,22px) 0 0}
+.calc-hero .h{margin-top:clamp(12px,1.6vw,18px);font-size:14px;color:var(--ink-2)}
+.tiles{display:grid;gap:clamp(14px,2vw,26px);border-top:1px solid var(--rule);
+  padding-top:clamp(16px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))}
+.tile .k{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);display:block}
+.tile .v{font-family:var(--serif);font-size:clamp(1.4rem,2.1vw,1.9rem);line-height:1;display:block;margin-top:7px}
+.tile .n{font-size:12.5px;color:var(--ink-3);display:block;margin-top:6px}
+.tile .v.g{color:var(--green)}
+.scale-tbl{width:100%;border-collapse:collapse;font-size:clamp(12.5px,.95vw,14px)}
+.scale-tbl th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--ink);
+  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.scale-tbl td{padding:9px 10px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.scale-tbl tr:last-child td{border-bottom:0}
+.scale-tbl .num{text-align:right;font-variant-numeric:tabular-nums}
+.scale-tbl .net{color:var(--green);font-weight:700}
+.scale-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:#FBF8F4}
+.more{border-top:1px solid var(--rule);padding-top:clamp(12px,1.5vw,16px)}
+.more summary{list-style:none;cursor:pointer;font-size:13px;color:var(--ink-2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";color:var(--tan);font-size:17px;line-height:1}
+.more[open] summary::after{content:"–"}
+.more .inner{display:grid;gap:clamp(12px,1.5vw,17px);padding-top:clamp(13px,1.6vw,18px)}
 </style>
 
 <header class="nav">
@@ -528,30 +565,92 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
         <span class="en">The saving, measured against the price</span></p></div>
     </div>
 
-    <div class="calc rv d2">
-      <div class="stack tight">
+    <div class="calc-grid rv d2">
+      <!-- Inputs -->
+      <div class="calc-panel">
         <p class="eyebrow" style="color:var(--ink-3)"><span class="de">Ihre Zahlen</span><span class="en">Your numbers</span></p>
-        <div class="calc-lab">
-          <label for="outlets"><span class="de">Outlets im Haus</span><span class="en">Outlets in the property</span></label>
-          <b id="outletsVal">2</b>
+
+        <div>
+          <div class="calc-lab"><label for="outlets"><span class="de">Outlets im Haus</span><span class="en">Outlets in the property</span></label><b id="vOutlets">2</b></div>
+          <input type="range" id="outlets" min="1" max="12" step="1" value="2">
         </div>
-        <input type="range" id="outlets" min="1" max="12" step="1" value="2">
-        <div class="calc-lab">
-          <label for="wage"><span class="de">Stundenkosten Schichtleitung</span><span class="en">Duty-manager hourly cost</span></label>
-          <b id="wageVal">30 €</b>
+        <div>
+          <div class="calc-lab"><label for="wage"><span class="de">Stundenkosten Schichtleitung</span><span class="en">Duty-manager hourly cost</span></label><b id="vWage">30 €</b></div>
+          <input type="range" id="wage" min="20" max="60" step="1" value="30">
         </div>
-        <input type="range" id="wage" min="20" max="60" step="1" value="30">
+        <div>
+          <div class="calc-lab"><label for="manual"><span class="de">Minuten je Abschluss, heute</span><span class="en">Minutes per close, today</span></label><b id="vManual">65</b></div>
+          <input type="range" id="manual" min="20" max="120" step="5" value="65">
+        </div>
+
+        <details class="more">
+          <summary><span class="de">Weitere Annahmen</span><span class="en">More assumptions</span></summary>
+          <div class="inner">
+            <div>
+              <div class="calc-lab"><label for="exc"><span class="de">Ausnahmen pro Nacht</span><span class="en">Exceptions per night</span></label><b id="vExc">4</b></div>
+              <input type="range" id="exc" min="0" max="20" step="1" value="4">
+            </div>
+            <div>
+              <div class="calc-lab"><label for="props"><span class="de">Häuser</span><span class="en">Properties</span></label><b id="vProps">1</b></div>
+              <input type="range" id="props" min="1" max="40" step="1" value="1">
+            </div>
+            <div>
+              <div class="calc-lab"><label for="closes"><span class="de">Abschlüsse pro Monat</span><span class="en">Closes per month</span></label><b id="vCloses">30</b></div>
+              <input type="range" id="closes" min="1" max="31" step="1" value="30">
+            </div>
+            <div>
+              <div class="calc-lab"><label for="price"><span class="de">Preis je Outlet / Monat</span><span class="en">Price per outlet / month</span></label><b id="vPrice">249 €</b></div>
+              <input type="range" id="price" min="0" max="600" step="1" value="249">
+            </div>
+            <p class="calc-note"><span class="de">Closewise-Zeit: 2,5 Min zum Öffnen plus 1,5 Min je geprüfter Ausnahme.</span>
+              <span class="en">Closewise time: 2.5 min to open plus 1.5 min per exception reviewed.</span></p>
+            <button type="button" class="btn btn-ghost" id="resetCalc" style="padding:9px 16px;font-size:13px">
+              <span class="de">Zurücksetzen</span><span class="en">Reset</span></button>
+          </div>
+        </details>
       </div>
-      <div class="calc-out">
-        <div><span class="calc-big" id="saveYear">18.720 €</span>
-          <p class="calc-note"><span class="de">Arbeitszeit zurück, pro Jahr</span><span class="en">Labour returned, per year</span></p></div>
-        <div><span class="calc-big" id="netYear" style="color:var(--ink)">12.744 €</span>
-          <p class="calc-note"><span class="de">Netto, nach Abzug von Closewise</span><span class="en">Net, after paying for Closewise</span></p></div>
-        <div><span class="calc-big" id="hoursMo" style="color:var(--ink);font-size:clamp(1.5rem,2.4vw,2.1rem)">52 h</span>
-          <p class="calc-note"><span class="de">Pro Monat zurück im Betrieb</span><span class="en">Per month, back on the floor</span></p></div>
+
+      <!-- Results -->
+      <div class="stack" style="gap:clamp(16px,2vw,24px)">
+        <div class="calc-hero">
+          <p class="eyebrow" style="color:var(--ink-3)"><span class="de">Arbeitszeit zurück</span><span class="en">Labour returned</span></p>
+          <span class="v" id="rYear">20.340 €</span>
+          <p class="s"><span class="de">pro Jahr · <span id="rMonth">1.695 €</span> pro Monat</span>
+            <span class="en">per year · <span id="rMonthEn">1.695 €</span> per month</span></p>
+          <hr>
+          <p class="h" id="rHours">56,5 Stunden im Monat zurück im Betrieb · über 2 Outlets</p>
+        </div>
+
+        <div class="tiles">
+          <div class="tile"><span class="k"><span class="de">Rendite</span><span class="en">Return</span></span>
+            <span class="v g" id="rRoi">3,4×</span>
+            <span class="n"><span class="de">je eingesetztem Euro</span><span class="en">per euro spent</span></span></div>
+          <div class="tile"><span class="k"><span class="de">Netto / Jahr</span><span class="en">Net / year</span></span>
+            <span class="v g" id="rNet">14.364 €</span>
+            <span class="n"><span class="de">nach Abzug des Abos</span><span class="en">after the subscription</span></span></div>
+          <div class="tile"><span class="k"><span class="de">Abo / Jahr</span><span class="en">Subscription / year</span></span>
+            <span class="v" id="rCost">5.976 €</span>
+            <span class="n" id="rCostN">2 Outlets × 249 €</span></div>
+          <div class="tile"><span class="k"><span class="de">Je Abschluss</span><span class="en">Per close</span></span>
+            <span class="v" id="rSaved">56,5 Min</span>
+            <span class="n" id="rRed">87 % weniger Zeit</span></div>
+        </div>
+
+        <div class="stack tight">
+          <p class="eyebrow" style="color:var(--ink-3)"><span class="de">Hochgerechnet auf die Gruppe</span><span class="en">At chain scale</span></p>
+          <div class="scale-wrap">
+            <table class="scale-tbl">
+              <thead><tr>
+                <th><span class="de">Outlets</span><span class="en">Outlets</span></th>
+                <th class="num"><span class="de">Arbeitszeit zurück</span><span class="en">Labour returned</span></th>
+                <th class="num"><span class="de">Abo</span><span class="en">Subscription</span></th>
+                <th class="num"><span class="de">Netto / Jahr</span><span class="en">Net / year</span></th>
+              </tr></thead>
+              <tbody id="scaleRows"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <p class="calc-note"><span class="de">Grundlage: 52 von 65 Minuten je Abschluss, 30 Abschlüsse im Monat, 249 € je Outlet und Monat.</span>
-        <span class="en">Based on 52 of 65 minutes per close, 30 closes a month, €249 per outlet per month.</span></p>
     </div>
   </div>
 </section>
@@ -656,7 +755,7 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
       var l = b.getAttribute("data-lang");
       root.setAttribute("data-lang", l); root.setAttribute("lang", l);
       btns.forEach(function (o) { o.setAttribute("aria-pressed", String(o === b)); });
-      buildDays(); paintBooking();
+      buildDays(); paintBooking(); calc();
     });
   });
 
@@ -725,22 +824,92 @@ details .ans{padding-top:11px;color:var(--ink-2);max-width:64ch}
     es.forEach(function (e) { if (e.isIntersecting && !started) { started = true; setTimeout(run, 600); } });
   }, { threshold: 0.3 }).observe(document.getElementById("demo"));
 
-  /* ---- Calculator ---- */
-  var outlets = document.getElementById("outlets"), wage = document.getElementById("wage");
-  var oVal = document.getElementById("outletsVal"), wVal = document.getElementById("wageVal");
-  var saveY = document.getElementById("saveYear"), netY = document.getElementById("netYear"),
-      hrsM = document.getElementById("hoursMo");
-  var PRICE = 249, CLOSES = 30, SAVED = 52;
-  function nf(n) { return new Intl.NumberFormat("de-DE").format(Math.round(n)); }
-  function calc() {
-    var o = +outlets.value, h = +wage.value;
-    var hoursMonth = SAVED * CLOSES * o / 60, labourYear = hoursMonth * h * 12, costYear = PRICE * o * 12;
-    oVal.textContent = o; wVal.textContent = h + " €";
-    saveY.textContent = nf(labourYear) + " €";
-    netY.textContent = nf(labourYear - costYear) + " €";
-    hrsM.textContent = nf(hoursMonth) + " h";
+  /* ---- Value model, moved here from the product ----
+     automated = 2.5 min to open the close + 1.5 min per exception reviewed. */
+  var OVERHEAD = 2.5, PER_EXC = 1.5;
+  var DEF = { outlets:2, wage:30, manual:65, exc:4, props:1, closes:30, price:249 };
+  var F = {};
+  ["outlets","wage","manual","exc","props","closes","price"].forEach(function (k) {
+    F[k] = document.getElementById(k);
+  });
+  var OUT = {};
+  ["vOutlets","vWage","vManual","vExc","vProps","vCloses","vPrice",
+   "rYear","rMonth","rMonthEn","rHours","rRoi","rNet","rCost","rCostN","rSaved","rRed","scaleRows"]
+    .forEach(function (k) { OUT[k] = document.getElementById(k); });
+
+  function nf(n, dp) {
+    return new Intl.NumberFormat(isEN() ? "en-GB" : "de-DE",
+      { minimumFractionDigits: dp || 0, maximumFractionDigits: dp || 0 }).format(n);
   }
-  outlets.addEventListener("input", calc); wage.addEventListener("input", calc); calc();
+  // German writes 20.340 €; English writes €20,340.
+  function money(n) {
+    var v = nf(Math.round(n));
+    return isEN() ? "€" + v : v + " €";
+  }
+
+  function model(o) {
+    var automated = OVERHEAD + PER_EXC * o.exc;
+    var saved = Math.max(0, o.manual - automated);
+    var count = o.outlets * o.props;
+    var hours = saved * o.closes * count / 60;
+    var labour = hours * o.wage;
+    var cost = o.price * count;
+    return { automated: automated, saved: saved, count: count, hours: hours,
+             labourMonth: labour, labourYear: labour * 12,
+             costMonth: cost, costYear: cost * 12,
+             netYear: (labour - cost) * 12,
+             roi: cost > 0 ? labour / cost : 0,
+             reduction: o.manual > 0 ? saved / o.manual : 0 };
+  }
+  function read() {
+    return { outlets:+F.outlets.value, wage:+F.wage.value, manual:+F.manual.value,
+             exc:+F.exc.value, props:+F.props.value, closes:+F.closes.value, price:+F.price.value };
+  }
+  function calc() {
+    var o = read(), m = model(o), en = isEN();
+    OUT.vOutlets.textContent = o.outlets;
+    OUT.vWage.textContent = money(o.wage);
+    OUT.vManual.textContent = o.manual;
+    OUT.vExc.textContent = o.exc;
+    OUT.vProps.textContent = o.props;
+    OUT.vCloses.textContent = o.closes;
+    OUT.vPrice.textContent = money(o.price);
+
+    OUT.rYear.textContent = money(m.labourYear);
+    OUT.rMonth.textContent = money(m.labourMonth);
+    OUT.rMonthEn.textContent = money(m.labourMonth);
+    OUT.rHours.textContent = en
+      ? nf(m.hours, 1) + " hours a month back on the floor · across " + m.count +
+        (m.count === 1 ? " outlet" : " outlets")
+      : nf(m.hours, 1) + " Stunden im Monat zurück im Betrieb · über " + m.count +
+        (m.count === 1 ? " Outlet" : " Outlets");
+    OUT.rRoi.textContent = nf(m.roi, 1) + "×";
+    OUT.rNet.textContent = money(m.netYear);
+    OUT.rCost.textContent = money(m.costYear);
+    OUT.rCostN.textContent = m.count + (en ? " outlets × " : " Outlets × ") + money(o.price);
+    OUT.rSaved.textContent = nf(m.saved, 1) + (en ? " min" : " Min");
+    OUT.rRed.textContent = en ? nf(m.reduction * 100) + "% less time"
+      : nf(m.reduction * 100) + " % weniger Zeit";
+
+    OUT.scaleRows.innerHTML = "";
+    [1, 4, 12, 40].forEach(function (n) {
+      var r = model({ outlets:n, wage:o.wage, manual:o.manual, exc:o.exc,
+                      props:1, closes:o.closes, price:o.price });
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + n + "</td>" +
+        '<td class="num">' + money(r.labourYear) + "</td>" +
+        '<td class="num">' + money(r.costYear) + "</td>" +
+        '<td class="num net">' + money(r.netYear) + "</td>";
+      if (n === m.count) tr.style.background = "#EFE7DC";
+      OUT.scaleRows.appendChild(tr);
+    });
+  }
+  Object.keys(F).forEach(function (k) { F[k].addEventListener("input", calc); });
+  document.getElementById("resetCalc").addEventListener("click", function () {
+    Object.keys(DEF).forEach(function (k) { F[k].value = DEF[k]; });
+    calc();
+  });
+  calc();
 
   /* ---- Booking: pick a slot, hand it to Google Calendar ---- */
   var daysEl = document.getElementById("days"), timesEl = document.getElementById("times");
