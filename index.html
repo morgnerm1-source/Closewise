@@ -14,7 +14,7 @@
 <title>Closewise Berlin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600&display=swap">
 
 <style>
 /* ============================================================
@@ -25,9 +25,9 @@
    Ten languages, Arabic included, driven from one dictionary.
    ============================================================ */
 :root{
-  --paper:#FAFAF9; --paper-2:#F3F1ED; --white:#FFFFFF;
-  --ink:#111826; --ink-2:#39424F; --muted:#606976; --muted-2:#8A93A1;
-  --line:#E4E2DD; --line-2:#D3D2CC;
+  --paper:#F6F7F8; --paper-2:#ECEEF0; --white:#FFFFFF;
+  --ink:#111826; --ink-2:#39424F; --muted:#59626E; --muted-2:#67707C;
+  --line:#DEE2E6; --line-2:#C6CDD4;
   --navy:#0D1420; --navy-2:#182130; --navy-3:#222E40; --navy-line:#2A3546;
   --on-dark:#F5F4F1; --on-dark-2:#C3C8D1; --on-dark-3:#8A93A1;
   --tan:#A58E78; --tan-lt:#C9B79F; --tan-text:#7A644B;
@@ -35,12 +35,15 @@
   --good:#2E6B4E; --good-bg:#E9F0EB;
   --bad:#B4231F;  --bad-bg:#FBF0EF;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
-  --sans:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  /* Every figure on this page is a till figure. They line up in a column
+     the way they do on a Z-report, so they are set like one. */
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
   --ease:cubic-bezier(.16,1,.3,1);
-  --gut:clamp(20px,4.4vw,72px); --sec:clamp(70px,9.5vh,140px);
+  --gut:clamp(20px,4.2vw,64px); --sec:clamp(54px,7vh,104px);
   --r:6px; --r-lg:10px;
 }
-html[lang="ar"]{--serif:"Noto Naskh Arabic",Georgia,serif;--sans:"Noto Naskh Arabic",Inter,sans-serif}
+html[lang="ar"]{--serif:"Noto Naskh Arabic",Georgia,serif;--sans:"Noto Naskh Arabic","IBM Plex Sans",sans-serif}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
@@ -78,20 +81,29 @@ a{color:inherit;text-decoration:none}
   .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
   .split-l{grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);align-items:center}
+  /* Read the chart first here; everywhere else the words come first. */
+  .split-l.flip{grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr)}
+  .split-l.flip>*:first-child{order:2}
 }
 .stack{display:flex;flex-direction:column;gap:clamp(15px,1.9vw,24px);min-width:0}
 .stack.tight{gap:clamp(9px,1.1vw,14px)}
 
 /* ---- Type ---- */
-.display{font-family:var(--serif);font-weight:400;font-size:clamp(2.5rem,6vw,4.5rem);
+.display{font-family:var(--serif);font-weight:400;font-size:clamp(2.3rem,5.1vw,3.9rem);
   line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
-.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.95rem,3.9vw,3rem);
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);
   line-height:1.09;letter-spacing:-.012em;text-wrap:balance;max-width:22ch}
 .h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.25rem,1.8vw,1.55rem);
   line-height:1.22;letter-spacing:-.008em}
-.lede{font-size:clamp(1.02rem,1.3vw,1.2rem);line-height:1.45;color:var(--ink-2);max-width:46ch}
+.lede{font-size:clamp(1rem,1.15vw,1.1rem);line-height:1.5;color:var(--ink-2);max-width:44ch}
 .body{font-size:15px;line-height:1.58;color:var(--muted);max-width:46ch}
-.eyebrow{font-size:13px;font-weight:600;color:var(--tan-text);letter-spacing:.02em}
+.eyebrow{display:flex;align-items:baseline;gap:12px;
+  padding-top:11px;border-top:1px solid var(--ink);
+  font-family:var(--mono);font-size:11.5px;font-weight:500;
+  letter-spacing:.10em;text-transform:uppercase;color:var(--ink-2)}
+.eyebrow::before{content:attr(data-n);color:var(--muted-2)}
+.on-dark .eyebrow{border-top-color:rgba(245,244,241,.35);color:var(--on-dark-2)}
+.on-dark .eyebrow::before{color:var(--on-dark-3)}
 .label{font-size:13px;font-weight:500;color:var(--muted)}
 .tiny{font-size:13px;color:var(--muted);line-height:1.55}
 .on-dark{color:var(--on-dark)}
@@ -180,8 +192,11 @@ a{color:inherit;text-decoration:none}
 /* ---- Metrics ---- */
 .metrics{display:grid;gap:clamp(18px,2.8vw,44px);padding:clamp(24px,3.2vw,40px) 0;
   border-top:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
-.metric .v{font-family:var(--serif);font-size:clamp(2rem,3.2vw,2.8rem);line-height:1;display:block}
-.metric .k{font-size:14px;color:var(--muted);margin-top:8px;display:block;max-width:24ch}
+.metric .v{font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.2vw,2rem);
+  letter-spacing:-.02em;line-height:1.1;display:block;font-variant-numeric:tabular-nums}
+.metric .v.txt{font-family:var(--sans);font-weight:600;letter-spacing:-.015em;
+  font-size:clamp(1.35rem,2vw,1.8rem)}
+.metric .k{font-size:14px;color:var(--muted);margin-top:9px;display:block;max-width:26ch}
 
 /* ---- Dark panel ---- */
 .panel{position:relative;overflow:hidden;border-radius:var(--r-lg);background:var(--navy);
@@ -222,7 +237,7 @@ a{color:inherit;text-decoration:none}
   .steps li+li{border-inline-start:1px solid var(--line)}
   .steps li:last-child{padding-inline-end:0}
 }
-.steps .s{font-family:var(--serif);font-size:1.2rem;line-height:1;color:var(--tan-text)}
+.steps .s{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;line-height:1;color:var(--muted-2)}
 .steps .body{max-width:32ch}
 
 /* ---- Screens ---- */
@@ -237,16 +252,16 @@ figcaption{font-size:13px;color:var(--muted)}
   padding:clamp(15px,1.9vw,22px) 0;border-bottom:1px solid var(--line)}
 @media (min-width:880px){.vsrow{grid-template-columns:minmax(0,12rem) minmax(0,1fr) minmax(0,1fr);
   gap:clamp(18px,2.6vw,38px);align-items:baseline}}
-.vsrow .who{font-family:var(--serif);font-size:1.2rem;line-height:1.25}
+.vsrow .who{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);line-height:1.5}
 .vsrow .them{font-size:15px;color:var(--muted-2)}
 .vsrow .us{font-size:15px;color:var(--ink);font-weight:500}
-.vsrow .us .arrow{color:var(--tan-text);font-weight:400;margin-inline-end:5px}
+.vsrow .us .arrow{color:var(--muted-2);font-weight:400;margin-inline-end:6px}
 
 /* ---- Ticks ---- */
 .ticks{display:grid;gap:11px}
 .ticks li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:11px;align-items:start;
   font-size:15px;color:var(--muted);line-height:1.5}
-.ticks .m{color:var(--tan-text)}
+.ticks .m{color:var(--muted-2)}
 .on-dark .ticks li{color:var(--on-dark-2)}
 .on-dark .ticks .m{color:var(--tan-lt)}
 
@@ -361,14 +376,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.14)}
 .calc-hero{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--white);
   padding:clamp(22px,2.8vw,34px)}
-.calc-hero .v{font-family:var(--serif);font-size:clamp(2.4rem,4.4vw,3.5rem);line-height:1;
+.calc-hero .v{font-family:var(--mono);font-weight:500;font-size:clamp(1.8rem,3.1vw,2.6rem);line-height:1.1;font-variant-numeric:tabular-nums;
   display:block;color:var(--good)}
 .calc-hero .s{margin-top:10px;color:var(--muted);font-size:15px}
 .calc-hero .h{margin-top:clamp(15px,2vw,22px);padding-top:clamp(13px,1.7vw,19px);
   border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .tiles{display:grid;gap:clamp(15px,2.1vw,28px);grid-template-columns:repeat(auto-fit,minmax(min(100%,136px),1fr))}
 .tile .k{font-size:13px;color:var(--muted-2);display:block}
-.tile .v{font-family:var(--serif);font-size:clamp(1.5rem,2.1vw,1.95rem);line-height:1;display:block;margin-top:7px}
+.tile .v{font-family:var(--mono);font-weight:500;font-size:clamp(1.15rem,1.5vw,1.4rem);line-height:1.1;display:block;margin-top:7px;font-variant-numeric:tabular-nums}
 .tile .n{font-size:13px;color:var(--muted-2);display:block;margin-top:6px}
 .scale-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--white)}
 .scale-tbl{width:100%;border-collapse:collapse;font-size:14px}
@@ -402,39 +417,6 @@ details.q[open] summary::after{content:"–"}
 details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px;line-height:1.6}
 
 /* ---- Reveal ---- */
-/* ---- The toggle ----
-   Five subjects, one on screen at a time. It sits directly under the
-   header and stays there, so it is always the way to the next one. */
-.views{position:sticky;top:66px;z-index:60;background:rgba(250,250,249,.92);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.views-in{max-width:1280px;margin:0 auto;padding:0 var(--gut);
-  display:flex;gap:clamp(16px,2.4vw,34px);overflow-x:auto;scrollbar-width:none}
-.views-in::-webkit-scrollbar{display:none}
-/* On a phone the last tab sits off the edge. Fade it rather than cut it,
-   so it reads as "there is more" instead of as a clipped word. */
-@media (max-width:720px){
-  .views{
-    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 34px),transparent);
-    mask-image:linear-gradient(to right,#000 calc(100% - 34px),transparent)}
-  [dir="rtl"] .views{
-    -webkit-mask-image:linear-gradient(to left,#000 calc(100% - 34px),transparent);
-    mask-image:linear-gradient(to left,#000 calc(100% - 34px),transparent)}
-}
-.views button{position:relative;height:52px;white-space:nowrap;
-  font-size:15px;font-weight:500;color:var(--muted);
-  transition:color .15s var(--ease)}
-.views button::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:2px;
-  background:var(--ink);transform:scaleX(0);transform-origin:var(--o,left);
-  transition:transform .22s var(--ease)}
-[dir="rtl"] .views button{--o:right}
-.views button:hover{color:var(--ink)}
-.views button[aria-selected="true"]{color:var(--ink);font-weight:600}
-.views button[aria-selected="true"]::after{transform:scaleX(1)}
-.view[hidden]{display:none}
-.view .sec{padding:clamp(46px,6.5vh,84px) 0}
-.view .sec:first-child{padding-top:clamp(38px,5vh,66px)}
-.sec{scroll-margin-top:120px}
-
 .rv{opacity:0;transform:translateY(12px)}
 .rv.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .rv.d1{transition-delay:.06s}.rv.d2{transition-delay:.12s}.rv.d3{transition-delay:.18s}
@@ -451,6 +433,13 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
 <header class="nav">
   <div class="nav-in">
     <a class="brand" href="#top"><svg class="mark" viewBox="0 0 112 96" width="26" role="img" aria-label="Closewise"><text class="c" x="0" y="78" font-family="Georgia,'Times New Roman',serif" font-size="98">C</text><text class="w" x="44" y="84" font-family="Georgia,'Times New Roman',serif" font-size="56">W</text></svg><span class="word">closewise</span></a>
+    <nav class="nav-links">
+      <a href="#problem" data-t="tabProblem"></a>
+      <a href="#ablauf" data-t="tabHow"></a>
+      <a href="#ki" data-t="tabFinds"></a>
+      <a href="#rechnung" data-t="tabCost"></a>
+      <a href="#fragen" data-t="tabQs"></a>
+    </nav>
     <div class="nav-right">
       <details class="lang" id="lang">
         <summary aria-label="Language"><span id="langNow">Deutsch</span><span id="langCode">DE</span><i class="chev"></i></summary>
@@ -490,30 +479,18 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
 
     <div class="metrics rv d3" style="margin-top:clamp(30px,4.5vh,56px)">
       <div class="metric"><span class="v">36 → 3</span><span class="k" data-t="m1"></span></div>
-      <div class="metric"><span class="v" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
+      <div class="metric"><span class="v txt" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
       <div class="metric"><span class="v" id="mBig">552,77 €</span><span class="k" data-t="m3"></span></div>
     </div>
   </div>
 </section>
 
-<!-- ══ The toggle: one subject at a time ══ -->
-<nav class="views" id="views" aria-label="Sections">
-  <div class="views-in" role="tablist">
-    <button type="button" role="tab" data-view="problem" data-t="tabProblem"></button>
-    <button type="button" role="tab" data-view="ablauf"  data-t="tabHow"></button>
-    <button type="button" role="tab" data-view="ki"      data-t="tabFinds"></button>
-    <button type="button" role="tab" data-view="rechnung" data-t="tabCost"></button>
-    <button type="button" role="tab" data-view="fragen"  data-t="tabQs"></button>
-  </div>
-</nav>
-
 <main>
-<div class="view" id="v-problem" role="tabpanel">
 <!-- ══ Problem ══ -->
 <section class="sec" id="problem">
   <div class="wrap grid split-l" style="align-items:start">
     <div class="stack">
-      <p class="eyebrow rv" data-t="probEye"></p>
+      <p class="eyebrow rv" data-n="01" data-t="probEye"></p>
       <h2 class="h2 rv d1" data-t="probH2"></h2>
       <p class="lede rv d2" data-t="probNote"></p>
     </div>
@@ -525,14 +502,11 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   </div>
 </section>
 
-</div>
-
-<div class="view" id="v-ablauf" role="tabpanel" hidden>
 <!-- ══ How it works ══ -->
 <section class="sec" id="ablauf">
   <div class="wrap stack" style="gap:clamp(26px,3.4vw,48px)">
     <div class="stack tight">
-      <p class="eyebrow rv" data-t="howEye"></p>
+      <p class="eyebrow rv" data-n="02" data-t="howEye"></p>
       <h2 class="h2 rv d1" data-t="howH2"></h2>
     </div>
     <ol class="steps rv d1">
@@ -567,9 +541,6 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   </div>
 </section>
 
-</div>
-
-<div class="view" id="v-ki" role="tabpanel" hidden>
 <!-- ══ What the AI finds — dark panel ══ -->
 <section class="sec" id="ki">
   <div class="wrap">
@@ -577,7 +548,7 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
       <div class="panel-in flush">
         <div class="grid split-l" style="align-items:end">
           <div class="stack">
-            <p class="eyebrow" data-t="aiEye"></p>
+            <p class="eyebrow" data-n="03" data-t="aiEye"></p>
             <h2 class="h2" style="color:var(--on-dark)" data-t="aiH2"></h2>
             <p class="lede" data-t="aiLede"></p>
           </div>
@@ -611,9 +582,9 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
 
 <!-- ══ Pattern ══ -->
 <section class="sec" id="muster">
-  <div class="wrap grid split-l">
+  <div class="wrap grid split-l flip">
     <div class="stack">
-      <p class="eyebrow rv" data-t="patEye"></p>
+      <p class="eyebrow rv" data-n="04" data-t="patEye"></p>
       <h2 class="h2 rv d1" data-t="patH2"></h2>
       <p class="lede rv d2" data-t="patLede"></p>
       <div class="grid g2 rv d2" style="gap:clamp(18px,2.4vw,30px)">
@@ -639,14 +610,35 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   </div>
 </section>
 
-</div>
+<!-- ══ Difference ══ -->
+<section class="sec" id="unterschied">
+  <div class="wrap stack" style="gap:clamp(24px,3.2vw,42px)">
+    <div class="stack tight">
+      <p class="eyebrow rv" data-n="05" data-t="diffEye"></p>
+      <h2 class="h2 rv d1" style="max-width:26ch" data-t="diffH2"></h2>
+    </div>
+    <div class="vs rv d2">
+      <div class="vsrow"><span class="who" data-t="d1w"></span>
+        <span class="them" data-t="d1t"></span>
+        <span class="us"><span class="arrow">→</span><span data-t="d1u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d2w"></span>
+        <span class="them" data-t="d2t"></span>
+        <span class="us"><span class="arrow">→</span><span data-t="d2u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d3w"></span>
+        <span class="them" data-t="d3t"></span>
+        <span class="us"><span class="arrow">→</span><span data-t="d3u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d4w"></span>
+        <span class="them" data-t="d4t"></span>
+        <span class="us"><span class="arrow">→</span><span data-t="d4u"></span></span></div>
+    </div>
+  </div>
+</section>
 
-<div class="view" id="v-rechnung" role="tabpanel" hidden>
 <!-- ══ Numbers ══ -->
 <section class="sec" id="rechnung">
   <div class="wrap stack" style="gap:clamp(26px,3.4vw,46px)">
     <div class="stack tight">
-      <p class="eyebrow rv" data-t="numEye"></p>
+      <p class="eyebrow rv" data-n="06" data-t="numEye"></p>
       <h2 class="h2 rv d1" data-t="numH2"></h2>
     </div>
     <div class="metrics rv d2" style="border-top:0;padding-top:0">
@@ -722,54 +714,6 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   </div>
 </section>
 
-</div>
-
-<div class="view" id="v-fragen" role="tabpanel" hidden>
-<!-- ══ Difference ══ -->
-<section class="sec" id="unterschied">
-  <div class="wrap stack" style="gap:clamp(24px,3.2vw,42px)">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-t="diffEye"></p>
-      <h2 class="h2 rv d1" style="max-width:26ch" data-t="diffH2"></h2>
-    </div>
-    <div class="vs rv d2">
-      <div class="vsrow"><span class="who" data-t="d1w"></span>
-        <span class="them" data-t="d1t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d1u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d2w"></span>
-        <span class="them" data-t="d2t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d2u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d3w"></span>
-        <span class="them" data-t="d3t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d3u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d4w"></span>
-        <span class="them" data-t="d4t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d4u"></span></span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FAQ ══ -->
-<section class="sec" id="fragen">
-  <div class="wrap grid split-l" style="align-items:start">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-t="faqEye"></p>
-      <h2 class="h2 rv d1" data-t="faqH2"></h2>
-    </div>
-    <div class="rv d2">
-      <details class="q" open><summary data-t="q1"></summary><p class="ans" data-t="a1"></p></details>
-      <details class="q"><summary data-t="q2"></summary><p class="ans" data-t="a2"></p></details>
-      <details class="q"><summary data-t="q3"></summary><p class="ans" data-t="a3"></p></details>
-      <details class="q"><summary data-t="q4"></summary><p class="ans" data-t="a4"></p></details>
-      <details class="q"><summary data-t="q5"></summary><p class="ans" data-t="a5"></p></details>
-      <p class="tiny" style="margin-top:clamp(20px,2.4vw,28px)" data-t="disclaimer"></p>
-    </div>
-  </div>
-</section>
-
-</div>
-</main>
-
 <!-- ══ Booking ══ -->
 <section class="sec" id="termin">
   <div class="wrap">
@@ -777,7 +721,7 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
       <div class="panel-in">
         <div class="grid split">
           <div class="stack">
-            <p class="eyebrow" data-t="bookEye"></p>
+            <p class="eyebrow" data-n="07" data-t="bookEye"></p>
             <h2 class="h2" style="color:var(--on-dark)" data-t="bookH2"></h2>
             <p class="lede" data-t="bookLede"></p>
             <ul class="ticks">
@@ -798,6 +742,26 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
     </div>
   </div>
 </section>
+
+<!-- ══ FAQ ══ -->
+<section class="sec" id="fragen">
+  <div class="wrap grid split-l" style="align-items:start">
+    <div class="stack tight">
+      <p class="eyebrow rv" data-n="08" data-t="faqEye"></p>
+      <h2 class="h2 rv d1" data-t="faqH2"></h2>
+    </div>
+    <div class="rv d2">
+      <details class="q" open><summary data-t="q1"></summary><p class="ans" data-t="a1"></p></details>
+      <details class="q"><summary data-t="q2"></summary><p class="ans" data-t="a2"></p></details>
+      <details class="q"><summary data-t="q3"></summary><p class="ans" data-t="a3"></p></details>
+      <details class="q"><summary data-t="q4"></summary><p class="ans" data-t="a4"></p></details>
+      <details class="q"><summary data-t="q5"></summary><p class="ans" data-t="a5"></p></details>
+      <p class="tiny" style="margin-top:clamp(20px,2.4vw,28px)" data-t="disclaimer"></p>
+    </div>
+  </div>
+</section>
+</main>
+
 
 <script>
 var LANGS=[["de","Deutsch"],["en","English"],["fr","Français"],["es","Español"],
@@ -1458,38 +1422,6 @@ tabQs:"أسئلة"};
       function (el) { io.observe(el); });
   }
   observeReveals();
-
-  /* ---- One subject at a time ----
-     Each view is a page of its own. A view that has never been on screen
-     has never been observed, so its reveals are hooked up on the way in. */
-  var VIEWS = ["problem", "ablauf", "ki", "rechnung", "fragen"];
-  var tabs = document.querySelectorAll(".views button");
-
-  function showView(name, scroll) {
-    if (VIEWS.indexOf(name) < 0) name = VIEWS[0];
-    VIEWS.forEach(function (v) {
-      document.getElementById("v-" + v).hidden = (v !== name);
-    });
-    [].forEach.call(tabs, function (b) {
-      b.setAttribute("aria-selected", String(b.dataset.view === name));
-    });
-    var panel = document.getElementById("v-" + name);
-    observeReveals(panel);
-    if (scroll) {
-      var bar = document.getElementById("views");
-      var y = bar.getBoundingClientRect().top + window.pageYOffset - 66;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-    if (history.replaceState) history.replaceState(null, "", "#" + name);
-  }
-
-  [].forEach.call(tabs, function (b) {
-    b.addEventListener("click", function () { showView(b.dataset.view, true); });
-  });
-  showView((location.hash || "").slice(1) || VIEWS[0], false);
-  window.addEventListener("hashchange", function () {
-    showView((location.hash || "").slice(1), true);
-  });
 
   /* ---- The night reconciling itself ---- */
   // Amounts are numbers, not strings: they are formatted in the reader's
