@@ -8,7 +8,7 @@
 <meta property="og:description" content="Die KI prüft jeden Beleg gegen Kartenterminal, Gästekonten und Kassenzählung. Ihre Schichtleitung bekommt die kurze Liste statt des Stapels.">
 <meta property="og:locale" content="de_DE">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 96'%3E%3Ctext x='0' y='78' font-family='Georgia,serif' font-size='98' fill='%23161920'%3EC%3C/text%3E%3Ctext x='44' y='84' font-family='Georgia,serif' font-size='56' fill='%23A58E78'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20fill%3D%27%2315202E%27%20fill-rule%3D%27evenodd%27%20d%3D%27M22.5%200H77.5A22.5%2022.5%200%200%201%20100%2022.5V77.5A22.5%2022.5%200%200%201%2077.5%20100H22.5A22.5%2022.5%200%200%201%200%2077.5V22.5A22.5%2022.5%200%200%201%2022.5%200Z%20M41.28%2015.53H57.74V83.31H41.28V78.23H50.69V25.11L46.95%2021.63H41.28Z%27%2F%3E%3C%2Fsvg%3E">
 </head>
 <body>
 <title>Closewise Berlin</title>
@@ -123,7 +123,9 @@ a{color:inherit;text-decoration:none}
   backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:1280px;margin:0 auto;padding:0 var(--gut);height:66px;
   display:flex;align-items:center;gap:clamp(12px,2vw,30px)}
-.brand{display:flex;align-items:center;gap:9px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.brand .mark{flex:none;display:block;border-radius:5.9px}
+.on-dark .brand,.brand.on-dark{color:var(--on-dark)}
 .brand .word{font-family:var(--serif);font-size:25px;letter-spacing:-.01em;line-height:1}
 .nav-links{display:none;gap:clamp(15px,1.8vw,26px);align-items:center;margin-inline-start:14px}
 @media (min-width:1080px){.nav-links{display:flex}}
@@ -703,7 +705,7 @@ body{overflow:hidden}
 
 <header class="nav">
   <div class="nav-in">
-    <a class="brand" href="#" data-go="overview"><svg class="mark" viewBox="0 0 112 96" width="26" role="img" aria-label="Closewise"><text class="c" x="0" y="78" font-family="Georgia,'Times New Roman',serif" font-size="98">C</text><text class="w" x="44" y="84" font-family="Georgia,'Times New Roman',serif" font-size="56">W</text></svg><span class="word">closewise</span></a>
+    <a class="brand" href="#" data-go="overview"><svg class="mark" viewBox="0 0 100 100" width="26" height="26" role="img" aria-label="Closewise"><path fill="currentColor" fill-rule="evenodd" d="M22.5 0H77.5A22.5 22.5 0 0 1 100 22.5V77.5A22.5 22.5 0 0 1 77.5 100H22.5A22.5 22.5 0 0 1 0 77.5V22.5A22.5 22.5 0 0 1 22.5 0Z M41.28 15.53H57.74V83.31H41.28V78.23H50.69V25.11L46.95 21.63H41.28Z"/></svg><span class="word">closewise</span></a>
     <div class="nav-right">
       <details class="lang" id="lang">
         <summary aria-label="Language"><span id="langNow">Deutsch</span><span id="langCode">DE</span><i class="chev"></i></summary>
