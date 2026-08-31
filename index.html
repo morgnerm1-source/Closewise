@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Closewise prüft jeden Beleg des Abends automatisch gegen Kartenterminal und Kasse. Der Tagesabschluss in 13 statt 65 Minuten. Für Hotels in Berlin.">
-<meta property="og:title" content="Closewise — Eine Stunde Abschluss. Oder dreizehn Minuten.">
-<meta property="og:description" content="Unsere KI prüft jeden Beleg des Abends gegen Kartenterminal und Kasse. Sie sehen nur, was nicht stimmt.">
+<meta name="description" content="Closewise prüft jeden Beleg des Abends gegen Kartenterminal, Gästekonten und Kassenzählung. Ihre Schichtleitung sieht nur, was nicht stimmt. Für Hotels in Berlin.">
+<meta property="og:title" content="Closewise — Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.">
+<meta property="og:description" content="Die KI prüft jeden Beleg gegen Kartenterminal, Gästekonten und Kassenzählung. Ihre Schichtleitung bekommt die kurze Liste statt des Stapels.">
 <meta property="og:locale" content="de_DE">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 96'%3E%3Ctext x='0' y='78' font-family='Georgia,serif' font-size='98' fill='%23161920'%3EC%3C/text%3E%3Ctext x='44' y='84' font-family='Georgia,serif' font-size='56' fill='%23A58E78'%3EW%3C/text%3E%3C/svg%3E">
@@ -144,6 +144,15 @@ a{color:inherit;text-decoration:none}
   border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);
   transition:transform .18s var(--ease)}
 .lang[open]>summary .chev{transform:rotate(-135deg) translate(-2px,-2px)}
+#langCode{display:none;font-weight:600;letter-spacing:.05em}
+@media (max-width:479px){
+  #langNow{display:none}
+  #langCode{display:inline}
+  .lang>summary{padding:0 10px}
+  .nav-in{gap:8px}
+  .nav-right{gap:6px}
+  .nav-right .btn{padding:0 14px}
+}
 .lang-menu{position:absolute;inset-inline-end:0;top:calc(100% + 8px);z-index:80;
   min-width:210px;max-height:min(72vh,452px);overflow-y:auto;
   background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);
@@ -179,18 +188,42 @@ a{color:inherit;text-decoration:none}
   color:var(--on-dark);isolation:isolate}
 .panel-in{position:relative;z-index:1;padding:clamp(28px,4vw,58px) clamp(22px,3.6vw,58px)}
 .panel-in.flush{padding-bottom:0}
-.panel-shot{position:relative;z-index:1;margin:clamp(24px,3.2vw,44px) clamp(22px,3.6vw,58px) 0;
-  border-radius:var(--r-lg) var(--r-lg) 0 0;overflow:hidden;
+.panel-shot{position:relative;z-index:1;
+  margin:clamp(24px,3.2vw,44px) clamp(22px,3.6vw,58px) clamp(28px,4vw,58px);
+  border-radius:var(--r-lg);overflow:hidden;
   box-shadow:0 -1px 0 rgba(245,244,241,.14),0 -22px 56px rgba(0,0,0,.55)}
 .panel::after{content:"";position:absolute;inset:0;z-index:0;
   background:radial-gradient(115% 88% at 80% 0%,rgba(165,142,120,.22),transparent 56%)}
 
-/* ---- Cards ---- */
-.card{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--white);
-  padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:11px;min-width:0}
-.card .n{font-family:var(--serif);font-size:1.65rem;line-height:1;color:var(--tan-text)}
-.on-dark .card{background:var(--navy-2);border-color:var(--navy-line)}
-.on-dark .card .n{color:var(--tan-lt)}
+/* ---- Ruled rows ----
+   The three things that go wrong at night are not three steps and not
+   three features, so they get no numbers and no boxes — just the rule
+   the rest of the page already uses to separate one fact from the next. */
+.rowlist{border-top:1px solid var(--line-2);max-width:40ch}
+.rowlist li{border-bottom:1px solid var(--line-2);
+  padding:clamp(15px,1.9vw,22px) 0;
+  font-size:clamp(1rem,1.15vw,1.13rem);line-height:1.42;color:var(--ink-2);
+  text-wrap:pretty}
+
+/* ---- Steps ----
+   This one really is a sequence, so it keeps its order and its numbers,
+   and reads across rather than down. Hairlines, not cards: two boxed
+   grids in a row is what makes a page look assembled from a kit. */
+.steps{display:grid;gap:0;border-top:1px solid var(--ink);
+  grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.steps li{padding:clamp(20px,2.4vw,30px) 0 clamp(22px,2.8vw,34px);
+  display:flex;flex-direction:column;gap:9px;min-width:0;
+  border-bottom:1px solid var(--line)}
+@media (min-width:820px){
+  .steps li{padding-inline:clamp(20px,2.4vw,34px);
+    border-bottom:1px solid var(--line)}
+  .steps li:first-child{padding-inline-start:0}
+  .steps li+li{border-inline-start:1px solid var(--line)}
+  .steps li:last-child{padding-inline-end:0}
+}
+.steps .s{font-family:var(--serif);font-size:1.2rem;line-height:1;color:var(--tan-text)}
+.steps .body{max-width:32ch}
 
 /* ---- Screens ---- */
 figure.screen{margin:0;display:flex;flex-direction:column;gap:11px;min-width:0}
@@ -310,7 +343,7 @@ figcaption{font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.tbar i{animation:none}}
 
 /* ---- Calculator ---- */
-.calc-grid{display:grid;gap:clamp(22px,2.8vw,42px)}
+.calc-grid{display:grid;gap:clamp(22px,2.8vw,42px);grid-template-columns:minmax(0,1fr)}
 @media (min-width:960px){.calc-grid{grid-template-columns:minmax(0,20rem) minmax(0,1fr);align-items:start}}
 .calc-panel{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--white);
   padding:clamp(20px,2.4vw,28px);display:grid;gap:clamp(14px,1.7vw,19px)}
@@ -386,17 +419,15 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   <div class="nav-in">
     <a class="brand" href="#top"><svg class="mark" viewBox="0 0 112 96" width="26" role="img" aria-label="Closewise"><text class="c" x="0" y="78" font-family="Georgia,'Times New Roman',serif" font-size="98">C</text><text class="w" x="44" y="84" font-family="Georgia,'Times New Roman',serif" font-size="56">W</text></svg><span class="word">closewise</span></a>
     <nav class="nav-links">
-      <a href="#problem" data-t="navProblem"></a>
       <a href="#ablauf" data-t="navHow"></a>
       <a href="#ki" data-t="navAi"></a>
       <a href="#unterschied" data-t="navDiff"></a>
-      <a href="https://closewise-production.up.railway.app" target="_blank" rel="noopener" data-t="navDemo"></a>
       <a href="#rechnung" data-t="navNumbers"></a>
-      <a href="#fragen" data-t="navFaq"></a>
+      <a href="https://closewise-production.up.railway.app" target="_blank" rel="noopener" data-t="navDemo"></a>
     </nav>
     <div class="nav-right">
       <details class="lang" id="lang">
-        <summary aria-label="Language"><span id="langNow">Deutsch</span><i class="chev"></i></summary>
+        <summary aria-label="Language"><span id="langNow">Deutsch</span><span id="langCode">DE</span><i class="chev"></i></summary>
         <div class="lang-menu" id="langMenu" role="listbox"></div>
       </details>
       <a class="btn btn-solid" href="#termin" data-t="ctaBook"></a>
@@ -433,25 +464,26 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
     </div>
 
     <div class="metrics rv d3" style="margin-top:clamp(30px,4.5vh,56px)">
-      <div class="metric"><span class="v">39 → 7</span><span class="k" data-t="m1"></span></div>
+      <div class="metric"><span class="v">36 → 3</span><span class="k" data-t="m1"></span></div>
       <div class="metric"><span class="v" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
-      <div class="metric"><span class="v" id="mYear">11.000 €</span><span class="k" data-t="m3"></span></div>
-      <div class="metric"><span class="v" id="mMs">0,3 ms</span><span class="k" data-t="m4"></span></div>
+      <div class="metric"><span class="v" id="mBig">552,77 €</span><span class="k" data-t="m3"></span></div>
     </div>
   </div>
 </section>
 
 <!-- ══ Problem ══ -->
 <section class="sec tint" id="problem">
-  <div class="wrap stack" style="gap:clamp(24px,3.2vw,44px)">
-    <p class="eyebrow rv" data-t="probEye"></p>
-    <h2 class="h2 rv d1" style="max-width:26ch" data-t="probH2"></h2>
-    <div class="grid g3 rv d2">
-      <div class="card"><span class="n">01</span><p class="body" data-t="prob1"></p></div>
-      <div class="card"><span class="n">02</span><p class="body" data-t="prob2"></p></div>
-      <div class="card"><span class="n">03</span><p class="body" data-t="prob3"></p></div>
+  <div class="wrap grid split-l" style="align-items:start">
+    <div class="stack">
+      <p class="eyebrow rv" data-t="probEye"></p>
+      <h2 class="h2 rv d1" data-t="probH2"></h2>
+      <p class="lede rv d2" data-t="probNote"></p>
     </div>
-    <p class="lede rv d3" style="max-width:54ch" data-t="probNote"></p>
+    <ul class="rowlist rv d2">
+      <li data-t="prob1"></li>
+      <li data-t="prob2"></li>
+      <li data-t="prob3"></li>
+    </ul>
   </div>
 </section>
 
@@ -462,14 +494,14 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
       <p class="eyebrow rv" data-t="howEye"></p>
       <h2 class="h2 rv d1" data-t="howH2"></h2>
     </div>
-    <div class="grid g3">
-      <div class="card rv"><span class="n">1</span>
-        <h3 class="h3" data-t="how1t"></h3><p class="body" data-t="how1p"></p></div>
-      <div class="card rv d1"><span class="n">2</span>
-        <h3 class="h3" data-t="how2t"></h3><p class="body" data-t="how2p"></p></div>
-      <div class="card rv d2"><span class="n">3</span>
-        <h3 class="h3" data-t="how3t"></h3><p class="body" data-t="how3p"></p></div>
-    </div>
+    <ol class="steps rv d1">
+      <li><span class="s">1</span>
+        <h3 class="h3" data-t="how1t"></h3><p class="body" data-t="how1p"></p></li>
+      <li><span class="s">2</span>
+        <h3 class="h3" data-t="how2t"></h3><p class="body" data-t="how2p"></p></li>
+      <li><span class="s">3</span>
+        <h3 class="h3" data-t="how3t"></h3><p class="body" data-t="how3p"></p></li>
+    </ol>
     <figure class="screen rv d2">
       <div class="surface">
         <div class="surface-bar">
@@ -499,22 +531,17 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
   <div class="wrap">
     <div class="panel grain on-dark rv">
       <div class="panel-in flush">
-        <div class="grid split-l" style="align-items:start">
+        <div class="grid split-l" style="align-items:end">
           <div class="stack">
             <p class="eyebrow" data-t="aiEye"></p>
             <h2 class="h2" style="color:var(--on-dark)" data-t="aiH2"></h2>
             <p class="lede" data-t="aiLede"></p>
-            <ul class="ticks">
-              <li><span class="m arrow">→</span><span data-t="ai1"></span></li>
-              <li><span class="m arrow">→</span><span data-t="ai2"></span></li>
-              <li><span class="m arrow">→</span><span data-t="ai3"></span></li>
-            </ul>
           </div>
-          <div class="grid" style="gap:14px">
-            <div class="card"><h3 class="h3" data-t="loss1t"></h3><p class="body" data-t="loss1p"></p></div>
-            <div class="card"><h3 class="h3" data-t="loss2t"></h3><p class="body" data-t="loss2p"></p></div>
-            <div class="card"><h3 class="h3" data-t="loss3t"></h3><p class="body" data-t="loss3p"></p></div>
-          </div>
+          <ul class="ticks">
+            <li><span class="m arrow">→</span><span data-t="ai1"></span></li>
+            <li><span class="m arrow">→</span><span data-t="ai2"></span></li>
+            <li><span class="m arrow">→</span><span data-t="ai3"></span></li>
+          </ul>
         </div>
       </div>
       <div class="panel-shot">
@@ -602,7 +629,6 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
     <div class="metrics rv d2" style="border-top:0;padding-top:0">
       <div class="metric"><span class="v" id="nNight">30 €</span><span class="k" data-t="n1"></span></div>
       <div class="metric"><span class="v" id="nYear">11.000 €</span><span class="k" data-t="n2"></span></div>
-      <div class="metric"><span class="v">3×</span><span class="k" data-t="n3"></span></div>
     </div>
 
     <div class="calc-grid rv d2">
@@ -721,8 +747,8 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
 </section>
 
 <script>
-var LANGS=[["de","Deutsch"],["en","English"],["fr","Français"],["es","Español"],["it","Italiano"],
-           ["nl","Nederlands"],["pl","Polski"],["pt","Português"],["tr","Türkçe"],["ar","العربية"]];
+var LANGS=[["de","Deutsch"],["en","English"],["fr","Français"],["es","Español"],
+           ["it","Italiano"],["nl","Nederlands"],["pl","Polski"],["ar","العربية"]];
 var RTL=["ar"];
 var T={};
 
@@ -732,22 +758,22 @@ navDemo:"Demo",ctaDemo:"Live-Demo öffnen",demoNote:"Echte Prüf-Engine, synthet
 strip:"Neu: Closewise erkennt wiederkehrende Ursachen über sieben Nächte.",stripLink:"Mehr erfahren",
 navProblem:"Problem",navHow:"Ablauf",navAi:"KI",navDiff:"Unterschied",navNumbers:"Rechnung",navFaq:"Fragen",
 ctaBook:"Termin buchen",ctaHow:"So funktioniert es",
-heroH1:"Der Abschluss dauert eine Stunde. Bei uns dreizehn Minuten.",
-heroSub:"Unsere KI prüft jeden Beleg des Abends gegen Kartenterminal und Kasse. Ihre Schichtleitung sieht nur, was nicht stimmt.",
+heroH1:"Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.",
+heroSub:"Die KI prüft jeden Beleg gegen Kartenterminal, Gästekonten und Kassenzählung. Ihre Schichtleitung bekommt die kurze Liste statt des Stapels.",
 demoTitle:"Abschluss · Restaurant Spreeblick · Berlin",
-demoReady:"Bereit.",demoRun:"KI prüft…",demoDone:"<b>3 Ausnahmen</b> zu prüfen · 11 erledigt",demoOk:"geprüft",demoNo:"prüfen",
-m1:"Belege geprüft, Ausnahmen übrig",m2v:"52 Min",m2:"Zurück, jede Nacht",
-m3:"Pro Führungskraft und Jahr",m4:"Für den ganzen Abend",
+demoReady:"Bereit.",demoRun:"Gleicht ab…",demoDone:"<b>3 Ausnahmen</b> zu prüfen · 11 erledigt",demoOk:"geprüft",demoNo:"prüfen",
+m1:"Belege geprüft, Ausnahmen für einen Menschen",m2v:"Drei Quellen",m2:"Kartenterminal, Gästekonto und Kassenzählung",
+m3:"Der grösste Einzelfund der Demo-Nacht",m4:"Für den ganzen Abend",
 probEye:"Das Problem",probH2:"Jede Nacht eine Stunde, die niemand zurückbekommt.",
 prob1:"Jeder Beleg wird von Hand gegen die Kasse geprüft.",
 prob2:"Der eine Fehler steckt irgendwo in hunderten Buchungen.",
 prob3:"Das ganze Team wartet, bis die Zahlen stimmen.",
 probNote:"Fast alle Belege sind in Ordnung. Zwei oder drei nicht. Genau deshalb müssen bisher alle gelesen werden.",
 howEye:"Der Ablauf",howH2:"Ein Knopf. Drei Schritte.",
-how1t:"Abgleichen",how1p:"Jeder Check gegen Bargeld, Karte und Kassenbuch — in Millisekunden.",
+how1t:"Abgleichen",how1p:"Jeder Check gegen Bargeld, Karte, Gästekonto und Kassenbuch.",
 how2t:"Markieren",how2p:"Nur was nicht aufgeht, erscheint. Im Klartext, mit Handlungsempfehlung.",
 how3t:"Übergeben",how3p:"Die fertige, ausgeglichene Buchung geht an die Buchhaltung.",
-howCap:"Nach dem Lauf: 33 von 39 Belegen erledigt. Sieben bleiben.",
+howCap:"36 Belege geprüft. 3 brauchen einen Menschen.",
 aiEye:"Die KI",aiH2:"Was die KI findet — und was Sie entscheiden.",
 aiLede:"Sie liest jeden Beleg, erklärt jede Abweichung in einem Satz und erkennt, was sich wiederholt. Die Entscheidung bleibt bei Ihrer Schichtleitung.",
 ai1:"Keine Stichprobe — jeder einzelne Beleg, jede Nacht.",
@@ -794,22 +820,22 @@ navDemo:"Demo",ctaDemo:"Open the live demo",demoNote:"Real reconciliation engine
 strip:"New: Closewise finds the causes that repeat across seven nights.",stripLink:"Learn more",
 navProblem:"Problem",navHow:"How it works",navAi:"AI",navDiff:"Difference",navNumbers:"Numbers",navFaq:"FAQ",
 ctaBook:"Book a call",ctaHow:"See how it works",
-heroH1:"The nightly close takes an hour. With us, thirteen minutes.",
-heroSub:"Our AI checks every receipt from the night against the card terminal and the till. Your duty manager only sees what's wrong.",
+heroH1:"Every receipt, every night. You see only what's wrong.",
+heroSub:"The AI reads every receipt against the card terminal, the guest folios and the drawer count. Your duty manager gets the short list, not the pile.",
 demoTitle:"Close · Restaurant Spreeblick · Berlin",
-demoReady:"Ready.",demoRun:"AI testing…",demoDone:"<b>3 exceptions</b> to review · 11 cleared",demoOk:"cleared",demoNo:"review",
-m1:"Receipts tested, exceptions left",m2v:"52 min",m2:"Returned, every night",
-m3:"Per manager, per year",m4:"For the whole evening",
+demoReady:"Ready.",demoRun:"Matching…",demoDone:"<b>3 exceptions</b> to review · 11 cleared",demoOk:"cleared",demoNo:"review",
+m1:"Receipts tested, exceptions left for a person",m2v:"Three sources",m2:"Card terminal, guest folio and drawer count",
+m3:"The largest single miss in the demo night",m4:"For the whole evening",
 probEye:"The problem",probH2:"An hour a night that nobody gets back.",
 prob1:"Every receipt is checked against the till by hand.",
 prob2:"The one mistake sits somewhere in hundreds of transactions.",
 prob3:"The whole team waits until the numbers agree.",
 probNote:"Almost every receipt is fine. Two or three aren't. That is exactly why, until now, all of them had to be read.",
 howEye:"How it works",howH2:"One button. Three steps.",
-how1t:"Match",how1p:"Every check against cash, card and till records — in milliseconds.",
+how1t:"Match",how1p:"Every check against cash, card, guest folio and till records.",
 how2t:"Flag",how2p:"Only what doesn't add up surfaces. In plain language, with a recommended action.",
 how3t:"Send",how3p:"The finished, balanced journal entry goes to accounting.",
-howCap:"After the run: 33 of 39 receipts done. Seven remain.",
+howCap:"36 receipts tested. 3 need a person.",
 aiEye:"The AI",aiH2:"What the AI finds — and what you decide.",
 aiLede:"It reads every receipt, explains each discrepancy in one sentence, and spots what repeats. The decision stays with your duty manager.",
 ai1:"No sampling — every single receipt, every night.",
@@ -856,22 +882,22 @@ navDemo:"Démo",ctaDemo:"Ouvrir la démo",demoNote:"Moteur de rapprochement rée
 strip:"Nouveau : Closewise repère les causes qui reviennent sur sept nuits.",stripLink:"En savoir plus",
 navProblem:"Problème",navHow:"Fonctionnement",navAi:"IA",navDiff:"Différence",navNumbers:"Chiffres",navFaq:"Questions",
 ctaBook:"Prendre rendez-vous",ctaHow:"Voir le fonctionnement",
-heroH1:"La clôture prend une heure. Chez nous, treize minutes.",
-heroSub:"Notre IA confronte chaque note de la soirée au terminal de paiement et à la caisse. Votre responsable ne voit que ce qui cloche.",
+heroH1:"Chaque addition, chaque nuit. Vous ne voyez que ce qui cloche.",
+heroSub:"L'IA confronte chaque addition au terminal de paiement, aux notes clients et au comptage de caisse. Votre responsable reçoit la liste courte, pas la pile.",
 demoTitle:"Clôture · Restaurant Spreeblick · Berlin",
-demoReady:"Prêt.",demoRun:"L'IA vérifie…",demoDone:"<b>3 anomalies</b> à examiner · 11 réglées",demoOk:"vérifié",demoNo:"à voir",
-m1:"Notes vérifiées, anomalies restantes",m2v:"52 min",m2:"Rendues, chaque nuit",
-m3:"Par responsable et par an",m4:"Pour toute la soirée",
+demoReady:"Prêt.",demoRun:"Rapprochement…",demoDone:"<b>3 anomalies</b> à examiner · 11 réglées",demoOk:"vérifié",demoNo:"à voir",
+m1:"Additions vérifiées, exceptions laissées à un humain",m2v:"Trois sources",m2:"Terminal de paiement, note client et comptage de caisse",
+m3:"Le plus gros écart de la nuit de démonstration",m4:"Pour toute la soirée",
 probEye:"Le problème",probH2:"Une heure chaque nuit que personne ne récupère.",
 prob1:"Chaque note est vérifiée à la main face à la caisse.",
 prob2:"L'unique erreur se cache parmi des centaines d'écritures.",
 prob3:"Toute l'équipe attend que les chiffres tombent juste.",
 probNote:"Presque toutes les notes sont bonnes. Deux ou trois ne le sont pas. C'est précisément pour cela qu'il fallait jusqu'ici toutes les lire.",
 howEye:"Le fonctionnement",howH2:"Un bouton. Trois étapes.",
-how1t:"Rapprocher",how1p:"Chaque note face aux espèces, à la carte et au livre de caisse — en millisecondes.",
+how1t:"Rapprocher",how1p:"Chaque note face aux espèces, à la carte, à la note client et au livre de caisse.",
 how2t:"Signaler",how2p:"Seul ce qui ne tombe pas juste apparaît. En clair, avec l'action à mener.",
 how3t:"Transmettre",how3p:"L'écriture finale, équilibrée, part à la comptabilité.",
-howCap:"Après le passage : 33 notes sur 39 réglées. Sept restent.",
+howCap:"36 additions vérifiées. 3 demandent un humain.",
 aiEye:"L'IA",aiH2:"Ce que l'IA trouve — et ce que vous décidez.",
 aiLede:"Elle lit chaque note, explique chaque écart en une phrase et repère ce qui se répète. La décision reste à votre responsable.",
 ai1:"Aucun échantillon — chaque note, chaque nuit.",
@@ -918,22 +944,22 @@ navDemo:"Demo",ctaDemo:"Abrir la demo",demoNote:"Motor de conciliación real, da
 strip:"Novedad: Closewise detecta las causas que se repiten a lo largo de siete noches.",stripLink:"Saber más",
 navProblem:"Problema",navHow:"Cómo funciona",navAi:"IA",navDiff:"Diferencia",navNumbers:"Números",navFaq:"Preguntas",
 ctaBook:"Reservar una llamada",ctaHow:"Ver cómo funciona",
-heroH1:"El cierre dura una hora. Con nosotros, trece minutos.",
-heroSub:"Nuestra IA comprueba cada ticket de la noche contra el datáfono y la caja. Su responsable solo ve lo que no cuadra.",
+heroH1:"Cada cuenta, cada noche. Solo ve lo que no cuadra.",
+heroSub:"La IA contrasta cada cuenta con el terminal, las cuentas de huésped y el arqueo de caja. Su encargado recibe la lista corta, no el montón.",
 demoTitle:"Cierre · Restaurant Spreeblick · Berlín",
-demoReady:"Listo.",demoRun:"La IA comprueba…",demoDone:"<b>3 excepciones</b> por revisar · 11 resueltas",demoOk:"revisado",demoNo:"revisar",
-m1:"Tickets comprobados, excepciones restantes",m2v:"52 min",m2:"Devueltos, cada noche",
-m3:"Por responsable y año",m4:"Para toda la noche",
+demoReady:"Listo.",demoRun:"Contrastando…",demoDone:"<b>3 excepciones</b> por revisar · 11 resueltas",demoOk:"revisado",demoNo:"revisar",
+m1:"Cuentas comprobadas, excepciones para una persona",m2v:"Tres fuentes",m2:"Terminal, cuenta de huésped y arqueo de caja",
+m3:"El mayor hallazgo de la noche de demostración",m4:"Para toda la noche",
 probEye:"El problema",probH2:"Una hora cada noche que nadie recupera.",
 prob1:"Cada ticket se comprueba a mano contra la caja.",
 prob2:"El único error está en algún punto de cientos de apuntes.",
 prob3:"Todo el equipo espera hasta que las cifras cuadran.",
 probNote:"Casi todos los tickets están bien. Dos o tres no. Precisamente por eso, hasta ahora, había que leerlos todos.",
 howEye:"Cómo funciona",howH2:"Un botón. Tres pasos.",
-how1t:"Cotejar",how1p:"Cada ticket contra efectivo, tarjeta y libro de caja — en milisegundos.",
+how1t:"Cotejar",how1p:"Cada cuenta frente a efectivo, tarjeta, cuenta de huésped y libro de caja.",
 how2t:"Marcar",how2p:"Solo aparece lo que no cuadra. En lenguaje claro, con la acción recomendada.",
 how3t:"Enviar",how3p:"El asiento final y cuadrado va a contabilidad.",
-howCap:"Tras la pasada: 33 de 39 tickets resueltos. Quedan siete.",
+howCap:"36 cuentas comprobadas. 3 necesitan a una persona.",
 aiEye:"La IA",aiH2:"Lo que la IA encuentra — y lo que usted decide.",
 aiLede:"Lee cada ticket, explica cada desviación en una frase y detecta lo que se repite. La decisión sigue siendo de su responsable.",
 ai1:"Sin muestreo — cada ticket, cada noche.",
@@ -980,22 +1006,22 @@ navDemo:"Demo",ctaDemo:"Apri la demo",demoNote:"Motore di riconciliazione reale,
 strip:"Novità: Closewise individua le cause che si ripetono su sette serate.",stripLink:"Scopri di più",
 navProblem:"Problema",navHow:"Come funziona",navAi:"IA",navDiff:"Differenza",navNumbers:"Numeri",navFaq:"Domande",
 ctaBook:"Prenota una call",ctaHow:"Guarda come funziona",
-heroH1:"La chiusura richiede un'ora. Con noi, tredici minuti.",
-heroSub:"La nostra IA verifica ogni scontrino della serata contro il POS e la cassa. Il responsabile vede solo ciò che non torna.",
+heroH1:"Ogni conto, ogni notte. Vede solo ciò che non torna.",
+heroSub:"L'IA confronta ogni conto con il terminale, i conti degli ospiti e la conta cassa. Al suo responsabile arriva l'elenco breve, non la pila.",
 demoTitle:"Chiusura · Restaurant Spreeblick · Berlino",
-demoReady:"Pronto.",demoRun:"L'IA verifica…",demoDone:"<b>3 anomalie</b> da esaminare · 11 risolte",demoOk:"verificato",demoNo:"da vedere",
-m1:"Scontrini verificati, anomalie rimaste",m2v:"52 min",m2:"Restituiti, ogni sera",
-m3:"Per responsabile all'anno",m4:"Per l'intera serata",
+demoReady:"Pronto.",demoRun:"Confronto…",demoDone:"<b>3 anomalie</b> da esaminare · 11 risolte",demoOk:"verificato",demoNo:"da vedere",
+m1:"Conti verificati, eccezioni lasciate a una persona",m2v:"Tre fonti",m2:"Terminale, conto dell'ospite e conta cassa",
+m3:"Lo scarto più grande della notte dimostrativa",m4:"Per l'intera serata",
 probEye:"Il problema",probH2:"Un'ora ogni sera che nessuno recupera.",
 prob1:"Ogni scontrino viene verificato a mano contro la cassa.",
 prob2:"L'unico errore si nasconde fra centinaia di registrazioni.",
 prob3:"Tutta la squadra aspetta che i conti tornino.",
 probNote:"Quasi tutti gli scontrini sono in ordine. Due o tre no. Proprio per questo, finora, bisognava leggerli tutti.",
 howEye:"Come funziona",howH2:"Un pulsante. Tre passaggi.",
-how1t:"Confrontare",how1p:"Ogni conto contro contanti, carta e libro cassa — in millisecondi.",
+how1t:"Confrontare",how1p:"Ogni conto contro contanti, carta, conto dell'ospite e libro cassa.",
 how2t:"Segnalare",how2p:"Compare solo ciò che non torna. In parole chiare, con l'azione consigliata.",
 how3t:"Trasmettere",how3p:"La scrittura finale, quadrata, va alla contabilità.",
-howCap:"Dopo il passaggio: 33 scontrini su 39 risolti. Ne restano sette.",
+howCap:"36 conti verificati. 3 richiedono una persona.",
 aiEye:"L'IA",aiH2:"Cosa trova l'IA — e cosa decide lei.",
 aiLede:"Legge ogni scontrino, spiega ogni scostamento in una frase e riconosce ciò che si ripete. La decisione resta al suo responsabile.",
 ai1:"Nessun campione — ogni singolo scontrino, ogni sera.",
@@ -1042,22 +1068,22 @@ navDemo:"Demo",ctaDemo:"Open de live demo",demoNote:"Echte controle-engine, synt
 strip:"Nieuw: Closewise herkent oorzaken die zich over zeven nachten herhalen.",stripLink:"Meer weten",
 navProblem:"Probleem",navHow:"Hoe het werkt",navAi:"AI",navDiff:"Verschil",navNumbers:"Cijfers",navFaq:"Vragen",
 ctaBook:"Gesprek plannen",ctaHow:"Bekijk hoe het werkt",
-heroH1:"De afsluiting duurt een uur. Bij ons dertien minuten.",
-heroSub:"Onze AI controleert elke bon van de avond tegen de pinautomaat en de kassa. Uw manager ziet alleen wat niet klopt.",
+heroH1:"Elke rekening, elke nacht. U ziet alleen wat niet klopt.",
+heroSub:"De AI toetst elke rekening aan de betaalterminal, de gastrekeningen en de kasteling. Uw dienstdoend manager krijgt de korte lijst, niet de stapel.",
 demoTitle:"Afsluiting · Restaurant Spreeblick · Berlijn",
-demoReady:"Gereed.",demoRun:"AI controleert…",demoDone:"<b>3 uitzonderingen</b> te bekijken · 11 afgehandeld",demoOk:"gecontroleerd",demoNo:"bekijken",
-m1:"Bonnen gecontroleerd, uitzonderingen over",m2v:"52 min",m2:"Terug, elke nacht",
-m3:"Per manager per jaar",m4:"Voor de hele avond",
+demoReady:"Gereed.",demoRun:"Toetsen…",demoDone:"<b>3 uitzonderingen</b> te bekijken · 11 afgehandeld",demoOk:"gecontroleerd",demoNo:"bekijken",
+m1:"Rekeningen getoetst, uitzonderingen voor een mens",m2v:"Drie bronnen",m2:"Betaalterminal, gastrekening en kasteling",
+m3:"De grootste enkele misser in de demonacht",m4:"Voor de hele avond",
 probEye:"Het probleem",probH2:"Elke nacht een uur dat niemand terugkrijgt.",
 prob1:"Elke bon wordt met de hand tegen de kassa gecontroleerd.",
 prob2:"Die ene fout zit ergens tussen honderden boekingen.",
 prob3:"Het hele team wacht tot de cijfers kloppen.",
 probNote:"Bijna elke bon is in orde. Twee of drie niet. Precies daarom moesten ze tot nu toe allemaal gelezen worden.",
 howEye:"Hoe het werkt",howH2:"Eén knop. Drie stappen.",
-how1t:"Vergelijken",how1p:"Elke bon tegen contant, pin en kasboek — in milliseconden.",
+how1t:"Vergelijken",how1p:"Elke rekening tegen contant, kaart, gastrekening en kasboek.",
 how2t:"Markeren",how2p:"Alleen wat niet klopt verschijnt. In gewone taal, met een aanbevolen actie.",
 how3t:"Doorgeven",how3p:"De sluitende boeking gaat naar de boekhouding.",
-howCap:"Na de ronde: 33 van 39 bonnen klaar. Zeven blijven over.",
+howCap:"36 rekeningen getoetst. 3 hebben een mens nodig.",
 aiEye:"De AI",aiH2:"Wat de AI vindt — en wat u beslist.",
 aiLede:"Ze leest elke bon, verklaart elk verschil in één zin en herkent wat terugkeert. De beslissing blijft bij uw manager.",
 ai1:"Geen steekproef — elke bon, elke nacht.",
@@ -1104,22 +1130,22 @@ navDemo:"Demo",ctaDemo:"Otwórz demo na żywo",demoNote:"Prawdziwy silnik uzgodn
 strip:"Nowość: Closewise wykrywa przyczyny powtarzające się przez siedem nocy.",stripLink:"Dowiedz się więcej",
 navProblem:"Problem",navHow:"Jak działa",navAi:"AI",navDiff:"Różnica",navNumbers:"Liczby",navFaq:"Pytania",
 ctaBook:"Umów rozmowę",ctaHow:"Zobacz, jak działa",
-heroH1:"Zamknięcie dnia trwa godzinę. U nas trzynaście minut.",
-heroSub:"Nasza AI sprawdza każdy paragon wieczoru wobec terminala i kasy. Kierownik zmiany widzi tylko to, co się nie zgadza.",
+heroH1:"Każdy rachunek, każdej nocy. Widzisz tylko to, co się nie zgadza.",
+heroSub:"AI zestawia każdy rachunek z terminalem, rachunkami gości i liczeniem kasy. Kierownik zmiany dostaje krótką listę, a nie stos.",
 demoTitle:"Zamknięcie · Restaurant Spreeblick · Berlin",
-demoReady:"Gotowe.",demoRun:"AI sprawdza…",demoDone:"<b>3 rozbieżności</b> do sprawdzenia · 11 rozliczonych",demoOk:"sprawdzone",demoNo:"sprawdź",
-m1:"Paragonów sprawdzonych, rozbieżności zostało",m2v:"52 min",m2:"Odzyskane, każdej nocy",
-m3:"Na kierownika rocznie",m4:"Na cały wieczór",
+demoReady:"Gotowe.",demoRun:"Zestawianie…",demoDone:"<b>3 rozbieżności</b> do sprawdzenia · 11 rozliczonych",demoOk:"sprawdzone",demoNo:"sprawdź",
+m1:"Rachunków sprawdzonych, wyjątków dla człowieka",m2v:"Trzy źródła",m2:"Terminal, rachunek gościa i liczenie kasy",
+m3:"Największy pojedynczy błąd nocy demonstracyjnej",m4:"Na cały wieczór",
 probEye:"Problem",probH2:"Godzina każdej nocy, której nikt nie odzyska.",
 prob1:"Każdy paragon sprawdzany jest ręcznie wobec kasy.",
 prob2:"Ten jeden błąd tkwi gdzieś wśród setek zapisów.",
 prob3:"Cały zespół czeka, aż liczby się zgodzą.",
 probNote:"Prawie wszystkie paragony są w porządku. Dwa lub trzy nie. Właśnie dlatego trzeba było dotąd czytać wszystkie.",
 howEye:"Jak działa",howH2:"Jeden przycisk. Trzy kroki.",
-how1t:"Porównanie",how1p:"Każdy rachunek wobec gotówki, karty i księgi kasowej — w milisekundach.",
+how1t:"Porównanie",how1p:"Każdy rachunek wobec gotówki, karty, rachunku gościa i księgi kasowej.",
 how2t:"Oznaczenie",how2p:"Pojawia się tylko to, co się nie zgadza. Prostym językiem, z zaleceniem.",
 how3t:"Przekazanie",how3p:"Gotowy, zbilansowany zapis trafia do księgowości.",
-howCap:"Po przebiegu: 33 z 39 paragonów rozliczone. Zostaje siedem.",
+howCap:"36 rachunków sprawdzonych. 3 wymagają człowieka.",
 aiEye:"AI",aiH2:"Co znajduje AI — i co decydujesz Ty.",
 aiLede:"Czyta każdy paragon, wyjaśnia każdą rozbieżność jednym zdaniem i rozpoznaje to, co się powtarza. Decyzja zostaje przy kierowniku.",
 ai1:"Bez próbkowania — każdy paragon, każdej nocy.",
@@ -1160,152 +1186,28 @@ q4:"Co dzieje się z naszymi danymi?",a4:"Tylko dane sprzedażowe: paragony, kwo
 q5:"Ile to kosztuje?",a5:"249 € za punkt miesięcznie, bez opłaty wdrożeniowej, wypowiedzenie w cyklu miesięcznym.",
 disclaimer:"Zrzuty pokazują dane demonstracyjne; liczby są syntetyczne i tak oznaczone w produkcie."};
 
-T.pt={
-fSev:"Alta",fCause:"Dispositivo",fRisk:"Em risco",fTitle:"O pagamento com cartão nunca chegou ao lote",fBody:"Este talão foi fechado como pagamento com cartão de {amount} em ····{last4} com autorização {authCode}, mas o lote de {terminal} desta noite não contém captura correspondente.",fDo:"O que fazer",fAction:"Confirme que o terminal concluiu a captura. Até lá, este valor foi servido mas não cobrado.",fReview:"Marcar como revisto",trFlagRate:"Taxa de sinalização",trWindow:"Sete noites",exWord:"Exceções",exCleared:"e mais 33, reconciliados sem diferença",
-navDemo:"Demo",ctaDemo:"Abrir a demo",demoNote:"Motor de reconciliação real, dados sintéticos. Abre num novo separador.",
-strip:"Novidade: a Closewise identifica as causas que se repetem ao longo de sete noites.",stripLink:"Saber mais",
-navProblem:"Problema",navHow:"Como funciona",navAi:"IA",navDiff:"Diferença",navNumbers:"Números",navFaq:"Perguntas",
-ctaBook:"Marcar uma chamada",ctaHow:"Ver como funciona",
-heroH1:"O fecho demora uma hora. Connosco, treze minutos.",
-heroSub:"A nossa IA confronta cada talão da noite com o terminal de pagamento e a caixa. O responsável só vê o que não bate certo.",
-demoTitle:"Fecho · Restaurant Spreeblick · Berlim",
-demoReady:"Pronto.",demoRun:"A IA verifica…",demoDone:"<b>3 exceções</b> por rever · 11 resolvidas",demoOk:"verificado",demoNo:"rever",
-m1:"Talões verificados, exceções restantes",m2v:"52 min",m2:"Devolvidos, todas as noites",
-m3:"Por responsável e por ano",m4:"Para a noite inteira",
-probEye:"O problema",probH2:"Uma hora por noite que ninguém recupera.",
-prob1:"Cada talão é conferido à mão contra a caixa.",
-prob2:"O único erro está algalgures entre centenas de lançamentos.",
-prob3:"A equipa inteira espera até as contas baterem.",
-probNote:"Quase todos os talões estão certos. Dois ou três não. É exatamente por isso que, até agora, era preciso ler todos.",
-howEye:"Como funciona",howH2:"Um botão. Três passos.",
-how1t:"Conferir",how1p:"Cada conta contra numerário, cartão e livro de caixa — em milissegundos.",
-how2t:"Sinalizar",how2p:"Só aparece o que não bate certo. Em linguagem clara, com a ação recomendada.",
-how3t:"Enviar",how3p:"O lançamento final e equilibrado segue para a contabilidade.",
-howCap:"Depois da passagem: 33 de 39 talões resolvidos. Ficam sete.",
-aiEye:"A IA",aiH2:"O que a IA encontra — e o que decide você.",
-aiLede:"Lê cada talão, explica cada desvio numa frase e reconhece o que se repete. A decisão fica com o seu responsável.",
-ai1:"Sem amostragem — cada talão, todas as noites.",
-ai2:"Não um código de erro, mas o que aconteceu e o que fazer.",
-ai3:"O mesmo terminal, a mesma pessoa, a mesma semana.",
-loss1t:"O cartão nunca chegou",loss1p:"Fechado como pagamento com cartão que o terminal nunca capturou. Servido, nunca cobrado.",
-loss2t:"Alguém alterou o valor",loss2p:"Um desconto depois do fecho. Uma anulação sem aprovação.",
-loss3t:"O dinheiro está no sítio errado",loss3p:"Lançado como numerário, pago com cartão — a caixa ficará curta exatamente nesse valor.",
-patEye:"O padrão",patH2:"O mesmo erro, quatro noites seguidas.",
-patLede:"Uma noite má é acaso. A IA alinha a semana — e a causa mostra-se sozinha.",
-pat1:"Noites: o mesmo terminal não capturou",pat2:"Noites: a mesma pessoa descontou tarde demais",
-patCap:"Sete noites — e as duas causas por trás de metade.",
-diffEye:"A diferença",diffH2:"Os outros mostram-lhe tudo. Nós mostramos sete linhas.",
-d1w:"POS e BI",d1t:"Entrega relatórios. O erro procura-o você.",d1u:"Encontra o erro. Só lhe resta decidir.",
-d2w:"O seu PMS",d2t:"Verifica-se a si próprio — e por isso bate sempre certo.",d2u:"Verifica contra o terminal e a contagem de caixa. Duas fontes independentes.",
-d3w:"Contabilidade",d3t:"Nota-se no fim do mês.",d3u:"Nota-se na mesma noite — enquanto ainda se resolve.",
-d4w:"Arranque",d4t:"Um projeto de meses.",d4u:"Basta uma exportação do POS. Começa no mesmo dia.",
-numEye:"As contas",numH2:"Essa hora é cara.",
-n1:"Por noite, em horas extra do responsável",n2:"Por ano, para um único responsável",n3:"A poupança, face ao preço",
-calcTitle:"Os seus números",cOutlets:"Pontos de venda",cWage:"Custo horário do responsável",cManual:"Minutos por fecho, hoje",
-cMore:"Mais pressupostos",cExc:"Exceções por noite",cProps:"Unidades",cCloses:"Fechos por mês",cPrice:"Preço por ponto de venda / mês",
-cAssume:"Tempo Closewise: 2,5 min para abrir mais 1,5 min por exceção revista.",cReset:"Repor",
-rLabel:"Tempo de trabalho devolvido",rPerYear:"por ano",rPerMonth:"por mês",
-hoursLine:"{h} horas por mês de volta ao terreno · em {n} pontos de venda",
-tRoi:"Retorno",tRoiN:"por euro gasto",tNet:"Líquido / ano",tNetN:"após a subscrição",
-tCost:"Subscrição / ano",tSaved:"Min por fecho",redLine:"{p}% menos tempo",costN:"{n} pontos de venda × {p}",
-scaleTitle:"À escala do grupo",scOutlets:"Pontos de venda",scLabour:"Tempo devolvido",scCost:"Subscrição",scNet:"Líquido / ano",
-bookEye:"Semana piloto",bookH2:"Vinte minutos. Uma noite real da sua unidade.",
-bookLede:"Reconciliamos uma das suas noites e mostramos-lhe o que não bate certo. Gratuito, sem ligação ao seu sistema.",
-book1:"Sem instalação na caixa",book2:"Basta a exportação que já produz todas as noites",book3:"Alojamento na UE, contrato de subcontratação incluído",
-bookLine:"Escolhe o momento que lhe der jeito — diretamente no nosso calendário.",
-bookCta:"Ver horários disponíveis",bookNote:"20 minutos · videochamada · só precisa da exportação de uma noite.",
-faqEye:"Perguntas",faqH2:"Respostas breves.",
-q1:"Funciona com o nosso POS?",a1:"Sim. Para começar basta a exportação diária em CSV — praticamente todos os sistemas a produzem, Simphony e Micros incluídos. Na caixa não muda nada.",
-q2:"Substitui o nosso PMS?",a2:"Não. A Closewise trabalha ao lado do seu sistema e confere os números contra duas fontes independentes: o terminal de pagamento e a contagem de caixa. Um sistema não pode auditar-se a si próprio.",
-q3:"Quanto tempo demora a instalação?",a3:"O piloto começa no mesmo dia: envia uma exportação, devolvemos o fecho terminado.",
-q4:"O que acontece aos nossos dados?",a4:"Apenas dados de faturação: talões, valores, formas de pagamento, terminais, iniciais do pessoal. Sem dados de hóspedes nem números de cartão completos. Alojamento na UE.",
-q5:"Quanto custa?",a5:"249 € por ponto de venda por mês, sem custo de adesão, cancelável mensalmente.",
-disclaimer:"As imagens mostram dados de demonstração; os números são sintéticos e assinalados como tal no produto."};
-
-T.tr={
-fSev:"Yüksek",fCause:"Cihaz",fRisk:"Risk altında",fTitle:"Kart ödemesi partiye hiç ulaşmadı",fBody:"Bu fiş, ····{last4} kartında {authCode} onayıyla {amount} tutarında kart ödemesi olarak kapatıldı; ancak {terminal} teriminin bu geceki partisinde eşleşen bir kayıt yok.",fDo:"Yapılacak",fAction:"Terminalin kaydı tamamladığını doğrulayın. O ana kadar bu tutar verilmiş ama tahsil edilmemiştir.",fReview:"İncelendi olarak işaretle",trFlagRate:"İşaretlenme oranı",trWindow:"Yedi gece",exWord:"İstisnalar",exCleared:"ve 33 tanesi daha, sorunsuz mutabık",
-navDemo:"Demo",ctaDemo:"Canlı demoyu aç",demoNote:"Gerçek mutabakat motoru, sentetik veriler. Yeni sekmede açılır.",
-strip:"Yeni: Closewise yedi gece boyunca tekrarlayan nedenleri tespit ediyor.",stripLink:"Daha fazlası",
-navProblem:"Sorun",navHow:"Nasıl çalışır",navAi:"YZ",navDiff:"Fark",navNumbers:"Rakamlar",navFaq:"Sorular",
-ctaBook:"Görüşme ayarla",ctaHow:"Nasıl çalıştığını gör",
-heroH1:"Gün sonu kapanışı bir saat sürüyor. Bizde on üç dakika.",
-heroSub:"Yapay zekâmız akşamın her fişini POS terminali ve kasayla karşılaştırır. Müdürünüz yalnızca tutmayanı görür.",
-demoTitle:"Kapanış · Restaurant Spreeblick · Berlin",
-demoReady:"Hazır.",demoRun:"YZ kontrol ediyor…",demoDone:"<b>3 istisna</b> incelenecek · 11 tamamlandı",demoOk:"kontrol edildi",demoNo:"incele",
-m1:"Fiş kontrol edildi, istisna kaldı",m2v:"52 dk",m2:"Geri kazanıldı, her gece",
-m3:"Müdür başına yılda",m4:"Tüm akşam için",
-probEye:"Sorun",probH2:"Her gece bir saat, kimse geri alamıyor.",
-prob1:"Her fiş elle kasayla karşılaştırılıyor.",
-prob2:"O tek hata yüzlerce kayıt arasında bir yerde.",
-prob3:"Rakamlar tutana kadar tüm ekip bekliyor.",
-probNote:"Fişlerin neredeyse tamamı doğru. İki ya da üç tanesi değil. Şimdiye kadar hepsinin okunması tam da bu yüzden gerekiyordu.",
-howEye:"Nasıl çalışır",howH2:"Tek düğme. Üç adım.",
-how1t:"Karşılaştır",how1p:"Her hesap nakit, kart ve kasa defterine karşı — milisaniyeler içinde.",
-how2t:"İşaretle",how2p:"Yalnızca tutmayan görünür. Sade bir dille, önerilen adımla birlikte.",
-how3t:"İlet",how3p:"Tamamlanmış, denk kayıt muhasebeye gider.",
-howCap:"Turdan sonra: 39 fişin 33'ü tamam. Yedi tanesi kalıyor.",
-aiEye:"Yapay zekâ",aiH2:"Yapay zekâ ne buluyor — kararı siz veriyorsunuz.",
-aiLede:"Her fişi okur, her sapmayı tek cümleyle açıklar ve tekrarlayanı tanır. Karar müdürünüzde kalır.",
-ai1:"Örnekleme yok — her fiş, her gece.",
-ai2:"Hata kodu değil; ne olduğu ve ne yapılacağı.",
-ai3:"Aynı terminal, aynı kişi, aynı hafta.",
-loss1t:"Kart hiç ulaşmadı",loss1p:"Kart ödemesi olarak kapatıldı ama terminal hiç kaydetmedi. Verildi, tahsil edilmedi.",
-loss2t:"Biri tutarı değiştirdi",loss2p:"Kapanıştan sonra bir indirim. Onaysız bir iptal.",
-loss3t:"Para yanlış yerde",loss3p:"Nakit olarak kaydedildi, kartla ödendi — kasa tam o kadar eksik çıkacak.",
-patEye:"Örüntü",patH2:"Aynı hata, dört gece üst üste.",
-patLede:"Kötü bir gece rastlantıdır. Yapay zekâ haftayı yan yana koyar — neden kendiliğinden görünür.",
-pat1:"Gece: aynı terminal kaydetmedi",pat2:"Gece: aynı kişi geç indirim yaptı",
-patCap:"Yedi gece — ve yarısının arkasındaki iki neden.",
-diffEye:"Fark",diffH2:"Diğerleri size her şeyi gösterir. Biz yedi satır.",
-d1w:"POS ve BI",d1t:"Rapor verir. Hatayı siz ararsınız.",d1u:"Hatayı bulur. Size yalnızca karar kalır.",
-d2w:"PMS'iniz",d2t:"Kendini kontrol eder — bu yüzden hep tutar.",d2u:"Terminale ve kasa sayımına karşı kontrol eder. İki bağımsız kaynak.",
-d3w:"Muhasebe",d3t:"Ay sonunda fark edilir.",d3u:"Aynı gece fark edilir — hâlâ çözülebilecekken.",
-d4w:"Devreye alma",d4t:"Aylar süren bir proje.",d4u:"Tek bir POS dışa aktarımı yeter. Aynı gün başlar.",
-numEye:"Hesap",numH2:"Bu saat pahalı.",
-n1:"Gecelik, müdür mesaisi olarak",n2:"Yılda, tek bir müdür için",n3:"Fiyata karşı tasarruf",
-calcTitle:"Sizin rakamlarınız",cOutlets:"Tesisteki işletmeler",cWage:"Müdürün saatlik maliyeti",cManual:"Kapanış başına dakika, bugün",
-cMore:"Diğer varsayımlar",cExc:"Gecelik istisna",cProps:"Tesisler",cCloses:"Aylık kapanış",cPrice:"İşletme başına aylık fiyat",
-cAssume:"Closewise süresi: açmak için 2,5 dk artı incelenen her istisna için 1,5 dk.",cReset:"Sıfırla",
-rLabel:"Geri kazanılan çalışma süresi",rPerYear:"yılda",rPerMonth:"ayda",
-hoursLine:"Ayda {h} saat sahaya geri · {n} işletmede",
-tRoi:"Getiri",tRoiN:"harcanan her euro için",tNet:"Net / yıl",tNetN:"abonelik sonrası",
-tCost:"Abonelik / yıl",tSaved:"Kapanış başına dk",redLine:"%{p} daha az süre",costN:"{n} işletme × {p}",
-scaleTitle:"Grup ölçeğinde",scOutlets:"İşletme",scLabour:"Geri kazanılan süre",scCost:"Abonelik",scNet:"Net / yıl",
-bookEye:"Pilot hafta",bookH2:"Yirmi dakika. Tesisinizden gerçek bir gece.",
-bookLede:"Akşamlarınızdan birini biz hesaplarız ve neyin tutmadığını gösteririz. Ücretsiz, sisteminize bağlanmadan.",
-book1:"Kasada kurulum yok",book2:"Zaten her gece ürettiğiniz dışa aktarım yeterli",book3:"AB'de barındırma, veri işleme sözleşmesi dâhil",
-bookLine:"Size uyan zamanı siz seçersiniz — doğrudan takvimimizden.",
-bookCta:"Uygun saatleri gör",bookNote:"20 dakika · görüntülü görüşme · yalnızca bir akşamın dışa aktarımı gerekli.",
-faqEye:"Sorular",faqH2:"Kısaca yanıtlandı.",
-q1:"Bizim kasamızla çalışır mı?",a1:"Evet. Başlamak için günlük CSV dışa aktarımı yeterli — Simphony ve Micros dâhil neredeyse her sistem üretir. Kasada hiçbir şey değişmez.",
-q2:"PMS'imizin yerine mi geçiyor?",a2:"Hayır. Closewise mevcut sisteminizin yanında çalışır ve rakamlarını iki bağımsız kaynağa karşı kontrol eder: ödeme terminali ve kasa sayımı. Bir sistem kendini denetleyemez.",
-q3:"Kurulum ne kadar sürüyor?",a3:"Pilot aynı gün başlar: siz bir dışa aktarım gönderirsiniz, biz tamamlanmış kapanışı geri göndeririz.",
-q4:"Verilerimize ne oluyor?",a4:"Yalnızca ciro verileri: fişler, tutarlar, ödeme türleri, terminaller, personel kısaltmaları. Misafir verisi ve tam kart numarası yok. AB'de barındırma.",
-q5:"Maliyeti nedir?",a5:"İşletme başına ayda 249 €, kurulum ücreti yok, aylık iptal edilebilir.",
-disclaimer:"Görseller gösterim verilerini içerir; rakamlar sentetiktir ve üründe bu şekilde işaretlenmiştir."};
-
 T.ar={
 fSev:"عالية",fCause:"جهاز",fRisk:"في خطر",fTitle:"الدفع بالبطاقة لم يصل إلى الدفعة",fBody:"أُقفل هذا الإيصال كدفعة بالبطاقة بمبلغ {amount} على ····{last4} بالتفويض {authCode}، لكن دفعة الليلة من {terminal} لا تحتوي على تسجيل مطابق.",fDo:"ما ينبغي فعله",fAction:"تأكّد من أن الجهاز أتمّ التسجيل. وإلى أن يحدث ذلك يكون المبلغ قد قُدّم ولم يُحصّل.",fReview:"وسمها كمُراجَعة",trFlagRate:"نسبة التعليم",trWindow:"سبع ليالٍ",exWord:"الاستثناءات",exCleared:"و33 غيرها، تطابقت دون فرق",
 navDemo:"عرض تجريبي",ctaDemo:"افتح العرض التجريبي",demoNote:"محرّك تسوية حقيقي ببيانات تركيبية. يُفتح في تبويب جديد.",
 strip:"جديد: كلوزوايز يكشف الأسباب المتكرّرة على مدى سبع ليالٍ.",stripLink:"اعرف المزيد",
 navProblem:"المشكلة",navHow:"كيف يعمل",navAi:"الذكاء الاصطناعي",navDiff:"الفرق",navNumbers:"الأرقام",navFaq:"أسئلة",
 ctaBook:"احجز مكالمة",ctaHow:"شاهد كيف يعمل",
-heroH1:"إقفال اليوم يستغرق ساعة. معنا ثلاث عشرة دقيقة.",
-heroSub:"يفحص الذكاء الاصطناعي لدينا كل إيصال من المساء مقابل جهاز الدفع والصندوق. ولا يرى مديرُ الوردية إلا ما لا يتطابق.",
+heroH1:"كل إيصال، كل ليلة. ولا ترى إلا ما لا يتطابق.",
+heroSub:"يقارن الذكاء الاصطناعي كل إيصال بجهاز البطاقات وحسابات النزلاء وجرد الصندوق. ويصل مديرَ الوردية جدولٌ قصير، لا كومة.",
 demoTitle:"الإقفال · مطعم شبريبليك · برلين",
-demoReady:"جاهز.",demoRun:"الذكاء الاصطناعي يفحص…",demoDone:"<b>3 استثناءات</b> للمراجعة · 11 مكتملة",demoOk:"مطابق",demoNo:"راجع",
-m1:"إيصالات مفحوصة، استثناءات متبقية",m2v:"52 دقيقة",m2:"مستعادة، كل ليلة",
-m3:"لكل مدير في السنة",m4:"للمساء كله",
+demoReady:"جاهز.",demoRun:"جارٍ المطابقة…",demoDone:"<b>3 استثناءات</b> للمراجعة · 11 مكتملة",demoOk:"مطابق",demoNo:"راجع",
+m1:"إيصالات فُحصت، واستثناءات تُترك لإنسان",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات وحساب النزيل وجرد الصندوق",
+m3:"أكبر فارق منفرد في ليلة العرض",m4:"للمساء كله",
 probEye:"المشكلة",probH2:"ساعة كل ليلة لا يستعيدها أحد.",
 prob1:"كل إيصال يُطابَق يدويًا مع الصندوق.",
 prob2:"الخطأ الواحد مخبّأ بين مئات القيود.",
 prob3:"الفريق كله ينتظر حتى تتطابق الأرقام.",
 probNote:"معظم الإيصالات سليمة. اثنان أو ثلاثة ليست كذلك. ولهذا السبب بالذات كان لا بد من قراءتها جميعًا حتى الآن.",
 howEye:"كيف يعمل",howH2:"زر واحد. ثلاث خطوات.",
-how1t:"المطابقة",how1p:"كل فاتورة مقابل النقد والبطاقة ودفتر الصندوق — في أجزاء من الثانية.",
+how1t:"المطابقة",how1p:"كل إيصال مقابل النقد والبطاقة وحساب النزيل ودفتر الصندوق.",
 how2t:"التنبيه",how2p:"لا يظهر إلا ما لا يتطابق. بلغة واضحة مع الإجراء المقترح.",
 how3t:"التسليم",how3p:"القيد النهائي المتوازن يذهب إلى المحاسبة.",
-howCap:"بعد الفحص: 33 من 39 إيصالًا مكتملة. تبقى سبعة.",
+howCap:"فُحص 36 إيصالاً. 3 منها تحتاج إنساناً.",
 aiEye:"الذكاء الاصطناعي",aiH2:"ما يجده الذكاء الاصطناعي — وما تقرّره أنت.",
 aiLede:"يقرأ كل إيصال، ويشرح كل فارق في جملة واحدة، ويتعرّف على ما يتكرّر. القرار يبقى لمدير الوردية.",
 ai1:"بلا عيّنات — كل إيصال، كل ليلة.",
@@ -1397,16 +1299,16 @@ disclaimer:"الصور تعرض بيانات توضيحية؛ الأرقام ت�
     });
     var now = LANGS.filter(function (l) { return l[0] === lang; })[0];
     document.getElementById("langNow").textContent = now ? now[1] : lang;
+    document.getElementById("langCode").textContent = lang.toUpperCase();
     [].forEach.call(menu.children, function (b) {
       b.setAttribute("aria-current", String(b.dataset.code === lang));
     });
 
     paintSurfaces();
     // Figures that live outside the dictionary but follow its locale.
-    document.getElementById("mYear").textContent = money(11000);
+    document.getElementById("mBig").textContent = money2(552.77);
     document.getElementById("nNight").textContent = money(30);
     document.getElementById("nYear").textContent = money(11000);
-    document.getElementById("mMs").textContent = ms();
     paintDemo();
     calc();
   }
