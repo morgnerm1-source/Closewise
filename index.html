@@ -25,10 +25,11 @@
    Ten languages, Arabic included, driven from one dictionary.
    ============================================================ */
 :root{
-  --paper:#F6F7F8; --paper-2:#ECEEF0; --white:#FFFFFF;
-  --ink:#111826; --ink-2:#39424F; --muted:#59626E; --muted-2:#67707C;
-  --line:#DEE2E6; --line-2:#C6CDD4;
-  --navy:#0D1420; --navy-2:#182130; --navy-3:#222E40; --navy-line:#2A3546;
+  --paper:#F7F3EC; --paper-2:#EFE8DE; --white:#FFFFFF;
+  --cream:#F7F3EC; --cream-2:#F1E9DD;
+  --ink:#15202E; --ink-2:#3B4655; --muted:#575F6B; --muted-2:#5F6875;
+  --line:#E3DACD; --line-2:#D2C6B4;
+  --navy:#101A28; --navy-2:#1A2534; --navy-3:#243247; --navy-line:#2C3A4E;
   --on-dark:#F5F4F1; --on-dark-2:#C3C8D1; --on-dark-3:#8A93A1;
   --tan:#A58E78; --tan-lt:#C9B79F; --tan-text:#7A644B;
   --steel:#4E6C8C;
@@ -41,7 +42,7 @@
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
   --ease:cubic-bezier(.16,1,.3,1);
   --gut:clamp(20px,4.2vw,64px); --sec:clamp(54px,7vh,104px);
-  --r:6px; --r-lg:10px;
+  --r:6px; --r-lg:10px; --row:30px;
 }
 html[lang="ar"]{--serif:"Noto Naskh Arabic",Georgia,serif;--sans:"Noto Naskh Arabic","IBM Plex Sans",sans-serif}
 *,*::before,*::after{box-sizing:border-box}
@@ -89,7 +90,7 @@ a{color:inherit;text-decoration:none}
 .stack.tight{gap:clamp(9px,1.1vw,14px)}
 
 /* ---- Type ---- */
-.display{font-family:var(--serif);font-weight:400;font-size:clamp(2.3rem,5.1vw,3.9rem);
+.display{font-family:var(--serif);font-weight:400;max-width:15ch;font-size:clamp(2.2rem,4.4vw,3.5rem);
   line-height:1.05;letter-spacing:-.015em;text-wrap:balance}
 .h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.2vw,2.5rem);
   line-height:1.09;letter-spacing:-.012em;text-wrap:balance;max-width:22ch}
@@ -274,7 +275,7 @@ figcaption{font-size:13px;color:var(--muted)}
 .demo-count{font-size:12px;color:var(--muted-2);font-variant-numeric:tabular-nums}
 .demo-rows{position:relative}
 .drow{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr) minmax(0,auto) 80px;
-  gap:10px;align-items:center;height:30px;padding:0 16px;font-size:12.5px;
+  gap:10px;align-items:center;height:var(--row);padding:0 16px;font-size:12.5px;
   border-bottom:1px solid var(--line);color:var(--muted-2);font-variant-numeric:tabular-nums;
   transition:background .22s var(--ease),color .22s var(--ease)}
 .drow .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -288,7 +289,7 @@ figcaption{font-size:13px;color:var(--muted)}
 .pill.show{opacity:1;transform:none}
 .pill.ok{color:var(--good);background:var(--good-bg)}
 .pill.no{color:var(--bad);background:var(--bad-bg)}
-.sweep{position:absolute;left:0;right:0;height:30px;top:0;pointer-events:none;
+.sweep{position:absolute;left:0;right:0;height:var(--row);top:0;pointer-events:none;
   background:linear-gradient(to bottom,rgba(165,142,120,.22),transparent 76%);
   border-bottom:2px solid var(--tan);opacity:0;transition:opacity .2s var(--ease)}
 .sweep.on{opacity:1}
@@ -365,7 +366,7 @@ figcaption{font-size:13px;color:var(--muted)}
 .calc-lab{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
   font-size:14px;color:var(--muted)}
 .calc-lab label{min-width:0}
-.calc-lab b{white-space:nowrap;flex:none;font-family:var(--serif);font-weight:400;
+.calc-lab b{white-space:nowrap;flex:none;font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;
   font-size:1.25rem;color:var(--ink)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;background:none;cursor:pointer}
 input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--line-2);border-radius:2px}
@@ -417,250 +418,251 @@ details.q[open] summary::after{content:"–"}
 details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px;line-height:1.6}
 
 /* ---- Reveal ---- */
+
+/* Hidden by clipping, never by an offscreen offset: a negative inline
+   start is scrollable overflow in RTL and once stretched the page to
+   eleven thousand pixels. */
+.skip-link{position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap}
+.skip-link:focus{position:fixed;inset-block-start:10px;inset-inline-start:10px;
+  width:auto;height:auto;clip-path:none;z-index:200;
+  padding:9px 14px;border-radius:var(--r);
+  background:var(--navy);color:var(--on-dark);font-size:14px}
+
+/* ---- One screen, one page ----
+   The whole point: a reader can never scroll out of the subject they
+   picked, because there is nothing underneath it. Pages are stacked in
+   the same box. A page scrolls inside itself only when a short screen
+   leaves it no choice — it can never scroll into another page. */
+html,body{height:100%}
+body{overflow:hidden}
+.app{height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr)}
+.stage{position:relative;min-height:0}
+.page{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+  display:flex;align-items:center}
+.page[hidden]{display:none}
+.page-in{width:100%;display:flex;flex-direction:column;
+  gap:clamp(16px,2.4vh,32px);padding:clamp(18px,3vh,38px) 0}
+
+/* Each page stands on its own ground, so a click plainly lands you
+   somewhere else rather than further down the same sheet. */
+.ground-white{background:var(--white)}
+.ground-cream{background:
+  radial-gradient(120% 90% at 78% 6%,rgba(165,142,120,.22),transparent 58%),
+  linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+.ground-navy{color:var(--on-dark);background:
+  radial-gradient(115% 92% at 82% 0%,rgba(165,142,120,.26),transparent 56%),
+  linear-gradient(165deg,var(--navy-2) 0%,var(--navy) 64%)}
+.page-enter{animation:pg .34s var(--ease) both}
+@keyframes pg{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.page-enter{animation:none}}
+
+/* ---- The pager: the only way between pages ---- */
+.pager{background:var(--navy);
+  background-image:linear-gradient(90deg,var(--navy) 0%,var(--navy-3) 100%)}
+.pager-in{max-width:1280px;margin:0 auto;padding:0 var(--gut);
+  display:flex;gap:clamp(2px,1.2vw,18px);overflow-x:auto;scrollbar-width:none}
+.pager-in::-webkit-scrollbar{display:none}
+.pager button{position:relative;display:inline-flex;align-items:center;gap:9px;
+  height:50px;padding:0 clamp(9px,1vw,14px);white-space:nowrap;
+  font-size:14.5px;font-weight:450;color:var(--on-dark-3);
+  transition:color .16s var(--ease)}
+.pager button .n{font-family:var(--mono);font-size:11px;letter-spacing:.06em;opacity:.7}
+.pager button::after{content:"";position:absolute;inset-inline:clamp(9px,1vw,14px);bottom:0;
+  height:2px;background:var(--tan-lt);transform:scaleX(0);
+  transition:transform .24s var(--ease)}
+.pager button:hover{color:var(--on-dark)}
+.pager button[aria-selected="true"]{color:var(--on-dark);font-weight:600}
+.pager button[aria-selected="true"] .n{color:var(--tan-lt);opacity:1}
+.pager button[aria-selected="true"]::after{transform:scaleX(1)}
+@media (max-width:720px){
+  .pager button .n{display:none}
+  .pager-in{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent);
+    mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent)}
+}
+
+/* ---- Page furniture ---- */
+.head{display:flex;flex-direction:column;gap:clamp(6px,1vh,11px)}
+.split-hero,.split-finds{display:grid;gap:clamp(18px,3vw,50px);align-items:center;
+  grid-template-columns:minmax(0,1fr)}
+@media (min-width:960px){
+  .split-hero{grid-template-columns:minmax(0,1fr) minmax(0,1.04fr)}
+  .split-finds{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+}
+.closer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:clamp(14px,2vw,28px);padding:clamp(15px,2.2vh,24px) clamp(18px,2.4vw,30px);
+  border-radius:var(--r-lg);
+  background:linear-gradient(135deg,var(--navy-3),var(--navy));color:var(--on-dark)}
+.closer-h{font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.45rem);line-height:1.2}
+.closer .body{color:var(--on-dark-2);max-width:54ch;margin-top:4px}
+.disclaim{opacity:.72}
+.chip-mute{background:var(--paper-2);color:var(--muted)}
+.calc-h{color:var(--ink);font-weight:600}
+.btn-sm{height:34px;padding:0 14px;font-size:13.5px}
+.calc-out{gap:clamp(12px,1.8vh,20px)}
+
+@media (max-height:840px){
+  :root{--row:26px}
+  .page-in{gap:clamp(12px,1.8vh,22px);padding:clamp(14px,2vh,24px) 0}
+  .display{font-size:clamp(2rem,3.6vw,2.8rem)}
+  .h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+  .lede{font-size:1rem}
+}
+@media (max-height:720px){
+  :root{--row:23px}
+  .vsrow{padding:clamp(8px,1.2vh,12px) 0}
+  .closer{padding:clamp(11px,1.6vh,16px) clamp(16px,2vw,24px)}
+  .disclaim{display:none}
+  .display{font-size:clamp(1.8rem,3vw,2.4rem)}
+  .metrics{padding:clamp(12px,2vw,20px) 0}
+  .metric .v{font-size:clamp(1.3rem,1.8vw,1.6rem)}
+  .metric .v.txt{font-size:clamp(1.2rem,1.7vw,1.5rem)}
+}
+
 .rv{opacity:0;transform:translateY(12px)}
 .rv.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .rv.d1{transition-delay:.06s}.rv.d2{transition-delay:.12s}.rv.d3{transition-delay:.18s}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 </style>
 
-<div class="strip">
-  <div class="strip-in">
-    <span data-t="strip"></span>
-    <a href="#muster" data-t="stripLink"></a>
-  </div>
-</div>
+<a class="skip-link" href="#stage" data-t="skip"></a>
+
+<div class="app">
 
 <header class="nav">
   <div class="nav-in">
-    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 112 96" width="26" role="img" aria-label="Closewise"><text class="c" x="0" y="78" font-family="Georgia,'Times New Roman',serif" font-size="98">C</text><text class="w" x="44" y="84" font-family="Georgia,'Times New Roman',serif" font-size="56">W</text></svg><span class="word">closewise</span></a>
-    <nav class="nav-links">
-      <a href="#problem" data-t="tabProblem"></a>
-      <a href="#ablauf" data-t="tabHow"></a>
-      <a href="#ki" data-t="tabFinds"></a>
-      <a href="#rechnung" data-t="tabCost"></a>
-      <a href="#fragen" data-t="tabQs"></a>
-    </nav>
+    <a class="brand" href="#" data-go="overview"><svg class="mark" viewBox="0 0 112 96" width="26" role="img" aria-label="Closewise"><text class="c" x="0" y="78" font-family="Georgia,'Times New Roman',serif" font-size="98">C</text><text class="w" x="44" y="84" font-family="Georgia,'Times New Roman',serif" font-size="56">W</text></svg><span class="word">closewise</span></a>
     <div class="nav-right">
       <details class="lang" id="lang">
         <summary aria-label="Language"><span id="langNow">Deutsch</span><span id="langCode">DE</span><i class="chev"></i></summary>
         <div class="lang-menu" id="langMenu" role="listbox"></div>
       </details>
-      <a class="btn btn-solid" href="#termin" data-t="ctaBook"></a>
+      <a class="btn btn-solid" href="https://calendly.com/closewise/20min" target="_blank" rel="noopener" data-t="ctaBook"></a>
     </div>
   </div>
 </header>
 
-<!-- ══ Hero ══ -->
-<section class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-top">
-      <div class="hero-left">
-        <h1 class="display rv" data-t="heroH1"></h1>
-        <p class="lede rv d1" data-t="heroSub"></p>
-        <div class="btns rv d2">
-          <a class="btn btn-solid btn-lg" href="#termin" data-t="ctaBook"></a>
+<nav class="pager" aria-label="Pages">
+  <div class="pager-in" role="tablist">
+    <button type="button" role="tab" data-go="overview"><span class="n">01</span><span data-t="tabOverview"></span></button>
+    <button type="button" role="tab" data-go="how"><span class="n">02</span><span data-t="tabHow"></span></button>
+    <button type="button" role="tab" data-go="finds"><span class="n">03</span><span data-t="tabFinds"></span></button>
+    <button type="button" role="tab" data-go="cost"><span class="n">04</span><span data-t="tabCost"></span></button>
+    <button type="button" role="tab" data-go="why"><span class="n">05</span><span data-t="tabWhy"></span></button>
+  </div>
+</nav>
+
+<main class="stage" id="stage">
+
+<!-- ══ 01 Overview ══ -->
+<section class="page ground-cream is-on" id="pg-overview" role="tabpanel">
+  <div class="wrap page-in">
+    <div class="split-hero">
+      <div class="stack">
+        <h1 class="display" data-t="heroH1"></h1>
+        <p class="lede" data-t="heroSub"></p>
+        <div class="btns">
+          <a class="btn btn-solid btn-lg" href="https://calendly.com/closewise/20min" target="_blank" rel="noopener" data-t="ctaBook"></a>
           <a class="btn btn-line btn-lg" href="https://closewise-production.up.railway.app" target="_blank" rel="noopener" data-t="ctaDemo"></a>
         </div>
+        <p class="tiny" data-t="heroProof"></p>
       </div>
-
-      <div class="rv d2">
-        <div class="demo" id="demo" aria-hidden="true">
-          <div class="demo-bar">
-            <span class="demo-t" data-t="demoTitle"></span>
-            <span class="demo-count" id="demoCount">0 / 14</span>
-          </div>
-          <div class="demo-rows" id="demoRows"></div>
-          <div class="demo-foot">
-            <span id="demoFoot"></span>
-          </div>
+      <div class="demo" id="demo" aria-hidden="true">
+        <div class="demo-bar">
+          <span class="demo-t" data-t="demoTitle"></span>
+          <span class="demo-count" id="demoCount">0 / 14</span>
         </div>
+        <div class="demo-rows" id="demoRows"></div>
+        <div class="demo-foot"><span id="demoFoot"></span></div>
       </div>
     </div>
-
-    <div class="metrics rv d3" style="margin-top:clamp(30px,4.5vh,56px)">
-      <div class="metric"><span class="v">36 → 3</span><span class="k" data-t="m1"></span></div>
+    <div class="metrics">
+      <div class="metric"><span class="v">36 &#8594; 3</span><span class="k" data-t="m1"></span></div>
       <div class="metric"><span class="v txt" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
-      <div class="metric"><span class="v" id="mBig">552,77 €</span><span class="k" data-t="m3"></span></div>
+      <div class="metric"><span class="v" id="mBig">552,77 &euro;</span><span class="k" data-t="m3"></span></div>
     </div>
   </div>
 </section>
 
-<main>
-<!-- ══ Problem ══ -->
-<section class="sec" id="problem">
-  <div class="wrap grid split-l" style="align-items:start">
-    <div class="stack">
-      <p class="eyebrow rv" data-n="01" data-t="probEye"></p>
-      <h2 class="h2 rv d1" data-t="probH2"></h2>
-      <p class="lede rv d2" data-t="probNote"></p>
+<!-- ══ 02 How it works ══ -->
+<section class="page ground-white" id="pg-how" role="tabpanel" hidden>
+  <div class="wrap page-in">
+    <div class="head">
+      <p class="eyebrow" data-n="02" data-t="howEye"></p>
+      <h2 class="h2" data-t="howH2"></h2>
     </div>
-    <ul class="rowlist rv d2">
-      <li data-t="prob1"></li>
-      <li data-t="prob2"></li>
-      <li data-t="prob3"></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ══ How it works ══ -->
-<section class="sec" id="ablauf">
-  <div class="wrap stack" style="gap:clamp(26px,3.4vw,48px)">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-n="02" data-t="howEye"></p>
-      <h2 class="h2 rv d1" data-t="howH2"></h2>
-    </div>
-    <ol class="steps rv d1">
-      <li><span class="s">1</span>
-        <h3 class="h3" data-t="how1t"></h3><p class="body" data-t="how1p"></p></li>
-      <li><span class="s">2</span>
-        <h3 class="h3" data-t="how2t"></h3><p class="body" data-t="how2p"></p></li>
-      <li><span class="s">3</span>
-        <h3 class="h3" data-t="how3t"></h3><p class="body" data-t="how3p"></p></li>
+    <ol class="steps">
+      <li><span class="s">1</span><h3 class="h3" data-t="how1t"></h3><p class="body" data-t="how1p"></p></li>
+      <li><span class="s">2</span><h3 class="h3" data-t="how2t"></h3><p class="body" data-t="how2p"></p></li>
+      <li><span class="s">3</span><h3 class="h3" data-t="how3t"></h3><p class="body" data-t="how3p"></p></li>
     </ol>
-    <figure class="screen rv d2">
-      <div class="surface">
-        <div class="surface-bar">
-          <span data-t="demoTitle"></span>
-          <span><span class="chip no" data-t="exCount"></span></span>
-        </div>
-        <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
-          <span class="t" data-t="loss1t"></span><span class="a" id="exA1"></span></div>
-        <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
-          <span class="t" data-t="loss2t"></span><span class="a" id="exA2"></span></div>
-        <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
-          <span class="t" data-t="loss3t"></span><span class="a" id="exA3"></span></div>
-        <div class="exrow"><span class="chip ok" data-t="demoOk"></span>
-          <span class="t" data-t="exCleared"></span><span class="a" style="color:var(--muted-2)">—</span></div>
-        <div class="surface-foot" data-t="howCap"></div>
+    <div class="surface">
+      <div class="surface-bar">
+        <span data-t="demoTitle"></span>
+        <span class="chip no" data-t="exCount"></span>
       </div>
-    </figure>
-    <div class="btns rv d3" style="align-items:center;gap:14px">
-      <a class="btn btn-solid btn-lg" href="https://closewise-production.up.railway.app" target="_blank" rel="noopener" data-t="ctaDemo"></a>
-      <span class="tiny" style="max-width:34ch" data-t="demoNote"></span>
+      <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
+        <span class="t" data-t="loss1t"></span><span class="a" id="exA1"></span></div>
+      <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
+        <span class="t" data-t="loss2t"></span><span class="a" id="exA2"></span></div>
+      <div class="exrow bad"><span class="chip no" data-t="demoNo"></span>
+        <span class="t" data-t="loss3t"></span><span class="a" id="exA3"></span></div>
+      <div class="exrow"><span class="chip ok" data-t="demoOk"></span>
+        <span class="t" data-t="exCleared"></span><span class="a">&mdash;</span></div>
+      <div class="surface-foot" data-t="howCap"></div>
     </div>
   </div>
 </section>
 
-<!-- ══ What the AI finds — dark panel ══ -->
-<section class="sec" id="ki">
-  <div class="wrap">
-    <div class="panel grain on-dark rv">
-      <div class="panel-in flush">
-        <div class="grid split-l" style="align-items:end">
-          <div class="stack">
-            <p class="eyebrow" data-n="03" data-t="aiEye"></p>
-            <h2 class="h2" style="color:var(--on-dark)" data-t="aiH2"></h2>
-            <p class="lede" data-t="aiLede"></p>
-          </div>
-          <ul class="ticks">
-            <li><span class="m arrow">→</span><span data-t="ai1"></span></li>
-            <li><span class="m arrow">→</span><span data-t="ai2"></span></li>
-            <li><span class="m arrow">→</span><span data-t="ai3"></span></li>
-          </ul>
-        </div>
+<!-- ══ 03 What it catches ══ -->
+<section class="page ground-navy on-dark" id="pg-finds" role="tabpanel" hidden>
+  <div class="wrap page-in">
+    <div class="split-finds">
+      <div class="stack">
+        <p class="eyebrow" data-n="03" data-t="aiEye"></p>
+        <h2 class="h2" data-t="aiH2"></h2>
+        <p class="lede" data-t="aiLede"></p>
+        <ul class="ticks">
+          <li><span class="m arrow">&#8594;</span><span data-t="ai1"></span></li>
+          <li><span class="m arrow">&#8594;</span><span data-t="ai2"></span></li>
+          <li><span class="m arrow">&#8594;</span><span data-t="ai3"></span></li>
+        </ul>
       </div>
-      <div class="panel-shot">
-        <div class="flagcard">
-          <div class="flag-top">
-            <span class="chip no" data-t="fSev"></span>
-            <span class="chip" style="background:var(--paper-2);color:var(--muted)" data-t="fCause"></span>
-            <span class="flag-id">REST-0827-034</span>
-            <span class="flag-risk"><span class="k" data-t="fRisk"></span><span class="v" id="fAmt"></span></span>
-          </div>
-          <p class="flag-title" data-t="fTitle"></p>
-          <p class="flag-body" id="fBody"></p>
-          <div class="flag-do"><span class="k" data-t="fDo"></span><p data-t="fAction"></p></div>
-          <div class="flag-foot">
-            <span class="ref">F-2026-08-27-005</span>
-            <span class="btn btn-line" data-t="fReview"></span>
-          </div>
+      <div class="flagcard">
+        <div class="flag-top">
+          <span class="chip no" data-t="fSev"></span>
+          <span class="chip chip-mute" data-t="fCause"></span>
+          <span class="flag-id">REST-0827-034</span>
+          <span class="flag-risk"><span class="k" data-t="fRisk"></span><span class="v" id="fAmt"></span></span>
+        </div>
+        <p class="flag-title" data-t="fTitle"></p>
+        <p class="flag-body" id="fBody"></p>
+        <div class="flag-do"><span class="k" data-t="fDo"></span><p data-t="fAction"></p></div>
+        <div class="flag-foot">
+          <span class="ref">F-2026-08-27-005</span>
+          <span class="btn btn-line" data-t="fReview"></span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ Pattern ══ -->
-<section class="sec" id="muster">
-  <div class="wrap grid split-l flip">
-    <div class="stack">
-      <p class="eyebrow rv" data-n="04" data-t="patEye"></p>
-      <h2 class="h2 rv d1" data-t="patH2"></h2>
-      <p class="lede rv d2" data-t="patLede"></p>
-      <div class="grid g2 rv d2" style="gap:clamp(18px,2.4vw,30px)">
-        <div class="metric"><span class="v" style="font-size:clamp(1.65rem,2.3vw,2.1rem)">6 / 7</span>
-          <span class="k" data-t="pat1"></span></div>
-        <div class="metric"><span class="v" style="font-size:clamp(1.65rem,2.3vw,2.1rem)">5 / 7</span>
-          <span class="k" data-t="pat2"></span></div>
-      </div>
+<!-- ══ 04 What it costs ══ -->
+<section class="page ground-cream" id="pg-cost" role="tabpanel" hidden>
+  <div class="wrap page-in">
+    <div class="head">
+      <p class="eyebrow" data-n="04" data-t="numEye"></p>
+      <h2 class="h2" data-t="numH2"></h2>
     </div>
-    <figure class="screen rv d2">
-      <div class="surface">
-        <div class="surface-bar">
-          <span data-t="trFlagRate"></span>
-          <span id="trWindow"></span>
-        </div>
-        <div class="tchart">
-          <div class="tbars" id="trBars"></div>
-          <div class="tticks" id="trTicks"></div>
-        </div>
-        <div class="surface-foot" data-t="patCap"></div>
-      </div>
-    </figure>
-  </div>
-</section>
-
-<!-- ══ Difference ══ -->
-<section class="sec" id="unterschied">
-  <div class="wrap stack" style="gap:clamp(24px,3.2vw,42px)">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-n="05" data-t="diffEye"></p>
-      <h2 class="h2 rv d1" style="max-width:26ch" data-t="diffH2"></h2>
-    </div>
-    <div class="vs rv d2">
-      <div class="vsrow"><span class="who" data-t="d1w"></span>
-        <span class="them" data-t="d1t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d1u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d2w"></span>
-        <span class="them" data-t="d2t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d2u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d3w"></span>
-        <span class="them" data-t="d3t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d3u"></span></span></div>
-      <div class="vsrow"><span class="who" data-t="d4w"></span>
-        <span class="them" data-t="d4t"></span>
-        <span class="us"><span class="arrow">→</span><span data-t="d4u"></span></span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ Numbers ══ -->
-<section class="sec" id="rechnung">
-  <div class="wrap stack" style="gap:clamp(26px,3.4vw,46px)">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-n="06" data-t="numEye"></p>
-      <h2 class="h2 rv d1" data-t="numH2"></h2>
-    </div>
-    <div class="metrics rv d2" style="border-top:0;padding-top:0">
-      <div class="metric"><span class="v" id="nNight">30 €</span><span class="k" data-t="n1"></span></div>
-      <div class="metric"><span class="v" id="nYear">11.000 €</span><span class="k" data-t="n2"></span></div>
-    </div>
-
-    <div class="calc-grid rv d2">
+    <div class="calc-grid">
       <div class="calc-panel">
-        <p class="label" style="color:var(--ink);font-weight:600" data-t="calcTitle"></p>
-        <div>
-          <div class="calc-lab"><label for="outlets" data-t="cOutlets"></label><b id="vOutlets">2</b></div>
-          <input type="range" id="outlets" min="1" max="12" step="1" value="2">
-        </div>
-        <div>
-          <div class="calc-lab"><label for="wage" data-t="cWage"></label><b id="vWage">30 €</b></div>
-          <input type="range" id="wage" min="20" max="60" step="1" value="30">
-        </div>
-        <div>
-          <div class="calc-lab"><label for="manual" data-t="cManual"></label><b id="vManual">65</b></div>
-          <input type="range" id="manual" min="20" max="120" step="5" value="65">
-        </div>
+        <p class="label calc-h" data-t="calcTitle"></p>
+        <div><div class="calc-lab"><label for="outlets" data-t="cOutlets"></label><b id="vOutlets">2</b></div>
+          <input type="range" id="outlets" min="1" max="12" step="1" value="2"></div>
+        <div><div class="calc-lab"><label for="wage" data-t="cWage"></label><b id="vWage">30 &euro;</b></div>
+          <input type="range" id="wage" min="20" max="60" step="1" value="30"></div>
+        <div><div class="calc-lab"><label for="manual" data-t="cManual"></label><b id="vManual">65</b></div>
+          <input type="range" id="manual" min="20" max="120" step="5" value="65"></div>
         <details class="more">
           <summary data-t="cMore"></summary>
           <div class="inner">
@@ -670,98 +672,65 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
               <input type="range" id="props" min="1" max="40" step="1" value="1"></div>
             <div><div class="calc-lab"><label for="closes" data-t="cCloses"></label><b id="vCloses">30</b></div>
               <input type="range" id="closes" min="1" max="31" step="1" value="30"></div>
-            <div><div class="calc-lab"><label for="price" data-t="cPrice"></label><b id="vPrice">249 €</b></div>
+            <div><div class="calc-lab"><label for="price" data-t="cPrice"></label><b id="vPrice">249 &euro;</b></div>
               <input type="range" id="price" min="0" max="600" step="1" value="249"></div>
-            <p class="tiny" data-t="cAssume"></p>
-            <button type="button" class="btn btn-line" id="resetCalc" style="height:36px;font-size:14px" data-t="cReset"></button>
+            <button type="button" class="btn btn-line btn-sm" id="resetCalc" data-t="cReset"></button>
           </div>
         </details>
       </div>
-
-      <div class="stack" style="gap:clamp(17px,2.1vw,24px)">
+      <div class="stack calc-out">
         <div class="calc-hero">
           <p class="label" data-t="rLabel"></p>
-          <span class="v" id="rYear">20.340 €</span>
-          <p class="s"><span data-t="rPerYear"></span> · <span id="rMonth">1.695 €</span> <span data-t="rPerMonth"></span></p>
+          <span class="v" id="rYear">20.340 &euro;</span>
+          <p class="s"><span data-t="rPerYear"></span> &middot; <span id="rMonth">1.695 &euro;</span> <span data-t="rPerMonth"></span></p>
           <p class="h" id="rHours"></p>
         </div>
         <div class="tiles">
-          <div class="tile"><span class="k" data-t="tRoi"></span><span class="v" id="rRoi">3,4×</span>
-            <span class="n" data-t="tRoiN"></span></div>
-          <div class="tile"><span class="k" data-t="tNet"></span><span class="v" id="rNet">14.364 €</span>
-            <span class="n" data-t="tNetN"></span></div>
-          <div class="tile"><span class="k" data-t="tCost"></span><span class="v" id="rCost">5.976 €</span>
-            <span class="n" id="rCostN"></span></div>
-          <div class="tile"><span class="k" data-t="tSaved"></span><span class="v" id="rSaved">56,5</span>
-            <span class="n" id="rRed"></span></div>
+          <div class="tile"><span class="k" data-t="tRoi"></span><span class="v" id="rRoi">3,4&times;</span><span class="n" data-t="tRoiN"></span></div>
+          <div class="tile"><span class="k" data-t="tNet"></span><span class="v" id="rNet">14.364 &euro;</span><span class="n" data-t="tNetN"></span></div>
+          <div class="tile"><span class="k" data-t="tCost"></span><span class="v" id="rCost">5.976 &euro;</span><span class="n" id="rCostN"></span></div>
+          <div class="tile"><span class="k" data-t="tSaved"></span><span class="v" id="rSaved">56,5</span><span class="n" id="rRed"></span></div>
         </div>
-        <div class="stack tight">
-          <p class="label" data-t="scaleTitle"></p>
-          <div class="scale-wrap">
-            <table class="scale-tbl">
-              <thead><tr>
-                <th data-t="scOutlets"></th>
-                <th class="num" data-t="scLabour"></th>
-                <th class="num" data-t="scCost"></th>
-                <th class="num" data-t="scNet"></th>
-              </tr></thead>
-              <tbody id="scaleRows"></tbody>
-            </table>
-          </div>
-        </div>
+        <p class="tiny" data-t="cAssume"></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ Booking ══ -->
-<section class="sec" id="termin">
-  <div class="wrap">
-    <div class="panel grain on-dark rv">
-      <div class="panel-in">
-        <div class="grid split">
-          <div class="stack">
-            <p class="eyebrow" data-n="07" data-t="bookEye"></p>
-            <h2 class="h2" style="color:var(--on-dark)" data-t="bookH2"></h2>
-            <p class="lede" data-t="bookLede"></p>
-            <ul class="ticks">
-              <li><span class="m arrow">→</span><span data-t="book1"></span></li>
-              <li><span class="m arrow">→</span><span data-t="book2"></span></li>
-              <li><span class="m arrow">→</span><span data-t="book3"></span></li>
-            </ul>
-          </div>
-          <div class="book">
-            <p class="book-line" data-t="bookLine"></p>
-            <!-- Replace with the real Calendly scheduling link. -->
-            <a class="btn btn-solid btn-lg" href="https://calendly.com/closewise/20min"
-               target="_blank" rel="noopener" data-t="bookCta"></a>
-            <p class="tiny" style="max-width:34ch" data-t="bookNote"></p>
-          </div>
-        </div>
-      </div>
+<!-- ══ 05 Why us ══ -->
+<section class="page ground-white" id="pg-why" role="tabpanel" hidden>
+  <div class="wrap page-in">
+    <div class="head">
+      <p class="eyebrow" data-n="05" data-t="diffEye"></p>
+      <h2 class="h2" data-t="diffH2"></h2>
     </div>
+    <div class="vs">
+      <div class="vsrow"><span class="who" data-t="d1w"></span>
+        <span class="them" data-t="d1t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d1u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d2w"></span>
+        <span class="them" data-t="d2t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d2u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d3w"></span>
+        <span class="them" data-t="d3t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d3u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d4w"></span>
+        <span class="them" data-t="d4t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d4u"></span></span></div>
+    </div>
+    <div class="closer">
+      <div>
+        <p class="closer-h" data-t="bookH2"></p>
+        <p class="body" data-t="bookLede"></p>
+      </div>
+      <a class="btn btn-solid btn-lg" href="https://calendly.com/closewise/20min" target="_blank" rel="noopener" data-t="bookCta"></a>
+    </div>
+    <p class="tiny disclaim" data-t="disclaimer"></p>
   </div>
 </section>
 
-<!-- ══ FAQ ══ -->
-<section class="sec" id="fragen">
-  <div class="wrap grid split-l" style="align-items:start">
-    <div class="stack tight">
-      <p class="eyebrow rv" data-n="08" data-t="faqEye"></p>
-      <h2 class="h2 rv d1" data-t="faqH2"></h2>
-    </div>
-    <div class="rv d2">
-      <details class="q" open><summary data-t="q1"></summary><p class="ans" data-t="a1"></p></details>
-      <details class="q"><summary data-t="q2"></summary><p class="ans" data-t="a2"></p></details>
-      <details class="q"><summary data-t="q3"></summary><p class="ans" data-t="a3"></p></details>
-      <details class="q"><summary data-t="q4"></summary><p class="ans" data-t="a4"></p></details>
-      <details class="q"><summary data-t="q5"></summary><p class="ans" data-t="a5"></p></details>
-      <p class="tiny" style="margin-top:clamp(20px,2.4vw,28px)" data-t="disclaimer"></p>
-    </div>
-  </div>
-</section>
 </main>
-
+</div>
 
 <script>
 var LANGS=[["de","Deutsch"],["en","English"],["fr","Français"],["es","Español"],
@@ -776,11 +745,11 @@ strip:"Neu: Closewise erkennt jetzt, was sich über sieben Nächte wiederholt.",
 navProblem:"Problem",navHow:"Ablauf",navAi:"KI",navDiff:"Unterschied",navNumbers:"Rechnung",navFaq:"Fragen",
 ctaBook:"Termin buchen",ctaHow:"So funktioniert es",
 heroH1:"Jeder Check, jede Nacht. Sie lesen nur die falschen.",
-heroSub:"Die KI gleicht die Checks des Abends gegen das Kartengerät, die Zimmerkonten und das gezählte Bargeld ab. Ihre Schichtleitung bekommt eine kurze Liste statt des ganzen Stapels.",
+heroSub:"Closewise macht Ihren Tagesabschluss. Es gleicht die Checks des Outlets mit Kartengerät, Zimmerkonten und der abgerechneten Kasse ab und gibt Ihrer Schichtleitung die kurze Liste.",
 demoTitle:"Abschluss · Restaurant Spreeblick · Berlin",
 demoReady:"Bereit.",demoRun:"Gleicht ab…",demoDone:"<b>3 zu prüfen</b> · 11 erledigt",demoOk:"erledigt",demoNo:"prüfen",
-m1:"Checks geprüft, für einen Menschen übrig",m2v:"Drei Quellen",m2:"Kartengerät, Zimmerkonto, Kassenlade",
-m3:"Der grösste Fund der Demo-Nacht",m4:"Für den ganzen Abend",
+m1:"Checks abgeglichen, für einen Menschen übrig",m2v:"Drei Quellen",m2:"Kartengerät, Zimmerkonto, Kassenlade",
+m3:"Grösster Fund der Demo-Nacht",m4:"Für den ganzen Abend",
 probEye:"Das Problem",probH2:"Der Tagesabschluss frisst eine Stunde. Jede Nacht.",
 prob1:"Jemand liest jeden Check von Hand gegen den Z-Bon.",
 prob2:"Ein falscher Check versteckt sich unter dreihundert.",
@@ -789,13 +758,13 @@ probNote:"Fast jeder Check ist in Ordnung. Zwei oder drei nicht. Deshalb musste 
 howEye:"So läuft es",howH2:"Ein Knopf. Drei Schritte.",
 how1t:"Abgleichen",how1p:"Jeder Check gegen Bargeld, Kartengerät, Zimmerkonten und Z-Bon.",
 how2t:"Markieren",how2p:"Nur was nicht aufgeht, kommt zurück. Im Klartext, mit dem nächsten Schritt.",
-how3t:"Übergeben",how3p:"Die ausgeglichene Buchung geht an die Buchhaltung. Die Nacht ist zu.",
-howCap:"36 Checks geprüft. 3 brauchen einen Menschen.",
-aiEye:"Was es findet",aiH2:"Die KI findet es. Sie entscheiden.",
-aiLede:"Sie liest jeden Check, sagt in einem Satz, was schiefging, und merkt, wenn sich dasselbe wiederholt. Entschieden wird weiter von Ihrer Schichtleitung.",
+how3t:"Übergeben",how3p:"Die ausgeglichene Buchung geht an die Buchhaltung, die Nacht ist zu.",
+howCap:"36 Checks abgeglichen. 3 brauchen einen Menschen.",
+aiEye:"Was es findet",aiH2:"Es findet es. Sie entscheiden.",
+aiLede:"Es liest jeden Check, sagt in einem Satz, was schiefging, und erkennt es, wenn dasselbe wieder passiert. Die Entscheidung bleibt bei Ihrer Schichtleitung.",
 ai1:"Keine Stichproben. Jeder Check, jede Nacht.",
-ai2:"Keine Fehlercodes. Sie sagt, was passiert ist und was zu tun ist.",
-ai3:"Sie erkennt dieselbe Kasse, denselben Kellner, dieselbe Woche.",
+ai2:"Keine Fehlercodes. Was passiert ist und was zu tun ist.",
+ai3:"Dieselbe Kasse, derselbe Kellner, dieselbe Woche.",
 loss1t:"Die Karte kam nie an",loss1p:"Als Kartenzahlung geschlossen, vom Terminal nie erfasst. Geleistet, aber nicht eingenommen.",
 loss2t:"Jemand hat die Zahl geändert",loss2p:"Ein Rabatt nach dem Abschluss. Ein Storno ohne Freigabe.",
 loss3t:"Das Geld liegt falsch",loss3p:"Als bar gebucht, mit Karte bezahlt — die Kasse ist am Ende genau um diesen Betrag zu kurz.",
@@ -803,26 +772,26 @@ patEye:"Das Muster",patH2:"Derselbe Fehler, vier Nächte hintereinander.",
 patLede:"Eine schlechte Nacht ist Pech. Legen Sie sieben nebeneinander, und Sie sehen, woran es liegt.",
 pat1:"Nächte, in denen dasselbe Kartengerät nicht erfasst hat",pat2:"Nächte, in denen derselbe Kellner nach dem Abschluss rabattiert hat",
 patCap:"Sieben Nächte, und die zwei Ursachen hinter der Hälfte.",
-diffEye:"Der Unterschied",diffH2:"Alle anderen geben Ihnen einen Bericht. Wir geben Ihnen drei Zeilen.",
-d1w:"Kassen- und BI-Systeme",d1t:"Geben einen Bericht. Den Fehler suchen Sie.",d1u:"Findet den Fehler. Sie entscheiden nur.",
-d2w:"Ihr PMS",d2t:"Prüft die eigenen Zahlen, also stimmt es immer.",d2u:"Prüft gegen Kartengerät und gezähltes Bargeld. Zwei Quellen, die es nicht kontrolliert.",
+diffEye:"Warum wir",diffH2:"Alle anderen geben Ihnen einen Bericht. Wir geben Ihnen drei Zeilen.",
+d1w:"Kasse und BI",d1t:"Gibt Ihnen einen Bericht. Den Fehler suchen Sie.",d1u:"Findet den Fehler. Sie entscheiden nur.",
+d2w:"Ihr PMS",d2t:"Prüft sich selbst, also geht es immer auf.",d2u:"Geht gegen Kartengerät und abgerechnete Kasse auf. Zwei Quellen, die es nicht selbst führt.",
 d3w:"Buchhaltung",d3t:"Merkt es am Monatsende.",d3u:"Merkt es in derselben Nacht, solange der Gast noch im Haus ist.",
-d4w:"Start",d4t:"Ein Projekt über Monate.",d4u:"Ein Z-Bon genügt. Am selben Tag.",
+d4w:"Start",d4t:"Ein Projekt über Monate.",d4u:"Ein Z-Bon, und Sie sind dabei. Am selben Tag.",
 numEye:"Was es kostet",numH2:"Diese Stunde ist teuer.",
 n1:"Pro Nacht, an Überstunden der Schichtleitung",n2:"Pro Jahr, für eine Führungskraft",n3:"Die Ersparnis, gemessen am Preis",
-calcTitle:"Ihre Zahlen",cOutlets:"Outlets im Haus",cWage:"Stundenkosten Schichtleitung",cManual:"Minuten je Abschluss, heute",
-cMore:"Weitere Annahmen",cExc:"Ausnahmen pro Nacht",cProps:"Häuser",cCloses:"Abschlüsse pro Monat",cPrice:"Preis je Outlet / Monat",
-cAssume:"Closewise-Zeit: 2,5 Min zum Öffnen plus 1,5 Min je geprüfter Ausnahme.",cReset:"Zurücksetzen",
-rLabel:"Arbeitszeit zurück",rPerYear:"pro Jahr",rPerMonth:"pro Monat",
+calcTitle:"Ihr Haus",cOutlets:"Outlets im Haus",cWage:"Schichtleitung, pro Stunde",cManual:"Minuten für den Abschluss heute",
+cMore:"Mehr Details",cExc:"Ausnahmen pro Nacht",cProps:"Häuser",cCloses:"Abschlüsse pro Monat",cPrice:"Preis pro Outlet und Monat",
+cAssume:"Gerechnet mit 2,5 Minuten fürs Öffnen und 1,5 Minuten je Ausnahme, die jemand liest.",cReset:"Zurücksetzen",
+rLabel:"Was Sie zurückbekommen",rPerYear:"pro Jahr",rPerMonth:"pro Monat",
 hoursLine:"{h} Stunden im Monat zurück im Betrieb · über {n} Outlets",
 tRoi:"Rendite",tRoiN:"je eingesetztem Euro",tNet:"Netto / Jahr",tNetN:"nach Abzug des Abos",
-tCost:"Abo / Jahr",tSaved:"Min je Abschluss",redLine:"{p} % weniger Zeit",costN:"{n} Outlets × {p}",
+tCost:"Abo / Jahr",tSaved:"Minuten pro Abschluss",redLine:"{p} % weniger Zeit",costN:"{n} Outlets × {p}",
 scaleTitle:"Hochgerechnet auf die Gruppe",scOutlets:"Outlets",scLabour:"Arbeitszeit zurück",scCost:"Abo",scNet:"Netto / Jahr",
-bookEye:"Ausprobieren",bookH2:"Zwanzig Minuten. Eine Ihrer eigenen Nächte.",
-bookLede:"Schicken Sie uns den Export einer Nacht. Wir lassen ihn laufen und zeigen Ihnen, was nicht aufgeht. Kostenlos, und nichts wird an Ihr System angeschlossen.",
+bookEye:"Ausprobieren",bookH2:"Zwanzig Minuten und eine Ihrer eigenen Nächte.",
+bookLede:"Schicken Sie den Z-Bon einer Nacht. Wir lassen den Abschluss darüber laufen und zeigen Ihnen, was nicht aufgeht. Kostenlos, ohne Schnittstelle, ohne Eingriff an der Kasse.",
 book1:"Nichts an der Kasse zu installieren",book2:"Der Export, den Sie ohnehin jede Nacht ziehen, genügt",book3:"Hosting in der EU, Auftragsverarbeitung inklusive",
 bookLine:"Suchen Sie sich eine Zeit aus.",
-bookCta:"Freie Zeiten ansehen",bookNote:"20 Minuten, Videocall. Bringen Sie den Export einer Nacht mit.",
+bookCta:"Termin buchen",bookNote:"20 Minuten, Videocall. Bringen Sie den Export einer Nacht mit.",
 faqEye:"Fragen",faqH2:"Kurze Antworten.",
 q1:"Läuft das mit unserer Kasse?",a1:"Ja. Für den Anfang genügt der CSV-Export des Tages, und fast jede Kasse macht einen, Simphony und Micros eingeschlossen. An der Kasse ändert sich nichts.",
 q2:"Ersetzt es unser PMS?",a2:"Nein. Es steht daneben und prüft dessen Zahlen gegen zwei Dinge, die es nicht kontrolliert: das Kartengerät und das gezählte Bargeld. Kein System kann sich selbst prüfen.",
@@ -834,7 +803,11 @@ tabProblem:"Das Problem",
 tabHow:"So läuft es",
 tabFinds:"Was es findet",
 tabCost:"Was es kostet",
-tabQs:"Fragen"};
+tabQs:"Fragen",
+skip:"Zur Seite springen",
+tabOverview:"Überblick",
+tabWhy:"Warum wir",
+heroProof:"Läuft mit dem Z-Bon, den Sie beim Abschluss ohnehin ziehen. An der Kasse ändert sich nichts."};
 
 T.en={
 fSev:"High",fCause:"Device",fRisk:"At risk",fTitle:"Card payment never reached the batch",fBody:"This check was closed as a card payment of {amount} on ····{last4} with authorisation {authCode}, but tonight's batch from {terminal} contains no matching capture.",fDo:"What to do",fAction:"Confirm the terminal completed the capture. Until it does, this amount has been served but not collected.",fReview:"Mark reviewed",trFlagRate:"Flag rate",trWindow:"Seven nights",exWord:"to check",exCleared:"and 33 more, all fine",
@@ -843,11 +816,11 @@ strip:"New: Closewise now spots what keeps going wrong across seven nights.",str
 navProblem:"Problem",navHow:"How it works",navAi:"AI",navDiff:"Difference",navNumbers:"Numbers",navFaq:"FAQ",
 ctaBook:"Book a call",ctaHow:"See how it works",
 heroH1:"Every check, every night. You only read the wrong ones.",
-heroSub:"The AI matches tonight's checks against the card machine, the room folios and the cash you counted up. Your duty manager gets a short list instead of the whole pile.",
+heroSub:"Closewise runs your night audit. It matches the outlet's checks to the card machine, the room folios and the cash you banked, then hands your duty manager the short list.",
 demoTitle:"Close · Restaurant Spreeblick · Berlin",
 demoReady:"Ready.",demoRun:"Matching…",demoDone:"<b>3 to check</b> · 11 cleared",demoOk:"cleared",demoNo:"check",
-m1:"Checks tested, left for a person",m2v:"Three sources",m2:"Card machine, room folio, cash drawer",
-m3:"The biggest one it caught on the demo night",m4:"For the whole evening",
+m1:"Checks matched, left for a person",m2v:"Three sources",m2:"Card machine, room folio, cash drawer",
+m3:"Biggest miss on the demo night",m4:"For the whole evening",
 probEye:"The problem",probH2:"The night audit eats an hour. Every night.",
 prob1:"Someone reads every check against the Z-report by hand.",
 prob2:"One wrong check is hiding in three hundred.",
@@ -855,14 +828,14 @@ prob3:"Everyone waits for the drawer to balance before they go home.",
 probNote:"Nearly every check is fine. Two or three are not. That is why someone has had to read all of them.",
 howEye:"How it works",howH2:"One button. Three steps.",
 how1t:"Match",how1p:"Every check against the cash, the card machine, the room folios and the Z-report.",
-how2t:"Flag",how2p:"Only the ones that do not add up come back, in plain words, with what to do.",
-how3t:"Hand over",how3p:"The balanced journal goes to accounts. The night is closed.",
-howCap:"36 checks tested. 3 need a person.",
-aiEye:"What it catches",aiH2:"The AI finds it. You decide.",
-aiLede:"It reads every check, says in one line what went wrong, and notices when the same thing keeps happening. Your duty manager still makes the call.",
+how2t:"Flag",how2p:"Only the ones that will not tie out come back, in plain words, with what to do.",
+how3t:"Hand over",how3p:"The balanced journal goes to accounts and the night is closed.",
+howCap:"36 checks matched. 3 need a person.",
+aiEye:"What it catches",aiH2:"It finds it. You call it.",
+aiLede:"It reads every check, says in one line what went wrong, and spots it when the same thing happens again. The call stays with your duty manager.",
 ai1:"No spot checks. Every check, every night.",
-ai2:"No error codes. It says what happened and what to do.",
-ai3:"It spots the same till, the same server, the same week.",
+ai2:"No error codes. What happened, and what to do about it.",
+ai3:"Same till, same server, same week.",
 loss1t:"The card never arrived",loss1p:"Closed as a card payment the terminal never captured. Served, never collected.",
 loss2t:"Someone changed the number",loss2p:"A discount after closing. A void with no approval.",
 loss3t:"The money's in the wrong place",loss3p:"Booked as cash, paid by card — the drawer comes up short by exactly that.",
@@ -870,26 +843,26 @@ patEye:"The pattern",patH2:"The same fault, four nights running.",
 patLede:"One bad night is bad luck. Put seven nights side by side and you can see what keeps causing it.",
 pat1:"Nights the same card machine failed to capture",pat2:"Nights the same server discounted after closing",
 patCap:"Seven nights, and the two things behind half of it.",
-diffEye:"The difference",diffH2:"Everyone else hands you a report. We hand you three lines.",
-d1w:"POS and BI tools",d1t:"Gives you a report. You go looking for the mistake.",d1u:"Finds the mistake. You just decide.",
-d2w:"Your PMS",d2t:"Checks its own numbers, so it always balances.",d2u:"Checks against the card machine and the cash you counted. Two sources it does not control.",
-d3w:"Accounts",d3t:"Finds it at month end.",d3u:"Finds it the same night, while the guest is still in house.",
-d4w:"Getting started",d4t:"A project that takes months.",d4u:"One Z-report gets you going. Same day.",
+diffEye:"Why us",diffH2:"Everyone else hands you a report. We hand you three lines.",
+d1w:"POS and BI",d1t:"Hands you a report. You go hunting for the mistake.",d1u:"Finds the mistake. You just call it.",
+d2w:"Your PMS",d2t:"Marks its own homework, so it always ties out.",d2u:"Ties out to the card machine and the cash you banked. Two sources it does not run.",
+d3w:"Accounts",d3t:"Picks it up at month end.",d3u:"Picks it up the same night, while the guest is still in house.",
+d4w:"Going live",d4t:"A project that runs for months.",d4u:"One Z-report and you are away. Same day.",
 numEye:"What it costs",numH2:"That hour is expensive.",
 n1:"A night, in duty-manager overtime",n2:"A year, for one manager",n3:"The saving, measured against the price",
-calcTitle:"Your numbers",cOutlets:"Outlets in the property",cWage:"Duty-manager hourly cost",cManual:"Minutes per close, today",
-cMore:"More assumptions",cExc:"Exceptions per night",cProps:"Properties",cCloses:"Closes per month",cPrice:"Price per outlet / month",
-cAssume:"Closewise time: 2.5 min to open plus 1.5 min per exception reviewed.",cReset:"Reset",
-rLabel:"Labour returned",rPerYear:"per year",rPerMonth:"per month",
+calcTitle:"Your house",cOutlets:"Outlets in the house",cWage:"Duty manager, per hour",cManual:"Minutes on the close today",
+cMore:"More detail",cExc:"Exceptions a night",cProps:"Properties",cCloses:"Closes a month",cPrice:"Price per outlet, per month",
+cAssume:"We allow 2.5 minutes to open the close and 1.5 minutes per exception a person reads.",cReset:"Reset",
+rLabel:"What you get back",rPerYear:"per year",rPerMonth:"per month",
 hoursLine:"{h} hours a month back on the floor · across {n} outlets",
 tRoi:"Return",tRoiN:"per euro spent",tNet:"Net / year",tNetN:"after the subscription",
-tCost:"Subscription / year",tSaved:"Min per close",redLine:"{p}% less time",costN:"{n} outlets × {p}",
+tCost:"Subscription / year",tSaved:"Minutes a close",redLine:"{p}% less time",costN:"{n} outlets × {p}",
 scaleTitle:"At chain scale",scOutlets:"Outlets",scLabour:"Labour returned",scCost:"Subscription",scNet:"Net / year",
-bookEye:"Try it",bookH2:"Twenty minutes. One of your own nights.",
-bookLede:"Send us one night's export. We run it and show you what does not add up. No charge, and nothing gets plugged into your system.",
+bookEye:"Try it",bookH2:"Twenty minutes, and one of your own nights.",
+bookLede:"Send one night's Z-report. We run the close on it and show you what did not tie out. No charge, no interface, nothing on your till.",
 book1:"Nothing to install at the till",book2:"The export you already run every night is enough",book3:"Hosted in the EU, data agreement included",
 bookLine:"Pick a time that suits you.",
-bookCta:"See available times",bookNote:"20 minutes, video call. Bring one night's export.",
+bookCta:"Book a call",bookNote:"20 minutes, video call. Bring one night's export.",
 faqEye:"Questions",faqH2:"Short answers.",
 q1:"Will it work with our POS?",a1:"Yes. The day's CSV export is enough to start, and nearly every till makes one, Simphony and Micros included. Nothing changes at the till.",
 q2:"Does it replace our PMS?",a2:"No. It sits beside it and checks its numbers against two things it does not control: the card machine and the cash you counted. No system can audit itself.",
@@ -901,7 +874,11 @@ tabProblem:"The problem",
 tabHow:"How it works",
 tabFinds:"What it catches",
 tabCost:"What it costs",
-tabQs:"Questions"};
+tabQs:"Questions",
+skip:"Skip to the page",
+tabOverview:"Overview",
+tabWhy:"Why us",
+heroProof:"Works off the Z-report you already run at close. Nothing goes on the till."};
 
 T.fr={
 fSev:"Élevée",fCause:"Matériel",fRisk:"En risque",fTitle:"Paiement carte absent du lot",fBody:"Cette note a été fermée en carte pour {amount} sur ····{last4} avec l'autorisation {authCode}, mais le lot de {terminal} ne contient aucune capture correspondante.",fDo:"À faire",fAction:"Vérifier que le terminal a bien finalisé la capture. Tant que ce n'est pas fait, ce montant a été servi mais pas encaissé.",fReview:"Marquer comme examinée",trFlagRate:"Taux de signalement",trWindow:"Sept nuits",exWord:"à vérifier",exCleared:"et 33 autres, toutes bonnes",
@@ -910,11 +887,11 @@ strip:"Nouveau : Closewise repère ce qui revient sur sept nuits.",stripLink:"Vo
 navProblem:"Problème",navHow:"Fonctionnement",navAi:"IA",navDiff:"Différence",navNumbers:"Chiffres",navFaq:"Questions",
 ctaBook:"Prendre rendez-vous",ctaHow:"Voir le fonctionnement",
 heroH1:"Chaque addition, chaque nuit. Vous ne lisez que les fausses.",
-heroSub:"L'IA rapproche les additions du soir du terminal de paiement, des notes de chambre et de la caisse que vous avez comptée. Votre responsable reçoit une liste courte au lieu de toute la pile.",
+heroSub:"Closewise fait votre clôture de nuit. Il rapproche les additions du point de vente du terminal, des notes de chambre et de la caisse remise, puis donne la liste courte à votre responsable.",
 demoTitle:"Clôture · Restaurant Spreeblick · Berlin",
 demoReady:"Prêt.",demoRun:"Rapprochement…",demoDone:"<b>3 à vérifier</b> · 11 réglées",demoOk:"réglée",demoNo:"vérifier",
-m1:"Additions vérifiées, laissées à une personne",m2v:"Trois sources",m2:"Terminal, note de chambre, caisse",
-m3:"Le plus gros écart de la nuit de démonstration",m4:"Pour toute la soirée",
+m1:"Additions rapprochées, laissées à une personne",m2v:"Trois sources",m2:"Terminal, note de chambre, caisse",
+m3:"Plus gros écart de la nuit de démonstration",m4:"Pour toute la soirée",
 probEye:"Le problème",probH2:"La clôture de nuit mange une heure. Chaque nuit.",
 prob1:"Quelqu'un lit chaque addition à la main face au ticket Z.",
 prob2:"Une addition fausse se cache dans trois cents.",
@@ -923,13 +900,13 @@ probNote:"Presque toutes les additions sont bonnes. Deux ou trois ne le sont pas
 howEye:"Comment ça marche",howH2:"Un bouton. Trois étapes.",
 how1t:"Rapprocher",how1p:"Chaque addition face aux espèces, au terminal, aux notes de chambre et au ticket Z.",
 how2t:"Signaler",how2p:"Seules celles qui ne tombent pas juste reviennent, en clair, avec quoi faire.",
-how3t:"Transmettre",how3p:"L'écriture équilibrée part à la compta. La nuit est close.",
-howCap:"36 additions vérifiées. 3 demandent une personne.",
-aiEye:"Ce qu'il attrape",aiH2:"L'IA trouve. Vous décidez.",
-aiLede:"Elle lit chaque addition, dit en une ligne ce qui cloche, et remarque quand la même chose revient. C'est toujours votre responsable qui tranche.",
+how3t:"Transmettre",how3p:"L'écriture équilibrée part à la compta et la nuit est close.",
+howCap:"36 additions rapprochées. 3 demandent une personne.",
+aiEye:"Ce qu'il attrape",aiH2:"Il trouve. Vous tranchez.",
+aiLede:"Il lit chaque addition, dit en une ligne ce qui cloche, et le repère quand la même chose revient. La décision reste à votre responsable.",
 ai1:"Pas de sondage. Chaque addition, chaque nuit.",
-ai2:"Pas de code d'erreur. Elle dit ce qui s'est passé et quoi faire.",
-ai3:"Elle repère la même caisse, le même serveur, la même semaine.",
+ai2:"Pas de code d'erreur. Ce qui s'est passé, et quoi faire.",
+ai3:"Même caisse, même serveur, même semaine.",
 loss1t:"La carte n'est jamais arrivée",loss1p:"Clôturée en carte, jamais capturée par le terminal. Servie, jamais encaissée.",
 loss2t:"Quelqu'un a changé le montant",loss2p:"Une remise après la clôture. Une annulation sans validation.",
 loss3t:"L'argent est au mauvais endroit",loss3p:"Saisi en espèces, réglé par carte — la caisse sera courte d'exactement cette somme.",
@@ -937,26 +914,26 @@ patEye:"Le motif",patH2:"La même faute, quatre nuits de suite.",
 patLede:"Une mauvaise nuit, c'est la malchance. Mettez-en sept côte à côte et vous voyez d'où ça vient.",
 pat1:"Nuits où le même terminal n'a pas capturé",pat2:"Nuits où le même serveur a remisé après la clôture",
 patCap:"Sept nuits, et les deux causes derrière la moitié.",
-diffEye:"La différence",diffH2:"Les autres vous donnent un rapport. Nous vous donnons trois lignes.",
-d1w:"Caisse et BI",d1t:"Vous donnent un rapport. C'est vous qui cherchez l'erreur.",d1u:"Trouve l'erreur. Vous ne faites que décider.",
-d2w:"Votre PMS",d2t:"Vérifie ses propres chiffres, donc il tombe toujours juste.",d2u:"Vérifie face au terminal et à la caisse comptée. Deux sources qu'il ne contrôle pas.",
+diffEye:"Pourquoi nous",diffH2:"Les autres vous donnent un rapport. Nous vous donnons trois lignes.",
+d1w:"Caisse et BI",d1t:"Vous donne un rapport. C'est vous qui cherchez l'erreur.",d1u:"Trouve l'erreur. Vous ne faites que trancher.",
+d2w:"Votre PMS",d2t:"Se contrôle lui-même, donc il tombe toujours juste.",d2u:"Tombe juste face au terminal et à la caisse remise. Deux sources qu'il ne tient pas.",
 d3w:"Comptabilité",d3t:"S'en aperçoit en fin de mois.",d3u:"S'en aperçoit la nuit même, tant que le client est encore là.",
-d4w:"Démarrage",d4t:"Un projet de plusieurs mois.",d4u:"Un ticket Z suffit. Le jour même.",
+d4w:"Mise en route",d4t:"Un projet qui dure des mois.",d4u:"Un ticket Z et c'est parti. Le jour même.",
 numEye:"Ce que ça coûte",numH2:"Cette heure coûte cher.",
 n1:"Par nuit, en heures sup du responsable",n2:"Par an, pour un seul responsable",n3:"L'économie, rapportée au prix",
-calcTitle:"Vos chiffres",cOutlets:"Points de vente",cWage:"Coût horaire du responsable",cManual:"Minutes par clôture, aujourd'hui",
-cMore:"Autres hypothèses",cExc:"Anomalies par nuit",cProps:"Établissements",cCloses:"Clôtures par mois",cPrice:"Prix par point de vente / mois",
-cAssume:"Temps Closewise : 2,5 min pour ouvrir plus 1,5 min par anomalie examinée.",cReset:"Réinitialiser",
-rLabel:"Temps de travail rendu",rPerYear:"par an",rPerMonth:"par mois",
+calcTitle:"Votre établissement",cOutlets:"Points de vente",cWage:"Responsable, par heure",cManual:"Minutes de clôture aujourd'hui",
+cMore:"Plus de détail",cExc:"Anomalies par nuit",cProps:"Établissements",cCloses:"Clôtures par mois",cPrice:"Prix par point de vente et par mois",
+cAssume:"On compte 2,5 minutes pour ouvrir la clôture et 1,5 minute par anomalie lue.",cReset:"Réinitialiser",
+rLabel:"Ce que vous récupérez",rPerYear:"par an",rPerMonth:"par mois",
 hoursLine:"{h} heures par mois rendues au terrain · sur {n} points de vente",
 tRoi:"Retour",tRoiN:"par euro dépensé",tNet:"Net / an",tNetN:"après abonnement",
-tCost:"Abonnement / an",tSaved:"Min par clôture",redLine:"{p} % de temps en moins",costN:"{n} points de vente × {p}",
+tCost:"Abonnement / an",tSaved:"Minutes par clôture",redLine:"{p} % de temps en moins",costN:"{n} points de vente × {p}",
 scaleTitle:"À l'échelle du groupe",scOutlets:"Points de vente",scLabour:"Temps rendu",scCost:"Abonnement",scNet:"Net / an",
-bookEye:"Essayer",bookH2:"Vingt minutes. Une de vos propres nuits.",
-bookLede:"Envoyez-nous l'export d'une nuit. On le passe et on vous montre ce qui ne tombe pas juste. Gratuit, et rien n'est branché sur votre système.",
+bookEye:"Essayer",bookH2:"Vingt minutes, et une de vos propres nuits.",
+bookLede:"Envoyez le ticket Z d'une nuit. On passe la clôture dessus et on vous montre ce qui ne tombe pas juste. Gratuit, sans interface, sans rien toucher à la caisse.",
 book1:"Rien à installer à la caisse",book2:"L'export que vous sortez déjà chaque nuit suffit",book3:"Hébergé dans l'UE, accord de traitement inclus",
 bookLine:"Choisissez une heure qui vous va.",
-bookCta:"Voir les créneaux",bookNote:"20 minutes, en visio. Apportez l'export d'une nuit.",
+bookCta:"Prendre rendez-vous",bookNote:"20 minutes, en visio. Apportez l'export d'une nuit.",
 faqEye:"Questions",faqH2:"Réponses courtes.",
 q1:"Est-ce que ça marche avec notre caisse ?",a1:"Oui. L'export CSV du jour suffit pour commencer, et presque toutes les caisses en font un, Simphony et Micros compris. Rien ne change à la caisse.",
 q2:"Est-ce que ça remplace notre PMS ?",a2:"Non. Il se met à côté et vérifie ses chiffres face à deux choses qu'il ne contrôle pas : le terminal et la caisse comptée. Aucun système ne peut s'auditer lui-même.",
@@ -968,7 +945,11 @@ tabProblem:"Le problème",
 tabHow:"Comment ça marche",
 tabFinds:"Ce qu'il attrape",
 tabCost:"Ce que ça coûte",
-tabQs:"Questions"};
+tabQs:"Questions",
+skip:"Aller à la page",
+tabOverview:"Aperçu",
+tabWhy:"Pourquoi nous",
+heroProof:"Fonctionne avec le ticket Z que vous sortez déjà à la clôture. Rien ne change à la caisse."};
 
 T.es={
 fSev:"Alta",fCause:"Dispositivo",fRisk:"En riesgo",fTitle:"El pago con tarjeta nunca llegó al lote",fBody:"Este ticket se cerró como pago con tarjeta de {amount} en ····{last4} con autorización {authCode}, pero el lote de {terminal} de esta noche no contiene ninguna captura correspondiente.",fDo:"Qué hacer",fAction:"Confirme que el terminal completó la captura. Hasta que lo haga, este importe se ha servido pero no cobrado.",fReview:"Marcar como revisado",trFlagRate:"Tasa de marcado",trWindow:"Siete noches",exWord:"por revisar",exCleared:"y 33 más, todas correctas",
@@ -977,10 +958,10 @@ strip:"Nuevo: Closewise detecta lo que se repite a lo largo de siete noches.",st
 navProblem:"Problema",navHow:"Cómo funciona",navAi:"IA",navDiff:"Diferencia",navNumbers:"Números",navFaq:"Preguntas",
 ctaBook:"Reservar una llamada",ctaHow:"Ver cómo funciona",
 heroH1:"Cada cuenta, cada noche. Solo lee las que están mal.",
-heroSub:"La IA cruza las cuentas de la noche con el datáfono, las cuentas de habitación y el efectivo que han contado. Su encargado recibe una lista corta en vez de todo el montón.",
+heroSub:"Closewise hace su cierre de noche. Cruza las cuentas del punto de venta con el datáfono, las cuentas de habitación y el efectivo entregado, y le pasa la lista corta a su encargado.",
 demoTitle:"Cierre · Restaurant Spreeblick · Berlín",
 demoReady:"Listo.",demoRun:"Cruzando…",demoDone:"<b>3 por revisar</b> · 11 cuadradas",demoOk:"cuadrada",demoNo:"revisar",
-m1:"Cuentas comprobadas, dejadas a una persona",m2v:"Tres fuentes",m2:"Datáfono, cuenta de habitación, caja",
+m1:"Cuentas cruzadas, dejadas a una persona",m2v:"Tres fuentes",m2:"Datáfono, cuenta de habitación, caja",
 m3:"El mayor hallazgo de la noche de demostración",m4:"Para toda la noche",
 probEye:"El problema",probH2:"El cierre de noche se come una hora. Cada noche.",
 prob1:"Alguien lee cada cuenta a mano contra el informe Z.",
@@ -990,13 +971,13 @@ probNote:"Casi todas las cuentas están bien. Dos o tres no. Por eso hasta ahora
 howEye:"Cómo funciona",howH2:"Un botón. Tres pasos.",
 how1t:"Cruzar",how1p:"Cada cuenta contra el efectivo, el datáfono, las cuentas de habitación y el informe Z.",
 how2t:"Marcar",how2p:"Solo vuelven las que no cuadran, en palabras claras, con qué hacer.",
-how3t:"Entregar",how3p:"El asiento cuadrado va a contabilidad. La noche queda cerrada.",
-howCap:"36 cuentas comprobadas. 3 necesitan a una persona.",
-aiEye:"Qué encuentra",aiH2:"La IA lo encuentra. Usted decide.",
-aiLede:"Lee cada cuenta, dice en una línea qué falla y se da cuenta cuando lo mismo se repite. Quien decide sigue siendo su encargado.",
+how3t:"Entregar",how3p:"El asiento cuadrado va a contabilidad y la noche queda cerrada.",
+howCap:"36 cuentas cruzadas. 3 necesitan a una persona.",
+aiEye:"Qué encuentra",aiH2:"Lo encuentra. Usted decide.",
+aiLede:"Lee cada cuenta, dice en una línea qué ha fallado y lo detecta cuando vuelve a pasar lo mismo. La decisión sigue siendo de su encargado.",
 ai1:"Nada de muestreos. Cada cuenta, cada noche.",
-ai2:"Nada de códigos de error. Dice qué ha pasado y qué hacer.",
-ai3:"Detecta la misma caja, el mismo camarero, la misma semana.",
+ai2:"Nada de códigos de error. Qué ha pasado y qué hacer.",
+ai3:"La misma caja, el mismo camarero, la misma semana.",
 loss1t:"La tarjeta nunca llegó",loss1p:"Cerrado como pago con tarjeta que el terminal nunca capturó. Servido, nunca cobrado.",
 loss2t:"Alguien cambió la cifra",loss2p:"Un descuento después del cierre. Una anulación sin autorización.",
 loss3t:"El dinero está en el sitio equivocado",loss3p:"Contabilizado como efectivo, pagado con tarjeta — a la caja le faltará exactamente eso.",
@@ -1004,26 +985,26 @@ patEye:"El patrón",patH2:"El mismo fallo, cuatro noches seguidas.",
 patLede:"Una mala noche es mala suerte. Ponga siete una al lado de otra y verá de dónde viene.",
 pat1:"Noches en las que el mismo datáfono no capturó",pat2:"Noches en las que el mismo camarero descontó tras el cierre",
 patCap:"Siete noches, y las dos causas detrás de la mitad.",
-diffEye:"La diferencia",diffH2:"Los demás le dan un informe. Nosotros le damos tres líneas.",
-d1w:"TPV y BI",d1t:"Le dan un informe. El fallo lo busca usted.",d1u:"Encuentra el fallo. Usted solo decide.",
-d2w:"Su PMS",d2t:"Comprueba sus propias cifras, así que siempre cuadra.",d2u:"Comprueba contra el datáfono y el efectivo contado. Dos fuentes que no controla.",
+diffEye:"Por qué nosotros",diffH2:"Los demás le dan un informe. Nosotros le damos tres líneas.",
+d1w:"TPV y BI",d1t:"Le da un informe. El fallo lo busca usted.",d1u:"Encuentra el fallo. Usted solo decide.",
+d2w:"Su PMS",d2t:"Se revisa a sí mismo, así que siempre cuadra.",d2u:"Cuadra contra el datáfono y el efectivo entregado. Dos fuentes que él no lleva.",
 d3w:"Contabilidad",d3t:"Lo ve a fin de mes.",d3u:"Lo ve esa misma noche, mientras el cliente sigue alojado.",
-d4w:"Puesta en marcha",d4t:"Un proyecto de meses.",d4u:"Con un informe Z basta. El mismo día.",
+d4w:"Puesta en marcha",d4t:"Un proyecto de meses.",d4u:"Un informe Z y ya está. El mismo día.",
 numEye:"Cuánto cuesta",numH2:"Esa hora sale cara.",
 n1:"Por noche, en horas extra del encargado",n2:"Por año, para un solo encargado",n3:"El ahorro, medido frente al precio",
-calcTitle:"Sus cifras",cOutlets:"Puntos de venta",cWage:"Coste por hora del responsable",cManual:"Minutos por cierre, hoy",
-cMore:"Más supuestos",cExc:"Excepciones por noche",cProps:"Establecimientos",cCloses:"Cierres al mes",cPrice:"Precio por punto de venta / mes",
-cAssume:"Tiempo Closewise: 2,5 min para abrir más 1,5 min por excepción revisada.",cReset:"Restablecer",
-rLabel:"Tiempo de trabajo devuelto",rPerYear:"al año",rPerMonth:"al mes",
+calcTitle:"Su casa",cOutlets:"Puntos de venta",cWage:"Encargado, por hora",cManual:"Minutos de cierre hoy",
+cMore:"Más detalle",cExc:"Excepciones por noche",cProps:"Hoteles",cCloses:"Cierres al mes",cPrice:"Precio por punto de venta y mes",
+cAssume:"Contamos 2,5 minutos para abrir el cierre y 1,5 minutos por cada excepción que alguien lee.",cReset:"Restablecer",
+rLabel:"Lo que recupera",rPerYear:"al año",rPerMonth:"al mes",
 hoursLine:"{h} horas al mes de vuelta en el negocio · en {n} puntos de venta",
 tRoi:"Retorno",tRoiN:"por euro invertido",tNet:"Neto / año",tNetN:"tras la suscripción",
-tCost:"Suscripción / año",tSaved:"Min por cierre",redLine:"{p} % menos tiempo",costN:"{n} puntos de venta × {p}",
+tCost:"Suscripción / año",tSaved:"Minutos por cierre",redLine:"{p} % menos tiempo",costN:"{n} puntos de venta × {p}",
 scaleTitle:"A escala de grupo",scOutlets:"Puntos de venta",scLabour:"Tiempo devuelto",scCost:"Suscripción",scNet:"Neto / año",
-bookEye:"Probarlo",bookH2:"Veinte minutos. Una noche suya.",
-bookLede:"Mándenos el export de una noche. Lo pasamos y le enseñamos qué no cuadra. Sin coste, y sin conectar nada a su sistema.",
+bookEye:"Probarlo",bookH2:"Veinte minutos y una noche suya.",
+bookLede:"Mándenos el informe Z de una noche. Le pasamos el cierre y le enseñamos qué no cuadra. Sin coste, sin interfaz y sin tocar su caja.",
 book1:"Nada que instalar en la caja",book2:"Basta con el export que ya saca cada noche",book3:"Alojado en la UE, contrato de tratamiento incluido",
 bookLine:"Elija la hora que le venga bien.",
-bookCta:"Ver horas libres",bookNote:"20 minutos, videollamada. Traiga el export de una noche.",
+bookCta:"Reservar una llamada",bookNote:"20 minutos, videollamada. Traiga el export de una noche.",
 faqEye:"Preguntas",faqH2:"Respuestas cortas.",
 q1:"¿Funciona con nuestro TPV?",a1:"Sí. Para empezar basta el export CSV del día, y casi todas las cajas lo hacen, Simphony y Micros incluidos. En la caja no cambia nada.",
 q2:"¿Sustituye a nuestro PMS?",a2:"No. Se pone al lado y comprueba sus cifras contra dos cosas que no controla: el datáfono y el efectivo contado. Ningún sistema puede auditarse a sí mismo.",
@@ -1035,7 +1016,11 @@ tabProblem:"El problema",
 tabHow:"Cómo funciona",
 tabFinds:"Qué encuentra",
 tabCost:"Cuánto cuesta",
-tabQs:"Preguntas"};
+tabQs:"Preguntas",
+skip:"Ir a la página",
+tabOverview:"Resumen",
+tabWhy:"Por qué nosotros",
+heroProof:"Funciona con el informe Z que ya saca al cerrar. En la caja no se toca nada."};
 
 T.it={
 fSev:"Alta",fCause:"Dispositivo",fRisk:"A rischio",fTitle:"Pagamento con carta assente dal lotto",fBody:"Questo conto è stato chiuso come pagamento con carta di {amount} su ····{last4} con autorizzazione {authCode}, ma il lotto di {terminal} non contiene alcuna acquisizione corrispondente.",fDo:"Da fare",fAction:"Verifichi che il terminale abbia completato l'acquisizione. Fino ad allora l'importo è stato servito ma non incassato.",fReview:"Segna come esaminata",trFlagRate:"Tasso di segnalazione",trWindow:"Sette serate",exWord:"da vedere",exCleared:"e altri 33, tutti a posto",
@@ -1044,10 +1029,10 @@ strip:"Novità: Closewise riconosce ciò che si ripete su sette notti.",stripLin
 navProblem:"Problema",navHow:"Come funziona",navAi:"IA",navDiff:"Differenza",navNumbers:"Numeri",navFaq:"Domande",
 ctaBook:"Prenota una call",ctaHow:"Guarda come funziona",
 heroH1:"Ogni conto, ogni notte. Legge solo quelli sbagliati.",
-heroSub:"L'IA confronta i conti della serata con il POS, i conti camera e il contante che avete contato. Al responsabile arriva un elenco breve invece di tutta la pila.",
+heroSub:"Closewise fa la sua chiusura notturna. Confronta i conti del punto vendita con il POS, i conti camera e il contante versato, poi passa al responsabile l'elenco breve.",
 demoTitle:"Chiusura · Restaurant Spreeblick · Berlino",
 demoReady:"Pronto.",demoRun:"Confronto…",demoDone:"<b>3 da vedere</b> · 11 a posto",demoOk:"a posto",demoNo:"da vedere",
-m1:"Conti verificati, lasciati a una persona",m2v:"Tre fonti",m2:"POS, conto camera, cassetto contanti",
+m1:"Conti confrontati, lasciati a una persona",m2v:"Tre fonti",m2:"POS, conto camera, cassetto contanti",
 m3:"Lo scarto più grande della notte dimostrativa",m4:"Per l'intera serata",
 probEye:"Il problema",probH2:"La chiusura notturna si mangia un'ora. Ogni notte.",
 prob1:"Qualcuno legge ogni conto a mano contro lo scontrino Z.",
@@ -1056,14 +1041,14 @@ prob3:"Tutti aspettano che la cassa torni prima di andare a casa.",
 probNote:"Quasi tutti i conti vanno bene. Due o tre no. Per questo finora bisognava leggerli tutti.",
 howEye:"Come funziona",howH2:"Un pulsante. Tre passi.",
 how1t:"Confrontare",how1p:"Ogni conto contro contanti, POS, conti camera e scontrino Z.",
-how2t:"Segnalare",how2p:"Tornano solo quelli che non tornano, in parole semplici, con cosa fare.",
-how3t:"Consegnare",how3p:"La scrittura quadrata va in contabilità. La notte è chiusa.",
-howCap:"36 conti verificati. 3 richiedono una persona.",
-aiEye:"Cosa trova",aiH2:"L'IA lo trova. Lei decide.",
-aiLede:"Legge ogni conto, dice in una riga cosa non va e si accorge quando la stessa cosa si ripete. A decidere resta il suo responsabile.",
+how2t:"Segnalare",how2p:"Tornano solo quelli che non quadrano, in parole semplici, con cosa fare.",
+how3t:"Consegnare",how3p:"La scrittura quadrata va in contabilità e la notte è chiusa.",
+howCap:"36 conti confrontati. 3 richiedono una persona.",
+aiEye:"Cosa trova",aiH2:"Lo trova. Lei decide.",
+aiLede:"Legge ogni conto, dice in una riga cosa non va e se ne accorge quando succede di nuovo la stessa cosa. La decisione resta al suo responsabile.",
 ai1:"Niente controlli a campione. Ogni conto, ogni notte.",
-ai2:"Niente codici di errore. Dice cosa è successo e cosa fare.",
-ai3:"Riconosce la stessa cassa, lo stesso cameriere, la stessa settimana.",
+ai2:"Niente codici di errore. Cosa è successo e cosa fare.",
+ai3:"Stessa cassa, stesso cameriere, stessa settimana.",
 loss1t:"La carta non è mai arrivata",loss1p:"Chiuso come pagamento con carta mai acquisito dal terminale. Servito, mai incassato.",
 loss2t:"Qualcuno ha cambiato la cifra",loss2p:"Uno sconto dopo la chiusura. Uno storno senza approvazione.",
 loss3t:"Il denaro è nel posto sbagliato",loss3p:"Registrato in contanti, pagato con carta — alla cassa mancherà esattamente quella somma.",
@@ -1071,26 +1056,26 @@ patEye:"Lo schema",patH2:"Lo stesso errore, quattro notti di fila.",
 patLede:"Una notte storta è sfortuna. Ne metta sette una accanto all'altra e vede da cosa dipende.",
 pat1:"Notti in cui lo stesso POS non ha registrato",pat2:"Notti in cui lo stesso cameriere ha scontato dopo la chiusura",
 patCap:"Sette notti, e le due cause dietro la metà.",
-diffEye:"La differenza",diffH2:"Gli altri le danno un report. Noi le diamo tre righe.",
-d1w:"Casse e BI",d1t:"Le danno un report. L'errore lo cerca lei.",d1u:"Trova l'errore. Lei deve solo decidere.",
-d2w:"Il vostro PMS",d2t:"Controlla i propri numeri, quindi torna sempre.",d2u:"Controlla contro il POS e il contante contato. Due fonti che non controlla.",
+diffEye:"Perché noi",diffH2:"Gli altri le danno un report. Noi le diamo tre righe.",
+d1w:"Casse e BI",d1t:"Le dà un report. L'errore lo cerca lei.",d1u:"Trova l'errore. Lei deve solo decidere.",
+d2w:"Il vostro PMS",d2t:"Si controlla da solo, quindi quadra sempre.",d2u:"Quadra contro il POS e il contante versato. Due fonti che non tiene lui.",
 d3w:"Contabilità",d3t:"Se ne accorge a fine mese.",d3u:"Se ne accorge la notte stessa, mentre l'ospite è ancora in casa.",
-d4w:"Avvio",d4t:"Un progetto di mesi.",d4u:"Basta uno scontrino Z. Lo stesso giorno.",
+d4w:"Partenza",d4t:"Un progetto che dura mesi.",d4u:"Uno scontrino Z e si parte. Lo stesso giorno.",
 numEye:"Quanto costa",numH2:"Quell'ora costa cara.",
 n1:"A notte, di straordinari del responsabile",n2:"All'anno, per un solo responsabile",n3:"Il risparmio, rapportato al prezzo",
-calcTitle:"I suoi numeri",cOutlets:"Punti vendita",cWage:"Costo orario del responsabile",cManual:"Minuti per chiusura, oggi",
-cMore:"Altre ipotesi",cExc:"Anomalie per sera",cProps:"Strutture",cCloses:"Chiusure al mese",cPrice:"Prezzo per punto vendita / mese",
-cAssume:"Tempo Closewise: 2,5 min per aprire più 1,5 min per anomalia esaminata.",cReset:"Ripristina",
-rLabel:"Tempo di lavoro restituito",rPerYear:"all'anno",rPerMonth:"al mese",
+calcTitle:"La sua struttura",cOutlets:"Punti vendita",cWage:"Responsabile, all'ora",cManual:"Minuti di chiusura oggi",
+cMore:"Più dettagli",cExc:"Eccezioni a notte",cProps:"Strutture",cCloses:"Chiusure al mese",cPrice:"Prezzo per punto vendita al mese",
+cAssume:"Calcoliamo 2,5 minuti per aprire la chiusura e 1,5 minuti per ogni eccezione letta.",cReset:"Reimposta",
+rLabel:"Quanto recupera",rPerYear:"all'anno",rPerMonth:"al mese",
 hoursLine:"{h} ore al mese restituite al servizio · su {n} punti vendita",
 tRoi:"Ritorno",tRoiN:"per euro speso",tNet:"Netto / anno",tNetN:"dopo l'abbonamento",
-tCost:"Abbonamento / anno",tSaved:"Min per chiusura",redLine:"{p} % di tempo in meno",costN:"{n} punti vendita × {p}",
+tCost:"Abbonamento / anno",tSaved:"Minuti a chiusura",redLine:"{p} % di tempo in meno",costN:"{n} punti vendita × {p}",
 scaleTitle:"Su scala di gruppo",scOutlets:"Punti vendita",scLabour:"Tempo restituito",scCost:"Abbonamento",scNet:"Netto / anno",
-bookEye:"Provarlo",bookH2:"Venti minuti. Una delle vostre notti.",
-bookLede:"Ci mandi l'export di una notte. Lo facciamo girare e le mostriamo cosa non torna. Gratis, e senza collegare nulla al vostro sistema.",
+bookEye:"Provarlo",bookH2:"Venti minuti e una delle vostre notti.",
+bookLede:"Ci mandi lo scontrino Z di una notte. Facciamo girare la chiusura e le mostriamo cosa non quadra. Gratis, senza interfaccia, senza toccare la cassa.",
 book1:"Niente da installare in cassa",book2:"Basta l'export che già fate ogni notte",book3:"Hosting nell'UE, accordo sul trattamento incluso",
 bookLine:"Scelga l'orario che le va bene.",
-bookCta:"Vedi gli orari liberi",bookNote:"20 minuti, videochiamata. Porti l'export di una notte.",
+bookCta:"Prenota una call",bookNote:"20 minuti, videochiamata. Porti l'export di una notte.",
 faqEye:"Domande",faqH2:"Risposte brevi.",
 q1:"Funziona con la nostra cassa?",a1:"Sì. Per iniziare basta l'export CSV della giornata, e quasi tutte le casse lo fanno, Simphony e Micros compresi. In cassa non cambia nulla.",
 q2:"Sostituisce il nostro PMS?",a2:"No. Ci sta accanto e ne controlla i numeri contro due cose che non controlla: il POS e il contante contato. Nessun sistema può verificare sé stesso.",
@@ -1102,7 +1087,11 @@ tabProblem:"Il problema",
 tabHow:"Come funziona",
 tabFinds:"Cosa trova",
 tabCost:"Quanto costa",
-tabQs:"Domande"};
+tabQs:"Domande",
+skip:"Vai alla pagina",
+tabOverview:"Panoramica",
+tabWhy:"Perché noi",
+heroProof:"Funziona con lo scontrino Z che già stampa alla chiusura. In cassa non si tocca nulla."};
 
 T.nl={
 fSev:"Hoog",fCause:"Apparaat",fRisk:"Risico",fTitle:"Pinbetaling ontbreekt in de batch",fBody:"Deze bon is afgesloten als pinbetaling van {amount} op ····{last4} met autorisatie {authCode}, maar de batch van {terminal} bevat vannacht geen bijbehorende vastlegging.",fDo:"Te doen",fAction:"Controleer of de terminal de vastlegging heeft afgerond. Tot die tijd is dit bedrag geleverd maar niet geïnd.",fReview:"Als bekeken markeren",trFlagRate:"Markeringspercentage",trWindow:"Zeven nachten",exWord:"na te kijken",exCleared:"en nog 33, allemaal in orde",
@@ -1111,26 +1100,26 @@ strip:"Nieuw: Closewise ziet nu wat over zeven nachten blijft terugkomen.",strip
 navProblem:"Probleem",navHow:"Hoe het werkt",navAi:"AI",navDiff:"Verschil",navNumbers:"Cijfers",navFaq:"Vragen",
 ctaBook:"Gesprek plannen",ctaHow:"Bekijk hoe het werkt",
 heroH1:"Elke rekening, elke nacht. U leest alleen de foute.",
-heroSub:"De AI legt de rekeningen van vanavond naast de pinautomaat, de kamerrekeningen en het geld dat u geteld hebt. Uw dienstdoend manager krijgt een korte lijst in plaats van de hele stapel.",
+heroSub:"Closewise draait uw nachtafsluiting. Het legt de rekeningen van het outlet naast de pinautomaat, de kamerrekeningen en het afgestorte geld, en geeft uw dienstdoend manager de korte lijst.",
 demoTitle:"Afsluiting · Restaurant Spreeblick · Berlijn",
 demoReady:"Gereed.",demoRun:"Naast elkaar leggen…",demoDone:"<b>3 na te kijken</b> · 11 in orde",demoOk:"in orde",demoNo:"nakijken",
-m1:"Rekeningen getoetst, over voor een mens",m2v:"Drie bronnen",m2:"Pinautomaat, kamerrekening, kassalade",
-m3:"De grootste die hij in de demonacht ving",m4:"Voor de hele avond",
+m1:"Rekeningen gematcht, over voor een mens",m2v:"Drie bronnen",m2:"Pinautomaat, kamerrekening, kassalade",
+m3:"Grootste misser in de demonacht",m4:"Voor de hele avond",
 probEye:"Het probleem",probH2:"De nachtafsluiting kost een uur. Elke nacht.",
 prob1:"Iemand leest elke rekening met de hand naast de Z-bon.",
 prob2:"Eén foute rekening zit verstopt tussen driehonderd.",
 prob3:"Iedereen wacht tot de kassa klopt voor ze naar huis gaan.",
 probNote:"Bijna elke rekening is goed. Twee of drie niet. Daarom moest iemand ze tot nu toe allemaal lezen.",
 howEye:"Hoe het werkt",howH2:"Eén knop. Drie stappen.",
-how1t:"Naast elkaar",how1p:"Elke rekening naast het contant, de pinautomaat, de kamerrekeningen en de Z-bon.",
-how2t:"Markeren",how2p:"Alleen wat niet klopt komt terug, in gewone woorden, met wat u moet doen.",
-how3t:"Overdragen",how3p:"De sluitende boeking gaat naar de administratie. De nacht is dicht.",
-howCap:"36 rekeningen getoetst. 3 hebben een mens nodig.",
-aiEye:"Wat het vindt",aiH2:"De AI vindt het. U beslist.",
-aiLede:"Hij leest elke rekening, zegt in één regel wat er mis is en merkt het als hetzelfde blijft gebeuren. Uw dienstdoend manager beslist nog steeds.",
+how1t:"Matchen",how1p:"Elke rekening naast het contant, de pinautomaat, de kamerrekeningen en de Z-bon.",
+how2t:"Markeren",how2p:"Alleen wat niet sluit komt terug, in gewone woorden, met wat u moet doen.",
+how3t:"Overdragen",how3p:"De sluitende boeking gaat naar de administratie en de nacht is dicht.",
+howCap:"36 rekeningen gematcht. 3 hebben een mens nodig.",
+aiEye:"Wat het vindt",aiH2:"Het vindt het. U beslist.",
+aiLede:"Het leest elke rekening, zegt in één regel wat er mis is, en ziet het als hetzelfde opnieuw gebeurt. De beslissing blijft bij uw dienstdoend manager.",
 ai1:"Geen steekproef. Elke rekening, elke nacht.",
-ai2:"Geen foutcodes. Hij zegt wat er gebeurd is en wat u moet doen.",
-ai3:"Hij ziet dezelfde kassa, dezelfde ober, dezelfde week.",
+ai2:"Geen foutcodes. Wat er gebeurd is en wat u moet doen.",
+ai3:"Dezelfde kassa, dezelfde ober, dezelfde week.",
 loss1t:"De betaling kwam nooit aan",loss1p:"Afgesloten als pinbetaling die de terminal nooit heeft vastgelegd. Geleverd, nooit geïnd.",
 loss2t:"Iemand heeft het bedrag gewijzigd",loss2p:"Een korting na de afsluiting. Een annulering zonder akkoord.",
 loss3t:"Het geld staat verkeerd",loss3p:"Als contant geboekt, met pin betaald — de kassa komt precies dat bedrag tekort.",
@@ -1138,26 +1127,26 @@ patEye:"Het patroon",patH2:"Dezelfde fout, vier nachten achter elkaar.",
 patLede:"Eén slechte nacht is pech. Leg er zeven naast elkaar en u ziet waar het aan ligt.",
 pat1:"Nachten waarin dezelfde pinautomaat niet afboekte",pat2:"Nachten waarin dezelfde ober na sluiting korting gaf",
 patCap:"Zeven nachten, en de twee oorzaken achter de helft.",
-diffEye:"Het verschil",diffH2:"De rest geeft u een rapport. Wij geven u drie regels.",
-d1w:"Kassa en BI",d1t:"Geven u een rapport. De fout zoekt u zelf.",d1u:"Vindt de fout. U hoeft alleen te beslissen.",
-d2w:"Uw PMS",d2t:"Controleert zijn eigen cijfers, dus het klopt altijd.",d2u:"Toetst aan de pinautomaat en het getelde geld. Twee bronnen die het niet zelf maakt.",
+diffEye:"Waarom wij",diffH2:"De rest geeft u een rapport. Wij geven u drie regels.",
+d1w:"Kassa en BI",d1t:"Geeft u een rapport. De fout zoekt u zelf.",d1u:"Vindt de fout. U hoeft alleen te beslissen.",
+d2w:"Uw PMS",d2t:"Controleert zichzelf, dus het sluit altijd.",d2u:"Sluit tegen de pinautomaat en het afgestorte geld. Twee bronnen die het niet zelf bijhoudt.",
 d3w:"Administratie",d3t:"Merkt het aan het eind van de maand.",d3u:"Merkt het dezelfde nacht, terwijl de gast er nog is.",
-d4w:"Beginnen",d4t:"Een project van maanden.",d4u:"Eén Z-bon en u kunt beginnen. Dezelfde dag.",
+d4w:"Live gaan",d4t:"Een project van maanden.",d4u:"Eén Z-bon en u draait. Dezelfde dag.",
 numEye:"Wat het kost",numH2:"Dat uur is duur.",
 n1:"Per nacht, aan overuren van de manager",n2:"Per jaar, voor één manager",n3:"De besparing, afgezet tegen de prijs",
-calcTitle:"Uw cijfers",cOutlets:"Outlets in het pand",cWage:"Uurkosten manager",cManual:"Minuten per afsluiting, nu",
-cMore:"Meer aannames",cExc:"Uitzonderingen per nacht",cProps:"Vestigingen",cCloses:"Afsluitingen per maand",cPrice:"Prijs per outlet / maand",
-cAssume:"Closewise-tijd: 2,5 min openen plus 1,5 min per bekeken uitzondering.",cReset:"Herstellen",
-rLabel:"Arbeidstijd terug",rPerYear:"per jaar",rPerMonth:"per maand",
+calcTitle:"Uw huis",cOutlets:"Outlets in het huis",cWage:"Dienstdoend manager, per uur",cManual:"Minuten afsluiten vandaag",
+cMore:"Meer detail",cExc:"Uitzonderingen per nacht",cProps:"Vestigingen",cCloses:"Afsluitingen per maand",cPrice:"Prijs per outlet per maand",
+cAssume:"We rekenen 2,5 minuut om de afsluiting te openen en 1,5 minuut per uitzondering die iemand leest.",cReset:"Herstellen",
+rLabel:"Wat u terugkrijgt",rPerYear:"per jaar",rPerMonth:"per maand",
 hoursLine:"{h} uur per maand terug op de vloer · over {n} outlets",
 tRoi:"Rendement",tRoiN:"per bestede euro",tNet:"Netto / jaar",tNetN:"na het abonnement",
-tCost:"Abonnement / jaar",tSaved:"Min per afsluiting",redLine:"{p}% minder tijd",costN:"{n} outlets × {p}",
+tCost:"Abonnement / jaar",tSaved:"Minuten per afsluiting",redLine:"{p}% minder tijd",costN:"{n} outlets × {p}",
 scaleTitle:"Op groepsniveau",scOutlets:"Outlets",scLabour:"Tijd terug",scCost:"Abonnement",scNet:"Netto / jaar",
-bookEye:"Uitproberen",bookH2:"Twintig minuten. Eén van uw eigen nachten.",
-bookLede:"Stuur ons de export van één nacht. Wij draaien hem en laten zien wat niet klopt. Gratis, en er wordt niets op uw systeem aangesloten.",
+bookEye:"Uitproberen",bookH2:"Twintig minuten en één van uw eigen nachten.",
+bookLede:"Stuur de Z-bon van één nacht. Wij draaien de afsluiting erop en laten zien wat niet sluit. Gratis, zonder koppeling, zonder iets aan uw kassa.",
 book1:"Niets te installeren op de kassa",book2:"De export die u elke nacht al draait is genoeg",book3:"Gehost in de EU, verwerkersovereenkomst inbegrepen",
 bookLine:"Kies een tijd die u uitkomt.",
-bookCta:"Bekijk vrije tijden",bookNote:"20 minuten, videogesprek. Neem de export van één nacht mee.",
+bookCta:"Gesprek inplannen",bookNote:"20 minuten, videogesprek. Neem de export van één nacht mee.",
 faqEye:"Vragen",faqH2:"Korte antwoorden.",
 q1:"Werkt het met onze kassa?",a1:"Ja. Om te beginnen is de CSV-export van de dag genoeg, en bijna elke kassa maakt er een, Simphony en Micros ook. Aan de kassa verandert niets.",
 q2:"Vervangt het ons PMS?",a2:"Nee. Het staat ernaast en toetst de cijfers aan twee dingen die het niet zelf maakt: de pinautomaat en het getelde geld. Geen systeem kan zichzelf controleren.",
@@ -1169,7 +1158,11 @@ tabProblem:"Het probleem",
 tabHow:"Hoe het werkt",
 tabFinds:"Wat het vindt",
 tabCost:"Wat het kost",
-tabQs:"Vragen"};
+tabQs:"Vragen",
+skip:"Ga naar de pagina",
+tabOverview:"Overzicht",
+tabWhy:"Waarom wij",
+heroProof:"Werkt op de Z-bon die u bij het afsluiten toch al draait. Aan de kassa verandert niets."};
 
 T.pl={
 fSev:"Wysoka",fCause:"Urządzenie",fRisk:"Zagrożone",fTitle:"Płatność kartą nie trafiła do partii",fBody:"Rachunek zamknięto jako płatność kartą na {amount} na ····{last4} z autoryzacją {authCode}, ale dzisiejsza partia z {terminal} nie zawiera odpowiadającej rejestracji.",fDo:"Co zrobić",fAction:"Sprawdź, czy terminal dokończył rejestrację. Do tego czasu kwota została wydana, ale nie zainkasowana.",fReview:"Oznacz jako sprawdzone",trFlagRate:"Odsetek oznaczeń",trWindow:"Siedem nocy",exWord:"do sprawdzenia",exCleared:"i 33 kolejne, wszystkie w porządku",
@@ -1178,10 +1171,10 @@ strip:"Nowość: Closewise wychwytuje to, co powtarza się przez siedem nocy.",s
 navProblem:"Problem",navHow:"Jak działa",navAi:"AI",navDiff:"Różnica",navNumbers:"Liczby",navFaq:"Pytania",
 ctaBook:"Umów rozmowę",ctaHow:"Zobacz, jak działa",
 heroH1:"Każdy rachunek, każdej nocy. Czytasz tylko te błędne.",
-heroSub:"AI zestawia wieczorne rachunki z terminalem, rachunkami pokoi i policzoną gotówką. Kierownik zmiany dostaje krótką listę zamiast całego stosu.",
+heroSub:"Closewise robi twoje nocne zamknięcie. Zestawia rachunki punktu z terminalem, rachunkami pokoi i odprowadzoną gotówką, a kierownikowi zmiany podaje krótką listę.",
 demoTitle:"Zamknięcie · Restaurant Spreeblick · Berlin",
 demoReady:"Gotowe.",demoRun:"Zestawianie…",demoDone:"<b>3 do sprawdzenia</b> · 11 zgodnych",demoOk:"zgodny",demoNo:"sprawdź",
-m1:"Rachunków sprawdzonych, zostawionych człowiekowi",m2v:"Trzy źródła",m2:"Terminal, rachunek pokoju, szuflada kasowa",
+m1:"Rachunków zestawionych, zostawionych człowiekowi",m2v:"Trzy źródła",m2:"Terminal, rachunek pokoju, szuflada kasowa",
 m3:"Największy błąd nocy demonstracyjnej",m4:"Na cały wieczór",
 probEye:"Problem",probH2:"Nocne zamknięcie zjada godzinę. Każdej nocy.",
 prob1:"Ktoś ręcznie czyta każdy rachunek obok raportu Z.",
@@ -1190,14 +1183,14 @@ prob3:"Wszyscy czekają, aż kasa się zgodzi, zanim pójdą do domu.",
 probNote:"Prawie każdy rachunek jest w porządku. Dwa albo trzy nie. Dlatego do tej pory ktoś musiał przeczytać wszystkie.",
 howEye:"Jak to działa",howH2:"Jeden przycisk. Trzy kroki.",
 how1t:"Zestaw",how1p:"Każdy rachunek wobec gotówki, terminala, rachunków pokoi i raportu Z.",
-how2t:"Oznacz",how2p:"Wracają tylko te, które się nie zgadzają, prostymi słowami i z tym, co zrobić.",
-how3t:"Przekaż",how3p:"Zbilansowana księga idzie do księgowości. Noc jest zamknięta.",
-howCap:"36 rachunków sprawdzonych. 3 wymagają człowieka.",
-aiEye:"Co znajduje",aiH2:"AI znajduje. Ty decydujesz.",
-aiLede:"Czyta każdy rachunek, jednym zdaniem mówi, co jest nie tak, i zauważa, gdy to samo się powtarza. Decyzja nadal należy do kierownika zmiany.",
+how2t:"Oznacz",how2p:"Wracają tylko te, które się nie spinają, prostymi słowami i z tym, co zrobić.",
+how3t:"Przekaż",how3p:"Zbilansowana księga idzie do księgowości i noc jest zamknięta.",
+howCap:"36 rachunków zestawionych. 3 wymagają człowieka.",
+aiEye:"Co znajduje",aiH2:"Ono znajduje. Ty decydujesz.",
+aiLede:"Czyta każdy rachunek, jednym zdaniem mówi, co poszło źle, i wychwytuje, gdy to samo dzieje się znowu. Decyzja zostaje przy kierowniku zmiany.",
 ai1:"Żadnych wyrywkowych kontroli. Każdy rachunek, każdej nocy.",
-ai2:"Żadnych kodów błędów. Mówi, co się stało i co zrobić.",
-ai3:"Wychwytuje tę samą kasę, tego samego kelnera, ten sam tydzień.",
+ai2:"Żadnych kodów błędów. Co się stało i co z tym zrobić.",
+ai3:"Ta sama kasa, ten sam kelner, ten sam tydzień.",
 loss1t:"Karta nigdy nie dotarła",loss1p:"Zamknięte jako płatność kartą, której terminal nigdy nie zarejestrował. Wydane, nigdy nie zainkasowane.",
 loss2t:"Ktoś zmienił kwotę",loss2p:"Rabat po zamknięciu. Storno bez zatwierdzenia.",
 loss3t:"Pieniądze są w złym miejscu",loss3p:"Zaksięgowane jako gotówka, zapłacone kartą — w kasie zabraknie dokładnie tyle.",
@@ -1205,26 +1198,26 @@ patEye:"Wzorzec",patH2:"Ten sam błąd, cztery noce z rzędu.",
 patLede:"Jedna zła noc to pech. Połóż siedem obok siebie, a zobaczysz, z czego to wynika.",
 pat1:"Noce, w których ten sam terminal nie zaksięgował",pat2:"Noce, w których ten sam kelner dał rabat po zamknięciu",
 patCap:"Siedem nocy i dwie przyczyny stojące za połową.",
-diffEye:"Różnica",diffH2:"Inni dają ci raport. My dajemy trzy linijki.",
+diffEye:"Dlaczego my",diffH2:"Inni dają ci raport. My dajemy trzy linijki.",
 d1w:"Kasy i BI",d1t:"Dają raport. Błędu szukasz sam.",d1u:"Znajduje błąd. Ty tylko decydujesz.",
-d2w:"Twój PMS",d2t:"Sprawdza własne liczby, więc zawsze się zgadza.",d2u:"Sprawdza wobec terminala i policzonej gotówki. Dwa źródła, których nie kontroluje.",
+d2w:"Twój PMS",d2t:"Sprawdza sam siebie, więc zawsze się spina.",d2u:"Spina się z terminalem i odprowadzoną gotówką. Dwa źródła, których sam nie prowadzi.",
 d3w:"Księgowość",d3t:"Zauważa na koniec miesiąca.",d3u:"Zauważa tej samej nocy, póki gość jeszcze jest w hotelu.",
-d4w:"Start",d4t:"Projekt na miesiące.",d4u:"Wystarczy jeden raport Z. Tego samego dnia.",
+d4w:"Start",d4t:"Projekt na miesiące.",d4u:"Jeden raport Z i działasz. Tego samego dnia.",
 numEye:"Ile kosztuje",numH2:"Ta godzina jest droga.",
 n1:"Na noc, w nadgodzinach kierownika",n2:"Na rok, dla jednego kierownika",n3:"Oszczędność w stosunku do ceny",
-calcTitle:"Twoje liczby",cOutlets:"Punkty w obiekcie",cWage:"Koszt godziny kierownika",cManual:"Minut na zamknięcie, dziś",
-cMore:"Więcej założeń",cExc:"Rozbieżności na noc",cProps:"Obiekty",cCloses:"Zamknięć miesięcznie",cPrice:"Cena za punkt / miesiąc",
-cAssume:"Czas Closewise: 2,5 min na otwarcie plus 1,5 min na sprawdzoną rozbieżność.",cReset:"Przywróć",
-rLabel:"Odzyskany czas pracy",rPerYear:"rocznie",rPerMonth:"miesięcznie",
+calcTitle:"Twój obiekt",cOutlets:"Punkty w obiekcie",cWage:"Kierownik zmiany, za godzinę",cManual:"Minuty na zamknięcie dziś",
+cMore:"Więcej szczegółów",cExc:"Wyjątków na noc",cProps:"Obiekty",cCloses:"Zamknięć w miesiącu",cPrice:"Cena za punkt na miesiąc",
+cAssume:"Liczymy 2,5 minuty na otwarcie zamknięcia i 1,5 minuty na każdy wyjątek, który ktoś czyta.",cReset:"Wyczyść",
+rLabel:"Ile odzyskujesz",rPerYear:"rocznie",rPerMonth:"miesięcznie",
 hoursLine:"{h} godzin miesięcznie z powrotem na sali · w {n} punktach",
 tRoi:"Zwrot",tRoiN:"z każdego euro",tNet:"Netto / rok",tNetN:"po abonamencie",
-tCost:"Abonament / rok",tSaved:"Min na zamknięcie",redLine:"{p}% mniej czasu",costN:"{n} punktów × {p}",
+tCost:"Abonament / rok",tSaved:"Minut na zamknięcie",redLine:"{p}% mniej czasu",costN:"{n} punktów × {p}",
 scaleTitle:"W skali grupy",scOutlets:"Punkty",scLabour:"Odzyskany czas",scCost:"Abonament",scNet:"Netto / rok",
-bookEye:"Wypróbuj",bookH2:"Dwadzieścia minut. Jedna z twoich nocy.",
-bookLede:"Przyślij nam eksport z jednej nocy. Puścimy go i pokażemy, co się nie zgadza. Bez opłat i bez podłączania czegokolwiek do twojego systemu.",
+bookEye:"Wypróbuj",bookH2:"Dwadzieścia minut i jedna z twoich nocy.",
+bookLede:"Przyślij raport Z z jednej nocy. Puścimy na nim zamknięcie i pokażemy, co się nie spina. Bez opłat, bez integracji, bez ruszania kasy.",
 book1:"Nic do instalowania przy kasie",book2:"Wystarczy eksport, który i tak robisz co noc",book3:"Hosting w UE, umowa powierzenia w zestawie",
 bookLine:"Wybierz godzinę, która ci pasuje.",
-bookCta:"Zobacz wolne terminy",bookNote:"20 minut, rozmowa wideo. Weź eksport z jednej nocy.",
+bookCta:"Umów rozmowę",bookNote:"20 minut, rozmowa wideo. Weź eksport z jednej nocy.",
 faqEye:"Pytania",faqH2:"Krótkie odpowiedzi.",
 q1:"Zadziała z naszą kasą?",a1:"Tak. Na początek wystarczy dzienny eksport CSV, a robi go prawie każda kasa, w tym Simphony i Micros. Przy kasie nic się nie zmienia.",
 q2:"Czy zastąpi nasz PMS?",a2:"Nie. Stoi obok i sprawdza jego liczby wobec dwóch rzeczy, których nie kontroluje: terminala i policzonej gotówki. Żaden system nie skontroluje sam siebie.",
@@ -1236,7 +1229,11 @@ tabProblem:"Problem",
 tabHow:"Jak to działa",
 tabFinds:"Co znajduje",
 tabCost:"Ile kosztuje",
-tabQs:"Pytania"};
+tabQs:"Pytania",
+skip:"Przejdź do strony",
+tabOverview:"Przegląd",
+tabWhy:"Dlaczego my",
+heroProof:"Działa na raporcie Z, który i tak drukujesz przy zamknięciu. Przy kasie nic się nie zmienia."};
 
 T.ar={
 fSev:"عالية",fCause:"جهاز",fRisk:"في خطر",fTitle:"الدفع بالبطاقة لم يصل إلى الدفعة",fBody:"أُقفل هذا الإيصال كدفعة بالبطاقة بمبلغ {amount} على ····{last4} بالتفويض {authCode}، لكن دفعة الليلة من {terminal} لا تحتوي على تسجيل مطابق.",fDo:"ما ينبغي فعله",fAction:"تأكّد من أن الجهاز أتمّ التسجيل. وإلى أن يحدث ذلك يكون المبلغ قد قُدّم ولم يُحصّل.",fReview:"وسمها كمُراجَعة",trFlagRate:"نسبة التعليم",trWindow:"سبع ليالٍ",exWord:"للمراجعة",exCleared:"و33 غيرها، كلها سليمة",
@@ -1245,11 +1242,11 @@ strip:"جديد: كلوزوايز صار يلتقط ما يتكرر عبر سب�
 navProblem:"المشكلة",navHow:"كيف يعمل",navAi:"الذكاء الاصطناعي",navDiff:"الفرق",navNumbers:"الأرقام",navFaq:"أسئلة",
 ctaBook:"احجز مكالمة",ctaHow:"شاهد كيف يعمل",
 heroH1:"كل إيصال، كل ليلة. ولا تقرأ إلا الخاطئ منها.",
-heroSub:"يقابل الذكاء الاصطناعي إيصالات الليلة بجهاز البطاقات وحسابات الغرف والنقد الذي عددتموه. ويصل مدير الوردية جدول قصير بدل الكومة كلها.",
+heroSub:"كلوزوايز ينفّذ إقفال ليلتكم. يقابل إيصالات المنفذ بجهاز البطاقات وحسابات الغرف والنقد المورَّد، ثم يسلّم مدير الوردية الجدول القصير.",
 demoTitle:"الإقفال · مطعم شبريبليك · برلين",
 demoReady:"جاهز.",demoRun:"جارٍ المقابلة…",demoDone:"<b>3 للمراجعة</b> · 11 سليمة",demoOk:"سليم",demoNo:"راجع",
-m1:"إيصالات فُحصت، وبقيت لإنسان",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات، حساب الغرفة، درج النقد",
-m3:"أكبر ما التقطه في ليلة العرض",m4:"للمساء كله",
+m1:"إيصالات قوبلت، وبقيت لإنسان",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات، حساب الغرفة، درج النقد",
+m3:"أكبر فارق في ليلة العرض",m4:"للمساء كله",
 probEye:"المشكلة",probH2:"إقفال الليل يأكل ساعة. كل ليلة.",
 prob1:"شخص يقرأ كل إيصال يدويًا مقابل تقرير Z.",
 prob2:"إيصال واحد خاطئ مختبئ بين ثلاثمئة.",
@@ -1257,14 +1254,14 @@ prob3:"الجميع ينتظر أن يتوازن الدرج قبل أن يذهب
 probNote:"كل الإيصالات تقريبًا سليمة. اثنان أو ثلاثة ليست كذلك. لهذا كان لا بد أن يقرأها أحدهم كلها.",
 howEye:"كيف يعمل",howH2:"زر واحد. ثلاث خطوات.",
 how1t:"المقابلة",how1p:"كل إيصال مقابل النقد وجهاز البطاقات وحسابات الغرف وتقرير Z.",
-how2t:"التعليم",how2p:"لا يعود إلا ما لا يتطابق، بكلام واضح ومعه ما ينبغي فعله.",
-how3t:"التسليم",how3p:"القيد المتوازن يذهب إلى المحاسبة. والليلة أُقفلت.",
-howCap:"فُحص 36 إيصالاً. 3 منها تحتاج إنساناً.",
-aiEye:"ماذا يجد",aiH2:"الذكاء الاصطناعي يجدها. وأنت تقرر.",
-aiLede:"يقرأ كل إيصال، ويقول في سطر واحد ما الخطأ، وينتبه حين يتكرر الشيء نفسه. والقرار يبقى لمدير الوردية.",
+how2t:"التعليم",how2p:"لا يعود إلا ما لا يتوازن، بكلام واضح ومعه ما ينبغي فعله.",
+how3t:"التسليم",how3p:"القيد المتوازن يذهب إلى المحاسبة والليلة تُقفل.",
+howCap:"قوبل 36 إيصالاً. 3 منها تحتاج إنساناً.",
+aiEye:"ماذا يجد",aiH2:"هو يجدها. وأنت تقرر.",
+aiLede:"يقرأ كل إيصال، ويقول في سطر واحد ما الخطأ، ويلتقطه حين يتكرر الأمر نفسه. والقرار يبقى لمدير الوردية.",
 ai1:"لا فحص بالعينة. كل إيصال، كل ليلة.",
-ai2:"لا رموز أخطاء. يقول ما حدث وما العمل.",
-ai3:"يلتقط الصندوق نفسه، والنادل نفسه، والأسبوع نفسه.",
+ai2:"لا رموز أخطاء. ما حدث وما العمل.",
+ai3:"الصندوق نفسه، والنادل نفسه، والأسبوع نفسه.",
 loss1t:"البطاقة لم تصل قط",loss1p:"أُقفلت كدفعة ببطاقة لم يسجّلها الجهاز أبدًا. قُدّمت ولم تُحصّل.",
 loss2t:"أحدهم غيّر المبلغ",loss2p:"خصم بعد الإقفال. إلغاء بلا موافقة.",
 loss3t:"المال في المكان الخطأ",loss3p:"سُجّل نقدًا ودُفع ببطاقة — سينقص الصندوق بهذا المبلغ بالضبط.",
@@ -1272,26 +1269,26 @@ patEye:"النمط",patH2:"الخطأ نفسه، أربع ليالٍ متتال�
 patLede:"ليلة سيئة واحدة سوء حظ. ضع سبع ليالٍ جنبًا إلى جنب وسترى مصدر المشكلة.",
 pat1:"ليالٍ لم يسجّل فيها جهاز البطاقات نفسه",pat2:"ليالٍ خصم فيها النادل نفسه بعد الإقفال",
 patCap:"سبع ليالٍ، والسببان وراء نصفها.",
-diffEye:"الفرق",diffH2:"غيرنا يعطيك تقريرًا. نحن نعطيك ثلاثة أسطر.",
-d1w:"أنظمة الكاشير وذكاء الأعمال",d1t:"تعطيك تقريرًا. والخطأ تبحث عنه أنت.",d1u:"يجد الخطأ. وأنت تقرر فقط.",
-d2w:"نظام إدارة الفندق لديكم",d2t:"يراجع أرقامه بنفسه، فيتوازن دائمًا.",d2u:"يراجع مقابل جهاز البطاقات والنقد المعدود. مصدران لا يتحكم بهما.",
-d3w:"المحاسبة",d3t:"تكتشفها في آخر الشهر.",d3u:"يكتشفها في الليلة نفسها، والنزيل ما زال في الفندق.",
-d4w:"البداية",d4t:"مشروع يستغرق شهورًا.",d4u:"تقرير Z واحد يكفي للبدء. في اليوم نفسه.",
+diffEye:"لماذا نحن",diffH2:"غيرنا يعطيك تقريرًا. نحن نعطيك ثلاثة أسطر.",
+d1w:"الكاشير وذكاء الأعمال",d1t:"يعطيك تقريرًا. والخطأ تبحث عنه أنت.",d1u:"يجد الخطأ. وأنت تقرر فقط.",
+d2w:"نظام إدارة الفندق لديكم",d2t:"يراجع نفسه بنفسه، فيتوازن دائمًا.",d2u:"يتوازن مقابل جهاز البطاقات والنقد المورَّد. مصدران لا يديرهما هو.",
+d3w:"المحاسبة",d3t:"تلتقطها في آخر الشهر.",d3u:"يلتقطها في الليلة نفسها، والنزيل ما زال في الفندق.",
+d4w:"الانطلاق",d4t:"مشروع يمتد شهورًا.",d4u:"تقرير Z واحد وتنطلقون. في اليوم نفسه.",
 numEye:"كم يكلّف",numH2:"تلك الساعة غالية.",
 n1:"في الليلة، من ساعات مدير الوردية الإضافية",n2:"في السنة، لمدير واحد",n3:"التوفير مقارنةً بالسعر",
-calcTitle:"أرقامك",cOutlets:"المنافذ في المنشأة",cWage:"تكلفة ساعة المدير",cManual:"دقائق لكل إقفال، اليوم",
-cMore:"افتراضات أخرى",cExc:"استثناءات في الليلة",cProps:"المنشآت",cCloses:"إقفالات في الشهر",cPrice:"السعر لكل منفذ شهريًا",
-cAssume:"زمن كلوزوايز: 2,5 دقيقة للفتح زائد 1,5 دقيقة لكل استثناء يُراجَع.",cReset:"إعادة الضبط",
-rLabel:"وقت عمل مستعاد",rPerYear:"سنويًا",rPerMonth:"شهريًا",
+calcTitle:"فندقكم",cOutlets:"منافذ الفندق",cWage:"مدير الوردية، للساعة",cManual:"دقائق الإقفال اليوم",
+cMore:"تفاصيل أكثر",cExc:"استثناءات في الليلة",cProps:"الفنادق",cCloses:"إقفالات في الشهر",cPrice:"السعر لكل منفذ شهريًا",
+cAssume:"نحسب 2.5 دقيقة لفتح الإقفال و1.5 دقيقة لكل استثناء يقرأه شخص.",cReset:"إعادة الضبط",
+rLabel:"ما تستعيدونه",rPerYear:"سنويًا",rPerMonth:"شهريًا",
 hoursLine:"{h} ساعة شهريًا تعود إلى العمل · عبر {n} منافذ",
 tRoi:"العائد",tRoiN:"لكل يورو يُنفق",tNet:"الصافي / سنة",tNetN:"بعد الاشتراك",
-tCost:"الاشتراك / سنة",tSaved:"دقيقة لكل إقفال",redLine:"{p}% وقت أقل",costN:"{n} منافذ × {p}",
+tCost:"الاشتراك / سنة",tSaved:"دقائق لكل إقفال",redLine:"{p}% وقت أقل",costN:"{n} منافذ × {p}",
 scaleTitle:"على مستوى المجموعة",scOutlets:"المنافذ",scLabour:"الوقت المستعاد",scCost:"الاشتراك",scNet:"الصافي / سنة",
-bookEye:"جرّبه",bookH2:"عشرون دقيقة. ليلة من لياليكم أنتم.",
-bookLede:"أرسل لنا تصدير ليلة واحدة. نشغّله ونريك ما لا يتطابق. بلا مقابل، ودون توصيل أي شيء بنظامكم.",
+bookEye:"جرّبه",bookH2:"عشرون دقيقة وليلة من لياليكم.",
+bookLede:"أرسلوا تقرير Z لليلة واحدة. نشغّل الإقفال عليه ونريكم ما لا يتوازن. بلا مقابل، وبلا ربط، وبلا أي تغيير في الكاشير.",
 book1:"لا شيء يُثبَّت على الكاشير",book2:"التصدير الذي تخرجونه كل ليلة يكفي",book3:"استضافة في الاتحاد الأوروبي، مع اتفاقية معالجة البيانات",
 bookLine:"اختر وقتًا يناسبك.",
-bookCta:"اطّلع على الأوقات المتاحة",bookNote:"20 دقيقة، مكالمة فيديو. أحضر تصدير ليلة واحدة.",
+bookCta:"احجز مكالمة",bookNote:"20 دقيقة، مكالمة فيديو. أحضر تصدير ليلة واحدة.",
 faqEye:"أسئلة",faqH2:"إجابات قصيرة.",
 q1:"هل يعمل مع نظام الكاشير لدينا؟",a1:"نعم. تصدير CSV اليومي يكفي للبدء، وتنتجه كل الأنظمة تقريبًا، ومنها Simphony وMicros. ولا يتغير شيء عند الكاشير.",
 q2:"هل يحل محل نظام إدارة الفندق؟",a2:"لا. يقف إلى جانبه ويراجع أرقامه مقابل شيئين لا يتحكم بهما: جهاز البطاقات والنقد المعدود. ولا نظام يستطيع تدقيق نفسه.",
@@ -1303,7 +1300,11 @@ tabProblem:"المشكلة",
 tabHow:"كيف يعمل",
 tabFinds:"ماذا يجد",
 tabCost:"كم يكلّف",
-tabQs:"أسئلة"};
+tabQs:"أسئلة",
+skip:"انتقل إلى الصفحة",
+tabOverview:"نظرة عامة",
+tabWhy:"لماذا نحن",
+heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عند الإقفال. ولا يُمَسّ شيء في الكاشير."};
 
 </script>
 <script>
@@ -1363,15 +1364,15 @@ tabQs:"أسئلة"};
 
     paintSurfaces();
     // Figures that live outside the dictionary but follow its locale.
-    document.getElementById("mBig").textContent = money2(552.77);
-    document.getElementById("nNight").textContent = money(30);
-    document.getElementById("nYear").textContent = money(11000);
+    setTxt("mBig", money2(552.77));
     paintDemo();
     calc();
   }
 
   /* ---- The product surfaces, drawn from the dictionary ---- */
   var NIGHTS = [0.06, 0.02, 0.08, 0.04, 0.05, 0.05, 0.15];
+  function setTxt(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+
   function paintSurfaces() {
     var d = T[lang];
 
@@ -1389,39 +1390,41 @@ tabQs:"أسئلة"};
       .replace("{authCode}", "F9EEF8")
       .replace("{terminal}", "T-02");
 
-    // Seven nights
-    var pct = new Intl.NumberFormat(LOC[lang], { style: "percent", maximumFractionDigits: 0 });
-    var bars = document.getElementById("trBars");
-    var ticks = document.getElementById("trTicks");
-    bars.innerHTML = ""; ticks.innerHTML = "";
-    var peak = Math.max.apply(null, NIGHTS);
-    var day = new Date();
-    day.setDate(day.getDate() - NIGHTS.length);
-    NIGHTS.forEach(function (v, i) {
-      var worst = v === peak;
-      var col = document.createElement("div");
-      col.className = "tbar" + (worst ? " worst" : "");
-      col.innerHTML = (worst ? "<b>" + pct.format(v) + "</b>" : "") +
-        '<i style="height:' + Math.max(3, (v / peak) * 100) + "%;animation-delay:" + (i * 55) + 'ms"></i>';
-      bars.appendChild(col);
+  }
 
-      var when = new Date(day); when.setDate(day.getDate() + i + 1);
-      var tick = document.createElement("span");
-      tick.textContent = when.toLocaleDateString(LOC[lang], { weekday: "short" });
-      ticks.appendChild(tick);
+  /* ---- One screen, one page ----
+     The buttons are the only way between pages. Nothing is stacked below
+     a page, so there is no scroll that can carry a reader somewhere they
+     did not ask to go. */
+  var PAGES = ["overview", "how", "finds", "cost", "why"];
+  var pagerBtns = document.querySelectorAll(".pager button");
+
+  function go(name, focus) {
+    if (PAGES.indexOf(name) < 0) name = PAGES[0];
+    PAGES.forEach(function (p) {
+      var el = document.getElementById("pg-" + p);
+      el.hidden = (p !== name);
+      el.classList.remove("page-enter");
     });
-    document.getElementById("trWindow").textContent = d.trWindow;
+    var live = document.getElementById("pg-" + name);
+    void live.offsetWidth;               // restart the entrance
+    live.classList.add("page-enter");
+    live.scrollTop = 0;
+    [].forEach.call(pagerBtns, function (b) {
+      b.setAttribute("aria-selected", String(b.dataset.go === name));
+    });
+    if (history.replaceState) history.replaceState(null, "", "#" + name);
+    if (focus) live.setAttribute("tabindex", "-1"), live.focus({ preventScroll: true });
   }
 
-  /* ---- Reveal ---- */
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-  function observeReveals(root) {
-    [].forEach.call((root || document).querySelectorAll(".rv:not(.in)"),
-      function (el) { io.observe(el); });
-  }
-  observeReveals();
+  [].forEach.call(document.querySelectorAll("[data-go]"), function (el) {
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      go(el.dataset.go, el.tagName === "BUTTON");
+    });
+  });
+  go((location.hash || "").slice(1) || PAGES[0], false);
+  window.addEventListener("hashchange", function () { go((location.hash || "").slice(1), false); });
 
   /* ---- The night reconciling itself ---- */
   // Amounts are numbers, not strings: they are formatted in the reader's
@@ -1440,6 +1443,10 @@ tabQs:"أسئلة"};
   var rowsEl = document.getElementById("demoRows");
   var count = document.getElementById("demoCount"), foot = document.getElementById("demoFoot"),
       ROW = 30;
+  var rowH = function () {
+    return parseFloat(getComputedStyle(document.documentElement)
+      .getPropertyValue("--row")) || ROW;
+  };
   CHECKS.forEach(function (c) {
     var r = document.createElement("div"); r.className = "drow";
     r.innerHTML = '<span>' + c[0] + '</span><span class="nm">' + c[1] + '</span>' +
@@ -1480,7 +1487,7 @@ tabQs:"أسئلة"};
     if (reduced) { rows.forEach(function (_, n) { settle(n); }); finish(); return; }
     foot.textContent = T[lang].demoRun; sweep.classList.add("on");
     timer = setInterval(function () {
-      sweep.style.transform = "translateY(" + (i * ROW) + "px)";
+      sweep.style.transform = "translateY(" + (i * rowH()) + "px)";
       if (i > 0) settle(i - 1);
       count.textContent = i + " / " + rows.length; i++;
       if (i > rows.length) { clearInterval(timer); timer = null; settle(rows.length - 1);
@@ -1500,7 +1507,7 @@ tabQs:"أسئلة"};
     F[k] = document.getElementById(k);
   });
   ["vOutlets","vWage","vManual","vExc","vProps","vCloses","vPrice","rYear","rMonth",
-   "rHours","rRoi","rNet","rCost","rCostN","rSaved","rRed","scaleRows"].forEach(function (k) {
+   "rHours","rRoi","rNet","rCost","rCostN","rSaved","rRed"].forEach(function (k) {
     OUT[k] = document.getElementById(k);
   });
   function model(o) {
@@ -1529,17 +1536,7 @@ tabQs:"أسئلة"};
     OUT.rCostN.textContent = fill(d.costN, { n: nf(m.n), p: money(o.price) });
     OUT.rSaved.textContent = nf(m.saved,1);
     OUT.rRed.textContent = fill(d.redLine, { p: nf(m.reduction*100) });
-    OUT.scaleRows.innerHTML = "";
-    [1,4,12,40].forEach(function (k) {
-      var r = model({ outlets:k, wage:o.wage, manual:o.manual, exc:o.exc,
-                      props:1, closes:o.closes, price:o.price });
-      var tr = document.createElement("tr");
-      tr.innerHTML = "<td>" + nf(k) + "</td><td class='num'>" + money(r.labourYear) +
-        "</td><td class='num'>" + money(r.costYear) + "</td><td class='num net'>" +
-        money(r.netYear) + "</td>";
-      if (k === m.n) tr.style.background = "#F3F1ED";
-      OUT.scaleRows.appendChild(tr);
-    });
+
   }
   Object.keys(F).forEach(function (k) { F[k].addEventListener("input", calc); });
   document.getElementById("resetCalc").addEventListener("click", function () {
