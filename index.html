@@ -436,13 +436,19 @@ details.q .ans{padding-top:11px;color:var(--muted);max-width:62ch;font-size:15px
    leaves it no choice — it can never scroll into another page. */
 html,body{height:100%}
 body{overflow:hidden}
-.app{height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr)}
+.app{height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr)}
 .stage{position:relative;min-height:0}
 .page{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
   display:flex;align-items:center}
 .page[hidden]{display:none}
+/* A page that does not quite fit gets a soft bottom edge, so the last
+   line never looks cut off and there is a visible reason to flick. */
+.page.has-more{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
+  mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent)}
+.page.has-more.at-end{-webkit-mask-image:none;mask-image:none}
 .page-in{width:100%;display:flex;flex-direction:column;
-  gap:clamp(16px,2.4vh,32px);padding:clamp(18px,3vh,38px) 0}
+  gap:clamp(16px,2.4vh,32px);padding-block:clamp(18px,3vh,38px)}
 
 /* Each page stands on its own ground, so a click plainly lands you
    somewhere else rather than further down the same sheet. */
@@ -493,6 +499,8 @@ body{overflow:hidden}
   gap:clamp(14px,2vw,28px);padding:clamp(15px,2.2vh,24px) clamp(18px,2.4vw,30px);
   border-radius:var(--r-lg);
   background:linear-gradient(135deg,var(--navy-3),var(--navy));color:var(--on-dark)}
+.closer .btn-solid{background:var(--tan);color:var(--navy)}
+.closer .btn-solid:hover{background:var(--tan-lt)}
 .closer-h{font-family:var(--serif);font-size:clamp(1.1rem,1.7vw,1.45rem);line-height:1.2}
 .closer .body{color:var(--on-dark-2);max-width:54ch;margin-top:4px}
 .disclaim{opacity:.72}
@@ -503,7 +511,7 @@ body{overflow:hidden}
 
 @media (max-height:840px){
   :root{--row:26px}
-  .page-in{gap:clamp(12px,1.8vh,22px);padding:clamp(14px,2vh,24px) 0}
+  .page-in{gap:clamp(12px,1.8vh,22px);padding-block:clamp(14px,2vh,24px)}
   .display{font-size:clamp(2rem,3.6vw,2.8rem)}
   .h2{font-size:clamp(1.5rem,2.6vw,2rem)}
   .lede{font-size:1rem}
@@ -517,6 +525,170 @@ body{overflow:hidden}
   .metrics{padding:clamp(12px,2vw,20px) 0}
   .metric .v{font-size:clamp(1.3rem,1.8vw,1.6rem)}
   .metric .v.txt{font-size:clamp(1.2rem,1.7vw,1.5rem)}
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   Phones and small tablets. The laptop layout above is untouched.
+
+   Two things change in kind, not just in size. The pager moves to the
+   bottom and becomes a five-up tab bar, because a horizontally
+   scrolling strip hides its last item and the whole point is that
+   every page is one tap away. And the close table drops to eight rows
+   with the covers column removed, because a phone that shows fourteen
+   rows has no room left for the sentence that explains them.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width:720px){
+  :root{--gut:18px;--row:26px}
+
+  .app{grid-template-rows:auto minmax(0,1fr) auto}
+  .stage{order:2}
+  .pager{order:3;background:var(--white);border-top:1px solid var(--line);
+    background-image:none;
+    padding-bottom:env(safe-area-inset-bottom);
+    box-shadow:0 -1px 0 rgba(21,32,46,.04),0 -10px 28px rgba(21,32,46,.06)}
+  .pager-in{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:0;padding:0;overflow:visible;mask-image:none;-webkit-mask-image:none}
+  .pager button{flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;
+    height:auto;min-height:56px;padding:8px 4px;
+    font-size:10.5px;font-weight:500;line-height:1.2;text-align:center;
+    white-space:normal;color:var(--muted)}
+  .pager button .n{display:block;font-size:9.5px;letter-spacing:.08em;
+    color:var(--muted-2);opacity:1}
+  .pager button>span:last-child{display:block;min-height:2.4em}
+  .pager button::after{inset-inline:22%;bottom:auto;top:0;height:2px;background:var(--ink)}
+  .pager button[aria-selected="true"]{color:var(--ink);font-weight:600}
+  .pager button[aria-selected="true"] .n{color:var(--tan-text)}
+
+  /* A page arrives from the side, the way a screen does in an app. */
+  .page{align-items:flex-start}
+  .page-enter{animation:pgm .32s var(--ease) both}
+  @keyframes pgm{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+  .page-in{gap:12px;padding-block:14px 18px}
+
+  .nav-in{height:56px}
+  .brand .word{font-size:21px}
+  .nav-right .btn{height:36px;padding:0 13px;font-size:13.5px}
+  .lang>summary{height:36px}
+
+  .display{font-size:clamp(1.75rem,7.6vw,2.15rem);max-width:none;line-height:1.08}
+  .h2{font-size:clamp(1.4rem,6vw,1.75rem);max-width:none}
+  .lede{font-size:15px;line-height:1.5;max-width:none}
+  .body{font-size:14px}
+  .eyebrow{padding-top:9px;font-size:10.5px}
+
+  /* Full-width buttons: a thumb should not have to aim. */
+  .btns{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+  .btns .btn{width:100%}
+  .btn-lg{height:46px;font-size:15px}
+
+  /* Three figures side by side keeps them off the bottom of the page. */
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+    padding-block:12px 0;border-top:1px solid var(--line-2)}
+  .metric .v{font-size:1.05rem}
+  .metric .v.txt{font-size:.95rem}
+  .metric .k{font-size:11px;margin-top:4px;max-width:none;line-height:1.32}
+
+  /* The close table, cut to what a phone can hold. */
+  .demo-bar{padding:9px 12px}
+  .demo-t{font-size:11.5px}
+  .demo-count{font-size:11px}
+  .drow{grid-template-columns:minmax(0,auto) minmax(0,1fr) 58px;
+    gap:8px;padding:0 12px;font-size:11.5px}
+  .drow .nm{display:none}
+  .drow .am{text-align:end}
+  .pill{height:17px;padding:0 7px;font-size:9.5px}
+  .demo-foot{padding:9px 12px;font-size:11.5px}
+
+  /* Steps read down the page with a rule on the leading edge. */
+  .steps{border-top:0}
+  .steps li{padding:11px 0 11px 14px;gap:3px;
+    border-bottom:0;border-inline-start:2px solid var(--line-2)}
+  .steps li+li{margin-top:2px}
+  .steps .s{font-size:10.5px}
+  .steps .h3{font-size:1.02rem}
+  .steps .body{max-width:none}
+
+  .surface-bar{padding:9px 12px;font-size:11.5px}
+  .exrow{padding:9px 12px;gap:9px;font-size:12.5px}
+  .surface-foot{padding:9px 12px;font-size:11.5px}
+
+  /* One flag, legible, with nothing trimmed off it. */
+  .flagcard{padding:14px}
+  .flag-top{gap:7px}
+  .flag-id{font-size:10.5px}
+  .flag-title{font-size:1.05rem}
+  .flag-body{font-size:13px}
+  .flag-do{padding:9px 11px;font-size:12.5px}
+  .flag-foot{padding-top:11px}
+  .ticks li{font-size:13px;gap:8px}
+  .ticks{gap:8px}
+
+  /* Calculator: the sliders, then what they produce. */
+  .calc-panel{padding:13px;gap:11px}
+  .calc-hero{padding:13px}
+  .calc-hero .v{font-size:1.65rem}
+  .calc-hero .h{font-size:11.5px;padding-top:9px;margin-top:9px}
+  .calc-hero .s{font-size:12.5px}
+  .calc-lab{font-size:13px}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tile .v{font-size:1.02rem}
+  .tile .k,.tile .n{font-size:11px}
+  .calc-out{gap:12px}
+  .calc-grid{gap:14px}
+
+  /* Each comparison is one card: who, what they do, what we do. */
+  .vsrow{gap:4px;padding:9px 0}
+  .vsrow .them,.vsrow .us{font-size:13px}
+  .vsrow .who{font-size:10.5px}
+  .closer{flex-direction:column;align-items:stretch;text-align:start;padding:13px;gap:11px}
+  .closer .btn{width:100%}
+  .closer-h{font-size:1.1rem}
+}
+
+
+/* A 4.7-inch phone, or any phone in landscape-ish height. Content comes
+   out rather than being squeezed until it is unreadable. */
+@media (max-width:720px) and (max-height:800px){
+  .page-in{gap:10px;padding-block:12px 14px}
+  .display{font-size:clamp(1.55rem,6.6vw,1.85rem)}
+  .h2{font-size:clamp(1.25rem,5.4vw,1.5rem)}
+  .lede{font-size:14px}
+  .btn-lg{height:42px;font-size:14px}
+  .metrics{padding-block:10px 0;gap:8px}
+  .metric .v{font-size:.95rem}
+  .metric .v.txt{font-size:.86rem}
+  .metric .k{font-size:10px}
+  .steps li{padding:8px 0 8px 12px}
+  .ticks li{font-size:12.5px}
+  .flag-body{font-size:12.5px}
+  .calc-panel,.calc-hero{padding:11px}
+  .calc-hero .v{font-size:1.45rem}
+  .vsrow{padding:7px 0}
+}
+@media (max-width:720px) and (max-height:700px){
+  /* The proof line is the first thing to go: the buttons say it too. */
+  .split-hero .tiny{display:none}
+  .display{font-size:1.5rem}
+  .lede{font-size:13.5px}
+  .cAssume,.calc-out>.tiny{display:none}
+  /* The card is the proof on this page; the three supporting lines are
+     the first thing a very short screen can do without. */
+  .split-finds .ticks{display:none}
+  .calc-hero .h{display:none}
+  .tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+  .tile .k,.tile .n{font-size:9.5px}
+  .tile .v{font-size:.92rem;margin-top:4px}
+  /* The closing panel repeats the button already in the header. */
+  .closer .body{display:none}
+  /* The cleared line is the one row the sheet can lose and still read. */
+  .surface .exrow:not(.bad){display:none}
+}
+
+/* Very narrow phones: the five labels need every pixel. */
+@media (max-width:359px){
+  .pager button{font-size:9.5px}
+  .pager button .n{display:none}
 }
 
 .rv{opacity:0;transform:translateY(12px)}
@@ -747,7 +919,7 @@ ctaBook:"Termin buchen",ctaHow:"So funktioniert es",
 heroH1:"Jeder Check, jede Nacht. Sie lesen nur die falschen.",
 heroSub:"Closewise macht Ihren Tagesabschluss. Es gleicht die Checks des Outlets mit Kartengerät, Zimmerkonten und der abgerechneten Kasse ab und gibt Ihrer Schichtleitung die kurze Liste.",
 demoTitle:"Abschluss · Restaurant Spreeblick · Berlin",
-demoReady:"Bereit.",demoRun:"Gleicht ab…",demoDone:"<b>3 zu prüfen</b> · 11 erledigt",demoOk:"erledigt",demoNo:"prüfen",
+demoReady:"Bereit.",demoRun:"Gleicht ab…",demoDone:"<b>{n} zu prüfen</b> · {ok} erledigt",demoOk:"erledigt",demoNo:"prüfen",
 m1:"Checks abgeglichen, für einen Menschen übrig",m2v:"Drei Quellen",m2:"Kartengerät, Zimmerkonto, Kassenlade",
 m3:"Grösster Fund der Demo-Nacht",m4:"Für den ganzen Abend",
 probEye:"Das Problem",probH2:"Der Tagesabschluss frisst eine Stunde. Jede Nacht.",
@@ -818,7 +990,7 @@ ctaBook:"Book a call",ctaHow:"See how it works",
 heroH1:"Every check, every night. You only read the wrong ones.",
 heroSub:"Closewise runs your night audit. It matches the outlet's checks to the card machine, the room folios and the cash you banked, then hands your duty manager the short list.",
 demoTitle:"Close · Restaurant Spreeblick · Berlin",
-demoReady:"Ready.",demoRun:"Matching…",demoDone:"<b>3 to check</b> · 11 cleared",demoOk:"cleared",demoNo:"check",
+demoReady:"Ready.",demoRun:"Matching…",demoDone:"<b>{n} to check</b> · {ok} cleared",demoOk:"cleared",demoNo:"check",
 m1:"Checks matched, left for a person",m2v:"Three sources",m2:"Card machine, room folio, cash drawer",
 m3:"Biggest miss on the demo night",m4:"For the whole evening",
 probEye:"The problem",probH2:"The night audit eats an hour. Every night.",
@@ -889,7 +1061,7 @@ ctaBook:"Prendre rendez-vous",ctaHow:"Voir le fonctionnement",
 heroH1:"Chaque addition, chaque nuit. Vous ne lisez que les fausses.",
 heroSub:"Closewise fait votre clôture de nuit. Il rapproche les additions du point de vente du terminal, des notes de chambre et de la caisse remise, puis donne la liste courte à votre responsable.",
 demoTitle:"Clôture · Restaurant Spreeblick · Berlin",
-demoReady:"Prêt.",demoRun:"Rapprochement…",demoDone:"<b>3 à vérifier</b> · 11 réglées",demoOk:"réglée",demoNo:"vérifier",
+demoReady:"Prêt.",demoRun:"Rapprochement…",demoDone:"<b>{n} à vérifier</b> · {ok} réglées",demoOk:"réglée",demoNo:"vérifier",
 m1:"Additions rapprochées, laissées à une personne",m2v:"Trois sources",m2:"Terminal, note de chambre, caisse",
 m3:"Plus gros écart de la nuit de démonstration",m4:"Pour toute la soirée",
 probEye:"Le problème",probH2:"La clôture de nuit mange une heure. Chaque nuit.",
@@ -960,7 +1132,7 @@ ctaBook:"Reservar una llamada",ctaHow:"Ver cómo funciona",
 heroH1:"Cada cuenta, cada noche. Solo lee las que están mal.",
 heroSub:"Closewise hace su cierre de noche. Cruza las cuentas del punto de venta con el datáfono, las cuentas de habitación y el efectivo entregado, y le pasa la lista corta a su encargado.",
 demoTitle:"Cierre · Restaurant Spreeblick · Berlín",
-demoReady:"Listo.",demoRun:"Cruzando…",demoDone:"<b>3 por revisar</b> · 11 cuadradas",demoOk:"cuadrada",demoNo:"revisar",
+demoReady:"Listo.",demoRun:"Cruzando…",demoDone:"<b>{n} por revisar</b> · {ok} cuadradas",demoOk:"cuadrada",demoNo:"revisar",
 m1:"Cuentas cruzadas, dejadas a una persona",m2v:"Tres fuentes",m2:"Datáfono, cuenta de habitación, caja",
 m3:"El mayor hallazgo de la noche de demostración",m4:"Para toda la noche",
 probEye:"El problema",probH2:"El cierre de noche se come una hora. Cada noche.",
@@ -1031,7 +1203,7 @@ ctaBook:"Prenota una call",ctaHow:"Guarda come funziona",
 heroH1:"Ogni conto, ogni notte. Legge solo quelli sbagliati.",
 heroSub:"Closewise fa la sua chiusura notturna. Confronta i conti del punto vendita con il POS, i conti camera e il contante versato, poi passa al responsabile l'elenco breve.",
 demoTitle:"Chiusura · Restaurant Spreeblick · Berlino",
-demoReady:"Pronto.",demoRun:"Confronto…",demoDone:"<b>3 da vedere</b> · 11 a posto",demoOk:"a posto",demoNo:"da vedere",
+demoReady:"Pronto.",demoRun:"Confronto…",demoDone:"<b>{n} da vedere</b> · {ok} a posto",demoOk:"a posto",demoNo:"da vedere",
 m1:"Conti confrontati, lasciati a una persona",m2v:"Tre fonti",m2:"POS, conto camera, cassetto contanti",
 m3:"Lo scarto più grande della notte dimostrativa",m4:"Per l'intera serata",
 probEye:"Il problema",probH2:"La chiusura notturna si mangia un'ora. Ogni notte.",
@@ -1102,7 +1274,7 @@ ctaBook:"Gesprek plannen",ctaHow:"Bekijk hoe het werkt",
 heroH1:"Elke rekening, elke nacht. U leest alleen de foute.",
 heroSub:"Closewise draait uw nachtafsluiting. Het legt de rekeningen van het outlet naast de pinautomaat, de kamerrekeningen en het afgestorte geld, en geeft uw dienstdoend manager de korte lijst.",
 demoTitle:"Afsluiting · Restaurant Spreeblick · Berlijn",
-demoReady:"Gereed.",demoRun:"Naast elkaar leggen…",demoDone:"<b>3 na te kijken</b> · 11 in orde",demoOk:"in orde",demoNo:"nakijken",
+demoReady:"Gereed.",demoRun:"Naast elkaar leggen…",demoDone:"<b>{n} na te kijken</b> · {ok} in orde",demoOk:"in orde",demoNo:"nakijken",
 m1:"Rekeningen gematcht, over voor een mens",m2v:"Drie bronnen",m2:"Pinautomaat, kamerrekening, kassalade",
 m3:"Grootste misser in de demonacht",m4:"Voor de hele avond",
 probEye:"Het probleem",probH2:"De nachtafsluiting kost een uur. Elke nacht.",
@@ -1173,7 +1345,7 @@ ctaBook:"Umów rozmowę",ctaHow:"Zobacz, jak działa",
 heroH1:"Każdy rachunek, każdej nocy. Czytasz tylko te błędne.",
 heroSub:"Closewise robi twoje nocne zamknięcie. Zestawia rachunki punktu z terminalem, rachunkami pokoi i odprowadzoną gotówką, a kierownikowi zmiany podaje krótką listę.",
 demoTitle:"Zamknięcie · Restaurant Spreeblick · Berlin",
-demoReady:"Gotowe.",demoRun:"Zestawianie…",demoDone:"<b>3 do sprawdzenia</b> · 11 zgodnych",demoOk:"zgodny",demoNo:"sprawdź",
+demoReady:"Gotowe.",demoRun:"Zestawianie…",demoDone:"<b>{n} do sprawdzenia</b> · {ok} zgodnych",demoOk:"zgodny",demoNo:"sprawdź",
 m1:"Rachunków zestawionych, zostawionych człowiekowi",m2v:"Trzy źródła",m2:"Terminal, rachunek pokoju, szuflada kasowa",
 m3:"Największy błąd nocy demonstracyjnej",m4:"Na cały wieczór",
 probEye:"Problem",probH2:"Nocne zamknięcie zjada godzinę. Każdej nocy.",
@@ -1244,7 +1416,7 @@ ctaBook:"احجز مكالمة",ctaHow:"شاهد كيف يعمل",
 heroH1:"كل إيصال، كل ليلة. ولا تقرأ إلا الخاطئ منها.",
 heroSub:"كلوزوايز ينفّذ إقفال ليلتكم. يقابل إيصالات المنفذ بجهاز البطاقات وحسابات الغرف والنقد المورَّد، ثم يسلّم مدير الوردية الجدول القصير.",
 demoTitle:"الإقفال · مطعم شبريبليك · برلين",
-demoReady:"جاهز.",demoRun:"جارٍ المقابلة…",demoDone:"<b>3 للمراجعة</b> · 11 سليمة",demoOk:"سليم",demoNo:"راجع",
+demoReady:"جاهز.",demoRun:"جارٍ المقابلة…",demoDone:"<b>{n} للمراجعة</b> · {ok} سليمة",demoOk:"سليم",demoNo:"راجع",
 m1:"إيصالات قوبلت، وبقيت لإنسان",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات، حساب الغرفة، درج النقد",
 m3:"أكبر فارق في ليلة العرض",m4:"للمساء كله",
 probEye:"المشكلة",probH2:"إقفال الليل يأكل ساعة. كل ليلة.",
@@ -1410,12 +1582,27 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
     void live.offsetWidth;               // restart the entrance
     live.classList.add("page-enter");
     live.scrollTop = 0;
+    marginNote(live);
     [].forEach.call(pagerBtns, function (b) {
       b.setAttribute("aria-selected", String(b.dataset.go === name));
     });
     if (history.replaceState) history.replaceState(null, "", "#" + name);
     if (focus) live.setAttribute("tabindex", "-1"), live.focus({ preventScroll: true });
   }
+
+  function marginNote(el) {
+    var more = el.scrollHeight > el.clientHeight + 1;
+    el.classList.toggle("has-more", more);
+    el.classList.toggle("at-end", more &&
+      el.scrollTop + el.clientHeight >= el.scrollHeight - 2);
+  }
+  [].forEach.call(document.querySelectorAll(".page"), function (el) {
+    el.addEventListener("scroll", function () { marginNote(el); }, { passive: true });
+  });
+  window.addEventListener("resize", function () {
+    var live = document.querySelector(".page:not([hidden])");
+    if (live) marginNote(live);
+  });
 
   [].forEach.call(document.querySelectorAll("[data-go]"), function (el) {
     el.addEventListener("click", function (e) {
@@ -1447,7 +1634,12 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
     return parseFloat(getComputedStyle(document.documentElement)
       .getPropertyValue("--row")) || ROW;
   };
-  CHECKS.forEach(function (c) {
+  // A phone cannot hold fourteen rows and still show the pitch above them.
+  var mq = function (q) { return window.matchMedia(q).matches; };
+  var SHOWN = !mq("(max-width:720px)") ? CHECKS
+    : mq("(max-height:800px)") ? CHECKS.slice(0, 5)   // 1 flagged, 4 clear
+    : CHECKS.slice(0, 8);                             // 2 flagged, 6 clear
+  SHOWN.forEach(function (c) {
     var r = document.createElement("div"); r.className = "drow";
     r.innerHTML = '<span>' + c[0] + '</span><span class="nm">' + c[1] + '</span>' +
       '<span class="am"></span><span class="st"><span class="pill ' +
@@ -1461,22 +1653,26 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
 
   function paintDemo() {
     rows.forEach(function (r, n) {
-      r.querySelector(".am").textContent = money2(CHECKS[n][2]);
+      r.querySelector(".am").textContent = money2(SHOWN[n][2]);
       var p = r.querySelector(".pill");
-      if (p.classList.contains("show")) p.textContent = CHECKS[n][3] ? T[lang].demoNo : T[lang].demoOk;
+      if (p.classList.contains("show")) p.textContent = SHOWN[n][3] ? T[lang].demoNo : T[lang].demoOk;
     });
-    if (finished) foot.innerHTML = T[lang].demoDone;
+    if (finished) foot.innerHTML = summary();
     else if (!timer) foot.textContent = T[lang].demoReady;
   }
+  function summary() {
+    var bad = SHOWN.filter(function (c) { return c[3]; }).length;
+    return fill(T[lang].demoDone, { n: bad, ok: SHOWN.length - bad });
+  }
   function settle(n) {
-    var r = rows[n], bad = CHECKS[n][3], p = r.querySelector(".pill");
+    var r = rows[n], bad = SHOWN[n][3], p = r.querySelector(".pill");
     r.classList.add(bad ? "bad" : "done");
     p.textContent = bad ? T[lang].demoNo : T[lang].demoOk;
     p.classList.add("show");
   }
   function finish() {
     sweep.classList.remove("on"); finished = true;
-    foot.innerHTML = T[lang].demoDone;
+    foot.innerHTML = summary();
     count.textContent = rows.length + " / " + rows.length;
   }
   function run() {
