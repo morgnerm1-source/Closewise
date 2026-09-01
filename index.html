@@ -440,15 +440,17 @@ html,body{height:100%}
 body{overflow:hidden}
 .app{height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr);
   grid-template-columns:minmax(0,1fr)}
-.stage{position:relative;min-height:0}
-.page{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+.stage{position:relative;min-height:0;overflow-y:auto;
+  scroll-snap-type:y proximity;scroll-behavior:smooth;
+  overscroll-behavior-y:contain}
+/* Each page is still a screen; now they sit in a track you can scroll,
+   and each one comes to rest under the header rather than mid-way. */
+.page{position:relative;min-height:100%;scroll-snap-align:start;
   display:flex;align-items:center}
-.page[hidden]{display:none}
-/* A page that does not quite fit gets a soft bottom edge, so the last
-   line never looks cut off and there is a visible reason to flick. */
-.page.has-more{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
-  mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent)}
-.page.has-more.at-end{-webkit-mask-image:none;mask-image:none}
+@media (prefers-reduced-motion:reduce){
+  .stage{scroll-behavior:auto;scroll-snap-type:none}
+}
+
 .page-in{width:100%;display:flex;flex-direction:column;
   gap:clamp(16px,2.4vh,32px);padding-block:clamp(18px,3vh,38px)}
 
@@ -461,9 +463,16 @@ body{overflow:hidden}
 .ground-navy{color:var(--on-dark);background:
   radial-gradient(115% 92% at 82% 0%,rgba(165,142,120,.26),transparent 56%),
   linear-gradient(165deg,var(--navy-2) 0%,var(--navy) 64%)}
-.page-enter{animation:pg .34s var(--ease) both}
-@keyframes pg{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.page-enter{animation:none}}
+/* Content lifts in as its page comes up the track, a beat at a time. */
+.page-in>*{opacity:0;transform:translateY(14px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.page.seen .page-in>*{opacity:1;transform:none}
+.page.seen .page-in>*:nth-child(2){transition-delay:.07s}
+.page.seen .page-in>*:nth-child(3){transition-delay:.14s}
+.page.seen .page-in>*:nth-child(4){transition-delay:.21s}
+@media (prefers-reduced-motion:reduce){
+  .page-in>*{opacity:1;transform:none;transition:none}
+}
 
 /* ---- The pager: the only way between pages ---- */
 .pager{background:var(--navy);
@@ -476,13 +485,20 @@ body{overflow:hidden}
   font-size:14.5px;font-weight:450;color:var(--on-dark-3);
   transition:color .16s var(--ease)}
 .pager button .n{font-family:var(--mono);font-size:11px;letter-spacing:.06em;opacity:.7}
-.pager button::after{content:"";position:absolute;inset-inline:clamp(9px,1vw,14px);bottom:0;
-  height:2px;background:var(--tan-lt);transform:scaleX(0);
-  transition:transform .24s var(--ease)}
+.pager{position:relative}
+.pager-in{position:relative}
+.pager-glide{position:absolute;bottom:0;inset-inline-start:0;height:2px;width:0;
+  background:var(--tan-lt);border-radius:2px;pointer-events:none;
+  transition:transform .34s var(--ease),width .34s var(--ease)}
+/* How far down the track you are, as a hairline under the bar. */
+.pager-rail{position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--tan);opacity:.34;transform:scaleX(0);transform-origin:left;
+  pointer-events:none}
+[dir="rtl"] .pager-rail{transform-origin:right}
 .pager button:hover{color:var(--on-dark)}
 .pager button[aria-selected="true"]{color:var(--on-dark);font-weight:600}
 .pager button[aria-selected="true"] .n{color:var(--tan-lt);opacity:1}
-.pager button[aria-selected="true"]::after{transform:scaleX(1)}
+@media (prefers-reduced-motion:reduce){.pager-glide{transition:none}}
 @media (max-width:720px){
   .pager button .n{display:none}
   .pager-in{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent);
@@ -522,7 +538,6 @@ body{overflow:hidden}
   :root{--row:23px}
   .vsrow{padding:clamp(8px,1.2vh,12px) 0}
   .closer{padding:clamp(11px,1.6vh,16px) clamp(16px,2vw,24px)}
-  .disclaim{display:none}
   .display{font-size:clamp(1.8rem,3vw,2.4rem)}
   .metrics{padding:clamp(12px,2vw,20px) 0}
   .metric .v{font-size:clamp(1.3rem,1.8vw,1.6rem)}
@@ -558,14 +573,13 @@ body{overflow:hidden}
   .pager button .n{display:block;font-size:9.5px;letter-spacing:.08em;
     color:var(--muted-2);opacity:1}
   .pager button>span:last-child{display:block;min-height:2.4em}
-  .pager button::after{inset-inline:22%;bottom:auto;top:0;height:2px;background:var(--ink)}
+  .pager-glide{top:0;bottom:auto;background:var(--ink)}
+  .pager-rail{top:0;bottom:auto;background:var(--ink);opacity:.16}
   .pager button[aria-selected="true"]{color:var(--ink);font-weight:600}
   .pager button[aria-selected="true"] .n{color:var(--tan-text)}
 
   /* A page arrives from the side, the way a screen does in an app. */
   .page{align-items:flex-start}
-  .page-enter{animation:pgm .32s var(--ease) both}
-  @keyframes pgm{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
   .page-in{gap:12px;padding-block:14px 18px}
 
   .nav-in{height:56px}
@@ -669,22 +683,11 @@ body{overflow:hidden}
   .vsrow{padding:7px 0}
 }
 @media (max-width:720px) and (max-height:700px){
-  /* The proof line is the first thing to go: the buttons say it too. */
-  .split-hero .tiny{display:none}
   .display{font-size:1.5rem}
   .lede{font-size:13.5px}
-  .cAssume,.calc-out>.tiny{display:none}
-  /* The card is the proof on this page; the three supporting lines are
-     the first thing a very short screen can do without. */
-  .split-finds .ticks{display:none}
-  .calc-hero .h{display:none}
   .tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
   .tile .k,.tile .n{font-size:9.5px}
   .tile .v{font-size:.92rem;margin-top:4px}
-  /* The closing panel repeats the button already in the header. */
-  .closer .body{display:none}
-  /* The cleared line is the one row the sheet can lose and still read. */
-  .surface .exrow:not(.bad){display:none}
 }
 
 /* Very narrow phones: the five labels need every pixel. */
@@ -718,12 +721,14 @@ body{overflow:hidden}
 
 <nav class="pager" aria-label="Pages">
   <div class="pager-in" role="tablist">
+    <span class="pager-glide" id="pagerGlide" aria-hidden="true"></span>
     <button type="button" role="tab" data-go="overview"><span class="n">01</span><span data-t="tabOverview"></span></button>
     <button type="button" role="tab" data-go="how"><span class="n">02</span><span data-t="tabHow"></span></button>
     <button type="button" role="tab" data-go="finds"><span class="n">03</span><span data-t="tabFinds"></span></button>
     <button type="button" role="tab" data-go="cost"><span class="n">04</span><span data-t="tabCost"></span></button>
     <button type="button" role="tab" data-go="why"><span class="n">05</span><span data-t="tabWhy"></span></button>
   </div>
+  <span class="pager-rail" id="pagerRail" aria-hidden="true"></span>
 </nav>
 
 <main class="stage" id="stage">
@@ -1566,45 +1571,47 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
 
   }
 
-  /* ---- One screen, one page ----
-     The buttons are the only way between pages. Nothing is stacked below
-     a page, so there is no scroll that can carry a reader somewhere they
-     did not ask to go. */
+  /* ---- Five pages on one track ----
+     You can scroll from one to the next, or click a tab and be taken
+     there. Whichever you do, the tab bar keeps up: the indicator slides
+     to whatever is actually on screen, and the hairline under it tracks
+     how far down the track you are. */
   var PAGES = ["overview", "how", "finds", "cost", "why"];
-  var pagerBtns = document.querySelectorAll(".pager button");
+  var stage = document.getElementById("stage");
+  var pagerBtns = [].slice.call(document.querySelectorAll(".pager button"));
+  var railEl = document.getElementById("pagerRail");
+  var glideEl = document.getElementById("pagerGlide");
+  var current = null;
+
+  function markCurrent(name) {
+    if (name === current) return;
+    current = name;
+    pagerBtns.forEach(function (b) {
+      b.setAttribute("aria-selected", String(b.dataset.go === name));
+    });
+    glide();
+    if (history.replaceState) history.replaceState(null, "", "#" + name);
+  }
+
+  /* The indicator is one element that moves, rather than five that blink. */
+  function glide() {
+    var on = pagerBtns.filter(function (b) {
+      return b.getAttribute("aria-selected") === "true"; })[0];
+    if (!on || !glideEl) return;
+    var host = on.parentElement.getBoundingClientRect();
+    var r = on.getBoundingClientRect();
+    glideEl.style.width = r.width + "px";
+    glideEl.style.transform = "translateX(" + (r.left - host.left) + "px)";
+  }
 
   function go(name, focus) {
     if (PAGES.indexOf(name) < 0) name = PAGES[0];
-    PAGES.forEach(function (p) {
-      var el = document.getElementById("pg-" + p);
-      el.hidden = (p !== name);
-      el.classList.remove("page-enter");
-    });
-    var live = document.getElementById("pg-" + name);
-    void live.offsetWidth;               // restart the entrance
-    live.classList.add("page-enter");
-    live.scrollTop = 0;
-    marginNote(live);
-    [].forEach.call(pagerBtns, function (b) {
-      b.setAttribute("aria-selected", String(b.dataset.go === name));
-    });
-    if (history.replaceState) history.replaceState(null, "", "#" + name);
-    if (focus) live.setAttribute("tabindex", "-1"), live.focus({ preventScroll: true });
+    var el = document.getElementById("pg-" + name);
+    stage.scrollTo({ top: el.offsetTop, behavior:
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    markCurrent(name);
+    if (focus) { el.setAttribute("tabindex", "-1"); el.focus({ preventScroll: true }); }
   }
-
-  function marginNote(el) {
-    var more = el.scrollHeight > el.clientHeight + 1;
-    el.classList.toggle("has-more", more);
-    el.classList.toggle("at-end", more &&
-      el.scrollTop + el.clientHeight >= el.scrollHeight - 2);
-  }
-  [].forEach.call(document.querySelectorAll(".page"), function (el) {
-    el.addEventListener("scroll", function () { marginNote(el); }, { passive: true });
-  });
-  window.addEventListener("resize", function () {
-    var live = document.querySelector(".page:not([hidden])");
-    if (live) marginNote(live);
-  });
 
   [].forEach.call(document.querySelectorAll("[data-go]"), function (el) {
     el.addEventListener("click", function (e) {
@@ -1612,8 +1619,43 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
       go(el.dataset.go, el.tagName === "BUTTON");
     });
   });
-  go((location.hash || "").slice(1) || PAGES[0], false);
-  window.addEventListener("hashchange", function () { go((location.hash || "").slice(1), false); });
+
+  /* Whichever page covers the middle of the screen is the one you are on. */
+  var spy = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("seen");
+      markCurrent(e.target.id.replace("pg-", ""));
+    });
+  }, { root: stage, threshold: 0.01, rootMargin: "-45% 0px -45% 0px" });
+  PAGES.forEach(function (p) { spy.observe(document.getElementById("pg-" + p)); });
+
+  /* Reveal a little before the page is centred, so nothing pops in late. */
+  var wake = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) e.target.classList.add("seen"); });
+  }, { root: stage, threshold: 0.15 });
+  PAGES.forEach(function (p) { wake.observe(document.getElementById("pg-" + p)); });
+
+  function rail() {
+    if (!railEl) return;
+    var max = stage.scrollHeight - stage.clientHeight;
+    railEl.style.transform = "scaleX(" + (max > 0 ? stage.scrollTop / max : 0) + ")";
+  }
+  stage.addEventListener("scroll", rail, { passive: true });
+  window.addEventListener("resize", function () { glide(); rail(); });
+
+  var first = (location.hash || "").slice(1);
+  if (PAGES.indexOf(first) >= 0) {
+    stage.scrollTop = document.getElementById("pg-" + first).offsetTop;
+    markCurrent(first);
+  } else {
+    markCurrent(PAGES[0]);
+  }
+  document.getElementById("pg-" + (current || PAGES[0])).classList.add("seen");
+  glide(); rail();
+  window.addEventListener("hashchange", function () {
+    go((location.hash || "").slice(1), false);
+  });
 
   /* ---- The night reconciling itself ---- */
   // Amounts are numbers, not strings: they are formatted in the reader's
