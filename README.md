@@ -20,12 +20,10 @@ npm start          # http://localhost:3000
 - What gets flagged, and the repeat causes across seven nights.
 - How Closewise differs from a PMS, accounting software and doing it by hand.
 - An ROI calculator — drag outlets and hourly cost, the yearly figures move.
-- Call booking that builds a pre-filled Google Calendar invite in Berlin time.
+- Call booking, handed off to Calendly rather than inventing our own availability.
 
 ## Before it goes to a hotel
 
-- The Calendly button points at a placeholder (`calendly.com/closewise/20min`).
-  The Google Calendar button works as-is.
 - Screens show demonstration data; the figures are synthetic and labelled as
   such inside the product.
 
