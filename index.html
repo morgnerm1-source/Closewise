@@ -757,9 +757,9 @@ body{overflow:hidden}
       </div>
     </div>
     <div class="metrics">
-      <div class="metric"><span class="v">36 &#8594; 3</span><span class="k" data-t="m1"></span></div>
+      <div class="metric"><span class="v txt" data-t="m1v"></span><span class="k" data-t="m1"></span></div>
       <div class="metric"><span class="v txt" data-t="m2v"></span><span class="k" data-t="m2"></span></div>
-      <div class="metric"><span class="v" id="mBig">552,77 &euro;</span><span class="k" data-t="m3"></span></div>
+      <div class="metric"><span class="v txt" data-t="m3v"></span><span class="k" data-t="m3"></span></div>
     </div>
   </div>
 </section>
@@ -852,8 +852,8 @@ body{overflow:hidden}
               <input type="range" id="props" min="1" max="40" step="1" value="1"></div>
             <div><div class="calc-lab"><label for="closes" data-t="cCloses"></label><b id="vCloses">30</b></div>
               <input type="range" id="closes" min="1" max="31" step="1" value="30"></div>
-            <div><div class="calc-lab"><label for="price" data-t="cPrice"></label><b id="vPrice">249 &euro;</b></div>
-              <input type="range" id="price" min="0" max="600" step="1" value="249"></div>
+            <div><div class="calc-lab"><label for="price" data-t="cPrice"></label><b id="vPrice">800 &euro;</b></div>
+              <input type="range" id="price" min="0" max="1600" step="10" value="800"></div>
             <button type="button" class="btn btn-line btn-sm" id="resetCalc" data-t="cReset"></button>
           </div>
         </details>
@@ -866,9 +866,9 @@ body{overflow:hidden}
           <p class="h" id="rHours"></p>
         </div>
         <div class="tiles">
-          <div class="tile"><span class="k" data-t="tRoi"></span><span class="v" id="rRoi">3,4&times;</span><span class="n" data-t="tRoiN"></span></div>
-          <div class="tile"><span class="k" data-t="tNet"></span><span class="v" id="rNet">14.364 &euro;</span><span class="n" data-t="tNetN"></span></div>
-          <div class="tile"><span class="k" data-t="tCost"></span><span class="v" id="rCost">5.976 &euro;</span><span class="n" id="rCostN"></span></div>
+          <div class="tile"><span class="k" data-t="tRoi"></span><span class="v" id="rRoi">1,1&times;</span><span class="n" data-t="tRoiN"></span></div>
+          <div class="tile"><span class="k" data-t="tNet"></span><span class="v" id="rNet">1.140 &euro;</span><span class="n" data-t="tNetN"></span></div>
+          <div class="tile"><span class="k" data-t="tCost"></span><span class="v" id="rCost">19.200 &euro;</span><span class="n" id="rCostN"></span></div>
           <div class="tile"><span class="k" data-t="tSaved"></span><span class="v" id="rSaved">56,5</span><span class="n" id="rRed"></span></div>
         </div>
         <p class="tiny" data-t="cAssume"></p>
@@ -894,6 +894,15 @@ body{overflow:hidden}
       <div class="vsrow"><span class="who" data-t="d3w"></span>
         <span class="them" data-t="d3t"></span>
         <span class="us"><span class="arrow">&#8594;</span><span data-t="d3u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d5w"></span>
+        <span class="them" data-t="d5t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d5u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d6w"></span>
+        <span class="them" data-t="d6t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d6u"></span></span></div>
+      <div class="vsrow"><span class="who" data-t="d7w"></span>
+        <span class="them" data-t="d7t"></span>
+        <span class="us"><span class="arrow">&#8594;</span><span data-t="d7u"></span></span></div>
       <div class="vsrow"><span class="who" data-t="d4w"></span>
         <span class="them" data-t="d4t"></span>
         <span class="us"><span class="arrow">&#8594;</span><span data-t="d4u"></span></span></div>
@@ -928,8 +937,8 @@ heroH1:"Jeder Check, jede Nacht. Sie lesen nur die falschen.",
 heroSub:"Closewise macht Ihren Tagesabschluss. Es gleicht die Checks des Outlets mit Kartengerät, Zimmerkonten und der abgerechneten Kasse ab und gibt Ihrer Schichtleitung die kurze Liste.",
 demoTitle:"Abschluss · Restaurant Spreeblick · Berlin",
 demoReady:"Bereit.",demoRun:"Gleicht ab…",demoDone:"<b>{n} zu prüfen</b> · {ok} erledigt",demoOk:"erledigt",demoNo:"prüfen",
-m1:"Checks abgeglichen, für einen Menschen übrig",m2v:"Drei Quellen",m2:"Kartengerät, Zimmerkonto, Kassenlade",
-m3:"Grösster Fund der Demo-Nacht",m4:"Für den ganzen Abend",
+m1:"Keine Stichprobe. Die ganze Nacht, jede Nacht.",m2v:"Drei Quellen",m2:"Kartengerät, Zimmerkonto und die abgerechnete Kasse.",
+m3:"Gefunden, solange der Gast noch im Haus ist.",m4:"Für den ganzen Abend",
 probEye:"Das Problem",probH2:"Der Tagesabschluss frisst eine Stunde. Jede Nacht.",
 prob1:"Jemand liest jeden Check von Hand gegen den Z-Bon.",
 prob2:"Ein falscher Check versteckt sich unter dreihundert.",
@@ -987,7 +996,18 @@ tabQs:"Fragen",
 skip:"Zur Seite springen",
 tabOverview:"Überblick",
 tabWhy:"Warum wir",
-heroProof:"Läuft mit dem Z-Bon, den Sie beim Abschluss ohnehin ziehen. An der Kasse ändert sich nichts."};
+heroProof:"Läuft mit dem Z-Bon, den Sie beim Abschluss ohnehin ziehen. An der Kasse ändert sich nichts.",
+m1v:"Jeder Check",
+m3v:"Dieselbe Nacht",
+d5w:"Bargeld",
+d5t:"Gezählt, eingetippt und geglaubt.",
+d5u:"Gegen das geprüft, was die Kasse wirklich erfasst hat — vor der Abrechnung.",
+d6w:"Zimmerbuchungen",
+d6t:"Ans Gastkonto geschickt und als angekommen angenommen.",
+d6u:"Gegen das Gastkonto geprüft. Was nie gebucht wurde, wird nie fakturiert.",
+d7w:"Wiederkehrende Fehler",
+d7t:"Jede Nacht für sich betrachtet.",
+d7u:"Sieben Nächte nebeneinander, so fällt dieselbe Kasse oder derselbe Kellner auf."};
 
 T.en={
 fSev:"High",fCause:"Device",fRisk:"At risk",fTitle:"Card payment never reached the batch",fBody:"This check was closed as a card payment of {amount} on ····{last4} with authorisation {authCode}, but tonight's batch from {terminal} contains no matching capture.",fDo:"What to do",fAction:"Confirm the terminal completed the capture. Until it does, this amount has been served but not collected.",fReview:"Mark reviewed",trFlagRate:"Flag rate",trWindow:"Seven nights",exWord:"to check",exCleared:"and 33 more, all fine",
@@ -999,8 +1019,8 @@ heroH1:"Every check, every night. You only read the wrong ones.",
 heroSub:"Closewise runs your night audit. It matches the outlet's checks to the card machine, the room folios and the cash you banked, then hands your duty manager the short list.",
 demoTitle:"Close · Restaurant Spreeblick · Berlin",
 demoReady:"Ready.",demoRun:"Matching…",demoDone:"<b>{n} to check</b> · {ok} cleared",demoOk:"cleared",demoNo:"check",
-m1:"Checks matched, left for a person",m2v:"Three sources",m2:"Card machine, room folio, cash drawer",
-m3:"Biggest miss on the demo night",m4:"For the whole evening",
+m1:"No sampling. The whole night, every night.",m2v:"Three sources",m2:"Card machine, room folio and the cash you banked.",
+m3:"Found while the guest is still in house.",m4:"For the whole evening",
 probEye:"The problem",probH2:"The night audit eats an hour. Every night.",
 prob1:"Someone reads every check against the Z-report by hand.",
 prob2:"One wrong check is hiding in three hundred.",
@@ -1058,7 +1078,18 @@ tabQs:"Questions",
 skip:"Skip to the page",
 tabOverview:"Overview",
 tabWhy:"Why us",
-heroProof:"Works off the Z-report you already run at close. Nothing goes on the till."};
+heroProof:"Works off the Z-report you already run at close. Nothing goes on the till.",
+m1v:"Every check",
+m3v:"Same night",
+d5w:"Cash",
+d5t:"Counted, typed in, and taken on trust.",
+d5u:"Counted against what the till actually recorded, before anyone banks it.",
+d6w:"Room charges",
+d6t:"Sent to the folio and assumed to have landed.",
+d6u:"Checked against the folio. A charge that never posted is never invoiced.",
+d7w:"Repeat faults",
+d7t:"Every night looked at on its own.",
+d7u:"Seven nights side by side, so the same till or the same server shows up."};
 
 T.fr={
 fSev:"Élevée",fCause:"Matériel",fRisk:"En risque",fTitle:"Paiement carte absent du lot",fBody:"Cette note a été fermée en carte pour {amount} sur ····{last4} avec l'autorisation {authCode}, mais le lot de {terminal} ne contient aucune capture correspondante.",fDo:"À faire",fAction:"Vérifier que le terminal a bien finalisé la capture. Tant que ce n'est pas fait, ce montant a été servi mais pas encaissé.",fReview:"Marquer comme examinée",trFlagRate:"Taux de signalement",trWindow:"Sept nuits",exWord:"à vérifier",exCleared:"et 33 autres, toutes bonnes",
@@ -1070,8 +1101,8 @@ heroH1:"Chaque addition, chaque nuit. Vous ne lisez que les fausses.",
 heroSub:"Closewise fait votre clôture de nuit. Il rapproche les additions du point de vente du terminal, des notes de chambre et de la caisse remise, puis donne la liste courte à votre responsable.",
 demoTitle:"Clôture · Restaurant Spreeblick · Berlin",
 demoReady:"Prêt.",demoRun:"Rapprochement…",demoDone:"<b>{n} à vérifier</b> · {ok} réglées",demoOk:"réglée",demoNo:"vérifier",
-m1:"Additions rapprochées, laissées à une personne",m2v:"Trois sources",m2:"Terminal, note de chambre, caisse",
-m3:"Plus gros écart de la nuit de démonstration",m4:"Pour toute la soirée",
+m1:"Pas de sondage. Toute la nuit, chaque nuit.",m2v:"Trois sources",m2:"Terminal, note de chambre et la caisse remise.",
+m3:"Trouvé tant que le client est encore là.",m4:"Pour toute la soirée",
 probEye:"Le problème",probH2:"La clôture de nuit mange une heure. Chaque nuit.",
 prob1:"Quelqu'un lit chaque addition à la main face au ticket Z.",
 prob2:"Une addition fausse se cache dans trois cents.",
@@ -1129,7 +1160,18 @@ tabQs:"Questions",
 skip:"Aller à la page",
 tabOverview:"Aperçu",
 tabWhy:"Pourquoi nous",
-heroProof:"Fonctionne avec le ticket Z que vous sortez déjà à la clôture. Rien ne change à la caisse."};
+heroProof:"Fonctionne avec le ticket Z que vous sortez déjà à la clôture. Rien ne change à la caisse.",
+m1v:"Chaque addition",
+m3v:"La nuit même",
+d5w:"Espèces",
+d5t:"Comptées, saisies, et crues sur parole.",
+d5u:"Confrontées à ce que la caisse a réellement enregistré, avant la remise.",
+d6w:"Notes de chambre",
+d6t:"Envoyées sur la note et supposées arrivées.",
+d6u:"Vérifiées sur la note. Une imputation qui n'est jamais passée n'est jamais facturée.",
+d7w:"Fautes qui reviennent",
+d7t:"Chaque nuit regardée seule.",
+d7u:"Sept nuits côte à côte : la même caisse ou le même serveur ressort."};
 
 T.es={
 fSev:"Alta",fCause:"Dispositivo",fRisk:"En riesgo",fTitle:"El pago con tarjeta nunca llegó al lote",fBody:"Este ticket se cerró como pago con tarjeta de {amount} en ····{last4} con autorización {authCode}, pero el lote de {terminal} de esta noche no contiene ninguna captura correspondiente.",fDo:"Qué hacer",fAction:"Confirme que el terminal completó la captura. Hasta que lo haga, este importe se ha servido pero no cobrado.",fReview:"Marcar como revisado",trFlagRate:"Tasa de marcado",trWindow:"Siete noches",exWord:"por revisar",exCleared:"y 33 más, todas correctas",
@@ -1141,8 +1183,8 @@ heroH1:"Cada cuenta, cada noche. Solo lee las que están mal.",
 heroSub:"Closewise hace su cierre de noche. Cruza las cuentas del punto de venta con el datáfono, las cuentas de habitación y el efectivo entregado, y le pasa la lista corta a su encargado.",
 demoTitle:"Cierre · Restaurant Spreeblick · Berlín",
 demoReady:"Listo.",demoRun:"Cruzando…",demoDone:"<b>{n} por revisar</b> · {ok} cuadradas",demoOk:"cuadrada",demoNo:"revisar",
-m1:"Cuentas cruzadas, dejadas a una persona",m2v:"Tres fuentes",m2:"Datáfono, cuenta de habitación, caja",
-m3:"El mayor hallazgo de la noche de demostración",m4:"Para toda la noche",
+m1:"Sin muestreo. Toda la noche, cada noche.",m2v:"Tres fuentes",m2:"Datáfono, cuenta de habitación y el efectivo entregado.",
+m3:"Encontrado mientras el cliente sigue alojado.",m4:"Para toda la noche",
 probEye:"El problema",probH2:"El cierre de noche se come una hora. Cada noche.",
 prob1:"Alguien lee cada cuenta a mano contra el informe Z.",
 prob2:"Una cuenta mal se esconde entre trescientas.",
@@ -1200,7 +1242,18 @@ tabQs:"Preguntas",
 skip:"Ir a la página",
 tabOverview:"Resumen",
 tabWhy:"Por qué nosotros",
-heroProof:"Funciona con el informe Z que ya saca al cerrar. En la caja no se toca nada."};
+heroProof:"Funciona con el informe Z que ya saca al cerrar. En la caja no se toca nada.",
+m1v:"Cada cuenta",
+m3v:"Esa misma noche",
+d5w:"Efectivo",
+d5t:"Contado, tecleado y dado por bueno.",
+d5u:"Contrastado con lo que la caja registró de verdad, antes de entregarlo.",
+d6w:"Cargos a habitación",
+d6t:"Enviados a la cuenta y dados por llegados.",
+d6u:"Comprobados en la cuenta. Un cargo que nunca se contabilizó nunca se factura.",
+d7w:"Fallos que se repiten",
+d7t:"Cada noche mirada por separado.",
+d7u:"Siete noches una al lado de otra: sale la misma caja o el mismo camarero."};
 
 T.it={
 fSev:"Alta",fCause:"Dispositivo",fRisk:"A rischio",fTitle:"Pagamento con carta assente dal lotto",fBody:"Questo conto è stato chiuso come pagamento con carta di {amount} su ····{last4} con autorizzazione {authCode}, ma il lotto di {terminal} non contiene alcuna acquisizione corrispondente.",fDo:"Da fare",fAction:"Verifichi che il terminale abbia completato l'acquisizione. Fino ad allora l'importo è stato servito ma non incassato.",fReview:"Segna come esaminata",trFlagRate:"Tasso di segnalazione",trWindow:"Sette serate",exWord:"da vedere",exCleared:"e altri 33, tutti a posto",
@@ -1212,8 +1265,8 @@ heroH1:"Ogni conto, ogni notte. Legge solo quelli sbagliati.",
 heroSub:"Closewise fa la sua chiusura notturna. Confronta i conti del punto vendita con il POS, i conti camera e il contante versato, poi passa al responsabile l'elenco breve.",
 demoTitle:"Chiusura · Restaurant Spreeblick · Berlino",
 demoReady:"Pronto.",demoRun:"Confronto…",demoDone:"<b>{n} da vedere</b> · {ok} a posto",demoOk:"a posto",demoNo:"da vedere",
-m1:"Conti confrontati, lasciati a una persona",m2v:"Tre fonti",m2:"POS, conto camera, cassetto contanti",
-m3:"Lo scarto più grande della notte dimostrativa",m4:"Per l'intera serata",
+m1:"Nessun campione. Tutta la notte, ogni notte.",m2v:"Tre fonti",m2:"POS, conto camera e il contante versato.",
+m3:"Trovato mentre l'ospite è ancora in casa.",m4:"Per l'intera serata",
 probEye:"Il problema",probH2:"La chiusura notturna si mangia un'ora. Ogni notte.",
 prob1:"Qualcuno legge ogni conto a mano contro lo scontrino Z.",
 prob2:"Un conto sbagliato si nasconde dentro trecento.",
@@ -1271,7 +1324,18 @@ tabQs:"Domande",
 skip:"Vai alla pagina",
 tabOverview:"Panoramica",
 tabWhy:"Perché noi",
-heroProof:"Funziona con lo scontrino Z che già stampa alla chiusura. In cassa non si tocca nulla."};
+heroProof:"Funziona con lo scontrino Z che già stampa alla chiusura. In cassa non si tocca nulla.",
+m1v:"Ogni conto",
+m3v:"La notte stessa",
+d5w:"Contanti",
+d5t:"Contati, digitati e presi per buoni.",
+d5u:"Confrontati con ciò che la cassa ha davvero registrato, prima del versamento.",
+d6w:"Addebiti in camera",
+d6t:"Mandati al conto e dati per arrivati.",
+d6u:"Verificati sul conto. Un addebito mai registrato non viene mai fatturato.",
+d7w:"Errori che tornano",
+d7t:"Ogni notte guardata da sola.",
+d7u:"Sette notti affiancate: emerge la stessa cassa o lo stesso cameriere."};
 
 T.nl={
 fSev:"Hoog",fCause:"Apparaat",fRisk:"Risico",fTitle:"Pinbetaling ontbreekt in de batch",fBody:"Deze bon is afgesloten als pinbetaling van {amount} op ····{last4} met autorisatie {authCode}, maar de batch van {terminal} bevat vannacht geen bijbehorende vastlegging.",fDo:"Te doen",fAction:"Controleer of de terminal de vastlegging heeft afgerond. Tot die tijd is dit bedrag geleverd maar niet geïnd.",fReview:"Als bekeken markeren",trFlagRate:"Markeringspercentage",trWindow:"Zeven nachten",exWord:"na te kijken",exCleared:"en nog 33, allemaal in orde",
@@ -1283,8 +1347,8 @@ heroH1:"Elke rekening, elke nacht. U leest alleen de foute.",
 heroSub:"Closewise draait uw nachtafsluiting. Het legt de rekeningen van het outlet naast de pinautomaat, de kamerrekeningen en het afgestorte geld, en geeft uw dienstdoend manager de korte lijst.",
 demoTitle:"Afsluiting · Restaurant Spreeblick · Berlijn",
 demoReady:"Gereed.",demoRun:"Naast elkaar leggen…",demoDone:"<b>{n} na te kijken</b> · {ok} in orde",demoOk:"in orde",demoNo:"nakijken",
-m1:"Rekeningen gematcht, over voor een mens",m2v:"Drie bronnen",m2:"Pinautomaat, kamerrekening, kassalade",
-m3:"Grootste misser in de demonacht",m4:"Voor de hele avond",
+m1:"Geen steekproef. De hele nacht, elke nacht.",m2v:"Drie bronnen",m2:"Pinautomaat, kamerrekening en het afgestorte geld.",
+m3:"Gevonden terwijl de gast er nog is.",m4:"Voor de hele avond",
 probEye:"Het probleem",probH2:"De nachtafsluiting kost een uur. Elke nacht.",
 prob1:"Iemand leest elke rekening met de hand naast de Z-bon.",
 prob2:"Eén foute rekening zit verstopt tussen driehonderd.",
@@ -1342,7 +1406,18 @@ tabQs:"Vragen",
 skip:"Ga naar de pagina",
 tabOverview:"Overzicht",
 tabWhy:"Waarom wij",
-heroProof:"Werkt op de Z-bon die u bij het afsluiten toch al draait. Aan de kassa verandert niets."};
+heroProof:"Werkt op de Z-bon die u bij het afsluiten toch al draait. Aan de kassa verandert niets.",
+m1v:"Elke rekening",
+m3v:"Dezelfde nacht",
+d5w:"Contant",
+d5t:"Geteld, ingetikt en op vertrouwen aangenomen.",
+d5u:"Getoetst aan wat de kassa werkelijk registreerde, voor het afstorten.",
+d6w:"Kamerrekeningen",
+d6t:"Naar de gastrekening gestuurd en aangenomen dat het aankwam.",
+d6u:"Getoetst aan de gastrekening. Wat nooit geboekt is, wordt nooit gefactureerd.",
+d7w:"Terugkerende fouten",
+d7t:"Elke nacht apart bekeken.",
+d7u:"Zeven nachten naast elkaar, zo valt dezelfde kassa of ober op."};
 
 T.pl={
 fSev:"Wysoka",fCause:"Urządzenie",fRisk:"Zagrożone",fTitle:"Płatność kartą nie trafiła do partii",fBody:"Rachunek zamknięto jako płatność kartą na {amount} na ····{last4} z autoryzacją {authCode}, ale dzisiejsza partia z {terminal} nie zawiera odpowiadającej rejestracji.",fDo:"Co zrobić",fAction:"Sprawdź, czy terminal dokończył rejestrację. Do tego czasu kwota została wydana, ale nie zainkasowana.",fReview:"Oznacz jako sprawdzone",trFlagRate:"Odsetek oznaczeń",trWindow:"Siedem nocy",exWord:"do sprawdzenia",exCleared:"i 33 kolejne, wszystkie w porządku",
@@ -1354,8 +1429,8 @@ heroH1:"Każdy rachunek, każdej nocy. Czytasz tylko te błędne.",
 heroSub:"Closewise robi twoje nocne zamknięcie. Zestawia rachunki punktu z terminalem, rachunkami pokoi i odprowadzoną gotówką, a kierownikowi zmiany podaje krótką listę.",
 demoTitle:"Zamknięcie · Restaurant Spreeblick · Berlin",
 demoReady:"Gotowe.",demoRun:"Zestawianie…",demoDone:"<b>{n} do sprawdzenia</b> · {ok} zgodnych",demoOk:"zgodny",demoNo:"sprawdź",
-m1:"Rachunków zestawionych, zostawionych człowiekowi",m2v:"Trzy źródła",m2:"Terminal, rachunek pokoju, szuflada kasowa",
-m3:"Największy błąd nocy demonstracyjnej",m4:"Na cały wieczór",
+m1:"Bez próbkowania. Cała noc, każdej nocy.",m2v:"Trzy źródła",m2:"Terminal, rachunek pokoju i odprowadzona gotówka.",
+m3:"Znalezione, póki gość jeszcze jest w hotelu.",m4:"Na cały wieczór",
 probEye:"Problem",probH2:"Nocne zamknięcie zjada godzinę. Każdej nocy.",
 prob1:"Ktoś ręcznie czyta każdy rachunek obok raportu Z.",
 prob2:"Jeden błędny rachunek chowa się wśród trzystu.",
@@ -1413,7 +1488,18 @@ tabQs:"Pytania",
 skip:"Przejdź do strony",
 tabOverview:"Przegląd",
 tabWhy:"Dlaczego my",
-heroProof:"Działa na raporcie Z, który i tak drukujesz przy zamknięciu. Przy kasie nic się nie zmienia."};
+heroProof:"Działa na raporcie Z, który i tak drukujesz przy zamknięciu. Przy kasie nic się nie zmienia.",
+m1v:"Każdy rachunek",
+m3v:"Tej samej nocy",
+d5w:"Gotówka",
+d5t:"Policzona, wpisana i przyjęta na wiarę.",
+d5u:"Zestawiona z tym, co kasa naprawdę zarejestrowała, przed odprowadzeniem.",
+d6w:"Obciążenia pokoju",
+d6t:"Wysłane na rachunek i uznane za zaksięgowane.",
+d6u:"Sprawdzone na rachunku. Co nigdy nie zostało zaksięgowane, nigdy nie trafi na fakturę.",
+d7w:"Powtarzające się błędy",
+d7t:"Każda noc oglądana osobno.",
+d7u:"Siedem nocy obok siebie — widać tę samą kasę albo tego samego kelnera."};
 
 T.ar={
 fSev:"عالية",fCause:"جهاز",fRisk:"في خطر",fTitle:"الدفع بالبطاقة لم يصل إلى الدفعة",fBody:"أُقفل هذا الإيصال كدفعة بالبطاقة بمبلغ {amount} على ····{last4} بالتفويض {authCode}، لكن دفعة الليلة من {terminal} لا تحتوي على تسجيل مطابق.",fDo:"ما ينبغي فعله",fAction:"تأكّد من أن الجهاز أتمّ التسجيل. وإلى أن يحدث ذلك يكون المبلغ قد قُدّم ولم يُحصّل.",fReview:"وسمها كمُراجَعة",trFlagRate:"نسبة التعليم",trWindow:"سبع ليالٍ",exWord:"للمراجعة",exCleared:"و33 غيرها، كلها سليمة",
@@ -1425,8 +1511,8 @@ heroH1:"كل إيصال، كل ليلة. ولا تقرأ إلا الخاطئ م�
 heroSub:"كلوزوايز ينفّذ إقفال ليلتكم. يقابل إيصالات المنفذ بجهاز البطاقات وحسابات الغرف والنقد المورَّد، ثم يسلّم مدير الوردية الجدول القصير.",
 demoTitle:"الإقفال · مطعم شبريبليك · برلين",
 demoReady:"جاهز.",demoRun:"جارٍ المقابلة…",demoDone:"<b>{n} للمراجعة</b> · {ok} سليمة",demoOk:"سليم",demoNo:"راجع",
-m1:"إيصالات قوبلت، وبقيت لإنسان",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات، حساب الغرفة، درج النقد",
-m3:"أكبر فارق في ليلة العرض",m4:"للمساء كله",
+m1:"بلا عيّنات. الليلة كلها، كل ليلة.",m2v:"ثلاثة مصادر",m2:"جهاز البطاقات وحساب الغرفة والنقد المورَّد.",
+m3:"يُكتشف والنزيل ما زال في الفندق.",m4:"للمساء كله",
 probEye:"المشكلة",probH2:"إقفال الليل يأكل ساعة. كل ليلة.",
 prob1:"شخص يقرأ كل إيصال يدويًا مقابل تقرير Z.",
 prob2:"إيصال واحد خاطئ مختبئ بين ثلاثمئة.",
@@ -1484,7 +1570,18 @@ tabQs:"أسئلة",
 skip:"انتقل إلى الصفحة",
 tabOverview:"نظرة عامة",
 tabWhy:"لماذا نحن",
-heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عند الإقفال. ولا يُمَسّ شيء في الكاشير."};
+heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عند الإقفال. ولا يُمَسّ شيء في الكاشير.",
+m1v:"كل إيصال",
+m3v:"الليلة نفسها",
+d5w:"النقد",
+d5t:"يُعدّ ويُدخَل ويُصدَّق.",
+d5u:"يُقابَل بما سجّله الصندوق فعلاً، قبل التوريد.",
+d6w:"قيود الغرف",
+d6t:"تُرسَل إلى الحساب ويُفترض وصولها.",
+d6u:"تُراجَع على الحساب. وما لم يُقيَّد قط لا يُفوتَر قط.",
+d7w:"الأخطاء المتكررة",
+d7t:"كل ليلة يُنظر إليها وحدها.",
+d7u:"سبع ليالٍ جنبًا إلى جنب، فيظهر الصندوق نفسه أو النادل نفسه."};
 
 </script>
 <script>
@@ -1544,7 +1641,6 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
 
     paintSurfaces();
     // Figures that live outside the dictionary but follow its locale.
-    setTxt("mBig", money2(552.77));
     paintDemo();
     calc();
   }
@@ -1742,7 +1838,7 @@ heroProof:"يعمل على تقرير Z الذي تسحبونه أصلاً عن�
 
   /* ---- Value model ---- */
   var OVERHEAD = 2.5, PER_EXC = 1.5;
-  var DEF = { outlets:2, wage:30, manual:65, exc:4, props:1, closes:30, price:249 };
+  var DEF = { outlets:2, wage:30, manual:65, exc:4, props:1, closes:30, price:800 };
   var F = {}, OUT = {};
   ["outlets","wage","manual","exc","props","closes","price"].forEach(function (k) {
     F[k] = document.getElementById(k);
