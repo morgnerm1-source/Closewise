@@ -31,6 +31,28 @@ eingebauten Bildabschnitten kam.
 
 Deutsch — in Antworten, in Code-Kommentaren, in Commit-Nachrichten.
 
+## Git — der Kontrollmechanismus
+
+Arbeit läuft auf dem Zweig `aman-redesign`, nicht auf `main`. `main` bleibt
+der letzte bekannte, unversionierte Stand — der Rückweg, falls das Redesign
+irgendwo falsch abbiegt.
+
+**Nach jeder abgeschlossenen, vom Nutzer angestoßenen Änderung: committen.**
+Nicht nach jeder einzelnen Edit-Anweisung, aber nach jedem Punkt, den der
+Nutzer als erledigt ansehen würde — eine neue Sektion, ein Bugfix, ein
+Palettenwechsel. Das ist der Kontrollmechanismus: der Nutzer sieht per
+`git diff` oder `git log -p`, was sich geändert hat, ohne dass vorher
+gefragt werden muss. Kleine Schrittfolgen (CSS anpassen, Screenshot prüfen,
+nochmal anpassen) gehören in einen gemeinsamen Commit, nicht in viele.
+
+Committen und Branch-Arbeit brauchen keine Rückfrage (siehe „Arbeitsweise"
+oben) — aber sie sollen tatsächlich passieren, nicht nur erlaubt sein.
+
+`git push` nach `origin` schlägt vermutlich fehl — das Repo gehört
+`fynnkz`, der lokale Git-Nutzer (`morgnerm1-source`) hat dort keine
+bestätigten Schreibrechte. Lokale Commits lösen das Kontrollproblem auch
+ohne Push.
+
 ## Dateien
 
 | Datei | Rolle |
