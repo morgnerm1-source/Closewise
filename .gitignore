@@ -3,3 +3,7 @@ node_modules
 .env*
 preview.html
 preview-server.js
+
+# Generierte Kopie aus sync.sh — Quelle ist design.html/stil.css/seite.js,
+# dieser Ordner würde jeden Diff verdoppeln.
+closewise/

@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ablauf — Closewise</title>
+<meta name="description" content="Wie der Nachtabschluss mit Closewise abläuft: Belege einsammeln, gegen drei Quellen prüfen, die kurze Liste übergeben.">
+<!-- Früh und synchron: die Startzustände der Animation hängen daran. -->
+<script>document.documentElement.classList.add("js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+
+<!-- Die Wortmarke steht einmal hier und wird überall per <use> geholt. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cw" viewBox="0 0 1316 219">
+    <path d="M379.186 151.2C391.986 151.2 402.586 144.8 407.786 133L431.486 145C417.986 173.6 382.586 183 354.086 171.3C328.086 160.626 321.286 145.8 318.786 124.6C316.286 103.4 330.286 73.2 355.486 63.4C371.086 57.4 388.086 57.7 403.686 63.7C415.886 69 425.586 77.5 431.586 90L407.986 101.9C402.886 91.8 393.786 85.3 382.386 84.2C363.386 82.4 347.186 95.5 345.586 114.6C343.986 133.7 358.686 151 379.286 151.2H379.186Z"/>
+    <path d="M471.586 14.8H445.086V173.5H471.586V14.8Z"/>
+    <path d="M91.2861 124L133.986 124.6L110.664 159.583C109.366 161.53 107.18 162.7 104.84 162.7H46.6861C29.6861 162.8 13.9861 155.8 5.38609 140.8C-1.91391 128 -2.21391 110.8 7.08609 98.8L66.3861 22.3C76.2861 9.5 91.0861 0 107.786 0H182.086C196.086 0 205.486 16.2 195.486 30.4L179.386 53.2C176.786 56.9 172.186 57.7 167.786 57.7L91.1861 58.3C71.7861 58.4 58.6861 77 61.0861 95.5C63.6861 110.6 75.4861 122.8 91.3861 124H91.2861Z"/>
+    <path d="M87.5 196.794L105.1 170.894C106.9 168.194 110.3 166.694 113.7 166.694H183.5C196.4 166.894 206.5 158.694 206.7 145.994C206.9 133.294 196.5 124.594 183.6 124.594H134L171 69.9937C173.1 66.8937 178 65.6937 181.5 65.6937L217.5 65.8937C227.1 65.8937 236.1 69.4937 243.8 75.3937C260.4 88.0937 266.6 111.794 255 130.394L211.4 193.294C201.9 207.094 187.9 218.494 170.5 218.594L95.6 218.794C90.7 218.794 87 213.794 85.8 210.694C84 205.894 84.5 201.294 87.5 196.894V196.794Z"/>
+    <path d="M1035.29 61.7L1003.39 152.5L996.186 173.4L968.786 173.3L942.886 100.3L916.686 173.3L889.486 173.4L851.386 61.9L880.186 61.7L904.486 140.1L931.686 61.8L954.486 61.6L981.586 140.5L1006.19 61.8L1035.29 61.7Z"/>
+    <path d="M666.886 175.9C649.086 175.2 633.786 167.3 623.186 153L641.186 137.1C650.886 150.7 667.286 156.7 682.286 151.6C687.786 149.2 691.886 144.2 689.386 138.5C686.886 132.8 683.486 132.5 679.786 131.3L656.986 124.1C648.186 121.3 639.586 116.8 634.386 108.8C623.986 92.9 630.886 72.1 647.986 64.1C668.886 54.2 700.886 58.2 714.086 78.5L696.286 94.3C688.586 82.9 674.686 78.8 662.186 83.3C658.486 85.1 656.186 87.7 655.986 91.5C655.786 95.3 658.086 99 662.086 100.3L690.186 110.1C697.986 112.8 705.886 116.6 710.886 123.4C722.286 139.2 715.986 160.9 698.986 170C681.986 179.1 678.786 176.8 667.086 176L666.886 175.9Z"/>
+    <path d="M1184.19 149.5C1177.19 175.2 1144.89 180.7 1119.89 173C1108.39 169.4 1099.09 162.4 1092.39 152.9L1110.39 137.2C1119.79 150.7 1136.79 156.9 1151.99 151.6C1156.19 149.5 1159.19 146.3 1159.19 142.1C1159.19 137.9 1156.39 134.2 1152.09 132.7L1121.59 122.3C1113.79 119.6 1106.49 114.8 1102.39 107.5C1093.19 91.2 1100.59 71.3 1117.59 63.9C1129.89 58.5 1143.09 57.7 1156.29 60.6C1166.89 63 1176.39 68.5 1182.89 77.9L1165.49 93.9C1157.49 82.5 1143.19 78.2 1130.99 83.1C1127.59 85.2 1125.19 87.7 1124.99 91.1C1124.79 94.5 1126.59 98.4 1130.09 99.6L1154.29 108.2C1160.29 110.3 1165.69 112.3 1170.99 115.6C1182.59 122.8 1187.79 136 1184.09 149.4L1184.19 149.5Z"/>
+    <path d="M1049.99 61.5V173.5H1076.99V61.5H1049.99Z"/>
+    <path d="M1064.19 47.6C1073.24 47.6 1080.59 40.2575 1080.59 31.2C1080.59 22.1425 1073.24 14.8 1064.19 14.8C1055.13 14.8 1047.79 22.1425 1047.79 31.2C1047.79 40.2575 1055.13 47.6 1064.19 47.6Z"/>
+    <path d="M575.686 172.2C556.886 178.9 536.586 177 519.786 167.4C502.986 157.8 491.086 138.8 490.486 119C489.886 98.5 500.486 79.3 518.386 68.5C537.986 56.7 562.586 55.8 582.986 66.1C603.386 76.4 612.886 92.4 614.386 112.6C616.486 139.2 601.286 163.2 575.586 172.3L575.686 172.2ZM552.686 151.9C571.629 151.9 586.986 136.588 586.986 117.7C586.986 98.8119 571.629 83.5 552.686 83.5C533.743 83.5 518.386 98.8119 518.386 117.7C518.386 136.588 533.743 151.9 552.686 151.9Z"/>
+    <path d="M797.286 151.8C807.386 150.8 815.786 146.4 821.786 137.9L842.086 152.6C825.586 175.4 793.086 180.9 767.486 172.3C741.886 163.7 729.586 143 728.786 118.6C727.986 93.9 741.986 72.1 765.086 63.3C780.686 57.4 797.786 57.4 813.286 63.6C837.986 73.6 848.986 100.2 845.486 126.8L756.986 127.1C760.686 145.8 778.686 154.5 797.186 151.8H797.286ZM756.686 107.2L819.686 107H819.786C817.186 90.8 804.986 82 790.486 81.7C774.086 80.9 760.186 91.1 756.686 107.2Z"/>
+    <path d="M1279.79 147.7C1284.19 145 1287.19 142.1 1290.69 137.9L1310.79 152.7C1293.79 175.8 1260.79 181.3 1234.99 171.9C1209.19 162.5 1199.89 145.3 1197.79 122.8C1195.29 96.9 1209.29 72.5 1233.79 63.4C1249.59 57.5 1266.59 57.4 1282.09 63.8C1306.59 74 1318.09 100.6 1314.39 127L1225.79 127.2C1227.59 136.6 1232.89 143.7 1240.99 147.9C1253.09 154.2 1267.09 153.6 1279.79 147.7ZM1225.49 107.1L1288.09 107.3L1287.99 107.2C1286.29 92.6 1276.39 82.5 1260.09 81.5C1243.79 80.5 1228.99 90 1225.49 107.1Z"/>
+  </symbol>
+</svg>
+
+<!-- ══════════ Hintergrund ══════════ -->
+<div class="bg" aria-hidden="true">
+  <span class="bg-wash a"></span>
+  <span class="bg-wash b"></span>
+  <span class="bg-wash c"></span>
+  <span class="bg-wash d"></span>
+</div>
+
+<!-- ══════════ Navigation ══════════ -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="design.html">
+      <svg class="logo" viewBox="0 0 1316 219" role="img" aria-label="closewise" fill="currentColor"><use href="#cw"/></svg>
+      <span class="sub">Nachtabschluss</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="ablauf.html" aria-current="page">Ablauf</a>
+      <a href="design.html#finds">Prüfung</a>
+      <a href="design.html#numbers">Zahlen</a>
+      <a href="design.html#why">Vergleich</a>
+      <a href="design.html#contact">Kontakt</a>
+    </nav>
+
+    <div class="nav-right">
+      <a class="btn btn-line btn-sm" href="#">Anmelden</a>
+      <a class="btn btn-solid btn-sm" href="https://calendly.com/besher-asfari-code/new-meeting?month=2026-09" target="_blank" rel="noopener">Termin buchen</a>
+      <button type="button" class="navtoggle" id="navToggle"
+              aria-expanded="false" aria-controls="navLinks" aria-label="Menü">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <i class="fortschritt" id="fortschritt" aria-hidden="true"></i>
+</header>
+
+
+<!-- ══════════ Kopfbereich der Seite ══════════ -->
+<section class="hero" id="top">
+  <div class="wrap hero-in" data-stagger="90">
+    <span class="label">Ablauf</span>
+    <h1 class="display" data-anim="lines">
+      <span class="line"><span>Drei Schritte,</span></span>
+      <span class="line"><span class="soft">jede Nacht dieselben.</span></span>
+    </h1>
+    <p class="lede">
+      Closewise läuft an, wenn das letzte Outlet geschlossen hat. Es prüft den
+      Abend gegen drei Quellen und legt Ihrer Schichtleitung am Ende eine kurze
+      Liste hin. Was hier steht, passiert ohne Ihr Zutun.
+    </p>
+    <div class="hero-acts">
+      <a class="btn btn-solid btn-lg" href="https://calendly.com/besher-asfari-code/new-meeting?month=2026-09" target="_blank" rel="noopener">Termin buchen</a>
+      <a class="btn btn-line btn-lg" href="#schritte">Die drei Schritte</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ Die drei Schritte ══════════ -->
+<section class="sec" id="schritte">
+  <div class="wrap">
+
+    <div class="split" style="margin-bottom:clamp(48px,7vw,96px)">
+      <div class="stack" data-stagger>
+        <span class="label">Schritt eins</span>
+        <h2 class="h2">Belege einsammeln.</h2>
+        <p class="lede">
+          Sobald geschlossen ist, zieht Closewise die Belege des Abends zusammen:
+          aus dem Kassensystem jedes Outlets, aus dem Kartenterminal, aus den
+          Gästekonten. Drei Quellen, die im Alltag selten von allein
+          zueinanderfinden.
+        </p>
+        <ul class="ticks" style="margin-top:6px">
+          <li><span class="m">·</span><span>Restaurant, Bar, Roomservice, Spa — jedes Outlet einzeln.</span></li>
+          <li><span class="m">·</span><span>Kartenzahlungen inklusive Trinkgeld und Storno.</span></li>
+          <li><span class="m">·</span><span>Zimmerbuchungen mit dem Gästekonto, auf dem sie gelandet sind.</span></li>
+        </ul>
+      </div>
+      <div class="win flat" data-anim="rise">
+        <aside class="side">
+          <div class="grp">
+            <span class="cap">Quellen</span>
+            <span class="it on"><i></i>Kassensysteme</span>
+            <span class="it"><i></i>Kartenterminal</span>
+            <span class="it"><i></i>Gästekonten</span>
+            <span class="it"><i></i>Kassenzählung</span>
+          </div>
+        </aside>
+        <div class="main">
+          <div class="head">
+            <h4>Eingang · 6. September</h4>
+            <div class="pills"><span class="pill">23:47 Uhr</span></div>
+          </div>
+          <div class="tile" style="flex:1">
+            <div class="rows">
+              <div class="r"><span class="t">Restaurant</span><span class="a">6 Belege</span></div>
+              <div class="r"><span class="t">Bar</span><span class="a">5 Belege</span></div>
+              <div class="r"><span class="t">Spa</span><span class="a">2 Belege</span></div>
+              <div class="r"><span class="t">Roomservice</span><span class="a">1 Beleg</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split flip" style="margin-bottom:clamp(48px,7vw,96px)">
+      <div class="stack" data-stagger>
+        <span class="label">Schritt zwei</span>
+        <h2 class="h2">Gegeneinander prüfen.</h2>
+        <p class="lede">
+          Jeder Beleg wird gegen die übrigen Quellen gehalten. Stimmt der Betrag
+          auf dem Terminal mit dem auf dem Bon? Ist die Zimmerbuchung auf dem
+          richtigen Gästekonto gelandet? Passt die Kassenzählung zu dem, was das
+          System erwartet?
+        </p>
+        <p class="lede">
+          Was aufgeht, wird abgehakt und verschwindet aus der Liste. Nur was
+          auseinanderläuft, bleibt stehen.
+        </p>
+      </div>
+      <div class="win flat" data-anim="rise">
+        <aside class="side">
+          <div class="grp">
+            <span class="cap">Prüfung</span>
+            <span class="it on"><i></i>Läuft</span>
+            <span class="it"><i></i>Geklärt · 11</span>
+            <span class="it"><i></i>Offen · 3</span>
+          </div>
+        </aside>
+        <div class="main">
+          <div class="head">
+            <h4>Abgleich</h4>
+            <div class="pills"><span class="pill solid">11 / 14</span></div>
+          </div>
+          <div class="tile" style="flex:1">
+            <div class="rows live">
+              <div class="r"><span class="t">Restaurant · Tisch 14</span><span class="a"><i class="ok" style="--i:0"></i>248,50 €</span></div>
+              <div class="r"><span class="t">Bar · Rechnung 2210</span><span class="a"><i class="ok" style="--i:1"></i>86,00 €</span></div>
+              <div class="r"><span class="t">Spa · Anwendung</span><span class="a"><i class="ok" style="--i:2"></i>140,00 €</span></div>
+              <div class="r"><span class="t">Roomservice · Zimmer 412</span><span class="a"><i class="ok" style="--i:3"></i>34,00 €</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="stack" data-stagger>
+        <span class="label">Schritt drei</span>
+        <h2 class="h2">Kurze Liste übergeben.</h2>
+        <p class="lede">
+          Übrig bleibt, was nicht aufgeht. Zu jedem Punkt steht da, welche Quellen
+          auseinanderlaufen, um welchen Betrag es geht und was die wahrscheinliche
+          Ursache ist. Ihre Schichtleitung entscheidet — sie sucht nicht mehr.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+          <a class="btn btn-solid" href="design.html#finds">Was auffällt</a>
+        </div>
+      </div>
+      <div class="win flat" data-anim="rise">
+        <aside class="side">
+          <div class="grp">
+            <span class="cap">Übergabe</span>
+            <span class="it on"><i></i>Offen · 3</span>
+            <span class="it"><i></i>Wiederkehrend</span>
+          </div>
+        </aside>
+        <div class="main">
+          <div class="head">
+            <h4>Was nicht aufgeht</h4>
+            <div class="pills"><span class="pill">Nacht 06.09.</span></div>
+          </div>
+          <div class="tile" style="flex:1">
+            <div class="rows">
+              <div class="r"><span class="t">Bar · Kartenzahlung ohne Beleg</span><span class="st flag">offen</span></div>
+              <div class="r"><span class="t">Restaurant · Storno nach Abschluss</span><span class="st flag">offen</span></div>
+              <div class="r"><span class="t">Spa · falsches Gästekonto</span><span class="st flag">offen</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ Was für die Schichtleitung bleibt ══════════ -->
+<section class="sec tinted">
+  <div class="wrap">
+    <div class="stack" data-stagger style="margin-bottom:clamp(22px,3vw,36px)">
+      <span class="label">Was bleibt</span>
+      <h2 class="h2">Aus einer Stunde werden Minuten.</h2>
+      <p class="lede">
+        Die Schichtleitung liest die kurze Liste und klärt, was zu klären ist.
+        Das Suchen entfällt.
+      </p>
+    </div>
+    <div class="cards" data-anim="none" data-stagger="70">
+      <article class="card">
+        <span class="step">Heute, von Hand</span>
+        <h3 class="h3">65 Minuten je Outlet</h3>
+        <p class="body">Belege sortieren, Beträge vergleichen, Abweichungen suchen.</p>
+      </article>
+      <article class="card">
+        <span class="step">Mit Closewise</span>
+        <h3 class="h3">8,5 Minuten je Outlet</h3>
+        <p class="body">Öffnen, drei Ausnahmen ansehen, abzeichnen.</p>
+      </article>
+      <article class="card">
+        <span class="step">Und dann</span>
+        <h3 class="h3">Der Abend ist zu</h3>
+        <p class="body">Der Export läuft wie bisher, nur mit geprüften Zahlen.</p>
+      </article>
+    </div>
+    <p class="calc-assume">
+      Gerechnet mit 2,5 Minuten fürs Öffnen und 1,5 Minuten je Ausnahme bei vier
+      Ausnahmen in einer normalen Nacht. Eine Schätzung, keine Zusage.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ Abschluss ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="dark">
+      <div class="dark-in cta" data-stagger>
+        <h2 class="h2" style="max-width:16ch">Einmal zusehen, dann wissen Sie es.</h2>
+        <p class="lede">Zwanzig Minuten an einem echten Abschluss aus Ihrem Haus.</p>
+        <a class="btn btn-solid btn-lg" href="https://calendly.com/besher-asfari-code/new-meeting?month=2026-09" target="_blank" rel="noopener">Termin buchen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ Fuß ══════════ -->
+<footer class="site-foot">
+  <div class="wrap-wide">
+
+    <div class="foot-cols" data-stagger="70">
+      <div class="foot-col">
+        <h4>Produkt</h4>
+        <ul>
+          <li><a href="#">Nachtabschluss</a></li>
+          <li><a href="#">Belegprüfung</a></li>
+          <li><a href="#">Abweichungen</a></li>
+          <li><a href="#">Kassenzählung</a></li>
+          <li><a href="#">Auswertung</a></li>
+          <li><a href="#">Berichte</a></li>
+          <li><a href="#">Schnittstellen</a></li>
+          <li><a href="#">Mobil</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Für wen</h4>
+        <ul>
+          <li><a href="#">Stadthotels</a></li>
+          <li><a href="#">Ferienhotels</a></li>
+          <li><a href="#">Restaurant &amp; Bar</a></li>
+          <li><a href="#">Spa</a></li>
+          <li><a href="#">Hotelgruppen</a></li>
+          <li><a href="#">Einzelhäuser</a></li>
+          <li><a href="#">Schichtleitung</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Sicherheit</h4>
+        <ul>
+          <li><a href="#">DSGVO</a></li>
+          <li><a href="#">Auftragsverarbeitung</a></li>
+          <li><a href="#">Serverstandort Deutschland</a></li>
+          <li><a href="#">Vertrauenszentrum</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4>Unternehmen</h4>
+        <ul>
+          <li><a href="#">Über uns</a></li>
+          <li><a href="#">Karriere</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Presse</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-mark">
+      <div class="hold" data-anim="mask">
+        <svg viewBox="0 0 1316 219" role="img" aria-label="closewise" fill="currentColor">
+          <use href="#cw"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="foot-bar">
+      <nav>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+        <a href="#">Cookie-Einstellungen</a>
+      </nav>
+      <nav>
+        <a href="#">Preise</a>
+        <a href="#">Neuigkeiten</a>
+      </nav>
+      <nav>
+        <a href="#">LinkedIn</a>
+        <a href="#">X</a>
+      </nav>
+      <span class="copy">© 2026 Closewise Hospitality · Berlin</span>
+    </div>
+
+  </div>
+</footer>
+
+<script src="seite.js" defer></script>
+</body>
+</html>
