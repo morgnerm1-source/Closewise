@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/", "destination": "/design.html" }
+  "redirects": [
+    { "source": "/", "destination": "/design", "permanent": false }
   ]
 }
