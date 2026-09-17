@@ -17,7 +17,7 @@ cp design.html "$ZIEL/index.html"
 cp design.html "$ZIEL/design.html"
 cp ablauf.html "$ZIEL/"
 cp stil.css seite.js "$ZIEL/"
-cp textur-dunkel.png textur-hell.png "$ZIEL/"
+cp textur-dunkel.png textur-hell.png flaechen-dunkel.svg "$ZIEL/"
 cp restaurant-abend.jpg rezeption-nacht.jpg "$ZIEL/"
 cp kofferwagen-lobby.jpg glocke-empfang.jpg "$ZIEL/"
 

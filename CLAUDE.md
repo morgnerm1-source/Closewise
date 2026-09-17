@@ -33,25 +33,18 @@ Deutsch — in Antworten, in Code-Kommentaren, in Commit-Nachrichten.
 
 ## Git — der Kontrollmechanismus
 
-Arbeit läuft auf dem Zweig `aman-redesign`, nicht auf `main`. `main` bleibt
-der letzte bekannte, unversionierte Stand — der Rückweg, falls das Redesign
-irgendwo falsch abbiegt.
+Aktuelle Arbeit läuft auf dem Zweig `figma-look`, abgezweigt von `vercel-live`
+(dem Stand, der auf Vercel lief). `main` und `aman-redesign` bleiben als
+Rückwege unangetastet.
 
 **Nach jeder abgeschlossenen, vom Nutzer angestoßenen Änderung: committen.**
 Nicht nach jeder einzelnen Edit-Anweisung, aber nach jedem Punkt, den der
-Nutzer als erledigt ansehen würde — eine neue Sektion, ein Bugfix, ein
-Palettenwechsel. Das ist der Kontrollmechanismus: der Nutzer sieht per
-`git diff` oder `git log -p`, was sich geändert hat, ohne dass vorher
-gefragt werden muss. Kleine Schrittfolgen (CSS anpassen, Screenshot prüfen,
-nochmal anpassen) gehören in einen gemeinsamen Commit, nicht in viele.
-
-Committen und Branch-Arbeit brauchen keine Rückfrage (siehe „Arbeitsweise"
-oben) — aber sie sollen tatsächlich passieren, nicht nur erlaubt sein.
+Nutzer als erledigt ansehen würde. Kleine Schrittfolgen (CSS anpassen,
+Screenshot prüfen, nochmal anpassen) gehören in einen gemeinsamen Commit.
 
 `git push` nach `origin` schlägt vermutlich fehl — das Repo gehört
 `fynnkz`, der lokale Git-Nutzer (`morgnerm1-source`) hat dort keine
-bestätigten Schreibrechte. Lokale Commits lösen das Kontrollproblem auch
-ohne Push.
+bestätigten Schreibrechte.
 
 ## Dateien
 
@@ -63,7 +56,8 @@ ohne Push.
 | `seite.js` | Einblendungen, Zähler, Parallaxe, Handy-Menü, Akkordeon, Lesefortschritt. |
 | `sync.sh` | Baut `closewise/` neu und öffnet die Seite. `./sync.sh still` ohne Öffnen. |
 | `closewise/` | Veröffentlichungsordner für Vercel (Drag-and-drop auf vercel.com/new). |
-| `textur-*.png` | Selbst erzeugte Texturen (Python + zlib, indiziertes PNG), Navy zu Leinen. |
+| `flaechen-dunkel.svg` | Frame 21 aus Figma, das Motiv der dunklen Flächen. |
+| `textur-*.png` | Alte Texturen, von `design.html` nicht mehr genutzt. |
 | `restaurant-abend.jpg` | Foto in der Outlet-Galerie (Unsplash, frei nutzbar). |
 | `index.html` | Die **alte** Fassung. Nicht anfassen. |
 | `server.js` | Dependency-freier Node-Server für die alte Fassung. |
@@ -73,34 +67,37 @@ ohne Push.
 **Achtung Doppelung:** Der Stil existiert zweimal — inline in `design.html`
 und in `stil.css`. Jede Stiländerung muss in **beide** Dateien.
 
-## Gestaltung — Harvey trifft Aman
+## Gestaltung — Figma „CLOSEWISE NEW“
 
-Zwei Vorbilder, ein Ton. Von Aman kommen Leinen, Weißraum, gesperrte
-Kleinversalien und die Serife; von Harvey das tiefe Navy, die Klarheit und
-der Software-Ernst. Die Seite soll nach einem Haus **und** nach Software
-aussehen.
+Dieselbe Marke wie die Demo (demo.closewise.site). Quelle ist das Figma-Board
+„CLOSWISE“, Seite „CLOSEWISE NEW“.
 
-- **Farbe:** Navy (`--ink`, `--deep`) trägt die dunklen Flächen, Leinen
-  (`--paper`, `--off`) die hellen, Bronze (`--akzent`) ist die Zweitstimme.
-  Nie reines Weiß, nie reines Schwarz — beides wäre zu hart für ein Haus.
-- **Zwei Schriften mit klarer Aufgabe:**
-  `--display` ist **Newsreader** (Serife) und trägt nur die großen Zeilen.
-  `--sans` ist **Inter** und trägt alles Funktionale — auch die
-  Fenster-Überschriften, denn die gehören zur Software, nicht zum Haus.
-  Die Serife steht in 400, nicht fett; Fettdruck nähme ihr die Ruhe.
-- **Gesperrte Kleinversalien** (`.label`) für Kategorien — fein und grau
-  (11 px, Gewicht 500, 0.2em, `--muted-2`). Fett und farbig gesperrt wirkt
-  dagegen schablonenhaft.
-- **`.textlink`** — Textverweis mit dünnem Unterstrich, die leise
-  Alternative zum Knopf. Bei beiden Vorbildern das übliche Mittel.
-- **Kanten statt Rundungen:** `--r:2px`, `--r-lg:3px`, `--r-xl:4px`.
-  Knöpfe sind flach, nicht vollrund.
-- **Linien statt Schatten.** Tiefe entsteht über feine Rahmen in `--line`.
-  Schlagschatten nur dort, wo ein Fenster aus einem Band aufsteigt.
-- **Keine Monoschrift.** Ziffern über `font-variant-numeric:tabular-nums`.
+- **Farbe:** Midnight Blue (`--midnight #12224E`, dunkle Flächen als Verlauf
+  `#132451` → `#09132F`) als Verweis auf den Nachtabschluss. Weiß ist die
+  Arbeitsfläche. `--accent #294DAF` ist die **einzige** Handlungsfarbe
+  (Knöpfe, Verweise, Fokus) — dieselbe wie in der Demo. Auswahl und Kacheln
+  in `--tile #EAF4FE` mit `--accent-deep #163382`. „HOSPITALITY“ auf Dunkel
+  in `#5E8AFF`. Grün und Rot nur für geprüft / offen.
+- **Dunkle Flächen** zeigen das Motiv aus Frame 21 (`flaechen-dunkel.svg`).
+  Der SVG-Export ist gegenüber Figma horizontal gespiegelt, deshalb überall
+  `transform:scaleX(-1)`.
+- **Schrift:** nur **Inter**. Große Zeilen 650, eng gesperrt (−.04em).
+- **Gesperrte Kleinversalien** (`.label`) in `--accent` mit kurzem Strich davor.
+- **Knöpfe** vollrund (`border-radius:999px`), Karten 14 px, Bänder 22 px.
+- **Produktfenster** zeigen, wie die Demo wirklich aussieht: Midnight-Sidebar
+  mit Wortmarke + HOSPITALITY, weiße Arbeitsfläche. Immer als Demodaten.
+- **Keine unbelegten Behauptungen.** Keine Herstellerlogos (es gibt keine
+  Anbindungen, nur Exporte), kein „Server in Deutschland“ (die Datenbank liegt
+  in eu-west-1, Irland), kein „monatlich kündbar“ ohne Vertrag dazu.
+  Belegt sind: 4 Quellen und 17 Fehlerbilder (Demo-Spec), 60–70 Minuten von
+  Hand, 8,5 Minuten mit Closewise, 3–7 Punkte je Nacht, Import lehnt
+  vollständige Kartennummern ab, 800 € im Monat je Haus.
 - **Bewegung:** kurze Wege (18 px), lange Zeiten (0,8–1,2 s), eine Kurve
-  (`--ease`), nur Deckkraft und Transform. Alles Bewegte gehört in
-  `@media (prefers-reduced-motion:no-preference)`.
+  (`--ease`), nur Deckkraft und Transform, alles hinter
+  `prefers-reduced-motion:no-preference`.
+
+**Achtung:** `ablauf.html` und `stil.css` stehen noch auf dem alten
+Aman-Stand und sind von `design.html` aus nicht verlinkt.
 
 ## Handy
 
