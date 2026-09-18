@@ -8,9 +8,16 @@
 <!-- Früh und synchron: die Startzustände der Animation hängen daran.
      Ohne Skript bleibt die Seite sichtbar, nur eben ohne Bewegung. -->
 <script>document.documentElement.classList.add("js")</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<!-- Inter lokal (self-hosted) statt Google Fonts — kein Drittanbieter-Request, DSGVO-konform. -->
+<style>
+@font-face{
+  font-family:"Inter";
+  font-style:normal;
+  font-weight:400 700;
+  font-display:swap;
+  src:url("fonts/inter-latin.woff2") format("woff2");
+}
+</style>
 
 <style>
 /* ============================================================
@@ -812,9 +819,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
         <div class="foot-col">
           <h4>Rechtliches</h4>
           <ul>
-            <li><a href="https://demo.closewise.site/impressum">Impressum</a></li>
-            <li><a href="https://demo.closewise.site/datenschutz">Datenschutz</a></li>
-            <li><a href="https://demo.closewise.site/agb">AGB</a></li>
+            <li><a href="/impressum">Impressum</a></li>
+            <li><a href="/datenschutz">Datenschutz</a></li>
           </ul>
         </div>
       </div>

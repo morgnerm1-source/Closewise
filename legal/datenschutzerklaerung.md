@@ -33,7 +33,7 @@ Für Zugriffe auf Ihr Endgerät (Speichern und Auslesen von Informationen) gilt 
 
 Die Website wird bei einem Dienstleister gehostet, der die Daten in unserem Auftrag verarbeitet. Mit dem Anbieter besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO.
 
-Anbieter: [HOSTING-ANBIETER, Anschrift, Serverstandort einsetzen]
+Anbieter: Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. Die Auslieferung erfolgt über ein weltweites Content-Delivery-Network; die Server können sich auch in den USA befinden. Grundlage der Übermittlung in Drittländer sind die EU-Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO bzw. – soweit zertifiziert – das EU-US Data Privacy Framework nach Art. 45 DSGVO.
 
 Bei jedem Aufruf der Website erhebt das System automatisiert Daten des zugreifenden Systems:
 
@@ -74,25 +74,21 @@ Bitte beachten Sie, dass unverschlüsselte E-Mails auf dem Übertragungsweg von 
 
 Über die Schaltfläche „Demo ansehen" gelangen Sie zu einer separat betriebenen Testinstanz der Closewise-Anwendung. Dort gelten die in der Anwendung bereitgestellten Datenschutzinformationen. Bitte geben Sie in der Demo-Umgebung keine echten Gäste-, Mitarbeiter- oder Umsatzdaten ein.
 
-## 7. Schriftarten (Google Fonts)
+## 7. Schriftarten
 
-Die Website bindet Schriftarten des Anbieters Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, ein. Beim Aufruf der Seite stellt Ihr Browser eine Verbindung zu Servern von Google her; dabei wird Ihre IP-Adresse an Google übertragen, gegebenenfalls an Server in den USA.
+Die auf dieser Website verwendete Schriftart „Inter" wird lokal von unserem Server ausgeliefert (self-hosting). Beim Laden der Schrift wird keine Verbindung zu Servern Dritter – insbesondere nicht zu Google – hergestellt, und es werden keine personenbezogenen Daten (etwa Ihre IP-Adresse) an Dritte übertragen. Eine Einwilligung ist hierfür nicht erforderlich.
 
-Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Sie können die Einwilligung jederzeit mit Wirkung für die Zukunft über die Cookie-Einstellungen widerrufen. Ohne Einwilligung wird eine lokal vorgehaltene Ersatzschrift verwendet.
+## 8. Cookies und lokale Speicherung
 
-Weitere Informationen: https://policies.google.com/privacy
-
-## 8. Lokale Speicherung im Browser
-
-Zur Speicherung Ihrer Sprachauswahl legt die Website einen Eintrag im lokalen Speicher Ihres Browsers ab (Schlüssel `cw_lang`). Der Eintrag enthält ausschließlich das gewählte Sprachkürzel, wird nicht an uns übertragen und dient allein der von Ihnen gewünschten Funktion. Rechtsgrundlage für diesen Speicherzugriff ist § 25 Abs. 2 Nr. 2 TDDDG (unbedingt erforderlich), eine Einwilligung ist hierfür nicht erforderlich. Sie können den Eintrag jederzeit über die Einstellungen Ihres Browsers löschen.
+Diese Website setzt keine Cookies und speichert keine Informationen im lokalen Speicher (localStorage/sessionStorage) Ihres Browsers. Ein Einwilligungsbanner ist daher nicht erforderlich.
 
 ## 9. Rechenbeispiel auf der Website
 
 Die Eingaben im Rechenbeispiel (z. B. Anzahl Outlets, Stundensatz, Zeitaufwand) werden ausschließlich in Ihrem Browser verarbeitet. Es findet keine Übertragung an uns oder an Dritte statt und es erfolgt keine Speicherung.
 
-## 10. Verlinkung sozialer Netzwerke
+## 10. Soziale Netzwerke
 
-Auf der Website sind Links zu unseren Profilen bei LinkedIn und X eingebunden. Es handelt sich um einfache Verlinkungen, keine Social-Plugins. Eine Datenübertragung an die Betreiber erfolgt erst, wenn Sie den Link aktiv anklicken. Ab diesem Zeitpunkt gelten die Datenschutzbestimmungen des jeweiligen Anbieters.
+Auf dieser Website sind keine Social-Media-Plugins und keine Verlinkungen zu sozialen Netzwerken eingebunden. Eine damit verbundene Datenübertragung findet nicht statt.
 
 ## 11. Keine Webanalyse und kein Tracking
 
