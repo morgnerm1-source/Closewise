@@ -85,6 +85,13 @@ a{color:inherit;text-decoration:none}
 }
 @keyframes aura-a{to{transform:translate(60px,40px) scale(1.08)}}
 @keyframes aura-b{to{transform:translate(-50px,30px) scale(1.06)}}
+/* Sprach-Umschalter */
+.lang{display:inline-flex;align-items:center;border:1px solid var(--line-2);border-radius:999px;overflow:hidden}
+.lang-btn{appearance:none;border:0;background:transparent;cursor:pointer;
+  font:600 12px/1 var(--sans);letter-spacing:.02em;color:var(--muted);padding:7px 10px;
+  transition:color .2s var(--ease),background .2s var(--ease)}
+.lang-btn.is-on{background:var(--tile);color:var(--accent-deep)}
+.lang-btn:not(.is-on):hover{color:var(--ink)}
 
 /* ---- Typografie ----
    Eine Schrift, zwei Stimmen: große Zeilen eng und fett,
@@ -524,6 +531,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     </nav>
 
     <div class="nav-right">
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button type="button" class="lang-btn is-on" data-lang="de">DE</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
       <a class="btn btn-line btn-sm" href="https://demo.closewise.site/sign-in">Anmelden</a>
       <a class="btn btn-solid btn-sm" href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener">Termin buchen</a>
     </div>
@@ -926,6 +937,144 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     </div>
   </div>
 </footer>
+
+<script>
+/* ============================================================
+   Sprache (DE/EN). Tauscht Textknoten per Wörterbuch, merkt die
+   Wahl in localStorage (Schlüssel cw_lang). Kein Nachladen.
+   ============================================================ */
+(function () {
+  var DICT = {
+    // Navigation
+    "Ablauf": "Process", "Prüfung": "Checks", "Rechner": "Calculator",
+    "Vergleich": "Comparison", "Fragen": "FAQ",
+    "Anmelden": "Sign in", "Termin buchen": "Book a call",
+    // Hero
+    "Wir verbinden uns mit Ihrem POS-System": "We connect to your POS system",
+    "Jeder Beleg, jede Nacht.": "Every receipt, every night.",
+    "Sie sehen nur, was nicht stimmt.": "You only see what doesn't add up.",
+    "Closewise prüft den Abend gegen Kartenterminal, Gästekonten und Kassenzählung, und legt Ihrer Schichtleitung die kurze Liste hin.": "Closewise checks the evening against the card terminal, guest accounts and cash count, and hands your shift lead the short list.",
+    "Demo ansehen": "See the demo",
+    // Vier Quellen
+    "Kassenbelege": "POS receipts", "Was verkauft wurde": "What was sold",
+    "Kartenterminal": "Card terminal", "Was eingezogen wurde": "What was charged",
+    "Gästekonten": "Guest accounts", "Was aufs Zimmer ging": "What went on the room",
+    "Kassenzählung": "Cash count", "Was in der Lade liegt": "What's in the drawer",
+    // Tutorial
+    "Wie es funktioniert": "How it works",
+    "In drei Schritten durch die Nacht.": "Through the night in three steps.",
+    "Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung nur die Abweichungen hin. Was in jedem Schritt passiert, sehen Sie hier.": "Closewise reads your exports, matches every receipt and hands the shift lead only the exceptions. Here's what happens in each step.",
+    "Import": "Import", "Kartennummern werden abgelehnt": "Card numbers are rejected",
+    "Exporte einlesen": "Read in the exports",
+    "Kassenbelege, Terminal-Abschluss und Gästekonten: die Dateien, die Ihre Systeme ohnehin erzeugen. Keine PMS-Anbindung, an der Kasse ändert sich nichts.": "POS receipts, terminal close and guest accounts: the files your systems produce anyway. No PMS integration, nothing changes at the till.",
+    "Abgleich": "Matching", "geprüft": "checked",
+    "Restaurant · Tisch 14": "Restaurant · Table 14", "Bar · Rechnung 2210": "Bar · Bill 2210",
+    "Bar · Zahlung fehlt": "Bar · Payment missing", "offen": "open",
+    "Gegen vier Quellen abgleichen": "Match against four sources",
+    "Jeder Beleg wird gegen die anderen Quellen gehalten: Betrag gegen Betrag, Buchung gegen Konto. Was übereinstimmt, wird abgehakt.": "Every receipt is held against the other sources: amount against amount, booking against account. What matches gets ticked off.",
+    "Offene Abweichungen · 3": "Open exceptions · 3",
+    "Bar · Kartenzahlung fehlt": "Bar · Card payment missing",
+    "Restaurant · Storno ohne Freigabe": "Restaurant · Void without approval",
+    "Roomservice · nie aufs Zimmer": "Room service · never on the room",
+    "Die kurze Liste klären": "Clear the short list",
+    "Übrig bleiben 3–7 offene Punkte je Nacht, jeder mit Outlet, Beleg und Ursache. Den Rest hat Closewise schon abgehakt.": "What's left is 3–7 open points a night, each with outlet, receipt and cause. Closewise has already ticked off the rest.",
+    // Ablauf
+    "Drei Schritte, jede Nacht dieselben.": "Three steps, the same every night.",
+    "Heute liest die Schichtleitung jeden Bon einzeln nach. Closewise übernimmt genau das.": "Today the shift lead reads every receipt one by one. Closewise takes exactly that over.",
+    "Belege einsammeln": "Collect the receipts",
+    "Alle Exporte des Abends: Kassenbelege, Kartenterminal, Gästekonten, gezählte Lade.": "All of the evening's exports: POS receipts, card terminal, guest accounts, counted drawer.",
+    "Gegeneinander prüfen": "Check against each other",
+    "Betrag gegen Betrag, Buchung gegen Konto. Was passt, ist abgehakt.": "Amount against amount, booking against account. What fits is ticked off.",
+    "Kurze Liste übergeben": "Hand over the short list",
+    "Was übrig bleibt, nach Tragweite sortiert, mit Beleg und nächstem Schritt.": "What's left, sorted by impact, with receipt and next step.",
+    "Unabhängige Quellen: Kasse, Kartenterminal, Gästekonto und die gezählte Lade.": "Independent sources: till, card terminal, guest account and the counted drawer.",
+    "Fehlerbilder: von der Karte, die nie eingezogen wurde, bis zur Zimmerbuchung, die nie ankam.": "Error types: from the card that was never charged to the room booking that never arrived.",
+    "Punkte liest die Schichtleitung in einer typischen Nacht. Der Rest ist abgehakt.": "points the shift lead reads on a typical night. The rest is ticked off.",
+    // Rechner
+    "Was der Abschluss heute kostet.": "What the close costs you today.",
+    "Stellen Sie Ihr Haus ein. Die Rechnung läuft mit: gegen 800 € im Monat, unabhängig davon, wie viele Outlets Sie haben.": "Set up your property. The math runs along: against €800 a month, no matter how many outlets you have.",
+    "Gerechnet mit 2,5 Minuten fürs Öffnen und 1,5 Minuten je Abweichung bei vier Abweichungen in einer normalen Nacht, also 8,5 Minuten je Outlet, an 360 Nächten im Jahr. Eine Schätzung nach Ihren Angaben, keine Zusage.": "Calculated with 2.5 minutes to open and 1.5 minutes per exception at four exceptions on a normal night, i.e. 8.5 minutes per outlet, across 360 nights a year. An estimate based on your input, not a commitment.",
+    "Ihr Haus": "Your property", "Outlets im Haus": "Outlets in the property",
+    "Restaurants, Bars, Roomservice, Spa.": "Restaurants, bars, room service, spa.",
+    "Schichtleitung, pro Stunde": "Shift lead, per hour",
+    "Mit Nachtzuschlägen und Nebenkosten.": "Including night premiums and overheads.",
+    "Minuten je Outlet heute": "Minutes per outlet today",
+    "Was der Abgleich heute Nacht von Hand dauert.": "How long the check takes by hand tonight.",
+    "Geschätzte Ersparnis im Jahr": "Estimated savings per year",
+    "Stunden im Jahr zurück": "Hours back per year", "Minuten je Abschluss": "Minutes per close",
+    "statt": "instead of", "Closewise im Jahr": "Closewise per year", "Bleibt netto": "Net remaining",
+    // Vergleich
+    "Kein PMS, keine Buchhaltung.": "No PMS, no accounting.",
+    "Closewise ersetzt keins Ihrer Systeme. Es liest, was sie erzeugen, und prüft, ob es zusammenpasst, in derselben Nacht.": "Closewise replaces none of your systems. It reads what they produce and checks whether it adds up, the same night.",
+    "Heute": "Today", "Mit Closewise": "With Closewise",
+    "Zeigt, was gebucht wurde.": "Shows what was booked.",
+    "Prüft, ob es auf dem Gästekonto auch angekommen ist.": "Checks whether it actually reached the guest account.",
+    "Buchhaltung": "Accounting", "Sieht die Differenz beim Monatsabschluss.": "Sees the difference at month-end close.",
+    "Sieht sie am Morgen danach, mit Beleg und Ursache.": "Sees it the next morning, with receipt and cause.",
+    "Von Hand": "By hand", "Rund eine Stunde je Outlet, Bon für Bon.": "About an hour per outlet, receipt by receipt.",
+    "Etwa acht Minuten für die Punkte, die nicht aufgehen.": "About eight minutes for the points that don't add up.",
+    // FAQ
+    "Häufige Fragen": "FAQ", "Was Hoteliers zuerst fragen.": "What hoteliers ask first.",
+    "Müssen wir unser Kassensystem wechseln?": "Do we have to switch our POS system?",
+    "Nein. Closewise liest die Exporte, die Ihre Systeme ohnehin erzeugen, die Belege aus den Outlets, den Terminal-Abschluss und die Buchungen auf den Gästekonten. An der Kasse ändert sich nichts.": "No. Closewise reads the exports your systems produce anyway: the receipts from the outlets, the terminal close and the bookings on the guest accounts. Nothing changes at the till.",
+    "Wer muss nachts noch etwas tun?": "Who still has to do something at night?",
+    "Ihre Schichtleitung öffnet die Liste und klärt die Abweichungen, in einer typischen Nacht drei bis sieben Punkte. Die Kassenzählung bleibt Handarbeit: Wie viel in der Lade liegt, trägt ein Mensch ein.": "Your shift lead opens the list and clears the exceptions, three to seven points on a typical night. The cash count stays manual: how much is in the drawer is entered by a person.",
+    "Was, wenn eine Quelle fehlt?": "What if a source is missing?",
+    "Dann prüft Closewise gegen die übrigen und sagt nichts zu der fehlenden. Ohne Anbindung an die Gästekonten werden Zimmerbuchungen also nicht als Fehler markiert, sondern gar nicht bewertet.": "Then Closewise checks against the rest and says nothing about the missing one. Without access to the guest accounts, room bookings aren't flagged as errors, they simply aren't assessed.",
+    "Welche Daten verarbeitet Closewise?": "What data does Closewise process?",
+    "Belegdaten: Beträge, Zahlarten, Zeitpunkte, Tische und Zimmernummern. Keine vollständigen Kartennummern: ein Import, der welche enthält, wird abgelehnt.": "Receipt data: amounts, payment types, timestamps, tables and room numbers. No full card numbers: an import that contains any is rejected.",
+    "Was kostet es?": "What does it cost?",
+    "800 € im Monat je Haus, unabhängig von der Zahl der Outlets. Für Gruppen mit mehreren Häusern sprechen wir über einen eigenen Satz.": "€800 a month per property, regardless of the number of outlets. For groups with several properties we agree a separate rate.",
+    "Können wir das vorher sehen?": "Can we see it first?",
+    "Ja. In der Demo können Sie selbst einen Abschluss mit Beispieldaten laufen lassen. Im Termin gehen wir gemeinsam durch, wie das mit den Exporten aus Ihrem Haus aussieht.": "Yes. In the demo you can run a close with sample data yourself. In the call we walk through together how it looks with the exports from your property.",
+    // Abschluss (Termin)
+    "Termin": "Booking", "Zwanzig Minuten, ein Abschluss.": "Twenty minutes, one close.",
+    "Wir zeigen Ihnen einen Nachtabschluss von vorn bis hinten und gehen gemeinsam durch, was die Exporte aus Ihrem Haus dafür liefern müssen.": "We show you a night close from front to back and walk through together what the exports from your property need to provide.",
+    "Demo selbst ausprobieren": "Try the demo yourself",
+    // Fuß
+    "Der Nachtabschluss für Hotels. Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.": "The night close for hotels. Every receipt, every night. You only see what doesn't add up.",
+    "Seite": "Site", "Konto erstellen": "Create account", "Rechtliches": "Legal",
+    "Impressum": "Imprint", "Datenschutz": "Privacy",
+    "Demodaten in allen Produktansichten dieser Seite.": "Sample data in all product views on this page."
+  };
+  var TITLE = { de: document.title, en: "Closewise Hospitality · Night close for hotels" };
+  var descEl = document.querySelector('meta[name="description"]');
+  var DESC = { de: descEl ? descEl.content : "", en: "Closewise checks every receipt of the night against the card terminal, guest accounts and cash count. Your shift lead only reads what doesn't add up." };
+
+  function norm(s){ return s.replace(/\s+/g, " ").trim(); }
+  var MAP = {}; for (var k in DICT) MAP[norm(k)] = DICT[k];
+
+  // Übersetzbare Textknoten einsammeln, Original + EN-Fassung merken.
+  var items = [];
+  var walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  var node;
+  while ((node = walk.nextNode())) {
+    var raw = node.nodeValue, key = norm(raw);
+    if (!key || !(key in MAP)) continue;
+    var m = raw.match(/^(\s*)[\s\S]*?(\s*)$/);
+    items.push({ node: node, de: raw, en: m[1] + MAP[key] + m[2] });
+  }
+
+  var btns = [].slice.call(document.querySelectorAll(".lang-btn"));
+  function apply(lang) {
+    var en = lang === "en";
+    for (var i = 0; i < items.length; i++) items[i].node.nodeValue = en ? items[i].en : items[i].de;
+    document.documentElement.lang = lang;
+    document.title = en ? TITLE.en : TITLE.de;
+    if (descEl) descEl.content = en ? DESC.en : DESC.de;
+    btns.forEach(function (b) { b.classList.toggle("is-on", b.dataset.lang === lang); });
+    try { localStorage.setItem("cw_lang", lang); } catch (e) {}
+  }
+
+  var saved;
+  try { saved = localStorage.getItem("cw_lang"); } catch (e) {}
+  if (saved !== "de" && saved !== "en") {
+    saved = (navigator.language || "").toLowerCase().indexOf("en") === 0 ? "en" : "de";
+  }
+  apply(saved);
+  btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang); }); });
+})();
+</script>
 
 <script>
 /* ============================================================

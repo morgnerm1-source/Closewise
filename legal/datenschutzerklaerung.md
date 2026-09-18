@@ -80,7 +80,7 @@ Die auf dieser Website verwendete Schriftart „Inter" wird lokal von unserem Se
 
 ## 8. Cookies und lokale Speicherung
 
-Diese Website setzt keine Cookies und speichert keine Informationen im lokalen Speicher (localStorage/sessionStorage) Ihres Browsers. Ein Einwilligungsbanner ist daher nicht erforderlich.
+Diese Website setzt keine Cookies. Zur Speicherung Ihrer Sprachauswahl legt sie einen Eintrag im lokalen Speicher (localStorage) Ihres Browsers ab (Schlüssel `cw_lang`). Der Eintrag enthält ausschließlich das gewählte Sprachkürzel (z. B. „de" oder „en"), wird nicht an uns übertragen und dient allein dieser Funktion. Rechtsgrundlage für diesen Speicherzugriff ist § 25 Abs. 2 Nr. 2 TDDDG (unbedingt erforderlich); eine Einwilligung ist hierfür nicht erforderlich. Ein Einwilligungsbanner ist daher nicht erforderlich. Sie können den Eintrag jederzeit über die Einstellungen Ihres Browsers löschen.
 
 ## 9. Rechenbeispiel auf der Website
 
