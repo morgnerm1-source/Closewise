@@ -72,6 +72,19 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gut)}
 .wrap-wide{max-width:1400px;margin:0 auto;padding:0 var(--gut)}
 .sec{padding:var(--sec) 0}
+/* Dezenter, geblurrter Blau-Verlauf hinter dem oberen Bereich */
+.aura{position:absolute;top:0;left:0;right:0;height:1150px;z-index:-1;overflow:hidden;pointer-events:none}
+.aura::before,.aura::after{content:"";position:absolute;border-radius:50%;filter:blur(92px);opacity:.4}
+.aura::before{width:620px;height:620px;left:-6%;top:40px;
+  background:radial-gradient(circle at 30% 30%,var(--accent),transparent 70%)}
+.aura::after{width:560px;height:560px;right:-4%;top:240px;
+  background:radial-gradient(circle at 60% 40%,var(--hospitality),transparent 70%)}
+@media (prefers-reduced-motion:no-preference){
+  .aura::before{animation:aura-a 22s var(--ease) infinite alternate}
+  .aura::after{animation:aura-b 26s var(--ease) infinite alternate}
+}
+@keyframes aura-a{to{transform:translate(60px,40px) scale(1.08)}}
+@keyframes aura-b{to{transform:translate(-50px,30px) scale(1.06)}}
 
 /* ---- Typografie ----
    Eine Schrift, zwei Stimmen: große Zeilen eng und fett,
@@ -466,6 +479,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 </style>
 </head>
 <body>
+<div class="aura" aria-hidden="true"></div>
 
 <!-- Die Wortmarke steht einmal hier und wird überall per <use> geholt.
      #cw-mark ist das Zeichen allein, #cw die ganze Marke. -->
