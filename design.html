@@ -138,6 +138,9 @@ a{color:inherit;text-decoration:none}
 .mock li.flag em{font-style:normal;font-size:10px;font-weight:600;color:var(--bad);
   background:var(--bad-bg);padding:2px 7px;border-radius:999px}
 .mock-note{margin:9px 0 0;font-size:10px;color:var(--muted)}
+.mock li.off span{color:var(--muted)}
+.mock li i.no{width:14px;height:14px;border-radius:50%;flex:none;background:var(--bad-bg);position:relative}
+.mock li i.no::after{content:"\00d7";position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-weight:700;line-height:1;color:var(--bad)}
 .mock-prog{font-size:11px;color:var(--muted);margin-bottom:9px}
 .mock-prog b{color:var(--ink);font-variant-numeric:tabular-nums}
 .mock-prog .bar{display:block;height:5px;border-radius:999px;background:var(--tile);margin-top:6px;overflow:hidden}
@@ -613,13 +616,13 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       <div class="step-media" style="background-image:url(haus-1.jpg)">
         <span class="step-no">1</span>
         <div class="mock">
-          <div class="mock-h"><span class="dot"></span>Import</div>
+          <div class="mock-h"><span class="dot"></span>CSV Import</div>
           <ul>
-            <li><span>Kassenbelege</span><i class="ok"></i></li>
+            <li><span>Kassenbeleg</span><i class="ok"></i></li>
             <li><span>Kartenterminal</span><i class="ok"></i></li>
-            <li><span>Gästekonten</span><i class="ok"></i></li>
+            <li><span>Gästekonto</span><i class="ok"></i></li>
+            <li class="off"><span>Kartennummer wird abgelehnt</span><i class="no"></i></li>
           </ul>
-          <p class="mock-note">Kartennummern werden abgelehnt</p>
         </div>
       </div>
       <div class="step-cap">
@@ -964,7 +967,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     "Wie es funktioniert": "How it works",
     "In drei Schritten durch die Nacht.": "Through the night in three steps.",
     "Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung nur die Abweichungen hin. Was in jedem Schritt passiert, sehen Sie hier.": "Closewise reads your exports, matches every receipt and hands the shift lead only the exceptions. Here's what happens in each step.",
-    "Import": "Import", "Kartennummern werden abgelehnt": "Card numbers are rejected",
+    "Import": "Import", "CSV Import": "CSV Import",
+    "Kassenbeleg": "POS receipt", "Gästekonto": "Guest account",
+    "Kartennummern werden abgelehnt": "Card numbers are rejected",
+    "Kartennummer wird abgelehnt": "Card number is rejected",
     "Exporte einlesen": "Read in the exports",
     "Kassenbelege, Terminal-Abschluss und Gästekonten: die Dateien, die Ihre Systeme ohnehin erzeugen. Keine PMS-Anbindung, an der Kasse ändert sich nichts.": "POS receipts, terminal close and guest accounts: the files your systems produce anyway. No PMS integration, nothing changes at the till.",
     "Abgleich": "Matching", "geprüft": "checked",
