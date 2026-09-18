@@ -89,11 +89,42 @@ a{color:inherit;text-decoration:none}
 .label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .label::before{content:"";width:18px;height:2px;border-radius:2px;background:currentColor}
-/* Häuser-Galerie */
-.haeuser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px);
-  margin-top:clamp(24px,3.5vw,48px)}
-.haeuser-grid figure{margin:0;border-radius:14px;overflow:hidden}
-.haeuser-grid img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+/* Ablauf-Karten (Tutorial): Foto-Hintergrund + kleine Demo-UI */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);
+  margin-top:clamp(28px,4vw,56px)}
+.step{display:flex;flex-direction:column}
+.step-media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;
+  background-size:cover;background-position:center;display:flex;align-items:flex-end;
+  padding:clamp(12px,1.4vw,18px);border:1px solid var(--line)}
+.step-media::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,19,48,.18) 0%,rgba(10,19,48,.34) 44%,rgba(10,19,48,.74) 100%)}
+.step-no{position:absolute;top:14px;left:14px;z-index:2;width:30px;height:30px;border-radius:8px;
+  display:grid;place-items:center;font-size:14px;font-weight:600;color:#fff;
+  background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28)}
+.mock{position:relative;z-index:2;width:100%;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;box-shadow:0 18px 44px rgba(10,19,48,.30);padding:11px 12px;
+  font-size:11px;line-height:1.35;color:var(--ink)}
+.mock-h{display:flex;align-items:center;gap:7px;font-weight:600;font-size:11.5px;
+  padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.mock-h .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.mock-h .dot.bad{background:var(--bad)}
+.mock ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mock li{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mock li span{color:var(--ink-2)}
+.mock li b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.mock li i.ok{width:14px;height:14px;border-radius:50%;flex:none;background:var(--good-bg);position:relative}
+.mock li i.ok::after{content:"";position:absolute;left:4.5px;top:2px;width:3px;height:6px;
+  border:solid var(--good);border-width:0 1.6px 1.6px 0;transform:rotate(45deg)}
+.mock li.flag em{font-style:normal;font-size:10px;font-weight:600;color:var(--bad);
+  background:var(--bad-bg);padding:2px 7px;border-radius:999px}
+.mock-note{margin:9px 0 0;font-size:10px;color:var(--muted)}
+.mock-prog{font-size:11px;color:var(--muted);margin-bottom:9px}
+.mock-prog b{color:var(--ink);font-variant-numeric:tabular-nums}
+.mock-prog .bar{display:block;height:5px;border-radius:999px;background:var(--tile);margin-top:6px;overflow:hidden}
+.mock-prog .bar i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.step-cap{padding:16px 2px 0}
+.step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
+.step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
 
@@ -419,8 +450,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 @media (max-width:760px){
   .win{grid-template-columns:minmax(0,1fr)}
   .win .side{display:none}
-  .haeuser-grid{grid-template-columns:1fr}
-  .haeuser-grid img{aspect-ratio:3/2}
+  .steps{grid-template-columns:1fr}
+  .step-media{aspect-ratio:5/4}
   .foot-bar .copy{margin-inline-start:0;width:100%}
 }
 @media (max-width:640px){
@@ -543,17 +574,75 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
 </div>
 
-<!-- ══════════ Häuser ══════════ -->
-<section class="sec" id="haeuser">
+<!-- ══════════ So funktioniert es ══════════ -->
+<section class="sec" id="tutorial">
   <div class="wrap stack" data-stagger>
-    <span class="label">Häuser</span>
-    <h2 class="h2">Ein Abschluss für jedes Haus.</h2>
-    <p class="lede">Von der einzelnen Stadtadresse bis zur Gruppe mit vielen Standorten: derselbe Nachtabschluss, dieselbe kurze Liste, jede Nacht.</p>
+    <span class="label">Wie es funktioniert</span>
+    <h2 class="h2">In drei Schritten durch die Nacht.</h2>
+    <p class="lede">Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung
+      nur die Abweichungen hin — hier, was in jedem Schritt passiert.</p>
   </div>
-  <div class="wrap-wide haeuser-grid" data-stagger="80">
-    <figure><img src="haus-1.jpg" alt="Moderne Backsteinfassade eines Stadtgebäudes bei blauem Himmel" loading="lazy"></figure>
-    <figure><img src="haus-2.jpg" alt="Hochhäuser aus Glas im Geschäftsviertel" loading="lazy"></figure>
-    <figure><img src="haus-3.jpg" alt="Blick an Bürotürmen empor gegen den Himmel" loading="lazy"></figure>
+  <div class="wrap-wide steps" data-stagger="90">
+
+    <article class="step">
+      <div class="step-media" style="background-image:url(haus-1.jpg)">
+        <span class="step-no">1</span>
+        <div class="mock">
+          <div class="mock-h"><span class="dot"></span>Import</div>
+          <ul>
+            <li><span>Kassenbelege</span><i class="ok"></i></li>
+            <li><span>Kartenterminal</span><i class="ok"></i></li>
+            <li><span>Gästekonten</span><i class="ok"></i></li>
+          </ul>
+          <p class="mock-note">Kartennummern werden abgelehnt</p>
+        </div>
+      </div>
+      <div class="step-cap">
+        <h3>Exporte einlesen</h3>
+        <p>Kassenbelege, Terminal-Abschluss und Gästekonten — die Dateien, die Ihre Systeme
+          ohnehin erzeugen. Keine PMS-Anbindung, an der Kasse ändert sich nichts.</p>
+      </div>
+    </article>
+
+    <article class="step">
+      <div class="step-media" style="background-image:url(haus-2.jpg)">
+        <span class="step-no">2</span>
+        <div class="mock">
+          <div class="mock-h"><span class="dot"></span>Abgleich</div>
+          <div class="mock-prog"><b>11 / 14</b> geprüft<span class="bar"><i style="width:79%"></i></span></div>
+          <ul>
+            <li class="ok"><span>Restaurant · Tisch 14</span><i class="ok"></i></li>
+            <li class="ok"><span>Bar · Rechnung 2210</span><i class="ok"></i></li>
+            <li class="flag"><span>Bar · Zahlung fehlt</span><em>offen</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="step-cap">
+        <h3>Gegen vier Quellen abgleichen</h3>
+        <p>Jeder Beleg wird gegen die anderen Quellen gehalten: Betrag gegen Betrag,
+          Buchung gegen Konto. Was übereinstimmt, wird abgehakt.</p>
+      </div>
+    </article>
+
+    <article class="step">
+      <div class="step-media" style="background-image:url(haus-3.jpg)">
+        <span class="step-no">3</span>
+        <div class="mock">
+          <div class="mock-h"><span class="dot bad"></span>Offene Abweichungen · 3</div>
+          <ul>
+            <li class="flag"><span>Bar · Kartenzahlung fehlt</span><em>offen</em></li>
+            <li class="flag"><span>Restaurant · Storno ohne Freigabe</span><em>offen</em></li>
+            <li class="flag"><span>Roomservice · nie aufs Zimmer</span><em>offen</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="step-cap">
+        <h3>Die kurze Liste klären</h3>
+        <p>Übrig bleiben 3–7 offene Punkte je Nacht — jeder mit Outlet, Beleg und Ursache.
+          Den Rest hat Closewise schon abgehakt.</p>
+      </div>
+    </article>
+
   </div>
 </section>
 
