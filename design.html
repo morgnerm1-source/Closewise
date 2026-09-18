@@ -89,6 +89,11 @@ a{color:inherit;text-decoration:none}
 .label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .label::before{content:"";width:18px;height:2px;border-radius:2px;background:currentColor}
+/* Häuser-Galerie */
+.haeuser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px);
+  margin-top:clamp(24px,3.5vw,48px)}
+.haeuser-grid figure{margin:0;border-radius:14px;overflow:hidden}
+.haeuser-grid img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
 
@@ -414,6 +419,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 @media (max-width:760px){
   .win{grid-template-columns:minmax(0,1fr)}
   .win .side{display:none}
+  .haeuser-grid{grid-template-columns:1fr}
+  .haeuser-grid img{aspect-ratio:3/2}
   .foot-bar .copy{margin-inline-start:0;width:100%}
 }
 @media (max-width:640px){
@@ -535,6 +542,20 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     </div>
   </div>
 </div>
+
+<!-- ══════════ Häuser ══════════ -->
+<section class="sec" id="haeuser">
+  <div class="wrap stack" data-stagger>
+    <span class="label">Häuser</span>
+    <h2 class="h2">Ein Abschluss für jedes Haus.</h2>
+    <p class="lede">Von der einzelnen Stadtadresse bis zur Gruppe mit vielen Standorten: derselbe Nachtabschluss, dieselbe kurze Liste, jede Nacht.</p>
+  </div>
+  <div class="wrap-wide haeuser-grid" data-stagger="80">
+    <figure><img src="haus-1.jpg" alt="Moderne Backsteinfassade eines Stadtgebäudes bei blauem Himmel" loading="lazy"></figure>
+    <figure><img src="haus-2.jpg" alt="Hochhäuser aus Glas im Geschäftsviertel" loading="lazy"></figure>
+    <figure><img src="haus-3.jpg" alt="Blick an Bürotürmen empor gegen den Himmel" loading="lazy"></figure>
+  </div>
+</section>
 
 <!-- ══════════ Ablauf ══════════ -->
 <section class="sec" id="how">

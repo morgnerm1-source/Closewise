@@ -21,6 +21,7 @@ cp textur-dunkel.png textur-hell.png flaechen-dunkel.svg "$ZIEL/"
 cp restaurant-abend.jpg rezeption-nacht.jpg "$ZIEL/"
 cp kofferwagen-lobby.jpg glocke-empfang.jpg "$ZIEL/"
 cp produkt-demo.mp4 produkt-demo.jpg "$ZIEL/"
+cp haus-1.jpg haus-2.jpg haus-3.jpg "$ZIEL/"
 cp impressum.html datenschutz.html "$ZIEL/"
 cp -r fonts "$ZIEL/"
 
