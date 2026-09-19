@@ -1131,11 +1131,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
    Closewise-Minuten = 2,5 (Öffnen) + 1,5 × 4 (Abweichungen) = 8,5
    Stunden im Jahr   = Outlets × (Minuten − 8,5) × 360 ÷ 60
    Ersparnis         = Stunden × Stundensatz
-   Netto             = Ersparnis − 9.600 € (800 € im Monat)
-   Negatives Netto erscheint nie grün.
+   Zeigt nur die Zeit-/Kostenersparnis der Handarbeit, keine Produktpreise.
    ============================================================ */
 (function () {
-  var CW_MIN = 8.5, NAECHTE = 360, KOSTEN = 9600;
+  var CW_MIN = 8.5, NAECHTE = 360;
   var eur = new Intl.NumberFormat("de-DE", { maximumFractionDigits: 0 });
   var $ = function (id) { return document.getElementById(id); };
   var felder = { outlets: $("c-outlets"), rate: $("c-rate"), min: $("c-min") };
