@@ -866,7 +866,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       <div>
         <span class="lockup on-dark">
           <svg class="logo" viewBox="0 0 1316 219" fill="currentColor" aria-hidden="true"><use href="#cw"/></svg>
-          <span class="tag">Hospitality</span>
         </span>
         <p>Der Nachtabschluss für Hotels. Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.</p>
       </div>
@@ -906,7 +905,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <div class="foot-bar">
       <span>Demodaten in allen Produktansichten dieser Seite.</span>
-      <span class="copy">© 2026 Closewise Hospitality · Berlin</span>
+      <span class="copy">© 2026 Closewise · Berlin</span>
     </div>
   </div>
 </footer>
@@ -1040,6 +1039,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       img.setAttribute("data-de", base);
       img.setAttribute("src", en ? base.replace(/\.png$/, "-en.png") : base);
     });
+    var l2 = document.querySelector(".display .line:nth-of-type(2) .soft");
+    if (l2) l2.innerHTML = en ? "You only see what's <em>wrong</em>." : "Sie sehen nur, was <em>nicht</em> stimmt.";
     document.documentElement.lang = lang;
     document.title = en ? TITLE.en : TITLE.de;
     if (descEl) descEl.content = en ? DESC.en : DESC.de;
