@@ -1035,6 +1035,11 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   function apply(lang) {
     var en = lang === "en";
     for (var i = 0; i < items.length; i++) items[i].node.nodeValue = en ? items[i].en : items[i].de;
+    document.querySelectorAll(".step-media img").forEach(function (img) {
+      var base = img.getAttribute("data-de") || img.getAttribute("src");
+      img.setAttribute("data-de", base);
+      img.setAttribute("src", en ? base.replace(/\.png$/, "-en.png") : base);
+    });
     document.documentElement.lang = lang;
     document.title = en ? TITLE.en : TITLE.de;
     if (descEl) descEl.content = en ? DESC.en : DESC.de;
