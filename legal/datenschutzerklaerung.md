@@ -4,15 +4,9 @@ Diese Datenschutzerklärung gilt für die Website von Closewise (nachfolgend „
 
 ## 1. Verantwortlicher
 
-Verantwortlicher im Sinne des Art. 4 Nr. 7 DSGVO ist:
+Verantwortlicher im Sinne des Art. 4 Nr. 7 DSGVO ist der Betreiber dieser Website.
 
-Fiscova GmbH
-Donaustraße 44
-12043 Berlin
-Deutschland
-
-E-Mail: info@fiscova.de
-Telefon: 030 75435464
+Die vollständige Anbieterkennzeichnung wird derzeit erstellt und hier sowie im Impressum in Kürze ergänzt.
 
 **Datenschutzbeauftragter:** Wir sind gesetzlich nicht zur Bestellung eines Datenschutzbeauftragten verpflichtet. Bei allen Fragen zum Datenschutz wenden Sie sich bitte an die oben genannte Adresse.
 
@@ -120,7 +114,7 @@ Sie haben uns gegenüber folgende Rechte hinsichtlich der Sie betreffenden perso
 
 **Widerspruchsrecht nach Art. 21 DSGVO:** Soweit wir Daten auf Grundlage berechtigter Interessen (Art. 6 Abs. 1 lit. f DSGVO) verarbeiten, können Sie der Verarbeitung aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen. Wir verarbeiten die Daten dann nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe nachweisen, die Ihre Interessen überwiegen, oder die Verarbeitung dient der Geltendmachung oder Verteidigung von Rechtsansprüchen.
 
-Zur Ausübung Ihrer Rechte genügt eine Nachricht an info@fiscova.de.
+Zur Ausübung Ihrer Rechte genügt eine Nachricht an den Betreiber dieser Website (Kontakt wird im Impressum ergänzt).
 
 **Beschwerderecht bei der Aufsichtsbehörde (Art. 77 DSGVO):**
 
