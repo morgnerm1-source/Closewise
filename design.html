@@ -150,7 +150,8 @@ a{color:inherit;text-decoration:none}
 .step-cap{padding:16px 2px 0}
 .step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
 .step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
-/* Bereiche – Karussell (große Bild-Kacheln, aktive größer mit Text) */
+/* Bereiche – Karussell (Legora-exakt: aktive Kachel waechst, Reihe zentriert) */
+.caro-section{--iw:clamp(150px,17vw,213px);--aw:clamp(280px,32vw,398px);--gap:clamp(18px,3.6vw,60px);overflow:hidden}
 .caro-head{text-align:center}
 .caro-head .lede{margin-inline:auto}
 .caro-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
@@ -158,29 +159,28 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center;
   transition:background .2s var(--ease),color .2s var(--ease)}
 .caro-arrow:hover{background:var(--tile);color:var(--accent-deep)}
+.caro-arrow:disabled{opacity:.35;cursor:default}
 .caro-bar{width:min(260px,40vw);height:4px;border-radius:999px;background:var(--line);overflow:hidden}
-.caro-bar-fill{display:block;height:100%;width:12%;background:var(--accent);border-radius:999px;transition:width .2s linear}
-.caro{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;align-items:flex-start;
-  margin-top:clamp(24px,3vw,44px);padding-inline:var(--gut);scroll-padding-inline:var(--gut);
-  -ms-overflow-style:none;scrollbar-width:none}
-.caro::-webkit-scrollbar{display:none}
-.sector{flex:0 0 clamp(300px,40vw,520px);scroll-snap-align:center;cursor:pointer;
-  transform:scale(.955);opacity:.6;transition:transform .4s var(--ease),opacity .4s var(--ease)}
-.sector.is-active{transform:scale(1);opacity:1}
-.sector-img{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);height:clamp(320px,50vh,480px)}
+.caro-bar-fill{display:block;height:100%;width:25%;background:var(--accent);border-radius:999px;transition:width .5s var(--ease)}
+.caro-stage{overflow:hidden;margin-top:clamp(26px,3.4vw,48px)}
+.caro-row{display:flex;gap:var(--gap);align-items:flex-start;width:max-content;
+  transition:transform .6s var(--ease);will-change:transform}
+.sector{flex:0 0 auto;width:var(--iw);cursor:pointer;transition:width .6s var(--ease)}
+.sector.is-active{width:var(--aw)}
+.sector-img{position:relative;width:100%;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line)}
 .sector-img::before{content:"";position:absolute;inset:0;z-index:0;background:var(--bg) center/cover;transition:transform .5s var(--ease)}
-.sector:hover .sector-img::before{transform:scale(1.06)}
+.sector:hover .sector-img::before{transform:scale(1.05)}
 .sector-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
-.sector-label{position:absolute;top:16px;left:0;right:0;text-align:center;z-index:2;color:#fff;
-  font-weight:600;font-size:15px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
-.sector-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s var(--ease)}
-.sector.is-active .sector-detail{max-height:280px;opacity:1;padding-top:16px}
-.sector-detail h3{margin:0 0 6px;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink)}
-.sector-detail p{margin:0 0 10px;font-size:.98rem;line-height:1.5;color:var(--muted)}
-.sector-detail .more{display:inline-flex;align-items:center;color:var(--accent);font-weight:600;font-size:.95rem;text-decoration:none}
+.sector-label{position:absolute;top:14px;left:0;right:0;text-align:center;z-index:2;color:#fff;
+  font-weight:600;font-size:14px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
+.sector-detail{opacity:0;max-height:0;overflow:hidden;transition:opacity .4s var(--ease),max-height .5s var(--ease)}
+.sector.is-active .sector-detail{opacity:1;max-height:220px;padding-top:16px}
+.sector-detail h3{margin:0 0 6px;font-size:1.15rem;letter-spacing:-.01em;color:var(--ink)}
+.sector-detail p{margin:0 0 10px;font-size:.95rem;line-height:1.5;color:var(--muted)}
+.sector-detail .more{display:inline-flex;align-items:center;color:var(--accent);font-weight:600;font-size:.9rem;text-decoration:none}
 .sector-detail .more::before{content:"\21B3";margin-right:6px}
 .sector-detail .more:hover{text-decoration:underline}
-@media (max-width:760px){ .sector{flex-basis:80vw} .sector-img{height:300px} }
+@media (max-width:640px){ .caro-section{--iw:42vw;--aw:78vw;--gap:14px} }
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
 
@@ -686,7 +686,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       <button type="button" class="caro-arrow" data-dir="1" aria-label="Weiter">&#8250;</button>
     </div>
   </div>
-  <div class="caro" role="region" aria-label="Bereiche">
+  <div class="caro-stage">
+  <div class="caro-row" role="region" aria-label="Bereiche">
     <article class="sector is-active">
       <div class="sector-img" style="--bg:url(restaurant-abend.jpg)"><span class="sector-label">Restaurant</span></div>
       <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
@@ -703,6 +704,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       <div class="sector-img" style="--bg:url(kofferwagen-lobby.jpg)"><span class="sector-label">Bankett &amp; Events</span></div>
       <div class="sector-detail"><h3>Bankett &amp; Events</h3><p>Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
+  </div>
   </div>
 </section>
 
@@ -1238,36 +1240,42 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 </script>
 
 <script>
-/* Bereiche – Karussell: aktive = zentrierte Kachel, Pfeile, Fortschritt */
+/* Bereiche – Karussell (Legora-Stil): aktive Kachel waechst, Reihe wird zentriert */
 (function () {
   document.querySelectorAll(".caro-section").forEach(function (sec) {
-    var caro = sec.querySelector(".caro");
+    var stage = sec.querySelector(".caro-stage");
+    var row = sec.querySelector(".caro-row");
     var tiles = [].slice.call(sec.querySelectorAll(".sector"));
     var fill = sec.querySelector(".caro-bar-fill");
-    if (!caro || !tiles.length) return;
-    function update() {
-      var center = caro.scrollLeft + caro.clientWidth / 2, best = 0, bestD = Infinity;
-      tiles.forEach(function (t, i) {
-        var c = t.offsetLeft + t.offsetWidth / 2, d = Math.abs(c - center);
-        if (d < bestD) { bestD = d; best = i; }
-      });
-      tiles.forEach(function (t, i) { t.classList.toggle("is-active", i === best); });
-      var max = caro.scrollWidth - caro.clientWidth;
-      if (fill) fill.style.width = Math.max(12, max > 0 ? (caro.scrollLeft / max * 100) : 100) + "%";
+    var prev = sec.querySelector('.caro-arrow[data-dir="-1"]');
+    var next = sec.querySelector('.caro-arrow[data-dir="1"]');
+    if (!row || !stage || !tiles.length) return;
+    var active = 0, Aw = 0, Iw = 0, G = 0;
+    function measure() {
+      var inact = tiles[active === 0 ? (tiles.length > 1 ? 1 : 0) : 0];
+      Aw = tiles[active].offsetWidth;
+      Iw = inact ? inact.offsetWidth : Aw;
+      G = parseFloat(getComputedStyle(row).gap) || 30;
     }
-    var raf;
-    caro.addEventListener("scroll", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
-    window.addEventListener("resize", update);
-    sec.querySelectorAll(".caro-arrow").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var w = tiles[0].getBoundingClientRect().width + 20;
-        caro.scrollBy({ left: (+b.dataset.dir) * w, behavior: "smooth" });
-      });
-    });
-    tiles.forEach(function (t) {
-      t.addEventListener("click", function () { t.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }); });
-    });
-    update();
+    function layout() {
+      var activeLeft = active * (Iw + G);
+      var tx = stage.clientWidth / 2 - (activeLeft + Aw / 2);
+      row.style.transform = "translateX(" + Math.round(tx) + "px)";
+      if (fill) fill.style.width = ((active + 1) / tiles.length * 100) + "%";
+      if (prev) prev.disabled = active === 0;
+      if (next) next.disabled = active === tiles.length - 1;
+    }
+    function setActive(i) {
+      active = Math.max(0, Math.min(tiles.length - 1, i));
+      tiles.forEach(function (t, idx) { t.classList.toggle("is-active", idx === active); });
+      layout();
+    }
+    if (prev) prev.addEventListener("click", function () { setActive(active - 1); });
+    if (next) next.addEventListener("click", function () { setActive(active + 1); });
+    tiles.forEach(function (t, i) { t.addEventListener("click", function () { setActive(i); }); });
+    window.addEventListener("resize", function () { measure(); layout(); });
+    // Startzustand messen (aktive = 0), dann zentrieren
+    requestAnimationFrame(function () { measure(); layout(); });
   });
 })();
 </script>
