@@ -150,28 +150,36 @@ a{color:inherit;text-decoration:none}
 .step-cap{padding:16px 2px 0}
 .step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
 .step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
-/* Bereiche – große Bild-Kacheln, aktive zeigt Text darunter */
-.sectors{display:flex;gap:clamp(10px,1.4vw,18px);align-items:flex-start;margin-top:clamp(28px,4vw,56px)}
-.sector{flex:1;min-width:0;cursor:pointer}
+/* Bereiche – Karussell (große Bild-Kacheln, aktive größer mit Text) */
+.caro-head{text-align:center}
+.caro-head .lede{margin-inline:auto}
+.caro-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.caro-arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:var(--paper);
+  color:var(--ink);font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center;
+  transition:background .2s var(--ease),color .2s var(--ease)}
+.caro-arrow:hover{background:var(--tile);color:var(--accent-deep)}
+.caro-bar{width:min(260px,40vw);height:4px;border-radius:999px;background:var(--line);overflow:hidden}
+.caro-bar-fill{display:block;height:100%;width:12%;background:var(--accent);border-radius:999px;transition:width .2s linear}
+.caro{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;align-items:flex-start;
+  margin-top:clamp(24px,3vw,44px);padding-inline:var(--gut);scroll-padding-inline:var(--gut);
+  -ms-overflow-style:none;scrollbar-width:none}
+.caro::-webkit-scrollbar{display:none}
+.sector{flex:0 0 clamp(300px,40vw,520px);scroll-snap-align:center;cursor:pointer;
+  transform:scale(.955);opacity:.6;transition:transform .4s var(--ease),opacity .4s var(--ease)}
+.sector.is-active{transform:scale(1);opacity:1}
 .sector-img{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
-  background-size:cover;background-position:center;height:clamp(300px,42vh,430px);transition:height .55s var(--ease)}
-.sector.is-open .sector-img{height:clamp(420px,60vh,620px)}
-.sector-img::before{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
+  background-size:cover;background-position:center;height:clamp(320px,50vh,480px)}
+.sector-img::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
 .sector-label{position:absolute;top:16px;left:0;right:0;text-align:center;z-index:2;color:#fff;
   font-weight:600;font-size:15px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
 .sector-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s var(--ease)}
-.sector.is-open .sector-detail{max-height:280px;opacity:1;padding-top:16px}
+.sector.is-active .sector-detail{max-height:280px;opacity:1;padding-top:16px}
 .sector-detail h3{margin:0 0 6px;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink)}
-.sector-detail p{margin:0 0 10px;font-size:.98rem;line-height:1.5;color:var(--muted);max-width:42ch}
+.sector-detail p{margin:0 0 10px;font-size:.98rem;line-height:1.5;color:var(--muted)}
 .sector-detail .more{display:inline-flex;align-items:center;color:var(--accent);font-weight:600;font-size:.95rem;text-decoration:none}
 .sector-detail .more::before{content:"\21B3";margin-right:6px}
 .sector-detail .more:hover{text-decoration:underline}
-@media (max-width:760px){
-  .sectors{flex-direction:column}
-  .sector-img{height:200px}
-  .sector.is-open .sector-img{height:260px}
-}
+@media (max-width:760px){ .sector{flex-basis:80vw} .sector-img{height:300px} }
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
 
@@ -666,15 +674,19 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
 </section>
 
-<!-- ══════════ Bereiche ══════════ -->
-<section class="sec" id="bereiche">
-  <div class="wrap stack" data-stagger>
-    <span class="label">Einsatz</span>
-    <h2 class="h2">Wo Closewise arbeitet.</h2>
-    <p class="lede">Ein Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.</p>
+<!-- ══════════ Bereiche (Karussell) ══════════ -->
+<section class="sec caro-section" id="bereiche">
+  <div class="wrap stack caro-head" data-stagger>
+    <h2 class="h2">Jedes Outlet. Jede Nacht.</h2>
+    <p class="lede">Closewise übernimmt den Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.</p>
+    <div class="caro-nav">
+      <button type="button" class="caro-arrow" data-dir="-1" aria-label="Zurück">&#8249;</button>
+      <div class="caro-bar"><span class="caro-bar-fill"></span></div>
+      <button type="button" class="caro-arrow" data-dir="1" aria-label="Weiter">&#8250;</button>
+    </div>
   </div>
-  <div class="wrap-wide sectors" data-anim="rise">
-    <article class="sector is-open">
+  <div class="caro" role="region" aria-label="Bereiche">
+    <article class="sector is-active">
       <div class="sector-img" style="background-image:url(restaurant-abend.jpg)"><span class="sector-label">Restaurant</span></div>
       <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
@@ -999,8 +1011,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     "Roomservice · nie aufs Zimmer": "Room service · never on the room",
     "Die kurze Liste klären": "Clear the short list",
     "Einsatz": "Sectors",
-    "Wo Closewise arbeitet.": "Where Closewise works.",
-    "Ein Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.": "One night close for every outlet in the house, from the restaurant to the banqueting floor.",
+    "Jedes Outlet. Jede Nacht.": "Every outlet. Every night.",
+    "Closewise übernimmt den Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.": "Closewise runs the night close for every outlet in the house, from the restaurant to the banqueting floor.",
     "Restaurant": "Restaurant",
     "Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.": "Every receipt against card terminal and till; voids and discounts surface.",
     "Hotel": "Hotel",
@@ -1225,16 +1237,36 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 </script>
 
 <script>
-/* Bereiche – aktive Kachel per Hover (Desktop) / Tap (Mobil) */
+/* Bereiche – Karussell: aktive = zentrierte Kachel, Pfeile, Fortschritt */
 (function () {
-  var canHover = matchMedia("(hover:hover)").matches;
-  document.querySelectorAll(".sectors").forEach(function (row) {
-    var items = [].slice.call(row.querySelectorAll(".sector"));
-    function open(el) { items.forEach(function (i) { i.classList.toggle("is-open", i === el); }); }
-    items.forEach(function (el) {
-      el.addEventListener("click", function () { open(el); });
-      if (canHover) el.addEventListener("mouseenter", function () { open(el); });
+  document.querySelectorAll(".caro-section").forEach(function (sec) {
+    var caro = sec.querySelector(".caro");
+    var tiles = [].slice.call(sec.querySelectorAll(".sector"));
+    var fill = sec.querySelector(".caro-bar-fill");
+    if (!caro || !tiles.length) return;
+    function update() {
+      var center = caro.scrollLeft + caro.clientWidth / 2, best = 0, bestD = Infinity;
+      tiles.forEach(function (t, i) {
+        var c = t.offsetLeft + t.offsetWidth / 2, d = Math.abs(c - center);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      tiles.forEach(function (t, i) { t.classList.toggle("is-active", i === best); });
+      var max = caro.scrollWidth - caro.clientWidth;
+      if (fill) fill.style.width = Math.max(12, max > 0 ? (caro.scrollLeft / max * 100) : 100) + "%";
+    }
+    var raf;
+    caro.addEventListener("scroll", function () { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", update);
+    sec.querySelectorAll(".caro-arrow").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var w = tiles[0].getBoundingClientRect().width + 20;
+        caro.scrollBy({ left: (+b.dataset.dir) * w, behavior: "smooth" });
+      });
     });
+    tiles.forEach(function (t) {
+      t.addEventListener("click", function () { t.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }); });
+    });
+    update();
   });
 })();
 </script>
