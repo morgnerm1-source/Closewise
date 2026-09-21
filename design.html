@@ -150,24 +150,27 @@ a{color:inherit;text-decoration:none}
 .step-cap{padding:16px 2px 0}
 .step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
 .step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
-/* Bereiche – horizontales Accordion */
-.sectors{display:flex;gap:10px;height:clamp(340px,46vh,520px);margin-top:clamp(28px,4vw,56px)}
-.sector{position:relative;flex:1;min-width:0;border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
-  background-size:cover;background-position:center;border:1px solid var(--line);transition:flex .55s var(--ease)}
-.sector.is-open{flex:3.2}
-.sector::before{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(10,19,48,.16) 0%,rgba(10,19,48,.04) 32%,rgba(10,19,48,.74) 100%)}
-.sector-label{position:absolute;top:14px;left:16px;z-index:2;color:#fff;font-weight:600;font-size:14px;
-  text-shadow:0 1px 10px rgba(10,19,48,.45)}
-.sector-detail{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;color:#fff;
-  opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none}
-.sector.is-open .sector-detail{opacity:1;transform:none;transition-delay:.12s}
-.sector-detail h3{margin:0 0 5px;font-size:1.2rem;letter-spacing:-.01em}
-.sector-detail p{margin:0;font-size:.95rem;color:rgba(255,255,255,.86);max-width:36ch}
+/* Bereiche – große Bild-Kacheln, aktive zeigt Text darunter */
+.sectors{display:flex;gap:clamp(10px,1.4vw,18px);align-items:flex-start;margin-top:clamp(28px,4vw,56px)}
+.sector{flex:1;min-width:0;cursor:pointer}
+.sector-img{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
+  background-size:cover;background-position:center;height:clamp(300px,42vh,430px);transition:height .55s var(--ease)}
+.sector.is-open .sector-img{height:clamp(420px,60vh,620px)}
+.sector-img::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
+.sector-label{position:absolute;top:16px;left:0;right:0;text-align:center;z-index:2;color:#fff;
+  font-weight:600;font-size:15px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
+.sector-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s var(--ease)}
+.sector.is-open .sector-detail{max-height:280px;opacity:1;padding-top:16px}
+.sector-detail h3{margin:0 0 6px;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink)}
+.sector-detail p{margin:0 0 10px;font-size:.98rem;line-height:1.5;color:var(--muted);max-width:42ch}
+.sector-detail .more{display:inline-flex;align-items:center;color:var(--accent);font-weight:600;font-size:.95rem;text-decoration:none}
+.sector-detail .more::before{content:"\21B3";margin-right:6px}
+.sector-detail .more:hover{text-decoration:underline}
 @media (max-width:760px){
-  .sectors{flex-direction:column;height:auto}
-  .sector{flex:none;height:150px}
-  .sector.is-open{height:260px}
+  .sectors{flex-direction:column}
+  .sector-img{height:200px}
+  .sector.is-open .sector-img{height:260px}
 }
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
@@ -671,21 +674,21 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     <p class="lede">Ein Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.</p>
   </div>
   <div class="wrap-wide sectors" data-anim="rise">
-    <article class="sector is-open" style="background-image:url(restaurant-abend.jpg)">
-      <span class="sector-label">Restaurant</span>
-      <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p></div>
+    <article class="sector is-open">
+      <div class="sector-img" style="background-image:url(restaurant-abend.jpg)"><span class="sector-label">Restaurant</span></div>
+      <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
-    <article class="sector" style="background-image:url(rezeption-nacht.jpg)">
-      <span class="sector-label">Hotel</span>
-      <div class="sector-detail"><h3>Hotel</h3><p>Vier Quellen je Nacht abgeglichen, die kurze Liste liegt der Schichtleitung morgens vor.</p></div>
+    <article class="sector">
+      <div class="sector-img" style="background-image:url(rezeption-nacht.jpg)"><span class="sector-label">Hotel</span></div>
+      <div class="sector-detail"><h3>Hotel</h3><p>Vier Quellen je Nacht abgeglichen, die kurze Liste liegt der Schichtleitung morgens vor.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
-    <article class="sector" style="background-image:url(glocke-empfang.jpg)">
-      <span class="sector-label">Roomservice</span>
-      <div class="sector-detail"><h3>Roomservice</h3><p>Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.</p></div>
+    <article class="sector">
+      <div class="sector-img" style="background-image:url(glocke-empfang.jpg)"><span class="sector-label">Roomservice</span></div>
+      <div class="sector-detail"><h3>Roomservice</h3><p>Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
-    <article class="sector" style="background-image:url(kofferwagen-lobby.jpg)">
-      <span class="sector-label">Bankett &amp; Events</span>
-      <div class="sector-detail"><h3>Bankett &amp; Events</h3><p>Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.</p></div>
+    <article class="sector">
+      <div class="sector-img" style="background-image:url(kofferwagen-lobby.jpg)"><span class="sector-label">Bankett &amp; Events</span></div>
+      <div class="sector-detail"><h3>Bankett &amp; Events</h3><p>Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
   </div>
 </section>
@@ -1006,6 +1009,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     "Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.": "Amounts booked to the room checked, right until the guest checks out.",
     "Bankett & Events": "Banqueting & events",
     "Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.": "Large bills and deposits cleanly matched against terminal and account.",
+    "Mehr erfahren": "Learn more",
     "Übrig bleiben 3–7 offene Punkte je Nacht, jeder mit Outlet, Beleg und Ursache. Den Rest hat Closewise schon abgehakt.": "What's left is 3–7 open points a night, each with outlet, receipt and cause. Closewise has already ticked off the rest.",
     // Ablauf
     "Drei Schritte, jede Nacht dieselben.": "Three steps, the same every night.",
