@@ -113,10 +113,9 @@ a{color:inherit;text-decoration:none}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);
   margin-top:clamp(28px,4vw,56px)}
 .step{display:flex;flex-direction:column}
-.step-media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;
-  border:1px solid var(--line);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.step-media img{display:block;width:100%;height:100%;object-fit:cover}
-.step:hover .step-media{transform:translateY(-8px) scale(1.02);box-shadow:0 26px 54px rgba(10,19,48,.22);z-index:2}
+.step-media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line)}
+.step-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.step:hover .step-media img{transform:scale(1.05)}
 .step-no{position:absolute;top:14px;left:14px;z-index:2;width:30px;height:30px;border-radius:8px;
   display:grid;place-items:center;font-size:14px;font-weight:600;color:#fff;
   background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28)}
@@ -168,11 +167,10 @@ a{color:inherit;text-decoration:none}
 .sector{flex:0 0 clamp(300px,40vw,520px);scroll-snap-align:center;cursor:pointer;
   transform:scale(.955);opacity:.6;transition:transform .4s var(--ease),opacity .4s var(--ease)}
 .sector.is-active{transform:scale(1);opacity:1}
-.sector-img{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
-  background-size:cover;background-position:center;height:clamp(320px,50vh,480px);
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.sector:hover .sector-img{transform:translateY(-6px);box-shadow:0 22px 46px rgba(10,19,48,.24)}
-.sector-img::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
+.sector-img{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);height:clamp(320px,50vh,480px)}
+.sector-img::before{content:"";position:absolute;inset:0;z-index:0;background:var(--bg) center/cover;transition:transform .5s var(--ease)}
+.sector:hover .sector-img::before{transform:scale(1.06)}
+.sector-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
 .sector-label{position:absolute;top:16px;left:0;right:0;text-align:center;z-index:2;color:#fff;
   font-weight:600;font-size:15px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
 .sector-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s var(--ease)}
@@ -690,19 +688,19 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
   <div class="caro" role="region" aria-label="Bereiche">
     <article class="sector is-active">
-      <div class="sector-img" style="background-image:url(restaurant-abend.jpg)"><span class="sector-label">Restaurant</span></div>
+      <div class="sector-img" style="--bg:url(restaurant-abend.jpg)"><span class="sector-label">Restaurant</span></div>
       <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
     <article class="sector">
-      <div class="sector-img" style="background-image:url(rezeption-nacht.jpg)"><span class="sector-label">Hotel</span></div>
+      <div class="sector-img" style="--bg:url(rezeption-nacht.jpg)"><span class="sector-label">Hotel</span></div>
       <div class="sector-detail"><h3>Hotel</h3><p>Vier Quellen je Nacht abgeglichen, die kurze Liste liegt der Schichtleitung morgens vor.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
     <article class="sector">
-      <div class="sector-img" style="background-image:url(glocke-empfang.jpg)"><span class="sector-label">Roomservice</span></div>
+      <div class="sector-img" style="--bg:url(glocke-empfang.jpg)"><span class="sector-label">Roomservice</span></div>
       <div class="sector-detail"><h3>Roomservice</h3><p>Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
     <article class="sector">
-      <div class="sector-img" style="background-image:url(kofferwagen-lobby.jpg)"><span class="sector-label">Bankett &amp; Events</span></div>
+      <div class="sector-img" style="--bg:url(kofferwagen-lobby.jpg)"><span class="sector-label">Bankett &amp; Events</span></div>
       <div class="sector-detail"><h3>Bankett &amp; Events</h3><p>Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.</p><a class="more" href="#tutorial">Mehr erfahren</a></div>
     </article>
   </div>
