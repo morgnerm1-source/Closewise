@@ -150,6 +150,25 @@ a{color:inherit;text-decoration:none}
 .step-cap{padding:16px 2px 0}
 .step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
 .step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
+/* Bereiche – horizontales Accordion */
+.sectors{display:flex;gap:10px;height:clamp(340px,46vh,520px);margin-top:clamp(28px,4vw,56px)}
+.sector{position:relative;flex:1;min-width:0;border-radius:var(--r-lg);overflow:hidden;cursor:pointer;
+  background-size:cover;background-position:center;border:1px solid var(--line);transition:flex .55s var(--ease)}
+.sector.is-open{flex:3.2}
+.sector::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,19,48,.16) 0%,rgba(10,19,48,.04) 32%,rgba(10,19,48,.74) 100%)}
+.sector-label{position:absolute;top:14px;left:16px;z-index:2;color:#fff;font-weight:600;font-size:14px;
+  text-shadow:0 1px 10px rgba(10,19,48,.45)}
+.sector-detail{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;color:#fff;
+  opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none}
+.sector.is-open .sector-detail{opacity:1;transform:none;transition-delay:.12s}
+.sector-detail h3{margin:0 0 5px;font-size:1.2rem;letter-spacing:-.01em}
+.sector-detail p{margin:0;font-size:.95rem;color:rgba(255,255,255,.86);max-width:36ch}
+@media (max-width:760px){
+  .sectors{flex-direction:column;height:auto}
+  .sector{flex:none;height:150px}
+  .sector.is-open{height:260px}
+}
 .num{font-variant-numeric:tabular-nums}
 .demo-hint{font-size:12px;color:var(--muted)}
 
@@ -644,6 +663,33 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
 </section>
 
+<!-- ══════════ Bereiche ══════════ -->
+<section class="sec" id="bereiche">
+  <div class="wrap stack" data-stagger>
+    <span class="label">Einsatz</span>
+    <h2 class="h2">Wo Closewise arbeitet.</h2>
+    <p class="lede">Ein Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.</p>
+  </div>
+  <div class="wrap-wide sectors" data-anim="rise">
+    <article class="sector is-open" style="background-image:url(restaurant-abend.jpg)">
+      <span class="sector-label">Restaurant</span>
+      <div class="sector-detail"><h3>Restaurant</h3><p>Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.</p></div>
+    </article>
+    <article class="sector" style="background-image:url(rezeption-nacht.jpg)">
+      <span class="sector-label">Hotel</span>
+      <div class="sector-detail"><h3>Hotel</h3><p>Vier Quellen je Nacht abgeglichen, die kurze Liste liegt der Schichtleitung morgens vor.</p></div>
+    </article>
+    <article class="sector" style="background-image:url(glocke-empfang.jpg)">
+      <span class="sector-label">Roomservice</span>
+      <div class="sector-detail"><h3>Roomservice</h3><p>Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.</p></div>
+    </article>
+    <article class="sector" style="background-image:url(kofferwagen-lobby.jpg)">
+      <span class="sector-label">Bankett &amp; Events</span>
+      <div class="sector-detail"><h3>Bankett &amp; Events</h3><p>Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.</p></div>
+    </article>
+  </div>
+</section>
+
 <!-- ══════════ Ablauf ══════════ -->
 <section class="sec" id="how">
   <div class="wrap stack" data-stagger>
@@ -949,6 +995,17 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     "Restaurant · Storno ohne Freigabe": "Restaurant · Void without approval",
     "Roomservice · nie aufs Zimmer": "Room service · never on the room",
     "Die kurze Liste klären": "Clear the short list",
+    "Einsatz": "Sectors",
+    "Wo Closewise arbeitet.": "Where Closewise works.",
+    "Ein Nachtabschluss für jeden Betrieb im Haus, vom Restaurant bis zur Bankett-Etage.": "One night close for every outlet in the house, from the restaurant to the banqueting floor.",
+    "Restaurant": "Restaurant",
+    "Jeder Bon gegen Kartenterminal und Kasse, Storno und Rabatt werden sichtbar.": "Every receipt against card terminal and till; voids and discounts surface.",
+    "Hotel": "Hotel",
+    "Vier Quellen je Nacht abgeglichen, die kurze Liste liegt der Schichtleitung morgens vor.": "Four sources reconciled each night; the short list is ready for your shift lead in the morning.",
+    "Roomservice": "Room service",
+    "Aufs Zimmer gebuchte Beträge geprüft, bis der Gast auscheckt.": "Amounts booked to the room checked, right until the guest checks out.",
+    "Bankett & Events": "Banqueting & events",
+    "Große Rechnungen und Anzahlungen sauber gegen Terminal und Konto.": "Large bills and deposits cleanly matched against terminal and account.",
     "Übrig bleiben 3–7 offene Punkte je Nacht, jeder mit Outlet, Beleg und Ursache. Den Rest hat Closewise schon abgehakt.": "What's left is 3–7 open points a night, each with outlet, receipt and cause. Closewise has already ticked off the rest.",
     // Ablauf
     "Drei Schritte, jede Nacht dieselben.": "Three steps, the same every night.",
@@ -1160,6 +1217,21 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
   Object.keys(felder).forEach(function (k) { felder[k].addEventListener("input", rechne); });
   rechne();
+})();
+</script>
+
+<script>
+/* Bereiche – aktive Kachel per Hover (Desktop) / Tap (Mobil) */
+(function () {
+  var canHover = matchMedia("(hover:hover)").matches;
+  document.querySelectorAll(".sectors").forEach(function (row) {
+    var items = [].slice.call(row.querySelectorAll(".sector"));
+    function open(el) { items.forEach(function (i) { i.classList.toggle("is-open", i === el); }); }
+    items.forEach(function (el) {
+      el.addEventListener("click", function () { open(el); });
+      if (canHover) el.addEventListener("mouseenter", function () { open(el); });
+    });
+  });
 })();
 </script>
 </body>
