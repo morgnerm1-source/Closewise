@@ -1250,9 +1250,9 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
     // Gegen Ende wird das ganze Bild extrem weiss (Blende), dann zieht die
     // naechste Section wie ein Popup hoch.
-    if (flash) flash.style.opacity = Math.max(0, Math.min(1, (p - 0.45) / 0.37));
+    if (flash) flash.style.opacity = Math.max(0, Math.min(1, (p - 0.45) / 0.35));
     if (p < 0.6) snapped = false;
-    if (p >= 0.84 && !snapped) {
+    if (p >= 0.82 && !snapped) {
       snapped = true;
       var d = document.getElementById("demo");
       if (d) pull(d.getBoundingClientRect().top + window.scrollY - 72);
