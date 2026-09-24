@@ -1238,7 +1238,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   var copy = sec.querySelector(".cinema-copy");
   var flash = sec.querySelector(".cinema-flash");
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var dur = 0, target = 0, cur = 0, primed = false, snapped = false;
+  var dur = 0, target = 0, cur = 0, primed = false, snapped = false, pulling = false;
   vid.addEventListener("loadedmetadata", function () { dur = vid.duration || 0; });
   function prime() { if (primed) return; primed = true; var p = vid.play(); if (p && p.then) p.then(function () { vid.pause(); }).catch(function () {}); }
   function onScroll() {
@@ -1246,27 +1246,37 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     var total = sec.offsetHeight - window.innerHeight;
     var scrolled = Math.min(Math.max(-top, 0), total);
     var p = total > 0 ? scrolled / total : 0;
-    target = Math.min(p, 0.86) * (dur || 0);
+    target = Math.min(p, 0.9) * (dur || 0);
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
-    // Gegen Ende wird das ganze Bild extrem weiss (Blende), dann zieht die
-    // naechste Section wie ein Popup hoch.
-    if (flash) flash.style.opacity = Math.max(0, Math.min(1, (p - 0.45) / 0.35));
-    if (p < 0.6) snapped = false;
-    if (p >= 0.82 && !snapped) {
+    // Weiss-Blende erst wenn das Video am Ende in den Laptop zoomt: exponentiell
+    // (erst kaum, dann schnell) von 0.74 bis 0.86. Waehrend des Aufzugs bleibt sie
+    // weiss; danach (snapped) 0, damit beim Zurueckscrollen aus der Demo kein
+    // weisser Bildschirm haengen bleibt.
+    if (flash) {
+      if (pulling) flash.style.opacity = 1;
+      else if (snapped) flash.style.opacity = 0;
+      else { var ft = Math.max(0, Math.min(1, (p - 0.74) / 0.12)); flash.style.opacity = p > 0.86 ? 0 : ft * ft * ft; }
+    }
+    if (p < 0.72) snapped = false;
+    if (p >= 0.86 && !snapped) {
       snapped = true;
       var d = document.getElementById("demo");
       if (d) pull(d.getBoundingClientRect().top + window.scrollY - 72);
     }
   }
-  // Eigene, gesperrte Zieh-Animation: setzt den Scroll jeden Frame neu, damit
-  // man zwischen den beiden Sections nicht stehen bleiben kann (Popup-Gefuehl).
+  // Eigene, gesperrte Zieh-Animation: haelt die Blende weiss und setzt den Scroll
+  // jeden Frame neu, damit man zwischen den beiden Sections nicht stehen bleiben
+  // kann (Popup-Gefuehl). Am Ende Blende wieder auf 0.
   function pull(toY) {
-    var startY = window.scrollY, dist = toY - startY, t0 = null, D = 620;
+    pulling = true;
+    if (flash) flash.style.opacity = 1;
+    var startY = window.scrollY, dist = toY - startY, t0 = null, D = 520;
     function step(now) {
       if (t0 === null) t0 = now;
       var k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
       window.scrollTo(0, startY + dist * e);
       if (k < 1) requestAnimationFrame(step);
+      else { pulling = false; if (flash) flash.style.opacity = 0; }
     }
     requestAnimationFrame(step);
   }
