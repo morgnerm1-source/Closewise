@@ -93,7 +93,7 @@ a{color:inherit;text-decoration:none}
 .lang-btn.is-on{background:var(--tile);color:var(--accent-deep)}
 .lang-btn:not(.is-on):hover{color:var(--ink)}
 /* Kino-Hero – Scroll steuert die Video-Zeit */
-.cinema{position:relative;height:480vh;background:#0A1330;margin-top:-72px}
+.cinema{position:relative;height:360vh;background:#0A1330;margin-top:-72px}
 .cinema-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
 .cinema-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0A1330}
 .cinema-overlay{position:absolute;inset:0;pointer-events:none;
@@ -1243,10 +1243,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     var total = sec.offsetHeight - window.innerHeight;
     var scrolled = Math.min(Math.max(-top, 0), total);
     var p = total > 0 ? scrolled / total : 0;
-    target = p * (dur || 0);
+    target = Math.min(p, 0.88) * (dur || 0);
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
-    if (p < 0.82) snapped = false;
-    if (p >= 0.9 && !snapped) {
+    if (p < 0.72) snapped = false;
+    if (p >= 0.84 && !snapped) {
       snapped = true;
       var d = document.getElementById("demo");
       if (d) window.scrollTo({ top: d.getBoundingClientRect().top + window.scrollY - 72, behavior: "auto" });
