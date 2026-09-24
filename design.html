@@ -1246,34 +1246,35 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     var total = sec.offsetHeight - window.innerHeight;
     var scrolled = Math.min(Math.max(-top, 0), total);
     var p = total > 0 ? scrolled / total : 0;
-    target = Math.min(p, 0.9) * (dur || 0);
+    // Video laeuft komplett bis zum Ende durch (es blendet von selbst nach Weiss aus).
+    target = p * (dur || 0);
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
-    // Weiss-Blende erst wenn das Video am Ende in den Laptop zoomt: exponentiell
-    // (erst kaum, dann schnell) von 0.74 bis 0.86. Waehrend des Aufzugs bleibt sie
-    // weiss; danach (snapped) 0, damit beim Zurueckscrollen aus der Demo kein
-    // weisser Bildschirm haengen bleibt.
+    // Das Video wird zum Schluss von selbst weiss; die Blende legt nur die letzten
+    // Prozente exponentiell auf reines Weiss. Beim Zurueckscrollen (snapped) aus,
+    // damit kein weisser Bildschirm haengen bleibt.
     if (flash) {
       if (pulling) flash.style.opacity = 1;
       else if (snapped) flash.style.opacity = 0;
-      else { var ft = Math.max(0, Math.min(1, (p - 0.74) / 0.12)); flash.style.opacity = p > 0.86 ? 0 : ft * ft * ft; }
+      else { var ft = Math.max(0, Math.min(1, (p - 0.87) / 0.10)); flash.style.opacity = ft * ft * ft; }
     }
-    if (p < 0.72) snapped = false;
-    if (p >= 0.86 && !snapped) {
+    if (p < 0.82) snapped = false;
+    if (p >= 0.98 && !snapped) {
       snapped = true;
       var d = document.getElementById("demo");
       if (d) pull(d.getBoundingClientRect().top + window.scrollY - 72);
     }
   }
   // Eigene, gesperrte Zieh-Animation: haelt die Blende weiss und setzt den Scroll
-  // jeden Frame neu, damit man zwischen den beiden Sections nicht stehen bleiben
-  // kann (Popup-Gefuehl). Am Ende Blende wieder auf 0.
+  // jeden Frame neu (easeInOut, damit der Uebergang sauber startet und ausrollt),
+  // sodass man zwischen den beiden Sections nicht stehen bleiben kann.
   function pull(toY) {
     pulling = true;
     if (flash) flash.style.opacity = 1;
-    var startY = window.scrollY, dist = toY - startY, t0 = null, D = 520;
+    var startY = window.scrollY, dist = toY - startY, t0 = null, D = 560;
     function step(now) {
       if (t0 === null) t0 = now;
-      var k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3);
+      var k = Math.min(1, (now - t0) / D);
+      var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       window.scrollTo(0, startY + dist * e);
       if (k < 1) requestAnimationFrame(step);
       else { pulling = false; if (flash) flash.style.opacity = 0; }
