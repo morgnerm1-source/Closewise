@@ -280,6 +280,7 @@ a{color:inherit;text-decoration:none}
   background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1)}
 .showband.light{background:var(--tint)}
 .showband.light::after{display:none}
+.showband.light .win{border-radius:16px;box-shadow:0 30px 80px rgba(18,34,78,.16),0 2px 8px rgba(18,34,78,.08)}
 .showband .hold{position:relative;z-index:2}
 
 /* ---- Das Produktfenster: so sieht die Demo aus ---- */
@@ -637,7 +638,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
 <!-- ══════════ Das große Produktfenster ══════════ -->
 <div class="wrap-wide" id="demo">
-  <div class="showband" data-anim="rise">
+  <div class="showband light" data-anim="rise" style="background:transparent;padding-left:0;padding-right:0;padding-top:0">
     <div class="hold" data-parallax="16">
       <div class="win" role="img" aria-label="Aufzeichnung der Closewise-Konsole beim Nachtabschluss für das Restaurant Spreeblick. Demodaten." style="display:block;min-height:0">
         <video autoplay muted loop playsinline preload="metadata" poster="produkt-demo.jpg" style="display:block;width:100%;height:auto">
@@ -1244,11 +1245,11 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     var p = total > 0 ? scrolled / total : 0;
     target = p * (dur || 0);
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
-    if (p < 0.9) snapped = false;
-    if (p >= 0.995 && !snapped) {
+    if (p < 0.82) snapped = false;
+    if (p >= 0.9 && !snapped) {
       snapped = true;
       var d = document.getElementById("demo");
-      if (d) window.scrollTo({ top: d.getBoundingClientRect().top + window.scrollY - 72, behavior: "smooth" });
+      if (d) window.scrollTo({ top: d.getBoundingClientRect().top + window.scrollY - 72, behavior: "auto" });
     }
   }
   function tick() {
