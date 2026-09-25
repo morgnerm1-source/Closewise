@@ -1269,10 +1269,13 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
     // Reines Weiss ganz am Ende (das Video ist da schon fast weiss).
     if (flash) { var ft = Math.max(0, Math.min(1, (p - 0.9) / 0.1)); flash.style.opacity = ft * ft; }
-    // Nicht zwischen den Sections stehen bleiben: wenn man im Endbereich anhaelt
-    // und zuletzt nach unten gescrollt hat, sauber auf die Demo einrasten.
+    // Nicht zwischen den Sections stehen bleiben: wenn das Video (fast) durch ist,
+    // die Demo aber noch nicht oben angedockt ist und man zuletzt nach unten
+    // gescrollt hat, sauber auf die Demo einrasten.
+    var d0 = document.getElementById("demo");
+    var demoGap = d0 ? (d0.getBoundingClientRect().top - 72) : 0;
     clearTimeout(snapTimer);
-    if (p > 0.8 && p < 0.999 && lastDir > 0) snapTimer = setTimeout(snapToDemo, 90);
+    if (p > 0.95 && demoGap > 40 && lastDir > 0) snapTimer = setTimeout(snapToDemo, 90);
   }
   function snapToDemo() {
     var d = document.getElementById("demo");
