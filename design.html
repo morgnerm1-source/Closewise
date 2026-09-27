@@ -114,6 +114,22 @@ a{color:inherit;text-decoration:none}
 .cinema-acts{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .cinema-acts .btn-line{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
 .cinema-acts .btn-line:hover{background:rgba(255,255,255,.14)}
+/* Randzeile: waehrend das Video laeuft, steht der Text nicht mehr mittig
+   ueber dem Bild, sondern klein unten links - wie eine Bauchbinde. Er
+   wechselt in drei Stufen mit dem Scrollfortschritt. */
+.cinema-rand{position:absolute;z-index:3;left:var(--gut);bottom:clamp(38px,7vh,86px);
+  max-width:min(32ch,64vw);color:#fff;pointer-events:none;
+  display:flex;flex-direction:column;gap:15px}
+.cinema-rand .strich{width:44px;height:2px;border-radius:2px;background:var(--hospitality);opacity:0}
+.cinema:not([data-stufe="0"]) .cinema-rand .strich{opacity:1}
+.cinema-rand .zeilen{display:grid}
+.cinema-rand .z{grid-area:1/1;font-weight:650;letter-spacing:-.032em;line-height:1.12;
+  font-size:clamp(1.25rem,2.5vw,2rem);text-shadow:0 2px 26px rgba(10,19,48,.55);
+  opacity:0;transform:translateY(14px)}
+.cinema[data-stufe="1"] .cinema-rand .z:nth-child(1),
+.cinema[data-stufe="2"] .cinema-rand .z:nth-child(2),
+.cinema[data-stufe="3"] .cinema-rand .z:nth-child(3){opacity:1;transform:none}
+
 .cinema-hint{display:inline-flex;align-items:center;gap:8px;margin-top:34px;font-size:13px;letter-spacing:.14em;
   text-transform:uppercase;color:rgba(255,255,255,.7)}
 .cinema-hint::after{content:"↓";animation:cinemabob 1.8s var(--ease) infinite}
@@ -125,6 +141,7 @@ a{color:inherit;text-decoration:none}
   .cinema-sticky{height:100svh}
   .cinema-flash{display:none}
   .cinema-hint{display:none}
+  .cinema-rand{display:none}
 }
 /* Header dunkel/transparent ueber dem Kino-Hero */
 .nav.on-cinema{background:transparent;border-bottom-color:transparent;box-shadow:none;backdrop-filter:none}
@@ -552,6 +569,9 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   .js .morgen-buehne.in .win .r:nth-child(4) .ok{transition-delay:.66s}
   .js .morgen-buehne.in .win .r:nth-child(5) .ok{transition-delay:.78s}
 
+  .cinema-rand .z{transition:opacity .55s var(--ease),transform .7s var(--ease)}
+  .cinema-rand .strich{transition:opacity .5s var(--ease)}
+
   .btn-solid:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(41,77,175,.28)}
   .btn-line:hover{transform:translateY(-1px)}
 }
@@ -644,7 +664,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 </header>
 
 <!-- ══════════ Kino-Hero (Scroll-Scrub) ══════════ -->
-<section class="cinema" id="cinema" aria-label="Intro">
+<section class="cinema" id="cinema" aria-label="Intro" data-stufe="0">
   <div class="cinema-sticky">
     <video class="cinema-video" muted playsinline preload="auto" poster="hero-scroll.jpg">
       <source src="hero-scroll.mp4" type="video/mp4">
@@ -659,6 +679,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
         <a class="btn btn-line btn-lg" href="#demo">Demo ansehen</a>
       </div>
       <span class="cinema-hint" aria-hidden="true">Scrollen</span>
+    </div>
+    <div class="cinema-rand" aria-hidden="true">
+      <span class="strich"></span>
+      <span class="zeilen">
+        <span class="z">Der Abend ist vorbei.</span>
+        <span class="z">Vier Auswertungen liegen vor.</span>
+        <span class="z">Eine davon passt nicht.</span>
+      </span>
     </div>
     <div class="cinema-flash" aria-hidden="true"></div>
   </div>
@@ -1351,7 +1379,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     var p = total > 0 ? scrolled / total : 0;
     var y = window.scrollY; if (y !== lastY) { lastDir = y > lastY ? 1 : -1; lastY = y; }
     target = p * (dur || 0);
-    if (copy) { copy.style.opacity = Math.max(0, 1 - p * 1.8); copy.style.pointerEvents = p > 0.5 ? "none" : "auto"; }
+    if (copy) { copy.style.opacity = Math.max(0, 1 - p * 3.2); copy.style.pointerEvents = p > 0.28 ? "none" : "auto"; }
+    // Randzeile: Stufe 0 = nichts, 1 bis 3 = die drei Zeilen nacheinander.
+    // Ab .86 wieder aus, dort uebernimmt die Weiss-Blende.
+    var stufe = 0;
+    if (p >= 0.30 && p < 0.52) stufe = 1;
+    else if (p >= 0.52 && p < 0.72) stufe = 2;
+    else if (p >= 0.72 && p < 0.86) stufe = 3;
+    if (sec.getAttribute("data-stufe") !== String(stufe)) sec.setAttribute("data-stufe", String(stufe));
     // Reines Weiss ganz am Ende (das Video ist da schon fast weiss).
     if (flash) { var ft = Math.max(0, Math.min(1, (p - 0.9) / 0.1)); flash.style.opacity = ft * ft; }
     // Nicht zwischen den Sections stehen bleiben: wenn das Video (fast) durch ist,
