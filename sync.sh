@@ -15,6 +15,7 @@ mkdir -p "$ZIEL"
 
 cp design.html "$ZIEL/index.html"
 cp design.html "$ZIEL/design.html"
+cp v2.html "$ZIEL/v2.html"          # die Umbau-Fassung, erreichbar unter /v2
 cp ablauf.html "$ZIEL/"
 cp stil.css seite.js "$ZIEL/"
 cp textur-dunkel.png textur-hell.png flaechen-dunkel.svg "$ZIEL/"
