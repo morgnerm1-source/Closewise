@@ -58,7 +58,7 @@
   --r:10px; --r-lg:14px; --r-xl:22px;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--deep)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   font-size:16px;line-height:1.55;letter-spacing:-.006em;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
@@ -214,7 +214,9 @@ a{color:inherit;text-decoration:none}
 
 
 /* Bereiche – Karussell (Legora-exakt: aktive Kachel waechst, Reihe zentriert) */
-.caro-section{--iw:clamp(150px,17vw,213px);--aw:clamp(280px,32vw,398px);--gap:clamp(18px,3.6vw,60px);overflow:hidden}
+/* Kachelmasse so, dass der ganze Abschnitt auf einen Laptopschirm passt:
+   quadratische Bilder statt 4:5, schmalere Kacheln, kuerzerer Aufklapptext. */
+.caro-section{--iw:clamp(130px,14vw,180px);--aw:clamp(260px,27vw,348px);--gap:clamp(16px,2.6vw,44px);overflow:hidden}
 .caro-head{text-align:center}
 .caro-head .lede{margin-inline:auto}
 .caro-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
@@ -225,19 +227,21 @@ a{color:inherit;text-decoration:none}
 .caro-arrow:disabled{opacity:.35;cursor:default}
 .caro-bar{width:min(260px,40vw);height:4px;border-radius:999px;background:var(--line);overflow:hidden}
 .caro-bar-fill{display:block;height:100%;width:25%;background:var(--accent);border-radius:999px;transition:width .5s var(--ease)}
-.caro-stage{overflow:hidden;margin-top:clamp(26px,3.4vw,48px)}
+.caro-stage{overflow:hidden;margin-top:clamp(20px,2.6vw,36px);
+  cursor:grab;touch-action:pan-y}
+.caro-stage:active{cursor:grabbing}
 .caro-row{display:flex;gap:var(--gap);align-items:flex-start;width:max-content;
   transition:transform .6s var(--ease);will-change:transform}
 .sector{flex:0 0 auto;width:var(--iw);cursor:pointer;transition:width .6s var(--ease)}
 .sector.is-active{width:var(--aw)}
-.sector-img{position:relative;width:100%;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line)}
+.sector-img{position:relative;width:100%;aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line)}
 .sector-img::before{content:"";position:absolute;inset:0;z-index:0;background:var(--bg) center/cover;transition:transform .5s var(--ease)}
 .sector:hover .sector-img::before{transform:scale(1.05)}
 .sector-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,19,48,.42) 0%,rgba(10,19,48,0) 34%)}
 .sector-label{position:absolute;top:14px;left:0;right:0;text-align:center;z-index:2;color:#fff;
   font-weight:600;font-size:14px;text-shadow:0 1px 10px rgba(10,19,48,.5)}
 .sector-detail{opacity:0;max-height:0;overflow:hidden;transition:opacity .4s var(--ease),max-height .5s var(--ease)}
-.sector.is-active .sector-detail{opacity:1;max-height:220px;padding-top:16px}
+.sector.is-active .sector-detail{opacity:1;max-height:170px;padding-top:14px}
 .sector-detail h3{margin:0 0 6px;font-size:1.15rem;letter-spacing:-.01em;color:var(--ink)}
 .sector-detail p{margin:0 0 10px;font-size:.95rem;line-height:1.5;color:var(--muted)}
 .sector-detail .more{display:inline-flex;align-items:center;color:var(--accent);font-weight:600;font-size:.9rem;text-decoration:none}
@@ -536,7 +540,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .cta-acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 
 /* ---- Fuß ---- */
-.site-foot{margin-top:clamp(40px,6vh,88px);background:linear-gradient(250deg,var(--deep-2) 0%,#09132F 100%);
+.site-foot{margin-top:0;background:linear-gradient(250deg,var(--deep-2) 0%,#09132F 100%);
   color:#fff;position:relative;overflow:hidden;isolation:isolate}
 .site-foot::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1);opacity:.55}
@@ -1359,7 +1363,42 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     }
     if (prev) prev.addEventListener("click", function () { setActive(active - 1); });
     if (next) next.addEventListener("click", function () { setActive(active + 1); });
-    tiles.forEach(function (t, i) { t.addEventListener("click", function () { setActive(i); }); });
+
+    /* Ziehen mit Maus und Finger sowie waagerechtes Wischen am Trackpad.
+       Bisher ging nur der Klick auf die Pfeile. touch-action:pan-y laesst
+       das senkrechte Scrollen der Seite unberuehrt. */
+    var startX = 0, zieht = false, weg = 0, warZug = false;
+    function zugEnde() {
+      if (!zieht) return;
+      zieht = false;
+      warZug = Math.abs(weg) > 6;
+      if (Math.abs(weg) > 60) setActive(active + (weg < 0 ? 1 : -1));
+      setTimeout(function () { warZug = false; }, 0);
+    }
+    stage.addEventListener("pointerdown", function (e) {
+      if (e.button) return;
+      zieht = true; startX = e.clientX; weg = 0;
+      try { stage.setPointerCapture(e.pointerId); } catch (x) {}
+    });
+    stage.addEventListener("pointermove", function (e) {
+      if (zieht) weg = e.clientX - startX;
+    });
+    stage.addEventListener("pointerup", zugEnde);
+    stage.addEventListener("pointercancel", zugEnde);
+
+    var radSperre = 0;
+    stage.addEventListener("wheel", function (e) {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;  // senkrecht: Seite scrollen
+      e.preventDefault();
+      if (radSperre) return;
+      setActive(active + (e.deltaX > 0 ? 1 : -1));
+      radSperre = setTimeout(function () { radSperre = 0; }, 320);
+    }, { passive: false });
+
+    // Nach einem Zug nicht zusaetzlich die Kachel unter dem Finger waehlen.
+    tiles.forEach(function (t, i) {
+      t.addEventListener("click", function () { if (!warZug) setActive(i); });
+    });
     window.addEventListener("resize", function () { measure(); layout(); });
     // Startzustand messen (aktive = 0), dann zentrieren
     requestAnimationFrame(function () { measure(); layout(); });
@@ -1437,7 +1476,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 (function () {
   var nav = document.querySelector(".nav"), sec = document.querySelector(".cinema");
   if (!nav || !sec) return;
-  function upd() { nav.classList.toggle("on-cinema", sec.getBoundingClientRect().bottom > 80); }
+  function upd() {
+    var r = sec.getBoundingClientRect();
+    var weg = sec.offsetHeight - innerHeight;
+    var p = weg > 0 ? Math.min(Math.max(-r.top / weg, 0), 1) : 0;
+    /* Nur solange der Hero wirklich dunkel ist. Zum Ende blendet er nach
+       Weiss - weisse Schrift auf weissem Grund waere unsichtbar. */
+    nav.classList.toggle("on-cinema", r.bottom > 80 && p < 0.72);
+  }
   window.addEventListener("scroll", upd, { passive: true });
   window.addEventListener("resize", upd);
   upd();
