@@ -152,9 +152,6 @@ a{color:inherit;text-decoration:none}
 .h3{font-weight:600;letter-spacing:-.014em;font-size:1.05rem;line-height:1.34;color:var(--midnight)}
 .lede{font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.62;color:var(--muted);max-width:56ch}
 .body{font-size:15px;line-height:1.62;color:var(--muted);max-width:46ch}
-.label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-.label::before{content:"";width:18px;height:2px;border-radius:2px;background:currentColor}
 /* Ablauf-Karten (Tutorial): Foto-Hintergrund + kleine Demo-UI */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);
   margin-top:clamp(28px,4vw,56px)}
@@ -397,7 +394,6 @@ a{color:inherit;text-decoration:none}
 .dark-in{position:relative;z-index:1;padding:clamp(40px,6vw,88px) clamp(22px,4.4vw,68px)}
 .dark .h2,.dark .h3{color:#fff}
 .dark .body,.dark .lede{color:var(--on-dark-2)}
-.dark .label{color:var(--hospitality)}
 
 /* ---- Zwei Spalten ---- */
 .split{display:grid;gap:clamp(26px,4vw,60px);align-items:center}
@@ -509,14 +505,11 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .quellen::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1);opacity:.42}
 .quellen>*{position:relative;z-index:1}
-.quellen .label{color:var(--hospitality)}
 
 .q-kopf{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
   gap:18px clamp(24px,4vw,64px)}
 .q-h{margin-top:16px;font-weight:650;letter-spacing:-.038em;line-height:1.02;color:#fff;
   font-size:clamp(2rem,4.6vw,3.5rem);text-wrap:balance}
-.q-zaehler{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;padding-bottom:10px}
 
 /* Die vier Zeilen */
 .q-liste{margin-top:clamp(34px,6vw,74px);border-top:1px solid rgba(255,255,255,.17)}
@@ -563,8 +556,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .platz-bild .platz{grid-area:1/1;display:flex;flex-direction:column;align-items:center;
   gap:9px;text-align:center;padding:24px;pointer-events:none}
 .platz-bild:has(img) .platz,.platz-bild:has(video) .platz{display:none}
-.platz-bild .mass{font-size:11px;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent)}
+.platz-bild .mass{font-size:13px;font-weight:600;color:var(--accent)}
 .platz-bild .wunsch{font-size:13.5px;line-height:1.5;color:var(--muted);max-width:40ch}
 .platz-bild::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   border-radius:inherit;border:1px dashed var(--line-2)}
@@ -781,10 +773,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
     <div class="q-kopf" data-anim="rise">
       <div>
-        <span class="label">Die vier Quellen</span>
         <h2 class="q-h" id="q-h">Vier Quellen.<br>Eine Nacht.</h2>
       </div>
-      <span class="q-zaehler">01 — 04</span>
     </div>
 
     <div class="q-liste">
@@ -800,7 +790,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
               <p class="q-satz">Jede Position, die gebongt wurde — Tisch, Uhrzeit, Betrag, Zahlart.</p>
               <div class="platz-bild breit dunkel">
                 <div class="platz">
-                  <span class="mass">Platzhalter · Kassenbelege</span>
+                  <span class="mass">Bild folgt</span>
                   <span class="wunsch">Ein Kassenbon, aus dem einzelne Positionen herausgehoben werden.</span>
                 </div>
               </div>
@@ -820,7 +810,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
               <p class="q-satz">Der Tagesabschluss des Terminals. Vollständige Kartennummern lehnt der Import ab.</p>
               <div class="platz-bild breit dunkel">
                 <div class="platz">
-                  <span class="mass">Platzhalter · Kartenterminal</span>
+                  <span class="mass">Bild folgt</span>
                   <span class="wunsch">Der Terminal-Abschluss als Liste, die Kartennummer bis auf vier Stellen unkenntlich.</span>
                 </div>
               </div>
@@ -840,7 +830,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
               <p class="q-satz">Alles, was der Gast aufs Zimmer nehmen lässt, statt an Ort und Stelle zu zahlen.</p>
               <div class="platz-bild breit dunkel">
                 <div class="platz">
-                  <span class="mass">Platzhalter · Gästekonten</span>
+                  <span class="mass">Bild folgt</span>
                   <span class="wunsch">Eine Zimmerrechnung mit den Posten des Abends.</span>
                 </div>
               </div>
@@ -860,7 +850,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
               <p class="q-satz">Das gezählte Bargeld. Die einzige der vier Zahlen, die von Hand kommt.</p>
               <div class="platz-bild breit dunkel">
                 <div class="platz">
-                  <span class="mass">Platzhalter · Kassenzählung</span>
+                  <span class="mass">Bild folgt</span>
                   <span class="wunsch">Die Kassenlade mit gezähltem Bargeld, daneben der eingetragene Betrag.</span>
                 </div>
               </div>
@@ -876,7 +866,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 <!-- ══════════ So funktioniert es ══════════ -->
 <section class="sec" id="tutorial">
   <div class="wrap stack" data-stagger>
-    <span class="label">Wie es funktioniert</span>
     <h2 class="h2">In drei Schritten durch die Nacht.</h2>
     <p class="lede">Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung
       nur die Abweichungen hin. Was in jedem Schritt passiert, sehen Sie hier.</p>
@@ -950,7 +939,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 <section class="sec" id="numbers" style="background:var(--tint)">
   <div class="wrap split">
     <div class="stack" data-stagger>
-      <span class="label">Rechner</span>
       <h2 class="h2">Was der Abschluss heute kostet.</h2>
       <p class="lede">Stellen Sie Ihr Haus ein und sehen Sie, wie viel Handarbeit heute im Nachtabschluss steckt.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
@@ -995,7 +983,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 <!-- ══════════ Vergleich ══════════ -->
 <section class="sec" id="why">
   <div class="wrap stack" data-stagger>
-    <span class="label">Vergleich</span>
     <h2 class="h2">Kein PMS, keine Buchhaltung.</h2>
     <p class="lede">Closewise ersetzt keins Ihrer Systeme. Es liest, was sie erzeugen, und prüft,
       ob es zusammenpasst, in derselben Nacht.</p>
@@ -1027,7 +1014,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 <section class="sec" id="faq" style="padding-top:0">
   <div class="wrap split top">
     <div class="stack" data-stagger>
-      <span class="label">Häufige Fragen</span>
       <h2 class="h2">Was Hoteliers zuerst fragen.</h2>
     </div>
     <div class="faq" data-anim="none" data-stagger="60">
@@ -1064,7 +1050,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   <div class="wrap">
     <div class="dark">
       <div class="dark-in cta" data-stagger>
-        <span class="label">Termin</span>
         <h2 class="h2" style="max-width:16ch">Zwanzig Minuten, ein Abschluss.</h2>
         <p class="lede">Wir zeigen Ihnen einen Nachtabschluss von vorn bis hinten und gehen
           gemeinsam durch, was die Exporte aus Ihrem Haus dafür liefern müssen.</p>
