@@ -497,6 +497,54 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .foot-bar .copy{margin-inline-start:auto}
 
 /* ============================================================
+   Die vier Blätter — Erklärabschnitt
+   Links ein Akkordeon aus vollrunden Pillen, immer genau eine
+   offen. Rechts vier Platten in Schrägsicht: die offene Pille
+   zieht ihre Platte aus dem Stapel heraus.
+   ============================================================ */
+.sheets{padding-top:clamp(40px,6vh,84px)}
+.sheets-head{margin-bottom:clamp(26px,4vw,52px)}
+.sheets-grid{display:grid;gap:clamp(22px,4vw,56px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:940px){
+  .sheets-grid{grid-template-columns:minmax(290px,380px) minmax(0,1fr);align-items:center}
+}
+
+/* Die Pillen */
+.sheets-list{display:flex;flex-direction:column;gap:10px}
+.sheet{border:1px solid var(--line-2);border-radius:999px;background:var(--off)}
+.sheet.open{border-radius:var(--r-lg);border-color:var(--accent);background:var(--paper);
+  box-shadow:0 10px 30px rgba(41,77,175,.10)}
+.sheet-btn{display:flex;align-items:center;gap:14px;width:100%;text-align:start;
+  padding:13px 13px 13px 20px;font-size:15px;font-weight:600;color:var(--midnight);
+  letter-spacing:-.012em;border-radius:inherit}
+.sheet-t{flex:1 1 auto;min-width:0}
+.sheet-ic{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
+  background:var(--tile);color:var(--accent-deep)}
+.sheet-ic svg{width:12px;height:12px}
+.sheet.open .sheet-ic{background:var(--accent);color:#fff;transform:rotate(135deg)}
+.sheet-p{display:grid;grid-template-rows:0fr}
+.sheet.open .sheet-p{grid-template-rows:1fr}
+.sheet-p>div{overflow:hidden}
+.sheet-p-in{padding:0 20px 16px;opacity:0}
+.sheet.open .sheet-p-in{opacity:1}
+.sheet-k{display:block;font-size:11.5px;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.sheet-p-in p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+
+/* Der Plattenstapel */
+.sheets-view{min-width:0}
+.sheets-fig{display:block;width:100%;max-width:640px;height:auto;margin-inline:auto;overflow:visible}
+.plate .top{fill:#F5F8FC;stroke:#C4CDDD;stroke-width:1.75}
+.plate .side{fill:#E4EAF3;stroke:#C4CDDD;stroke-width:1.75}
+.plate .cap{font-family:var(--sans);font-size:23px;font-weight:600;
+  letter-spacing:-.012em;fill:var(--accent-deep);opacity:0}
+.plate.on .cap{opacity:1}
+.plate.on .top{fill:var(--tile);stroke:var(--accent);stroke-width:2}
+.plate.on .side{fill:#BFD6F4;stroke:var(--accent);stroke-width:2}
+.sheets-note{margin-top:16px;font-size:13.5px;line-height:1.55;color:var(--muted);
+  text-align:center;max-width:46ch;margin-inline:auto;text-wrap:balance}
+
+/* ============================================================
    Bewegung
    Kurze Wege (18 px), lange Zeiten (.8–1.2 s), eine Kurve.
    Nur Deckkraft und Transform. Wer weniger Bewegung eingestellt
@@ -531,6 +579,17 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     transition:transform 1.1s var(--ease),opacity .9s var(--ease)}
   .js [data-anim="mask"].in>*{opacity:1;transform:none}
 
+  .sheet{transition:border-radius .5s var(--ease),border-color .45s var(--ease),
+    background .45s var(--ease),box-shadow .45s var(--ease)}
+  .sheet-ic{transition:background .45s var(--ease),color .45s var(--ease),
+    transform .5s var(--ease)}
+  .sheet-p{transition:grid-template-rows .55s var(--ease)}
+  .sheet-p-in{transition:opacity .4s var(--ease)}
+  .sheet.open .sheet-p-in{transition-delay:.12s}
+  .plate{transition:transform .6s var(--ease)}
+  .plate .top,.plate .side,.plate .cap{transition:fill .5s var(--ease),stroke .5s var(--ease)}
+  .plate.on{transform:translate(-64px,-30px)}
+
   .btn-solid:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(41,77,175,.28)}
   .btn-line:hover{transform:translateY(-1px)}
 }
@@ -556,6 +615,12 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   .steps{grid-template-columns:1fr}
   .step-media{aspect-ratio:5/4}
   .foot-bar .copy{margin-inline-start:0;width:100%}
+  .sheets-note{text-align:start;margin-inline:0}
+  .sheet-btn{padding:12px 12px 12px 18px;font-size:14.5px}
+  /* Die Figur schrumpft auf Handybreite mit — die Beschriftung steht in
+     viewBox-Einheiten und muss darum gegensteuern. */
+  .plate .cap{font-size:34px}
+  .sheets-fig{max-width:none}
 }
 @media (max-width:640px){
   .nav-in{height:64px}
@@ -645,8 +710,11 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
 <main>
 
-<!-- ══════════ Das große Produktfenster ══════════ -->
-<div class="wrap-wide" id="demo">
+<!-- ══════════ Das große Produktfenster — vorerst ausgeblendet,
+     an dieser Stelle stehen jetzt die vier Blätter. Zum Zurückholen
+     die Kommentarklammern entfernen und id="demo" wieder hierher. ══════════ -->
+<!--
+<div class="wrap-wide">
   <div class="showband light" data-anim="rise" style="background:transparent;padding-left:0;padding-right:0;padding-top:0">
     <div class="hold" data-parallax="16">
       <div class="win" role="img" aria-label="Aufzeichnung der Closewise-Konsole beim Nachtabschluss für das Restaurant Spreeblick. Demodaten." style="display:block;min-height:0">
@@ -657,8 +725,11 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     </div>
   </div>
 </div>
+-->
 
-<!-- ══════════ Die vier Quellen ══════════ -->
+<!-- ══════════ Die vier Quellen — geht im Abschnitt „Die vier Blätter“
+     auf und steht darum nicht mehr doppelt. ══════════ -->
+<!--
 <div class="sources" style="margin-top:clamp(48px,7vh,90px)">
   <div class="wrap-wide sources-in" data-stagger="70">
     <div class="src">
@@ -679,6 +750,111 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     </div>
   </div>
 </div>
+-->
+
+<!-- ══════════ Die vier Blätter ══════════ -->
+<section class="sec sheets" id="demo" aria-labelledby="sheets-h">
+  <div class="wrap-wide">
+
+    <div class="stack sheets-head" data-stagger>
+      <span class="label">Die vier Quellen</span>
+      <h2 class="h2" id="sheets-h">Vier Auswertungen, übereinandergelegt.</h2>
+      <p class="lede">Closewise liest die Dateien, die Ihre Systeme ohnehin jede Nacht
+        erzeugen, und legt sie übereinander. Was deckungsgleich ist, sehen Sie nie.
+        Was es nicht ist, liegt am Morgen auf dem Tisch.</p>
+    </div>
+
+    <div class="sheets-grid" data-anim="rise">
+      <div class="sheets-list">
+        <div class="sheet open" data-i="0">
+          <button class="sheet-btn" id="sheet-b0" aria-expanded="true" aria-controls="sheet-p0">
+            <span class="sheet-t">Kassenbelege</span>
+            <span class="sheet-ic" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span>
+          </button>
+          <div class="sheet-p" id="sheet-p0" role="region" aria-labelledby="sheet-b0">
+            <div>
+              <div class="sheet-p-in">
+                <span class="sheet-k">Was verkauft wurde</span>
+                <p>Jede Position, die an der Kasse gebongt wurde: Tisch, Uhrzeit, Betrag, Zahlart. Der Export, den Ihr Kassensystem ohnehin jede Nacht erzeugt.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet" data-i="1">
+          <button class="sheet-btn" id="sheet-b1" aria-expanded="false" aria-controls="sheet-p1">
+            <span class="sheet-t">Kartenterminal</span>
+            <span class="sheet-ic" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span>
+          </button>
+          <div class="sheet-p" id="sheet-p1" role="region" aria-labelledby="sheet-b1">
+            <div>
+              <div class="sheet-p-in">
+                <span class="sheet-k">Was eingezogen wurde</span>
+                <p>Der Tagesabschluss des Terminals mit allen Kartenzahlungen des Abends. Dateien mit vollständigen Kartennummern lehnt der Import ab.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet" data-i="2">
+          <button class="sheet-btn" id="sheet-b2" aria-expanded="false" aria-controls="sheet-p2">
+            <span class="sheet-t">Gästekonten</span>
+            <span class="sheet-ic" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span>
+          </button>
+          <div class="sheet-p" id="sheet-p2" role="region" aria-labelledby="sheet-b2">
+            <div>
+              <div class="sheet-p-in">
+                <span class="sheet-k">Was aufs Zimmer ging</span>
+                <p>Alles, was der Gast nicht an Ort und Stelle bezahlt, sondern aufs Zimmer nehmen lässt — aus Ihrem PMS, Konto für Konto.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet" data-i="3">
+          <button class="sheet-btn" id="sheet-b3" aria-expanded="false" aria-controls="sheet-p3">
+            <span class="sheet-t">Kassenzählung</span>
+            <span class="sheet-ic" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span>
+          </button>
+          <div class="sheet-p" id="sheet-p3" role="region" aria-labelledby="sheet-b3">
+            <div>
+              <div class="sheet-p-in">
+                <span class="sheet-k">Was in der Lade liegt</span>
+                <p>Das gezählte Bargeld am Ende der Schicht. Die einzige der vier Zahlen, die von Hand kommt.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheets-view">
+        <svg class="sheets-fig" viewBox="0 0 700 600" role="img"
+             aria-label="Vier Platten in Schrägsicht, übereinandergestapelt: Kassenbelege, Kartenterminal, Gästekonten, Kassenzählung. Die gewählte Platte liegt herausgezogen über dem Stapel.">
+    <g class="plate" data-i="3">
+      <path class="side" d="M120,438 L350,542 L580,438 L580,452 L350,556 L120,452 Z"/>
+      <path class="top" d="M120,438 L350,334 L580,438 L350,542 Z"/>
+      <text class="cap" x="350" y="447" text-anchor="middle" transform="rotate(-24.3 350 438)">Kassenzählung</text>
+    </g>
+    <g class="plate" data-i="2">
+      <path class="side" d="M120,342 L350,446 L580,342 L580,356 L350,460 L120,356 Z"/>
+      <path class="top" d="M120,342 L350,238 L580,342 L350,446 Z"/>
+      <text class="cap" x="350" y="351" text-anchor="middle" transform="rotate(-24.3 350 342)">Gästekonten</text>
+    </g>
+    <g class="plate" data-i="1">
+      <path class="side" d="M120,246 L350,350 L580,246 L580,260 L350,364 L120,260 Z"/>
+      <path class="top" d="M120,246 L350,142 L580,246 L350,350 Z"/>
+      <text class="cap" x="350" y="255" text-anchor="middle" transform="rotate(-24.3 350 246)">Kartenterminal</text>
+    </g>
+    <g class="plate" data-i="0">
+      <path class="side" d="M120,150 L350,254 L580,150 L580,164 L350,268 L120,164 Z"/>
+      <path class="top" d="M120,150 L350,46 L580,150 L350,254 Z"/>
+      <text class="cap" x="350" y="159" text-anchor="middle" transform="rotate(-24.3 350 150)">Kassenbelege</text>
+    </g>
+        </svg>
+        <p class="sheets-note">Vier Blätter, ein Abgleich. Closewise legt sie übereinander
+          und zeigt, wo sie nicht deckungsgleich sind.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ══════════ So funktioniert es ══════════ -->
 <section class="sec" id="tutorial">
@@ -1303,6 +1479,48 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   window.addEventListener("scroll", upd, { passive: true });
   window.addEventListener("resize", upd);
   upd();
+})();
+</script>
+<script>
+/* Die vier Blätter: immer genau eine Pille offen, die zugehörige
+   Platte zieht sich aus dem Stapel. */
+(function () {
+  var wrap = document.querySelector(".sheets");
+  if (!wrap) return;
+  var pillen  = [].slice.call(wrap.querySelectorAll(".sheet"));
+  var platten = [].slice.call(wrap.querySelectorAll(".plate"));
+  if (!pillen.length) return;
+
+  var svg = wrap.querySelector(".sheets-fig");
+  function nr(g) { return +g.getAttribute("data-i"); }
+  /* Stapelordnung von unten nach oben: die hoechste Platte liegt vorn. */
+  var stapel = platten.slice().sort(function (a, b) { return nr(b) - nr(a); });
+
+  function zeige(i) {
+    pillen.forEach(function (el, k) {
+      var an = k === i;
+      el.classList.toggle("open", an);
+      el.querySelector(".sheet-btn").setAttribute("aria-expanded", an ? "true" : "false");
+    });
+
+    /* SVG kennt keine Stapelordnung ueber CSS — sie haengt allein an der
+       Reihenfolge im Baum. Also neu einhaengen: erst der Stapel, dann die
+       gewaehlte Platte ganz zum Schluss, damit sie vor den anderen liegt.
+       Zustand synchron setzen, nicht ueber requestAnimationFrame: ein
+       verzoegertes Setzen lief hier gegen den naechsten Klick. */
+    platten.forEach(function (g) { g.classList.toggle("on", nr(g) === i); });
+    if (svg) {
+      stapel.forEach(function (g) { if (nr(g) !== i) svg.appendChild(g); });
+      var vorn = platten.filter(function (g) { return nr(g) === i; })[0];
+      if (vorn) svg.appendChild(vorn);
+    }
+  }
+
+  pillen.forEach(function (el, i) {
+    el.querySelector(".sheet-btn").addEventListener("click", function () { zeige(i); });
+  });
+
+  zeige(0);
 })();
 </script>
 </body>
