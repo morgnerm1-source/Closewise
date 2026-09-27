@@ -493,81 +493,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .foot-bar .copy{margin-inline-start:auto}
 
 /* ============================================================
-   Die vier Quellen — dunkles Band, grosse Zeilen
-   Die ganze Breite in Midnight, darauf vier Zeilen im Schriftgrad
-   einer Schlagzeile. Zugeklappt steht nur der Name da; genau eine
-   Zeile ist offen und zeigt einen Satz und eine breite Flaeche.
-   Der Text ist bewusst knapp — die Groesse traegt, nicht die Menge.
-   ============================================================ */
-.quellen{position:relative;isolation:isolate;overflow:hidden;color:var(--on-dark);
-  background:linear-gradient(250deg,var(--deep-2) 0%,#09132F 100%);
-  padding:clamp(56px,9vh,132px) 0;margin-top:clamp(40px,6vh,90px)}
-.quellen::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1);opacity:.42}
-.quellen>*{position:relative;z-index:1}
-
-.q-kopf{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-  gap:18px clamp(24px,4vw,64px)}
-.q-h{margin-top:16px;font-weight:650;letter-spacing:-.038em;line-height:1.02;color:#fff;
-  font-size:clamp(2rem,4.6vw,3.5rem);text-wrap:balance}
-
-/* Die vier Zeilen */
-.q-liste{margin-top:clamp(34px,6vw,74px);border-top:1px solid rgba(255,255,255,.17)}
-.q-zeile{border-bottom:1px solid rgba(255,255,255,.17)}
-.q-griff{display:flex;align-items:center;gap:clamp(14px,2.6vw,38px);width:100%;
-  text-align:start;color:inherit;padding:clamp(16px,2.4vw,28px) 0}
-.q-nr{flex:none;width:2.6ch;font-size:12px;font-weight:600;letter-spacing:.12em;
-  color:rgba(255,255,255,.4);font-variant-numeric:tabular-nums;align-self:flex-start;
-  padding-top:.7em}
-.q-name{flex:1 1 auto;min-width:0;font-weight:650;letter-spacing:-.042em;line-height:1;
-  color:rgba(255,255,255,.44);font-size:clamp(1.85rem,6vw,4.4rem)}
-.q-zeile.auf .q-name{color:#fff}
-.q-griff:hover .q-name{color:rgba(255,255,255,.8)}
-.q-zeile.auf .q-griff:hover .q-name{color:#fff}
-.q-kreis{flex:none;display:grid;place-items:center;width:clamp(34px,3.4vw,44px);
-  height:clamp(34px,3.4vw,44px);border-radius:50%;
-  border:1px solid rgba(255,255,255,.28);color:#fff}
-.q-kreis svg{width:14px;height:14px}
-.q-zeile.auf .q-kreis{background:var(--hospitality);border-color:var(--hospitality);
-  color:var(--deep);transform:rotate(135deg)}
-
-/* Die offene Tafel */
-.q-tafel{display:grid;grid-template-rows:0fr}
-.q-zeile.auf .q-tafel{grid-template-rows:1fr}
-.q-tafel>div{overflow:hidden}
-.q-tafel-in{display:grid;gap:clamp(18px,2.8vw,40px);grid-template-columns:minmax(0,1fr);
-  padding-bottom:clamp(26px,3.6vw,48px);opacity:0}
-.q-zeile.auf .q-tafel-in{opacity:1}
-@media (min-width:940px){
-  .q-tafel-in{grid-template-columns:minmax(0,24ch) minmax(0,1fr);align-items:start}
-}
-.q-satz{font-size:clamp(1rem,1.35vw,1.2rem);line-height:1.5;color:var(--on-dark-2);
-  letter-spacing:-.012em}
-
-/* Platzhalterflaeche — zeigt ihren Hinweis, solange kein <img> oder <video>
-   darin steht, und blendet ihn ueber :has() selbst aus. Zum Fuellen also
-   nur ergaenzen, nichts loeschen. */
-.platz-bild{position:relative;display:grid;place-items:center;isolation:isolate;
-  border-radius:var(--r-lg);background:var(--off);overflow:hidden}
-.platz-bild.breit{aspect-ratio:21/9}
-.platz-bild.quer{aspect-ratio:4/3}
-.platz-bild img,.platz-bild video{position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;display:block}
-.platz-bild .platz{grid-area:1/1;display:flex;flex-direction:column;align-items:center;
-  gap:9px;text-align:center;padding:24px;pointer-events:none}
-.platz-bild:has(img) .platz,.platz-bild:has(video) .platz{display:none}
-.platz-bild .mass{font-size:13px;font-weight:600;color:var(--accent)}
-.platz-bild .wunsch{font-size:13.5px;line-height:1.5;color:var(--muted);max-width:40ch}
-.platz-bild::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  border-radius:inherit;border:1px dashed var(--line-2)}
-.platz-bild:has(img)::after,.platz-bild:has(video)::after{border-style:solid;border-color:var(--line)}
-/* Auf dunklem Grund dreht die Flaeche die Werte um. */
-.platz-bild.dunkel{background:rgba(255,255,255,.055)}
-.platz-bild.dunkel::after{border-color:rgba(255,255,255,.24)}
-.platz-bild.dunkel .mass{color:var(--hospitality)}
-.platz-bild.dunkel .wunsch{color:rgba(255,255,255,.66)}
-
-/* ============================================================
    Bewegung
    Kurze Wege (18 px), lange Zeiten (.8–1.2 s), eine Kurve.
    Nur Deckkraft und Transform. Wer weniger Bewegung eingestellt
@@ -602,12 +527,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     transition:transform 1.1s var(--ease),opacity .9s var(--ease)}
   .js [data-anim="mask"].in>*{opacity:1;transform:none}
 
-  .q-name,.q-kreis{transition:color .4s var(--ease),background .4s var(--ease),
-    border-color .4s var(--ease),transform .5s var(--ease)}
-  .q-tafel{transition:grid-template-rows .6s var(--ease)}
-  .q-tafel-in{transition:opacity .45s var(--ease)}
-  .q-zeile.auf .q-tafel-in{transition-delay:.14s}
-
   .btn-solid:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(41,77,175,.28)}
   .btn-line:hover{transform:translateY(-1px)}
 }
@@ -633,9 +552,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   .steps{grid-template-columns:1fr}
   .step-media{aspect-ratio:5/4}
   .foot-bar .copy{margin-inline-start:0;width:100%}
-  .q-griff{gap:14px;padding:15px 0}
-  .q-nr{display:none}
-  .platz-bild.breit{aspect-ratio:16/10}
 }
 @media (max-width:640px){
   .nav-in{height:64px}
@@ -767,103 +683,12 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 </div>
 -->
 
-<!-- ══════════ Die vier Quellen ══════════ -->
-<section class="quellen" id="demo" aria-labelledby="q-h">
-  <div class="wrap-wide">
-
-    <div class="q-kopf" data-anim="rise">
-      <div>
-        <h2 class="q-h" id="q-h">Vier Quellen.<br>Eine Nacht.</h2>
-      </div>
-    </div>
-
-    <div class="q-liste">
-      <div class="q-zeile auf" data-i="0">
-        <button class="q-griff" id="q-g0" aria-expanded="true" aria-controls="q-t0">
-          <span class="q-nr">01</span>
-          <span class="q-name">Kassenbelege</span>
-          <span class="q-kreis" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 1.6v10.8M1.6 7h10.8"/></svg></span>
-        </button>
-        <div class="q-tafel" id="q-t0" role="region" aria-labelledby="q-g0">
-          <div>
-            <div class="q-tafel-in">
-              <p class="q-satz">Jede Position, die gebongt wurde — Tisch, Uhrzeit, Betrag, Zahlart.</p>
-              <div class="platz-bild breit dunkel">
-                <div class="platz">
-                  <span class="mass">Bild folgt</span>
-                  <span class="wunsch">Ein Kassenbon, aus dem einzelne Positionen herausgehoben werden.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="q-zeile" data-i="1">
-        <button class="q-griff" id="q-g1" aria-expanded="false" aria-controls="q-t1">
-          <span class="q-nr">02</span>
-          <span class="q-name">Kartenterminal</span>
-          <span class="q-kreis" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 1.6v10.8M1.6 7h10.8"/></svg></span>
-        </button>
-        <div class="q-tafel" id="q-t1" role="region" aria-labelledby="q-g1">
-          <div>
-            <div class="q-tafel-in">
-              <p class="q-satz">Der Tagesabschluss des Terminals. Vollständige Kartennummern lehnt der Import ab.</p>
-              <div class="platz-bild breit dunkel">
-                <div class="platz">
-                  <span class="mass">Bild folgt</span>
-                  <span class="wunsch">Der Terminal-Abschluss als Liste, die Kartennummer bis auf vier Stellen unkenntlich.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="q-zeile" data-i="2">
-        <button class="q-griff" id="q-g2" aria-expanded="false" aria-controls="q-t2">
-          <span class="q-nr">03</span>
-          <span class="q-name">Gästekonten</span>
-          <span class="q-kreis" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 1.6v10.8M1.6 7h10.8"/></svg></span>
-        </button>
-        <div class="q-tafel" id="q-t2" role="region" aria-labelledby="q-g2">
-          <div>
-            <div class="q-tafel-in">
-              <p class="q-satz">Alles, was der Gast aufs Zimmer nehmen lässt, statt an Ort und Stelle zu zahlen.</p>
-              <div class="platz-bild breit dunkel">
-                <div class="platz">
-                  <span class="mass">Bild folgt</span>
-                  <span class="wunsch">Eine Zimmerrechnung mit den Posten des Abends.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="q-zeile" data-i="3">
-        <button class="q-griff" id="q-g3" aria-expanded="false" aria-controls="q-t3">
-          <span class="q-nr">04</span>
-          <span class="q-name">Kassenzählung</span>
-          <span class="q-kreis" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 1.6v10.8M1.6 7h10.8"/></svg></span>
-        </button>
-        <div class="q-tafel" id="q-t3" role="region" aria-labelledby="q-g3">
-          <div>
-            <div class="q-tafel-in">
-              <p class="q-satz">Das gezählte Bargeld. Die einzige der vier Zahlen, die von Hand kommt.</p>
-              <div class="platz-bild breit dunkel">
-                <div class="platz">
-                  <span class="mass">Bild folgt</span>
-                  <span class="wunsch">Die Kassenlade mit gezähltem Bargeld, daneben der eingetragene Betrag.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <!-- ══════════ So funktioniert es ══════════ -->
+<!-- Der Kino-Hero rastet ueber demoGap auf #demo ein und der Hero-Knopf
+     springt dorthin. Seit der Abschnitt davor weg ist, traegt diese
+     Marke den Anker - id="tutorial" bleibt, darauf zeigen vier Verweise. -->
+<span id="demo" aria-hidden="true"></span>
 <section class="sec" id="tutorial">
   <div class="wrap stack" data-stagger>
     <h2 class="h2">In drei Schritten durch die Nacht.</h2>
@@ -1483,28 +1308,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   upd();
 })();
 </script>
-<script>
-/* Die vier Quellen: genau eine Zeile offen. */
-(function () {
-  var wrap = document.querySelector(".quellen");
-  if (!wrap) return;
-  var zeilen = [].slice.call(wrap.querySelectorAll(".q-zeile"));
-  if (!zeilen.length) return;
 
-  function zeige(i) {
-    zeilen.forEach(function (el, k) {
-      var auf = k === i;
-      el.classList.toggle("auf", auf);
-      el.querySelector(".q-griff").setAttribute("aria-expanded", auf ? "true" : "false");
-    });
-  }
-
-  zeilen.forEach(function (el, i) {
-    el.querySelector(".q-griff").addEventListener("click", function () { zeige(i); });
-  });
-
-  zeige(0);
-})();
-</script>
 </body>
 </html>
