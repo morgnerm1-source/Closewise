@@ -288,6 +288,23 @@ a{color:inherit;text-decoration:none}
 .showband.light .win{border-radius:16px;box-shadow:0 30px 80px rgba(18,34,78,.16),0 2px 8px rgba(18,34,78,.08)}
 .showband .hold{position:relative;z-index:2}
 
+/* ============================================================
+   Der Morgen danach — das Produktfenster gross auf einer Buehne
+   Wenig Worte, ein Bild: die Liste, die die Schichtleitung morgens
+   vorfindet. Der Beweis fuer die Zeile aus dem Hero.
+   ============================================================ */
+.morgen{padding-top:clamp(44px,7vh,100px)}
+.morgen-kopf{max-width:44ch;margin-bottom:clamp(30px,4.4vw,60px)}
+.morgen-kopf .lede{margin-top:14px;text-wrap:balance}
+.morgen-buehne{position:relative;isolation:isolate}
+/* Ein weicher Schein hinter dem Fenster, damit es traegt statt nur zu liegen. */
+.morgen-buehne::before{content:"";position:absolute;z-index:-1;inset:-8% -5% -16%;
+  border-radius:50%;background:radial-gradient(58% 58% at 50% 42%,
+  rgba(41,77,175,.20) 0%,rgba(41,77,175,.07) 45%,transparent 72%)}
+.morgen .win{border-radius:var(--r-xl);min-height:0;
+  box-shadow:0 44px 110px rgba(10,19,48,.24),0 3px 12px rgba(10,19,48,.09)}
+.morgen-fuss{margin-top:16px;font-size:13px;color:var(--muted);text-align:center}
+
 /* ---- Das Produktfenster: so sieht die Demo aus ---- */
 .win{border-radius:14px 14px 0 0;overflow:hidden;background:var(--paper);
   box-shadow:0 -1px 0 rgba(255,255,255,.14),0 -26px 70px rgba(0,0,0,.45);
@@ -527,6 +544,14 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
     transition:transform 1.1s var(--ease),opacity .9s var(--ease)}
   .js [data-anim="mask"].in>*{opacity:1;transform:none}
 
+  .js .morgen-buehne.in .win .r .ok{opacity:1;transform:none;
+    transition:opacity .5s var(--ease),transform .6s var(--ease)}
+  .js .morgen-buehne.in .win .r:nth-child(1) .ok{transition-delay:.30s}
+  .js .morgen-buehne.in .win .r:nth-child(2) .ok{transition-delay:.42s}
+  .js .morgen-buehne.in .win .r:nth-child(3) .ok{transition-delay:.54s}
+  .js .morgen-buehne.in .win .r:nth-child(4) .ok{transition-delay:.66s}
+  .js .morgen-buehne.in .win .r:nth-child(5) .ok{transition-delay:.78s}
+
   .btn-solid:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(41,77,175,.28)}
   .btn-line:hover{transform:translateY(-1px)}
 }
@@ -685,10 +710,67 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 
 
 <!-- ══════════ So funktioniert es ══════════ -->
-<!-- Der Kino-Hero rastet ueber demoGap auf #demo ein und der Hero-Knopf
-     springt dorthin. Seit der Abschnitt davor weg ist, traegt diese
-     Marke den Anker - id="tutorial" bleibt, darauf zeigen vier Verweise. -->
-<span id="demo" aria-hidden="true"></span>
+<!-- ══════════ Der Morgen danach ══════════ -->
+<section class="sec morgen" id="demo" aria-labelledby="morgen-h">
+  <div class="wrap-wide">
+
+    <div class="morgen-kopf" data-anim="rise">
+      <h2 class="h2" id="morgen-h">Der Morgen danach.</h2>
+      <p class="lede">Eine Nacht, vier Quellen, drei offene Punkte. Mehr steht da nicht.</p>
+    </div>
+
+    <div class="morgen-buehne" data-anim="rise">
+      <div class="win" aria-label="Die Closewise-Konsole nach dem Nachtabschluss. Demodaten.">
+
+        <div class="side" aria-hidden="true">
+          <div class="top">
+            <svg viewBox="0 0 1316 219" fill="currentColor"><use href="#cw"/></svg>
+            <span class="tag">HOSPITALITY</span>
+          </div>
+          <div class="grp">
+            <span class="cap">Nacht</span>
+            <span class="it on"><i>✓</i>Abschluss</span>
+            <span class="it"><i>B</i>Belege</span>
+            <span class="it"><i>!</i>Ausnahmen</span>
+          </div>
+          <div class="grp">
+            <span class="cap">Haus</span>
+            <span class="it"><i>O</i>Outlets</span>
+            <span class="it"><i>R</i>Berichte</span>
+          </div>
+        </div>
+
+        <div class="main">
+          <div class="head">
+            <h4>Nachtabschluss <span>· Restaurant Spreeblick</span></h4>
+            <div class="pills">
+              <span class="pill">Demodaten</span>
+              <span class="pill solid">8,5 min</span>
+            </div>
+          </div>
+
+          <div class="tiles">
+            <div class="tile"><span class="k">Belege geprüft</span><span class="v">214</span></div>
+            <div class="tile blue"><span class="k">Deckungsgleich</span><span class="v">211</span></div>
+            <div class="tile"><span class="k">Offen</span><span class="v bad">3</span></div>
+          </div>
+
+          <div class="rows">
+          <div class="r"><span class="t">Tisch 12 · Kartenzahlung</span><span class="a">84,50 € <span class="ok" aria-hidden="true"></span></span></div>
+          <div class="r"><span class="t">Tisch 7 · aufs Zimmer 214</span><span class="a">126,00 € <span class="ok" aria-hidden="true"></span></span></div>
+          <div class="r"><span class="t">Terminal · Beleg ohne Gegenstück</span><span class="a">39,80 € <span class="st flag">offen</span></span></div>
+          <div class="r"><span class="t">Kasse · Zählung weicht ab</span><span class="a">12,40 € <span class="st flag">offen</span></span></div>
+          <div class="r"><span class="t">Bar · Storno nach Abschluss</span><span class="a">18,00 € <span class="st flag">offen</span></span></div>
+          </div>
+        </div>
+
+      </div>
+      <p class="morgen-fuss">So sieht die Liste aus, die morgens auf dem Tisch liegt.</p>
+    </div>
+
+  </div>
+</section>
+
 <section class="sec" id="tutorial">
   <div class="wrap stack" data-stagger>
     <h2 class="h2">In drei Schritten durch die Nacht.</h2>
