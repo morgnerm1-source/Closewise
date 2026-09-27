@@ -156,47 +156,44 @@ a{color:inherit;text-decoration:none}
 .h3{font-weight:600;letter-spacing:-.014em;font-size:1.05rem;line-height:1.34;color:var(--midnight)}
 .lede{font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.62;color:var(--muted);max-width:56ch}
 .body{font-size:15px;line-height:1.62;color:var(--muted);max-width:46ch}
-/* Ablauf-Karten (Tutorial): Foto-Hintergrund + kleine Demo-UI */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,22px);
-  margin-top:clamp(28px,4vw,56px)}
-.step{display:flex;flex-direction:column}
-.step-media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line)}
-.step-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-.step:hover .step-media img{transform:scale(1.05)}
-.step-no{position:absolute;top:14px;left:14px;z-index:2;width:30px;height:30px;border-radius:8px;
-  display:grid;place-items:center;font-size:14px;font-weight:600;color:#fff;
-  background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28)}
-.mock{position:relative;z-index:2;width:100%;background:var(--paper);border:1px solid var(--line);
-  border-radius:10px;box-shadow:0 18px 44px rgba(10,19,48,.30);padding:11px 12px;
-  font-size:11px;line-height:1.35;color:var(--ink)}
-.mock-h{display:flex;align-items:center;gap:7px;font-weight:600;font-size:11.5px;
-  padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--line)}
-.mock-h .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
-.mock-h .dot.bad{background:var(--bad)}
-.mock ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.mock li{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.mock li span{color:var(--ink-2)}
-.mock li b{font-variant-numeric:tabular-nums;color:var(--ink)}
-.mock li .ri{flex:none;width:15px;height:15px;color:var(--accent)}
-.mock li .ri svg{display:block;width:15px;height:15px}
-.mock li .txt{flex:1}
-.mock li i.ok{width:15px;height:15px;border-radius:50%;flex:none;border:1.3px solid var(--good);position:relative}
-.mock li i.ok::after{content:"";position:absolute;left:4.6px;top:2.6px;width:3px;height:6px;
-  border:solid var(--good);border-width:0 1.4px 1.4px 0;transform:rotate(45deg)}
-.mock li.flag em{font-style:normal;font-size:10px;font-weight:600;color:var(--bad);
-  background:var(--bad-bg);padding:2px 7px;border-radius:999px}
-.mock-note{margin:9px 0 0;font-size:10px;color:var(--muted)}
-.mock li.off span{color:var(--muted)}
-.mock li i.no{width:15px;height:15px;border-radius:50%;flex:none;border:1.3px solid var(--bad);position:relative}
-.mock li i.no::after{content:"\00d7";position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:700;line-height:1;color:var(--bad)}
-.mock li.off .ri{color:var(--muted)}
-.mock-prog{font-size:11px;color:var(--muted);margin-bottom:9px}
-.mock-prog b{color:var(--ink);font-variant-numeric:tabular-nums}
-.mock-prog .bar{display:block;height:5px;border-radius:999px;background:var(--tile);margin-top:6px;overflow:hidden}
-.mock-prog .bar i{display:block;height:100%;background:var(--accent);border-radius:999px}
-.step-cap{padding:16px 2px 0}
-.step-cap h3{margin:0 0 5px;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink)}
-.step-cap p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
+/* ============================================================
+   Produkt-Rundgang: die drei Schritte als Reiterleiste
+   Links die Schritte untereinander, rechts die Aufnahme dazu. Loest
+   die Kartenreihe ab: drei Karten nebeneinander zwingen jedes Bild in
+   ein Drittel der Breite, hier traegt eines die volle Flaeche.
+   ============================================================ */
+.rg-kopf{display:grid;gap:clamp(14px,2.6vw,48px);grid-template-columns:minmax(0,1fr);
+  margin-bottom:clamp(28px,4vw,58px)}
+.rg-kopf .lede{align-self:end}
+@media (min-width:940px){
+  .rg-kopf{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:end}
+}
+
+.rg{display:grid;gap:clamp(20px,3.4vw,56px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:940px){
+  .rg{grid-template-columns:minmax(300px,420px) minmax(0,1fr);align-items:start}
+}
+
+.rg-reiter{display:flex;flex-direction:column}
+.rg-r{display:grid;grid-template-columns:auto minmax(0,1fr);gap:15px;width:100%;text-align:start;
+  padding:clamp(17px,2.1vw,23px) clamp(14px,1.6vw,20px);
+  border-inline-start:2px solid var(--line);border-radius:0 var(--r) var(--r) 0}
+.rg-r[aria-selected="true"]{border-inline-start-color:var(--accent);background:var(--off)}
+.rg-nr{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--muted);
+  font-variant-numeric:tabular-nums;padding-top:4px}
+.rg-r[aria-selected="true"] .rg-nr{color:var(--accent)}
+.rg-r b{display:block;font-size:clamp(1.02rem,1.3vw,1.16rem);font-weight:600;
+  letter-spacing:-.018em;color:var(--midnight)}
+.rg-r p{margin-top:6px;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.rg-r:hover b{color:var(--accent-deep)}
+.rg-r[aria-selected="true"]:hover b{color:var(--midnight)}
+
+.rg-schau{display:grid;min-width:0;max-width:600px;margin-inline:auto;width:100%}
+.rg-b{grid-area:1/1;opacity:0;visibility:hidden;min-width:0}
+.rg-b[aria-hidden="false"]{opacity:1;visibility:visible}
+.rg-b img{display:block;width:100%;height:auto;border-radius:var(--r-lg);
+  border:1px solid var(--line);box-shadow:0 24px 60px rgba(18,34,78,.13)}
+
 /* Bereiche – Karussell (Legora-exakt: aktive Kachel waechst, Reihe zentriert) */
 .caro-section{--iw:clamp(150px,17vw,213px);--aw:clamp(280px,32vw,398px);--gap:clamp(18px,3.6vw,60px);overflow:hidden}
 .caro-head{text-align:center}
@@ -572,6 +569,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   .cinema-rand .z{transition:opacity .55s var(--ease),transform .7s var(--ease)}
   .cinema-rand .strich{transition:opacity .5s var(--ease)}
 
+  .rg-r b,.rg-r{transition:color .35s var(--ease),background .35s var(--ease),
+    border-color .35s var(--ease)}
+  .rg-b{transition:opacity .5s var(--ease),visibility .5s var(--ease)}
+
   .btn-solid:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(41,77,175,.28)}
   .btn-line:hover{transform:translateY(-1px)}
 }
@@ -594,8 +595,6 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 @media (max-width:760px){
   .win{grid-template-columns:minmax(0,1fr)}
   .win .side{display:none}
-  .steps{grid-template-columns:1fr}
-  .step-media{aspect-ratio:5/4}
   .foot-bar .copy{margin-inline-start:0;width:100%}
 }
 @media (max-width:640px){
@@ -798,40 +797,48 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
 </section>
 
-<section class="sec" id="tutorial">
-  <div class="wrap stack" data-stagger>
-    <h2 class="h2">In drei Schritten durch die Nacht.</h2>
-    <p class="lede">Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung
-      nur die Abweichungen hin. Was in jedem Schritt passiert, sehen Sie hier.</p>
-  </div>
-  <div class="wrap-wide steps" data-stagger="90">
+<section class="sec" id="tutorial" aria-labelledby="rg-h">
+  <div class="wrap-wide">
 
-    <article class="step">
-      <div class="step-media"><img src="step-1.png" alt="Schritt 1 – CSV Import: Kassenbeleg, Kartenterminal und Gästekonto geprüft, Kartennummer abgelehnt." loading="lazy"></div>
-      <div class="step-cap">
-        <h3>Exporte einlesen</h3>
-        <p>Kassenbelege, Terminal-Abschluss und Gästekonten: die Dateien, die Ihre Systeme
-          ohnehin erzeugen. An der Kasse ändert sich für Ihr Team nichts.</p>
-      </div>
-    </article>
+    <div class="rg-kopf" data-anim="rise">
+      <h2 class="h2" id="rg-h">In drei Schritten durch die Nacht.</h2>
+      <p class="lede">Closewise liest Ihre Exporte, gleicht jeden Beleg ab und legt der Schichtleitung
+        nur die Abweichungen hin. Was in jedem Schritt passiert, sehen Sie hier.</p>
+    </div>
 
-    <article class="step">
-      <div class="step-media"><img src="step-2.png" alt="Schritt 2 – Abgleich: 11 von 14 geprüft, zwei Belege abgeglichen, einer offen." loading="lazy"></div>
-      <div class="step-cap">
-        <h3>Gegen vier Quellen abgleichen</h3>
-        <p>Jeder Beleg wird gegen die anderen Quellen gehalten: Betrag gegen Betrag,
-          Buchung gegen Konto. Was übereinstimmt, wird abgehakt.</p>
+    <div class="rg" data-anim="rise">
+      <div class="rg-reiter" role="tablist" aria-label="Die drei Schritte">
+        <button class="rg-r" role="tab" id="rg-r0" aria-controls="rg-b0"
+                aria-selected="true" tabindex="0">
+          <span class="rg-nr">01</span>
+          <span><b>Exporte einlesen</b><p>Kassenbelege, Terminal-Abschluss und Gästekonten: die Dateien, die Ihre Systeme ohnehin erzeugen. An der Kasse ändert sich für Ihr Team nichts.</p></span>
+        </button>
+        <button class="rg-r" role="tab" id="rg-r1" aria-controls="rg-b1"
+                aria-selected="false" tabindex="-1">
+          <span class="rg-nr">02</span>
+          <span><b>Gegen vier Quellen abgleichen</b><p>Jeder Beleg wird gegen die anderen Quellen gehalten: Betrag gegen Betrag, Buchung gegen Konto. Was übereinstimmt, wird abgehakt.</p></span>
+        </button>
+        <button class="rg-r" role="tab" id="rg-r2" aria-controls="rg-b2"
+                aria-selected="false" tabindex="-1">
+          <span class="rg-nr">03</span>
+          <span><b>Die kurze Liste klären</b><p>Übrig bleiben 3–7 offene Punkte je Nacht, jeder mit Outlet, Beleg und Ursache. Den Rest hat Closewise schon abgehakt.</p></span>
+        </button>
       </div>
-    </article>
-
-    <article class="step">
-      <div class="step-media"><img src="step-3.png" alt="Schritt 3 – Offene Abweichungen: drei offene Punkte mit Outlet und Ursache." loading="lazy"></div>
-      <div class="step-cap">
-        <h3>Die kurze Liste klären</h3>
-        <p>Übrig bleiben 3–7 offene Punkte je Nacht, jeder mit Outlet, Beleg und Ursache.
-          Den Rest hat Closewise schon abgehakt.</p>
+      <div class="rg-schau">
+        <div class="rg-b" id="rg-b0" role="tabpanel" aria-labelledby="rg-r0"
+             aria-hidden="false">
+          <img src="step-1.png" alt="Schritt 1 – CSV Import: Kassenbeleg, Kartenterminal und Gästekonto geprüft, Kartennummer abgelehnt." loading="lazy" width="1000" height="1250">
+        </div>
+        <div class="rg-b" id="rg-b1" role="tabpanel" aria-labelledby="rg-r1"
+             aria-hidden="true">
+          <img src="step-2.png" alt="Schritt 2 – Abgleich: 11 von 14 geprüft, zwei Belege abgeglichen, einer offen." loading="lazy" width="1000" height="1250">
+        </div>
+        <div class="rg-b" id="rg-b2" role="tabpanel" aria-labelledby="rg-r2"
+             aria-hidden="true">
+          <img src="step-3.png" alt="Schritt 3 – Offene Abweichungen: drei offene Punkte mit Outlet und Ursache." loading="lazy" width="1000" height="1250">
+        </div>
       </div>
-    </article>
+    </div>
 
   </div>
 </section>
@@ -1427,5 +1434,41 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 })();
 </script>
 
+<script>
+/* Produkt-Rundgang: genau ein Schritt gewaehlt, seine Aufnahme steht rechts.
+   Pfeiltasten wandern durch die Reiter, wie bei einer Reiterleiste ueblich. */
+(function () {
+  var wrap = document.querySelector(".rg");
+  if (!wrap) return;
+  var reiter = [].slice.call(wrap.querySelectorAll(".rg-r"));
+  var tafeln = [].slice.call(wrap.querySelectorAll(".rg-b"));
+  if (!reiter.length) return;
+
+  function zeige(i, fokus) {
+    reiter.forEach(function (el, k) {
+      var an = k === i;
+      el.setAttribute("aria-selected", an ? "true" : "false");
+      el.setAttribute("tabindex", an ? "0" : "-1");
+    });
+    tafeln.forEach(function (el, k) {
+      el.setAttribute("aria-hidden", k === i ? "false" : "true");
+    });
+    if (fokus) reiter[i].focus();
+  }
+
+  reiter.forEach(function (el, i) {
+    el.addEventListener("click", function () { zeige(i); });
+    el.addEventListener("keydown", function (e) {
+      var k = e.key, n = reiter.length;
+      if (k === "ArrowDown" || k === "ArrowRight") { e.preventDefault(); zeige((i + 1) % n, true); }
+      else if (k === "ArrowUp" || k === "ArrowLeft") { e.preventDefault(); zeige((i - 1 + n) % n, true); }
+      else if (k === "Home") { e.preventDefault(); zeige(0, true); }
+      else if (k === "End") { e.preventDefault(); zeige(n - 1, true); }
+    });
+  });
+
+  zeige(0);
+})();
+</script>
 </body>
 </html>
