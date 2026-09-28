@@ -6,9 +6,6 @@
 <title>Closewise — Nachtabschluss für Hotels und Gastronomie</title>
 <meta name="description" content="Closewise prüft jede Nacht Kassenbelege, Kartenterminal, Gästekonten und Kassenzählung gegeneinander und legt der Schichtleitung am Morgen nur die Abweichungen hin.">
 <script>document.documentElement.classList.add("js")</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 @font-face{
   font-family:"Inter";
@@ -19,266 +16,297 @@
 }
 
 /* ============================================================
-   Wurzelwerte
-   Palette aus der Vorlage ausgemessen: Elfenbein #FFFCF7,
-   Kartenfuellung #F7F2E8, Linien #E9E3D7, Tiefe #1E1E1B, Gold #EAC267.
-   Warme Neutraltoene, genau eine helle und eine dunkle Welt.
+   Wurzelwerte — Closewise-Marke, wie in CLAUDE.md festgelegt:
+   nur Inter, Midnight Blue fuer Ueberschriften, --accent als
+   einzige Handlungsfarbe, Weiss als Arbeitsflaeche.
    ============================================================ */
 :root{
-  --paper:#FFFCF7;
-  --off:#FAF6EE;
-  --tint:#F4EFE4;
-  --tile:#F0E9DA;
-  --midnight:#1B1A17;
-  --ink:#26241F;
-  --muted:#6E6A5E;
-  --soft:#8A8577;
-  --line:#E9E3D7;
-  --line-2:#DCD4C4;
-  --deep:#141412;
-  --deep-2:#1E1E1B;
-  --accent:#1F1D19;
-  --accent-hover:#000;
-  --gold:#EAC267;
-  --good:#4A6B4E;  --good-bg:#ECEFE6;
-  --bad:#9C3A2A;   --bad-bg:#F7EEE9;
-  --on-dark:#FFFCF7;
-  --on-dark-2:rgba(255,252,247,.68);
+  --paper:#FFFFFF;
+  --off:#F7F9FC;
+  --tint:#EFF4FD;
+  --tile:#EAF4FE;
+  --midnight:#12224E;
+  --ink:#121A33;
+  --ink-2:#333B52;
+  --muted:#5B6378;
+  --soft:#7A8296;
+  --line:#E4E8F0;
+  --line-2:#D3D9E4;
+  --deep:#0A1330;
+  --deep-2:#132451;
+  --accent:#294DAF;
+  --accent-hover:#203F95;
+  --accent-deep:#163382;
+  --hospitality:#5E8AFF;
+  --good:#2E6B4E;  --good-bg:#E9F0EB;
+  --bad:#B4231F;   --bad-bg:#FBF0EF;
+  --on-dark:#FFFFFF;
+  --on-dark-2:rgba(255,255,255,.70);
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  --serif:"Instrument Serif",ui-serif,Georgia,"Times New Roman",serif;
   --ease:cubic-bezier(.16,1,.3,1);
-  --gut:clamp(20px,4.5vw,64px);
-  --sec:clamp(72px,10vh,150px);
-  --r:12px; --r-lg:20px; --r-xl:28px;
+  --gut:clamp(20px,4.5vw,56px);
+  --sec:clamp(64px,8.5vh,120px);
+  --r:10px; --r-lg:14px; --r-xl:20px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--deep)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
-  font-size:16px;line-height:1.6;letter-spacing:-.006em;-webkit-font-smoothing:antialiased}
+  font-size:16px;line-height:1.58;letter-spacing:-.006em;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
 ul,ol{padding:0;list-style:none}
 img,svg,video{display:block;max-width:100%}
-button,input,select{font:inherit;color:inherit}
+button,input{font:inherit;color:inherit}
 button{background:none;border:0;cursor:pointer}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
-.wrap-eng{max-width:820px;margin:0 auto;padding:0 var(--gut)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--gut)}
+.wrap-eng{max-width:800px;margin:0 auto;padding:0 var(--gut)}
 .sec{padding:var(--sec) 0}
-
-/* ---- Schrift ---- */
-.h1,.h2,.h3-gross,.zahl-v{font-family:var(--serif);font-weight:400}
-.h1{font-size:clamp(2.6rem,6.2vw,5rem);line-height:1.02;letter-spacing:-.018em;
-  color:var(--midnight);text-wrap:balance}
-.h1 .kur{display:block;font-style:italic;color:var(--soft)}
-.h2{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.06;letter-spacing:-.016em;
-  color:var(--midnight);text-wrap:balance}
-.h2 .kur{font-style:italic;color:var(--soft)}
-.h3{font-size:1.06rem;font-weight:600;letter-spacing:-.012em;color:var(--midnight)}
-.lede{font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.62;color:var(--muted)}
-.klein{font-size:13.5px;line-height:1.55;color:var(--soft)}
 .mitte{text-align:center}
-.mitte .lede{margin-inline:auto;max-width:52ch}
+.mitte .lede{margin-inline:auto}
+
+/* ---- Schrift: eine Familie, vier Stufen ---- */
+.h1{font-size:clamp(2.3rem,5vw,3.9rem);font-weight:680;line-height:1.05;
+  letter-spacing:-.035em;color:var(--midnight);text-wrap:balance}
+.h2{font-size:clamp(1.8rem,3.2vw,2.7rem);font-weight:660;line-height:1.1;
+  letter-spacing:-.03em;color:var(--midnight);text-wrap:balance}
+.h3{font-size:1.06rem;font-weight:620;letter-spacing:-.014em;color:var(--midnight)}
+.lede{font-size:clamp(1rem,1.1vw,1.1rem);line-height:1.62;color:var(--muted);max-width:56ch}
+.body{font-size:14.8px;line-height:1.62;color:var(--muted)}
+.klein{font-size:13px;line-height:1.55;color:var(--soft)}
 
 /* ---- Knoepfe ---- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  border-radius:999px;padding:13px 26px;font-size:15px;font-weight:500;
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:999px;padding:12px 24px;font-size:15px;font-weight:550;
   border:1px solid transparent;white-space:nowrap}
-.btn-voll{background:var(--accent);color:var(--paper)}
+.btn-voll{background:var(--accent);color:#fff}
 .btn-voll:hover{background:var(--accent-hover)}
 .btn-linie{background:var(--paper);border-color:var(--line-2);color:var(--midnight)}
-.btn-linie:hover{background:var(--tint);border-color:var(--muted)}
-.dunkel .btn-voll{background:var(--paper);color:var(--accent)}
+.btn-linie:hover{border-color:var(--muted);background:var(--off)}
+.dunkel .btn-voll{background:#fff;color:var(--accent-deep)}
 .dunkel .btn-voll:hover{background:var(--tile)}
-.dunkel .btn-linie{background:transparent;border-color:rgba(255,252,247,.3);color:var(--paper)}
-.dunkel .btn-linie:hover{background:rgba(255,252,247,.1);border-color:rgba(255,252,247,.6)}
+.dunkel .btn-linie{background:transparent;border-color:rgba(255,255,255,.34);color:#fff}
+.dunkel .btn-linie:hover{background:rgba(255,255,255,.1);border-color:#fff}
 
 /* ---- Navigation ---- */
-.nav{position:sticky;top:0;z-index:80;background:rgba(255,252,247,.86);
+.nav{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.88);
   backdrop-filter:blur(14px);border-bottom:1px solid transparent}
 .nav.fest{border-bottom-color:var(--line)}
-.nav-in{max-width:1180px;margin:0 auto;padding:0 var(--gut);height:74px;
-  display:flex;align-items:center;gap:22px}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 var(--gut);height:70px;
+  display:flex;align-items:center;gap:20px}
 .marke{display:flex;align-items:center;color:var(--midnight)}
-.marke svg{height:22px;width:auto}
-.nav-mitte{display:none;margin-inline:auto;gap:30px}
+.marke svg{height:21px;width:auto}
+.nav-mitte{display:none;margin-inline:auto;gap:28px}
 .nav-mitte a{font-size:14.5px;color:var(--muted)}
 .nav-mitte a:hover{color:var(--midnight)}
-.nav-rechts{display:flex;align-items:center;gap:10px;margin-inline-start:auto}
+.nav-rechts{display:flex;align-items:center;gap:9px;margin-inline-start:auto}
 .lang{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:2px;background:var(--paper)}
-.lang button{font-size:12px;font-weight:600;letter-spacing:.04em;padding:4px 10px;
+.lang button{font-size:12px;font-weight:620;letter-spacing:.04em;padding:4px 10px;
   border-radius:999px;color:var(--soft)}
-.lang button.an{background:var(--tile);color:var(--midnight)}
-.nav-rechts .btn{padding:10px 20px;font-size:14px}
-@media (min-width:980px){ .nav-mitte{display:flex} .nav-rechts{margin-inline-start:0} }
-@media (max-width:620px){ .nav-rechts .btn-linie{display:none} }
+.lang button.an{background:var(--tile);color:var(--accent-deep)}
+.nav-rechts .btn{padding:9px 18px;font-size:14px}
+@media (min-width:1000px){ .nav-mitte{display:flex} .nav-rechts{margin-inline-start:0} }
+@media (max-width:640px){ .nav-rechts .btn-linie{display:none} }
 
 /* ============================================================
-   Einstieg: mittig gesetzt, Typografie traegt
+   Einstieg
    ============================================================ */
-.hero{padding:clamp(56px,9vh,108px) 0 clamp(26px,4vh,52px)}
-.hero .h1{margin:0 auto;max-width:15ch}
-.hero .lede{margin:22px auto 0;max-width:46ch}
-.hero-akt{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;margin-top:32px}
-.hero-fakten{display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;
-  margin-top:30px;font-size:13.5px;color:var(--soft)}
-.hero-fakten b{color:var(--midnight);font-weight:600}
+.hero{padding:clamp(52px,8vh,100px) 0 clamp(30px,4vh,56px)}
+.hero .h1{max-width:17ch;margin-inline:auto}
+.hero .lede{margin:20px auto 0;max-width:50ch}
+.hero-akt{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.hero-fakt{display:flex;gap:8px 24px;justify-content:center;flex-wrap:wrap;
+  margin-top:26px;font-size:13.5px;color:var(--soft)}
+.hero-fakt b{color:var(--midnight);font-weight:620}
 
-/* ---- Die grosse Flaeche unter dem Einstieg ---- */
 .buehne{position:relative;border-radius:var(--r-xl);overflow:hidden;
-  background:var(--tint);border:1px solid var(--line);isolation:isolate}
+  border:1px solid var(--line);background:var(--off);
+  box-shadow:0 28px 70px rgba(18,34,78,.13),0 2px 6px rgba(18,34,78,.05)}
 .buehne video,.buehne img{width:100%;height:auto;display:block}
-.tafel{position:absolute;z-index:2;max-width:min(340px,62%);
-  background:rgba(20,20,18,.62);backdrop-filter:blur(16px);
-  border:1px solid rgba(255,252,247,.16);border-radius:var(--r-lg);
-  padding:15px 17px;color:var(--paper);font-size:14px;line-height:1.5}
-.tafel.oben{inset-block-start:5%;inset-inline-start:4%}
-.tafel.unten{inset-block-end:6%;inset-inline-end:4%}
-.tafel b{display:block;font-weight:600;margin-bottom:4px}
-.tafel span{color:rgba(255,252,247,.72)}
-@media (max-width:760px){ .tafel{display:none} }
 
 /* ============================================================
-   Dunkles Band mit den Zahlen
+   Drei Stellen, an denen es auseinanderlaeuft
    ============================================================ */
-.dunkel{background:var(--deep);color:var(--on-dark);position:relative;isolation:isolate}
-.dunkel .h2,.dunkel .h1{color:var(--paper)}
-.dunkel .h2 .kur{color:var(--gold)}
-.dunkel .lede{color:var(--on-dark-2)}
-.dunkel .klein{color:rgba(255,252,247,.5)}
+.drei{display:grid;gap:clamp(14px,1.6vw,20px);grid-template-columns:minmax(0,1fr);
+  margin-top:clamp(34px,4.6vw,56px)}
+@media (min-width:820px){ .drei{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.drei-z{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;gap:10px;min-width:0}
+.drei-z .wo{font-size:12.5px;font-weight:620;color:var(--accent)}
+.drei-z h3{font-size:1.14rem}
+.drei-z p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+.drei-z .zahl{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--soft)}
 
+/* ============================================================
+   Funktionsraster — bewusst ungleich gross
+   ============================================================ */
+.raster{display:grid;gap:clamp(14px,1.6vw,20px);grid-template-columns:minmax(0,1fr);
+  margin-top:clamp(34px,4.6vw,56px)}
+@media (min-width:900px){
+  .raster{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .f-gross{grid-column:span 4}
+  .f-klein{grid-column:span 2}
+  .f-halb{grid-column:span 3}
+}
+.feld{background:var(--off);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;gap:12px;min-width:0}
+.feld h3{font-size:1.1rem}
+.feld p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+.feld .bild{margin-top:auto;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.feld .bild img{width:100%;height:auto;display:block}
+.feld.hell{background:var(--tile);border-color:#D8E7FA}
+.feld.dunkel{background:linear-gradient(250deg,var(--deep-2),var(--deep));border-color:transparent;color:#fff}
+.feld.dunkel h3{color:#fff}
+.feld.dunkel p{color:var(--on-dark-2)}
+
+/* ============================================================
+   Rundgang mit Reitern
+   ============================================================ */
+.tour{display:grid;gap:clamp(20px,3vw,44px);grid-template-columns:minmax(0,1fr);
+  margin-top:clamp(34px,4.6vw,56px);align-items:start}
+@media (min-width:940px){ .tour{grid-template-columns:minmax(280px,380px) minmax(0,1fr)} }
+.tour-reiter{display:flex;flex-direction:column}
+.t-r{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;width:100%;
+  text-align:start;padding:clamp(16px,2vw,22px) clamp(12px,1.4vw,18px);
+  border-inline-start:2px solid var(--line);border-radius:0 var(--r) var(--r) 0}
+.t-r[aria-selected="true"]{border-inline-start-color:var(--accent);background:var(--off)}
+.t-r .nr{font-size:12px;font-weight:620;color:var(--soft);
+  font-variant-numeric:tabular-nums;padding-top:3px}
+.t-r[aria-selected="true"] .nr{color:var(--accent)}
+.t-r b{display:block;font-size:1.02rem;font-weight:620;letter-spacing:-.016em;color:var(--midnight)}
+.t-r p{margin-top:5px;font-size:14.2px;line-height:1.58;color:var(--muted)}
+.t-r:hover b{color:var(--accent-deep)}
+.tour-schau{display:grid;min-width:0;max-width:560px;margin-inline:auto;width:100%}
+.t-b{grid-area:1/1;opacity:0;visibility:hidden;min-width:0}
+.t-b[aria-hidden="false"]{opacity:1;visibility:visible}
+.t-b img{width:100%;height:auto;display:block;border-radius:var(--r-lg);
+  border:1px solid var(--line);box-shadow:0 20px 50px rgba(18,34,78,.12)}
+
+/* ============================================================
+   Outlets — waagerechte Reihe
+   ============================================================ */
+.outlets{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,3.4vw,44px);
+  justify-content:center}
+.outlet{border:1px solid var(--line-2);border-radius:999px;padding:9px 20px;
+  font-size:14.5px;color:var(--ink-2);background:var(--paper)}
+.outlet b{font-weight:620;color:var(--midnight)}
+
+/* ============================================================
+   Kennzahlen, dunkel
+   ============================================================ */
+.dunkel{background:linear-gradient(250deg,var(--deep-2) 0%,var(--deep) 100%);
+  color:var(--on-dark);position:relative;isolation:isolate;overflow:hidden}
+.dunkel::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1);opacity:.5}
+.dunkel .h2{color:#fff}
+.dunkel .lede{color:var(--on-dark-2)}
 .zahlen{display:grid;gap:0;grid-template-columns:minmax(0,1fr);
-  margin-top:clamp(40px,6vw,76px);border-top:1px solid rgba(255,252,247,.14)}
+  margin-top:clamp(34px,5vw,64px);border-top:1px solid rgba(255,255,255,.15)}
 @media (min-width:820px){ .zahlen{grid-template-columns:repeat(3,minmax(0,1fr))} }
-.zahl{padding:clamp(28px,4vw,46px) 0;border-bottom:1px solid rgba(255,252,247,.14)}
+.zahl{padding:clamp(24px,3.4vw,40px) 0;border-bottom:1px solid rgba(255,255,255,.15)}
 @media (min-width:820px){
   .zahl{padding-inline:clamp(18px,3vw,40px);border-bottom:0;
-    border-inline-start:1px solid rgba(255,252,247,.14)}
+    border-inline-start:1px solid rgba(255,255,255,.15)}
   .zahl:first-child{border-inline-start:0;padding-inline-start:0}
   .zahl:last-child{padding-inline-end:0}
-  .zahlen{border-bottom:1px solid rgba(255,252,247,.14)}
+  .zahlen{border-bottom:1px solid rgba(255,255,255,.15)}
 }
-.zahl-v{display:flex;align-items:baseline;gap:9px;color:var(--gold);
-  font-size:clamp(3.2rem,7.6vw,6rem);line-height:.94;letter-spacing:-.02em;
+.zahl-v{display:flex;align-items:baseline;gap:8px;color:#fff;font-weight:660;
+  font-size:clamp(2.8rem,6vw,4.6rem);line-height:1;letter-spacing:-.04em;
   font-variant-numeric:tabular-nums}
-.zahl-v small{font-family:var(--sans);font-size:clamp(.9rem,1.3vw,1.1rem);
-  font-weight:500;color:var(--on-dark-2)}
-.zahl-k{display:block;margin-top:14px;font-size:14.5px;line-height:1.55;
+.zahl-v small{font-size:clamp(.9rem,1.2vw,1.05rem);font-weight:500;color:var(--hospitality)}
+.zahl-k{display:block;margin-top:12px;font-size:14.5px;line-height:1.55;
   color:var(--on-dark-2);max-width:24ch}
-
-/* ============================================================
-   Kartenraster
-   ============================================================ */
-.karten{display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:minmax(0,1fr);
-  margin-top:clamp(36px,5vw,64px)}
-@media (min-width:860px){ .karten{grid-template-columns:repeat(2,minmax(0,1fr))} }
-.karte{background:var(--off);border:1px solid var(--line);border-radius:var(--r-xl);
-  padding:clamp(24px,2.8vw,36px);display:flex;flex-direction:column;gap:18px;min-width:0}
-.karte-kopf h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,2vw,1.75rem);
-  line-height:1.15;letter-spacing:-.012em;color:var(--midnight)}
-.karte-kopf p{margin-top:9px;font-size:14.5px;line-height:1.6;color:var(--muted);max-width:44ch}
-.karte-bild{margin-top:auto;border-radius:var(--r-lg);overflow:hidden;
-  border:1px solid var(--line);background:var(--tint)}
-.karte-bild img{width:100%;height:auto;display:block}
 
 /* ============================================================
    Rechner
    ============================================================ */
-.rechner{background:var(--off);border:1px solid var(--line);border-radius:var(--r-xl);
-  overflow:hidden;margin-top:clamp(34px,5vw,58px);
-  display:grid;grid-template-columns:minmax(0,1fr)}
+.rechner{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-xl);
+  overflow:hidden;margin-top:clamp(32px,4.4vw,54px);
+  display:grid;grid-template-columns:minmax(0,1fr);
+  box-shadow:0 20px 50px rgba(18,34,78,.09)}
 @media (min-width:900px){ .rechner{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)} }
-.rechner-ein{padding:clamp(26px,3vw,42px);display:flex;flex-direction:column;gap:24px}
+.rechner-ein{padding:clamp(24px,2.8vw,38px);display:flex;flex-direction:column;gap:22px}
 .feld-kopf{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
 .feld-kopf label{font-size:14.5px;color:var(--ink)}
-.feld-kopf output{font-family:var(--serif);font-size:1.5rem;color:var(--midnight);
+.feld-kopf output{font-size:1.35rem;font-weight:620;color:var(--midnight);
   font-variant-numeric:tabular-nums}
-.feld input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;
-  margin-top:12px;border-radius:999px;background:var(--line-2)}
-.feld input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;
-  border-radius:50%;background:var(--paper);border:1.5px solid var(--accent);cursor:pointer}
-.feld input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;
-  background:var(--paper);border:1.5px solid var(--accent);cursor:pointer}
-.feld .hinweis{display:block;margin-top:9px;font-size:12.5px;color:var(--soft)}
-.rechner-aus{background:var(--deep);color:var(--on-dark);
-  padding:clamp(26px,3vw,42px);display:flex;flex-direction:column;justify-content:center;gap:20px}
-.rechner-aus .gross{font-family:var(--serif);font-size:clamp(2.8rem,5.4vw,4.2rem);
-  line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;
-  display:flex;align-items:baseline;gap:8px}
-.rechner-aus .gross small{font-family:var(--sans);font-size:1rem;color:var(--on-dark-2)}
+.regler input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;
+  margin-top:11px;border-radius:999px;background:var(--line-2)}
+.regler input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;
+  border-radius:50%;background:#fff;border:1.5px solid var(--accent);cursor:pointer}
+.regler input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--accent);cursor:pointer}
+.regler .hinweis{display:block;margin-top:8px;font-size:12.5px;color:var(--soft)}
+.rechner-aus{background:linear-gradient(250deg,var(--deep-2),var(--deep));color:#fff;
+  padding:clamp(24px,2.8vw,38px);display:flex;flex-direction:column;justify-content:center;gap:18px}
+.rechner-aus .gross{font-size:clamp(2.4rem,4.6vw,3.4rem);font-weight:660;line-height:1;
+  letter-spacing:-.035em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:7px}
+.rechner-aus .gross small{font-size:1rem;font-weight:500;color:var(--on-dark-2)}
 .rechner-aus dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
-  padding-top:18px;border-top:1px solid rgba(255,252,247,.14)}
-.rechner-aus dt{font-size:12.5px;color:rgba(255,252,247,.55)}
-.rechner-aus dd{margin:4px 0 0;font-size:1.25rem;color:var(--paper);font-variant-numeric:tabular-nums}
-
-/* ============================================================
-   Gegenueberstellung
-   ============================================================ */
-.gegen{margin-top:clamp(34px,5vw,58px);border-top:1px solid var(--line)}
-.gegen-z{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;
-  padding:clamp(20px,2.4vw,28px) 0;border-bottom:1px solid var(--line)}
-@media (min-width:820px){
-  .gegen-z{grid-template-columns:minmax(0,10rem) minmax(0,1fr) minmax(0,1fr);
-    gap:clamp(20px,3vw,48px);align-items:baseline}
-}
-.gegen-z .wer{font-size:15px;font-weight:600;color:var(--midnight)}
-.gegen-z .heute{font-size:15px;color:var(--soft)}
-.gegen-z .mit{font-size:15px;color:var(--ink)}
+  padding-top:16px;border-top:1px solid rgba(255,255,255,.15)}
+.rechner-aus dt{font-size:12.5px;color:rgba(255,255,255,.55)}
+.rechner-aus dd{margin:4px 0 0;font-size:1.2rem;font-weight:620;font-variant-numeric:tabular-nums}
 
 /* ============================================================
    Fragen
    ============================================================ */
-.fragen{margin-top:clamp(30px,4vw,52px);border-top:1px solid var(--line)}
+.fragen{margin-top:clamp(28px,3.6vw,48px);border-top:1px solid var(--line)}
 .fragen details{border-bottom:1px solid var(--line)}
 .fragen summary{list-style:none;cursor:pointer;display:flex;align-items:center;
-  justify-content:space-between;gap:20px;padding:clamp(18px,2.2vw,26px) 0;
-  font-size:1.02rem;font-weight:500;color:var(--midnight)}
+  justify-content:space-between;gap:20px;padding:clamp(17px,2vw,24px) 0;
+  font-size:1.02rem;font-weight:560;color:var(--midnight)}
 .fragen summary::-webkit-details-marker{display:none}
 .fragen summary::after{content:"";flex:none;width:28px;height:28px;border-radius:50%;
-  background:var(--tile);
-  background-image:linear-gradient(var(--midnight),var(--midnight)),
-                   linear-gradient(var(--midnight),var(--midnight));
-  background-size:10px 1.2px,1.2px 10px;background-position:center,center;
+  background-color:var(--tile);
+  background-image:linear-gradient(var(--accent-deep),var(--accent-deep)),
+                   linear-gradient(var(--accent-deep),var(--accent-deep));
+  background-size:10px 1.3px,1.3px 10px;background-position:center,center;
   background-repeat:no-repeat}
-.fragen details[open] summary::after{background-size:10px 1.2px,0 0}
-.fragen details p{padding:0 0 clamp(18px,2.2vw,26px);font-size:15px;line-height:1.66;
+.fragen details[open] summary::after{background-size:10px 1.3px,0 0}
+.fragen details p{padding:0 0 clamp(17px,2vw,24px);font-size:15px;line-height:1.66;
   color:var(--muted);max-width:66ch}
 
 /* ============================================================
    Fuss
    ============================================================ */
-.fuss{background:var(--deep);color:var(--on-dark);padding-top:clamp(56px,7vw,92px)}
-.fuss-raster{display:grid;gap:34px;grid-template-columns:minmax(0,1fr)}
+.fuss{background:linear-gradient(250deg,var(--deep-2) 0%,var(--deep) 100%);
+  color:var(--on-dark);padding-top:clamp(52px,6.5vw,86px);position:relative;
+  isolation:isolate;overflow:hidden}
+.fuss::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:url("flaechen-dunkel.svg") center/cover no-repeat;transform:scaleX(-1);opacity:.4}
+.fuss-raster{display:grid;gap:32px;grid-template-columns:minmax(0,1fr)}
 @media (min-width:760px){ .fuss-raster{grid-template-columns:2fr 1fr 1fr} }
-.fuss h4{font-size:13px;font-weight:600;color:rgba(255,252,247,.5);margin-bottom:14px}
+.fuss h4{font-size:12.5px;font-weight:620;color:rgba(255,255,255,.5);margin-bottom:12px}
 .fuss a{color:var(--on-dark-2);font-size:14.5px;display:block;padding:5px 0}
-.fuss a:hover{color:var(--paper)}
-.fuss-wort{margin-top:clamp(48px,7vw,90px);padding-bottom:clamp(20px,3vw,34px);
-  color:rgba(255,252,247,.09)}
-.fuss-wort svg{width:100%;height:auto}
-.fuss-schluss{border-top:1px solid rgba(255,252,247,.12);padding:20px 0 26px;
-  display:flex;flex-wrap:wrap;gap:12px 26px;font-size:13px;color:rgba(255,252,247,.5)}
+.fuss a:hover{color:#fff}
+.fuss-schluss{margin-top:clamp(40px,5vw,68px);border-top:1px solid rgba(255,255,255,.14);
+  padding:18px 0 26px;display:flex;flex-wrap:wrap;gap:12px 24px;
+  font-size:13px;color:rgba(255,255,255,.5)}
 .fuss-schluss .rechts{margin-inline-start:auto}
 
 /* ============================================================
    Bewegung — kurze Wege, lange Zeiten, eine Kurve.
-   Nur Deckkraft, Transform und clip-path.
+   Nur Deckkraft und Transform.
    ============================================================ */
 @media (prefers-reduced-motion:no-preference){
-  .js [data-auf]{opacity:0;transform:translateY(18px);
-    transition:opacity .9s var(--ease),transform .9s var(--ease);
+  .js [data-auf]{opacity:0;transform:translateY(16px);
+    transition:opacity .85s var(--ease),transform .85s var(--ease);
     transition-delay:var(--d,0s)}
   .js [data-auf].da{opacity:1;transform:none}
-  .btn-voll:hover{transform:translateY(-1px)}
-  .karte{transition:border-color .4s var(--ease),transform .5s var(--ease)}
-  .karte:hover{border-color:var(--line-2);transform:translateY(-2px)}
+  .btn-voll:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(41,77,175,.26)}
+  .feld,.drei-z{transition:border-color .4s var(--ease),transform .5s var(--ease)}
+  .feld:hover,.drei-z:hover{border-color:var(--line-2);transform:translateY(-2px)}
+  .t-r,.t-r b{transition:background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease)}
+  .t-b{transition:opacity .5s var(--ease),visibility .5s var(--ease)}
   .nav{transition:border-color .3s var(--ease)}
 }
 
 /* ============================================================
-   Handy — ausschliesslich hier und ganz am Ende, damit jede Regel
-   ihre Grundregel schlaegt.
+   Handy — ausschliesslich hier und ganz am Ende, damit jede
+   Regel ihre Grundregel schlaegt.
    ============================================================ */
 @media (max-width:760px){
   .rechner-aus dl{grid-template-columns:minmax(0,1fr)}
@@ -321,8 +349,8 @@ a{color:inherit;text-decoration:none}
     </a>
     <nav class="nav-mitte" aria-label="Abschnitte">
       <a href="#ablauf">Ablauf</a>
+      <a href="#funktionen">Funktionen</a>
       <a href="#rechner">Rechner</a>
-      <a href="#vergleich">Vergleich</a>
       <a href="#fragen">Fragen</a>
     </nav>
     <div class="nav-rechts">
@@ -341,14 +369,14 @@ a{color:inherit;text-decoration:none}
 <!-- ══════════ Einstieg ══════════ -->
 <section class="hero mitte">
   <div class="wrap">
-    <h1 class="h1" data-auf>Jeder Beleg, jede Nacht.<span class="kur">Sie sehen nur, was nicht stimmt.</span></h1>
+    <h1 class="h1" data-auf>Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.</h1>
     <p class="lede" data-auf>Closewise prüft den Abend gegen Kartenterminal, Gästekonten und
       Kassenzählung — und legt Ihrer Schichtleitung am Morgen die kurze Liste hin.</p>
     <div class="hero-akt" data-auf>
       <a class="btn btn-voll" href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener">Termin buchen</a>
       <a class="btn btn-linie" href="#ablauf">So funktioniert es</a>
     </div>
-    <p class="hero-fakten" data-auf>
+    <p class="hero-fakt" data-auf>
       <span><b>4</b> Quellen je Nacht</span>
       <span><b>8,5</b> Minuten statt 60–70</span>
       <span><b>3–7</b> offene Punkte</span>
@@ -356,7 +384,6 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ══════════ Die grosse Flaeche ══════════ -->
 <section>
   <div class="wrap">
     <div class="buehne" data-auf>
@@ -364,24 +391,145 @@ a{color:inherit;text-decoration:none}
              aria-label="Die Closewise-Konsole beim Nachtabschluss. Demodaten.">
         <source src="produkt-demo.mp4" type="video/mp4">
       </video>
-      <div class="tafel oben" aria-hidden="true">
-        <b>214 Belege geprüft</b>
-        <span>211 deckungsgleich, 3 offen.</span>
-      </div>
-      <div class="tafel unten" aria-hidden="true">
-        <b>Terminal · Beleg ohne Gegenstück</b>
-        <span>39,80 € — offen seit 23:47</span>
-      </div>
     </div>
-    <p class="klein mitte" style="margin-top:14px">Demodaten. So sieht die Liste aus, die morgens auf dem Tisch liegt.</p>
+    <p class="klein mitte" style="margin-top:13px">Demodaten. So sieht die Liste aus, die morgens auf dem Tisch liegt.</p>
   </div>
 </section>
 
-<!-- ══════════ Zahlen, dunkel ══════════ -->
-<section class="sec dunkel">
+<!-- ══════════ Wo es auseinanderlaeuft ══════════ -->
+<section class="sec">
   <div class="wrap">
-    <h2 class="h2 mitte" data-auf>Eine Nacht <span class="kur">in drei Zahlen</span></h2>
-    <div class="zahlen">
+    <div class="mitte">
+      <h2 class="h2" data-auf>Drei Stellen, an denen die Nacht auseinanderläuft</h2>
+      <p class="lede" data-auf style="margin-top:16px">Vier Auswertungen entstehen ohnehin.
+        Wo sie sich widersprechen, findet es heute ein Mensch — nach der Schicht, von Hand.</p>
+    </div>
+    <div class="drei">
+      <article class="drei-z" data-auf>
+        <span class="wo">Kartenterminal</span>
+        <h3>Eingezogen, aber nicht gebucht</h3>
+        <p>Das Terminal hat kassiert, der Beleg fehlt. Oder umgekehrt: gebongt, aber nie
+          eingezogen. Beides fällt beim Monatsabschluss auf — sechs Wochen zu spät.</p>
+        <span class="zahl">Abgleich Betrag gegen Betrag</span>
+      </article>
+      <article class="drei-z" data-auf>
+        <span class="wo">Gästekonto</span>
+        <h3>Aufs falsche Zimmer gelaufen</h3>
+        <p>Der Gast lässt anschreiben, der Betrag landet auf einem anderen Konto — oder gar
+          keinem. Bis zum Check-out fällt es niemandem auf.</p>
+        <span class="zahl">Abgleich Buchung gegen Konto</span>
+      </article>
+      <article class="drei-z" data-auf>
+        <span class="wo">Kassenlade</span>
+        <h3>Gezählt passt nicht zu erfasst</h3>
+        <p>Die einzige der vier Zahlen, die von Hand kommt. Weicht sie ab, liegt die Ursache
+          fast immer woanders — im Storno, im Rabatt, in der Zahlart.</p>
+        <span class="zahl">Abgleich Zählung gegen Journal</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ Funktionsraster ══════════ -->
+<section class="sec" id="funktionen" style="background:var(--off)">
+  <div class="wrap">
+    <div class="mitte">
+      <h2 class="h2" data-auf>Was Closewise jede Nacht tut</h2>
+      <p class="lede" data-auf style="margin-top:16px">Kein neues Kassensystem, keine Anbindung,
+        kein zusätzlicher Handgriff an der Kasse.</p>
+    </div>
+    <div class="raster">
+      <article class="feld f-gross" data-auf>
+        <h3>Vier Quellen übereinandergelegt</h3>
+        <p>Kassenbelege, Terminal-Abschluss, Gästekonten und Kassenzählung werden Position für
+          Position gegeneinander gehalten. Was deckungsgleich ist, sehen Sie nie.</p>
+        <div class="bild"><img src="step-2.png" alt="Abgleich mit Fortschritt: elf von vierzehn geprüft, einer offen." loading="lazy" width="1000" height="1250"></div>
+      </article>
+      <article class="feld f-klein hell" data-auf>
+        <h3>17 Fehlerbilder</h3>
+        <p>Von der Kartenzahlung, die nie eingezogen wurde, bis zur Zimmerbuchung, die nie
+          ankam. Closewise kennt sie und benennt sie.</p>
+      </article>
+      <article class="feld f-klein" data-auf>
+        <h3>Keine Kartennummern</h3>
+        <p>Dateien mit vollständigen Kartennummern lehnt der Import ab. Gespeichert werden
+          Beträge, Zeiten, Zahlarten, Tisch- und Zimmernummern.</p>
+      </article>
+      <article class="feld f-klein" data-auf>
+        <h3>Jedes Outlet</h3>
+        <p>Restaurant, Bar, Roomservice, Bankett. Ein Haus, eine Ansicht.</p>
+      </article>
+      <article class="feld f-klein dunkel" data-auf>
+        <h3>8,5 Minuten</h3>
+        <p>Statt 60 bis 70 von Hand. Zweieinhalb Minuten fürs Öffnen, anderthalb je Abweichung.</p>
+      </article>
+      <article class="feld f-halb" data-auf>
+        <h3>Die Exporte, die es ohnehin gibt</h3>
+        <p>Closewise liest, was Ihre Systeme jede Nacht erzeugen. An der Kasse ändert sich für
+          Ihr Team nichts — kein Wechsel, keine Schulung, keine Anbindung.</p>
+        <div class="bild"><img src="step-1.png" alt="Import dreier Exporte; eine Datei mit vollständiger Kartennummer wird abgelehnt." loading="lazy" width="1000" height="1250"></div>
+      </article>
+      <article class="feld f-halb" data-auf>
+        <h3>Die kurze Liste am Morgen</h3>
+        <p>Übrig bleiben drei bis sieben Punkte je Nacht, jeder mit Outlet, Beleg und Ursache.
+          Den Rest hat Closewise schon abgehakt.</p>
+        <div class="bild"><img src="step-3.png" alt="Drei offene Abweichungen mit Outlet und Ursache." loading="lazy" width="1000" height="1250"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ Rundgang ══════════ -->
+<section class="sec" id="ablauf">
+  <div class="wrap">
+    <div class="mitte">
+      <h2 class="h2" data-auf>In drei Schritten durch die Nacht</h2>
+      <p class="lede" data-auf style="margin-top:16px">Was in jedem Schritt passiert, sehen Sie hier.</p>
+    </div>
+    <div class="tour" data-auf>
+      <div class="tour-reiter" role="tablist" aria-label="Die drei Schritte">
+        <button class="t-r" role="tab" id="t0" aria-controls="b0" aria-selected="true" tabindex="0">
+          <span class="nr">01</span>
+          <span><b>Exporte einlesen</b><p>Kassenbelege, Terminal-Abschluss und Gästekonten — die Dateien, die Ihre Systeme ohnehin erzeugen.</p></span>
+        </button>
+        <button class="t-r" role="tab" id="t1" aria-controls="b1" aria-selected="false" tabindex="-1">
+          <span class="nr">02</span>
+          <span><b>Gegen vier Quellen abgleichen</b><p>Betrag gegen Betrag, Buchung gegen Konto. Was übereinstimmt, wird abgehakt.</p></span>
+        </button>
+        <button class="t-r" role="tab" id="t2" aria-controls="b2" aria-selected="false" tabindex="-1">
+          <span class="nr">03</span>
+          <span><b>Die kurze Liste klären</b><p>Drei bis sieben Punkte je Nacht, jeder mit Outlet, Beleg und Ursache.</p></span>
+        </button>
+      </div>
+      <div class="tour-schau">
+        <div class="t-b" id="b0" role="tabpanel" aria-labelledby="t0" aria-hidden="false">
+          <img src="step-1.png" alt="Import dreier Exporte; eine Datei mit vollständiger Kartennummer wird abgelehnt." loading="lazy" width="1000" height="1250">
+        </div>
+        <div class="t-b" id="b1" role="tabpanel" aria-labelledby="t1" aria-hidden="true">
+          <img src="step-2.png" alt="Abgleich mit Fortschritt: elf von vierzehn geprüft, einer offen." loading="lazy" width="1000" height="1250">
+        </div>
+        <div class="t-b" id="b2" role="tabpanel" aria-labelledby="t2" aria-hidden="true">
+          <img src="step-3.png" alt="Drei offene Abweichungen mit Outlet und Ursache." loading="lazy" width="1000" height="1250">
+        </div>
+      </div>
+    </div>
+
+    <div class="outlets" data-auf>
+      <span class="outlet"><b>Restaurant</b></span>
+      <span class="outlet"><b>Bar</b></span>
+      <span class="outlet"><b>Roomservice</b></span>
+      <span class="outlet"><b>Bankett</b></span>
+      <span class="outlet"><b>Spa</b></span>
+      <span class="outlet"><b>Frühstück</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ Kennzahlen ══════════ -->
+<section class="sec dunkel">
+  <div class="wrap mitte">
+    <h2 class="h2" data-auf>Eine Nacht in drei Zahlen</h2>
+    <div class="zahlen" style="text-align:start">
       <div class="zahl" data-auf>
         <span class="zahl-v"><span class="zaehl" data-bis="4">0</span></span>
         <span class="zahl-k">Quellen, die jede Nacht zusammenpassen müssen</span>
@@ -398,77 +546,27 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- ══════════ Ablauf ══════════ -->
-<section class="sec" id="ablauf">
-  <div class="wrap">
-    <div class="mitte">
-      <h2 class="h2" data-auf>Der Abschluss ist Handarbeit.<span class="kur"> Das muss er nicht sein.</span></h2>
-      <p class="lede" data-auf style="margin-top:18px">Vier Auswertungen entstehen jede Nacht ohnehin.
-        Closewise legt sie übereinander und zeigt, wo sie nicht deckungsgleich sind.</p>
-    </div>
-
-    <div class="karten">
-      <article class="karte" data-auf>
-        <div class="karte-kopf">
-          <h3>Exporte einlesen</h3>
-          <p>Kassenbelege, Terminal-Abschluss und Gästekonten — die Dateien, die Ihre
-            Systeme ohnehin erzeugen. An der Kasse ändert sich für Ihr Team nichts.</p>
-        </div>
-        <div class="karte-bild"><img src="step-1.png" alt="Import dreier Exporte; eine Datei mit vollständiger Kartennummer wird abgelehnt." loading="lazy" width="1000" height="1250"></div>
-      </article>
-
-      <article class="karte" data-auf>
-        <div class="karte-kopf">
-          <h3>Gegen vier Quellen abgleichen</h3>
-          <p>Jeder Beleg wird gegen die anderen Quellen gehalten: Betrag gegen Betrag,
-            Buchung gegen Konto. Was übereinstimmt, wird abgehakt.</p>
-        </div>
-        <div class="karte-bild"><img src="step-2.png" alt="Abgleich mit Fortschritt: elf von vierzehn geprüft, einer offen." loading="lazy" width="1000" height="1250"></div>
-      </article>
-
-      <article class="karte" data-auf>
-        <div class="karte-kopf">
-          <h3>Die kurze Liste klären</h3>
-          <p>Übrig bleiben drei bis sieben Punkte je Nacht, jeder mit Outlet, Beleg und
-            Ursache. Den Rest hat Closewise schon abgehakt.</p>
-        </div>
-        <div class="karte-bild"><img src="step-3.png" alt="Drei offene Abweichungen mit Outlet und Ursache." loading="lazy" width="1000" height="1250"></div>
-      </article>
-
-      <article class="karte" data-auf>
-        <div class="karte-kopf">
-          <h3>Jedes Outlet im Haus</h3>
-          <p>Restaurant, Bar, Roomservice, Bankett. Closewise übernimmt den Abschluss
-            für jeden Betrieb — und zeigt das Haus in einer Ansicht.</p>
-        </div>
-        <div class="karte-bild"><img src="restaurant-abend.jpg" alt="Restaurant am Abend." loading="lazy"></div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ══════════ Rechner ══════════ -->
-<section class="sec" id="rechner" style="background:var(--tint)">
+<section class="sec" id="rechner">
   <div class="wrap">
     <div class="mitte">
-      <h2 class="h2" data-auf>Was der Abschluss <span class="kur">heute kostet</span></h2>
-      <p class="lede" data-auf style="margin-top:18px">Stellen Sie Ihr Haus ein und sehen Sie,
+      <h2 class="h2" data-auf>Was der Abschluss heute kostet</h2>
+      <p class="lede" data-auf style="margin-top:16px">Stellen Sie Ihr Haus ein und sehen Sie,
         wie viel Handarbeit im Nachtabschluss steckt.</p>
     </div>
-
     <div class="rechner" data-auf>
       <div class="rechner-ein">
-        <div class="feld">
+        <div class="regler">
           <div class="feld-kopf"><label for="r-outlets">Outlets im Haus</label><output id="a-outlets">2</output></div>
           <input id="r-outlets" type="range" min="1" max="12" step="1" value="2">
           <span class="hinweis">Restaurants, Bars, Roomservice, Spa.</span>
         </div>
-        <div class="feld">
+        <div class="regler">
           <div class="feld-kopf"><label for="r-satz">Schichtleitung, pro Stunde</label><output id="a-satz">30 €</output></div>
           <input id="r-satz" type="range" min="20" max="60" step="1" value="30">
           <span class="hinweis">Mit Nachtzuschlägen und Nebenkosten.</span>
         </div>
-        <div class="feld">
+        <div class="regler">
           <div class="feld-kopf"><label for="r-min">Minuten je Outlet heute</label><output id="a-min">65</output></div>
           <input id="r-min" type="range" min="20" max="120" step="5" value="65">
           <span class="hinweis">Was der Abgleich heute Nacht von Hand dauert.</span>
@@ -476,55 +574,27 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="rechner-aus">
         <div>
-          <span class="klein" style="color:rgba(255,252,247,.55)">Netto im Jahr, nach Abzug von Closewise</span>
-          <span class="gross"><span id="a-spar">20.340</span><small>€</small></span>
+          <span class="klein" style="color:rgba(255,255,255,.55)">Netto im Jahr, nach Abzug von Closewise</span>
+          <span class="gross"><span id="a-netto">10.740</span><small>€</small></span>
         </div>
         <dl>
           <div><dt>Stunden im Jahr zurück</dt><dd id="a-std">678</dd></div>
-          <div><dt>Minuten je Abschluss</dt><dd>8,5 <span style="color:rgba(255,252,247,.5)">statt</span> <span id="a-alt">65</span></dd></div>
+          <div><dt>Minuten je Abschluss</dt><dd>8,5 <span style="color:rgba(255,255,255,.5);font-weight:400">statt</span> <span id="a-alt">65</span></dd></div>
         </dl>
       </div>
     </div>
-    <p class="klein" style="margin-top:16px;max-width:64ch">Gerechnet mit 2,5 Minuten fürs Öffnen und
+    <p class="klein" style="margin-top:14px;max-width:66ch">Gerechnet mit 2,5 Minuten fürs Öffnen und
       1,5 Minuten je Abweichung bei vier Abweichungen in einer normalen Nacht, also 8,5 Minuten je
       Outlet, an 360 Nächten im Jahr. Abzüglich 9.600 € im Jahr für Closewise. Eine Schätzung nach
       Ihren Angaben, keine Zusage.</p>
   </div>
 </section>
 
-<!-- ══════════ Gegenueberstellung ══════════ -->
-<section class="sec" id="vergleich">
-  <div class="wrap">
-    <div class="mitte">
-      <h2 class="h2" data-auf>Kein PMS, <span class="kur">keine Buchhaltung</span></h2>
-      <p class="lede" data-auf style="margin-top:18px">Closewise ersetzt keins Ihrer Systeme.
-        Es liest, was sie erzeugen, und prüft in derselben Nacht, ob es zusammenpasst.</p>
-    </div>
-    <div class="gegen" data-auf>
-      <div class="gegen-z">
-        <span class="wer">PMS</span>
-        <span class="heute">Zeigt, was gebucht wurde.</span>
-        <span class="mit">Prüft, ob es auf dem Gästekonto auch angekommen ist.</span>
-      </div>
-      <div class="gegen-z">
-        <span class="wer">Buchhaltung</span>
-        <span class="heute">Sieht die Differenz beim Monatsabschluss.</span>
-        <span class="mit">Sieht sie am Morgen danach, mit Beleg und Ursache.</span>
-      </div>
-      <div class="gegen-z">
-        <span class="wer">Von Hand</span>
-        <span class="heute">Rund eine Stunde je Outlet, Bon für Bon.</span>
-        <span class="mit">Etwa acht Minuten für die Punkte, die nicht aufgehen.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══════════ Fragen ══════════ -->
-<section class="sec" id="fragen">
+<section class="sec" id="fragen" style="background:var(--off)">
   <div class="wrap-eng">
     <div class="mitte">
-      <h2 class="h2" data-auf>Was Hoteliers <span class="kur">zuerst fragen</span></h2>
+      <h2 class="h2" data-auf>Was Hoteliers zuerst fragen</h2>
     </div>
     <div class="fragen" data-auf>
       <details>
@@ -566,9 +636,9 @@ a{color:inherit;text-decoration:none}
 <!-- ══════════ Abschluss ══════════ -->
 <section class="sec dunkel mitte">
   <div class="wrap-eng">
-    <h2 class="h2" data-auf>Zwanzig Minuten, <span class="kur">ein Abschluss</span></h2>
-    <p class="lede" data-auf style="margin-top:20px">Wir zeigen Ihnen einen Nachtabschluss von vorn
-      bis hinten und gehen gemeinsam durch, was die Exporte aus Ihrem Haus dafür liefern müssen.</p>
+    <h2 class="h2" data-auf>Zwanzig Minuten, ein Abschluss</h2>
+    <p class="lede" data-auf style="margin:18px auto 0">Wir zeigen Ihnen einen Nachtabschluss von
+      vorn bis hinten und gehen gemeinsam durch, was die Exporte aus Ihrem Haus dafür liefern müssen.</p>
     <div class="hero-akt" data-auf>
       <a class="btn btn-voll" href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener">Termin buchen</a>
       <a class="btn btn-linie" href="https://demo.closewise.site/sign-up">Demo ausprobieren</a>
@@ -583,17 +653,17 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="fuss-raster">
       <div>
-        <div class="marke" style="color:var(--paper)">
+        <div class="marke" style="color:#fff">
           <svg viewBox="0 0 1316 219" fill="currentColor" aria-hidden="true"><use href="#cw"/></svg>
         </div>
-        <p class="lede" style="margin-top:16px;max-width:34ch">Nachtabschluss für Hotels und
-          Gastronomie. Jede Nacht, jeder Beleg.</p>
+        <p class="lede" style="margin-top:14px;max-width:32ch;color:var(--on-dark-2)">Nachtabschluss
+          für Hotels und Gastronomie. Jede Nacht, jeder Beleg.</p>
       </div>
       <div>
         <h4>Seite</h4>
         <a href="#ablauf">Ablauf</a>
+        <a href="#funktionen">Funktionen</a>
         <a href="#rechner">Rechner</a>
-        <a href="#vergleich">Vergleich</a>
         <a href="#fragen">Fragen</a>
       </div>
       <div>
@@ -604,11 +674,6 @@ a{color:inherit;text-decoration:none}
         <a href="datenschutz.html">Datenschutz</a>
       </div>
     </div>
-
-    <div class="fuss-wort" aria-hidden="true">
-      <svg viewBox="0 0 1316 219" fill="currentColor"><use href="#cw"/></svg>
-    </div>
-
     <div class="fuss-schluss">
       <span>© 2026 Closewise</span>
       <span class="rechts">Datenbank in der EU, eu-west-1 Irland</span>
@@ -618,19 +683,17 @@ a{color:inherit;text-decoration:none}
 
 <script>
 /* ============================================================
-   Auftritte beim Hereinscrollen und die Zaehler.
-   Jedes Element wird nach seinem Auftritt wieder abgemeldet.
+   Auftritte und Zaehler. Jedes Element wird nach seinem Auftritt
+   wieder abgemeldet.
    ============================================================ */
 (function () {
   var ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Gestaffelt: Geschwister bekommen wachsende Verzoegerung.
-  var gruppen = {};
+  var gruppen = new Map();
   document.querySelectorAll("[data-auf]").forEach(function (el) {
-    var k = el.parentNode;
-    gruppen[k] = gruppen[k] || [];
-    el.style.setProperty("--d", (gruppen[k].length * 70) + "ms");
-    gruppen[k].push(el);
+    var k = el.parentNode, l = gruppen.get(k) || 0;
+    el.style.setProperty("--d", (l * 70) + "ms");
+    gruppen.set(k, l + 1);
   });
 
   function zeig(wert, dez) {
@@ -652,18 +715,17 @@ a{color:inherit;text-decoration:none}
       el.textContent = zeig(parseFloat(el.dataset.bis), parseInt(el.dataset.dez, 10) || 0);
     });
   } else {
-    var auge = new IntersectionObserver(function (eintraege) {
-      eintraege.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        if (e.target.classList.contains("zaehl")) zaehle(e.target);
-        else e.target.classList.add("da");
-        auge.unobserve(e.target);
+    var auge = new IntersectionObserver(function (e) {
+      e.forEach(function (x) {
+        if (!x.isIntersecting) return;
+        if (x.target.classList.contains("zaehl")) zaehle(x.target);
+        else x.target.classList.add("da");
+        auge.unobserve(x.target);
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
     document.querySelectorAll("[data-auf], .zaehl").forEach(function (el) { auge.observe(el); });
   }
 
-  // Haarlinie unter der Kopfzeile erst, wenn etwas darunter liegt.
   var kopf = document.getElementById("kopf");
   function stand() { kopf.classList.toggle("fest", scrollY > 8); }
   addEventListener("scroll", stand, { passive: true });
@@ -671,36 +733,65 @@ a{color:inherit;text-decoration:none}
 })();
 
 /* ============================================================
+   Rundgang: genau ein Schritt gewaehlt. Reiterleiste nach ARIA,
+   mit wanderndem tabindex und Pfeiltasten.
+   ============================================================ */
+(function () {
+  var reiter = [].slice.call(document.querySelectorAll(".t-r"));
+  var tafeln = [].slice.call(document.querySelectorAll(".t-b"));
+  if (!reiter.length) return;
+
+  function zeige(i, fokus) {
+    reiter.forEach(function (el, k) {
+      var an = k === i;
+      el.setAttribute("aria-selected", an ? "true" : "false");
+      el.setAttribute("tabindex", an ? "0" : "-1");
+    });
+    tafeln.forEach(function (el, k) {
+      el.setAttribute("aria-hidden", k === i ? "false" : "true");
+    });
+    if (fokus) reiter[i].focus();
+  }
+  reiter.forEach(function (el, i) {
+    el.addEventListener("click", function () { zeige(i); });
+    el.addEventListener("keydown", function (e) {
+      var k = e.key, n = reiter.length;
+      if (k === "ArrowDown" || k === "ArrowRight") { e.preventDefault(); zeige((i + 1) % n, true); }
+      else if (k === "ArrowUp" || k === "ArrowLeft") { e.preventDefault(); zeige((i - 1 + n) % n, true); }
+      else if (k === "Home") { e.preventDefault(); zeige(0, true); }
+      else if (k === "End") { e.preventDefault(); zeige(n - 1, true); }
+    });
+  });
+  zeige(0);
+})();
+
+/* ============================================================
    Rechner
    Closewise-Minuten = 2,5 (Oeffnen) + 1,5 x 4 (Abweichungen) = 8,5
    Stunden im Jahr   = Outlets x (Minuten - 8,5) x 360 / 60
-   Ersparnis         = Stunden x Stundensatz
-   Netto             = Ersparnis - 9.600 EUR (800 EUR/Monat)
+   Netto             = Stunden x Stundensatz - 9.600 EUR
    360 Naechte, nicht 365.
    ============================================================ */
 (function () {
-  var outlets = document.getElementById("r-outlets");
-  if (!outlets) return;
-  var satz = document.getElementById("r-satz"), min = document.getElementById("r-min");
+  var o = document.getElementById("r-outlets");
+  if (!o) return;
+  var s = document.getElementById("r-satz"), m = document.getElementById("r-min");
   var aO = document.getElementById("a-outlets"), aS = document.getElementById("a-satz");
-  var aM = document.getElementById("a-min"), aSpar = document.getElementById("a-spar");
+  var aM = document.getElementById("a-min"), aN = document.getElementById("a-netto");
   var aStd = document.getElementById("a-std"), aAlt = document.getElementById("a-alt");
-  var CW = 8.5, NAECHTE = 360, JAHRESPREIS = 9600;
+  var CW = 8.5, NAECHTE = 360, PREIS = 9600;
 
   function rechne() {
-    var o = +outlets.value, s = +satz.value, m = +min.value;
-    aO.textContent = o;
-    aS.textContent = s + " €";
-    aM.textContent = m;
-    aAlt.textContent = m;
-    var stunden = Math.max(0, o * (m - CW) * NAECHTE / 60);
-    var netto = stunden * s - JAHRESPREIS;
+    var ou = +o.value, sa = +s.value, mi = +m.value;
+    aO.textContent = ou; aS.textContent = sa + " €"; aM.textContent = mi; aAlt.textContent = mi;
+    var stunden = Math.max(0, ou * (mi - CW) * NAECHTE / 60);
+    var netto = stunden * sa - PREIS;
     aStd.textContent = Math.round(stunden).toLocaleString("de-DE");
-    aSpar.textContent = Math.round(netto).toLocaleString("de-DE");
+    aN.textContent = Math.round(netto).toLocaleString("de-DE");
     // Negatives Netto darf nicht wie ein Gewinn aussehen.
-    aSpar.parentNode.style.color = netto < 0 ? "var(--bad)" : "var(--gold)";
+    aN.parentNode.style.color = netto < 0 ? "#FF9C95" : "#fff";
   }
-  [outlets, satz, min].forEach(function (el) { el.addEventListener("input", rechne); });
+  [o, s, m].forEach(function (el) { el.addEventListener("input", rechne); });
   rechne();
 })();
 
@@ -710,57 +801,62 @@ a{color:inherit;text-decoration:none}
    ============================================================ */
 (function () {
   var EN = {
-    "Ablauf": "How it works", "Rechner": "Calculator", "Vergleich": "Comparison",
+    "Ablauf": "How it works", "Funktionen": "Features", "Rechner": "Calculator",
     "Fragen": "Questions", "Anmelden": "Sign in", "Termin buchen": "Book a call",
-    "Jeder Beleg, jede Nacht.": "Every receipt, every night.",
-    "Sie sehen nur, was nicht stimmt.": "You only see what doesn’t add up.",
-    "Closewise prüft den Abend gegen Kartenterminal, Gästekonten und\n      Kassenzählung — und legt Ihrer Schichtleitung am Morgen die kurze Liste hin.":
-      "Closewise checks the evening against the card terminal, guest accounts and the cash count — and hands your shift lead the short list in the morning.",
+    "Jeder Beleg, jede Nacht. Sie sehen nur, was nicht stimmt.":
+      "Every receipt, every night. You only see what doesn’t add up.",
     "So funktioniert es": "How it works",
     "Quellen je Nacht": "sources per night", "Minuten statt 60–70": "minutes instead of 60–70",
     "offene Punkte": "open items",
-    "214 Belege geprüft": "214 receipts checked",
-    "211 deckungsgleich, 3 offen.": "211 matched, 3 open.",
-    "Terminal · Beleg ohne Gegenstück": "Terminal · receipt without counterpart",
     "Demodaten. So sieht die Liste aus, die morgens auf dem Tisch liegt.":
       "Demo data. This is the list that lands on the desk in the morning.",
-    "Eine Nacht ": "One night ", "in drei Zahlen": "in three numbers",
-    "Quellen, die jede Nacht zusammenpassen müssen": "sources that have to agree every night",
-    "Minuten": "minutes", "für den Abschluss, statt 60–70 von Hand":
-      "for the close, instead of 60–70 by hand",
-    "Nächte im Jahr, jede davon geprüft": "nights a year, every one of them checked",
-    "Der Abschluss ist Handarbeit.": "The night close is manual work.",
-    " Das muss er nicht sein.": " It doesn’t have to be.",
+    "Drei Stellen, an denen die Nacht auseinanderläuft":
+      "Three places where the night comes apart",
+    "Kartenterminal": "Card terminal", "Gästekonto": "Guest account", "Kassenlade": "Cash drawer",
+    "Eingezogen, aber nicht gebucht": "Charged, but never booked",
+    "Aufs falsche Zimmer gelaufen": "Posted to the wrong room",
+    "Gezählt passt nicht zu erfasst": "Counted doesn’t match recorded",
+    "Abgleich Betrag gegen Betrag": "Amount against amount",
+    "Abgleich Buchung gegen Konto": "Posting against account",
+    "Abgleich Zählung gegen Journal": "Count against journal",
+    "Was Closewise jede Nacht tut": "What Closewise does every night",
+    "Vier Quellen übereinandergelegt": "Four sources laid over each other",
+    "17 Fehlerbilder": "17 error patterns", "Keine Kartennummern": "No card numbers",
+    "Jedes Outlet": "Every outlet", "8,5 Minuten": "8.5 minutes",
+    "Die Exporte, die es ohnehin gibt": "The exports that already exist",
+    "Die kurze Liste am Morgen": "The short list in the morning",
+    "In drei Schritten durch die Nacht": "Through the night in three steps",
+    "Was in jedem Schritt passiert, sehen Sie hier.": "Here is what happens at each step.",
     "Exporte einlesen": "Read in the exports",
     "Gegen vier Quellen abgleichen": "Match against four sources",
     "Die kurze Liste klären": "Clear the short list",
-    "Jedes Outlet im Haus": "Every outlet in the house",
-    "Was der Abschluss ": "What the night close ", "heute kostet": "costs you today",
+    "Restaurant": "Restaurant", "Bar": "Bar", "Roomservice": "Room service",
+    "Bankett": "Banqueting", "Spa": "Spa", "Frühstück": "Breakfast",
+    "Eine Nacht in drei Zahlen": "One night in three numbers",
+    "Quellen, die jede Nacht zusammenpassen müssen": "sources that have to agree every night",
+    "Minuten": "minutes",
+    "für den Abschluss, statt 60–70 von Hand": "for the close, instead of 60–70 by hand",
+    "Nächte im Jahr, jede davon geprüft": "nights a year, every one of them checked",
+    "Was der Abschluss heute kostet": "What the night close costs you today",
     "Outlets im Haus": "Outlets in the house",
     "Schichtleitung, pro Stunde": "Shift lead, per hour",
     "Minuten je Outlet heute": "Minutes per outlet today",
     "Netto im Jahr, nach Abzug von Closewise": "Net per year, after Closewise",
     "Stunden im Jahr zurück": "Hours back per year",
     "Minuten je Abschluss": "Minutes per close", "statt": "instead of",
-    "Kein PMS, ": "No PMS, ", "keine Buchhaltung": "no accounting",
-    "Was Hoteliers ": "What hoteliers ", "zuerst fragen": "ask first",
-    "Zwanzig Minuten, ": "Twenty minutes, ", "ein Abschluss": "one night close",
-    "Demo ausprobieren": "Try the demo", "Seite": "Page", "Impressum": "Legal notice",
-    "Datenschutz": "Privacy", "Datenbank in der EU, eu-west-1 Irland":
-      "Database in the EU, eu-west-1 Ireland",
-    "Nachtabschluss für Hotels und\n          Gastronomie. Jede Nacht, jeder Beleg.":
-      "Night close for hotels and hospitality. Every night, every receipt."
+    "Was Hoteliers zuerst fragen": "What hoteliers ask first",
+    "Zwanzig Minuten, ein Abschluss": "Twenty minutes, one night close",
+    "Demo ausprobieren": "Try the demo", "Seite": "Page",
+    "Impressum": "Legal notice", "Datenschutz": "Privacy",
+    "Datenbank in der EU, eu-west-1 Irland": "Database in the EU, eu-west-1 Ireland"
   };
 
-  var knoten = [];
-  var lauf = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-  var n;
+  var knoten = [], lauf = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n;
   while ((n = lauf.nextNode())) {
     var roh = n.nodeValue, schl = roh.trim();
     if (!schl || !EN[schl]) continue;
     knoten.push({ k: n, de: roh, en: roh.replace(schl, EN[schl]) });
   }
-
   var knoepfe = [].slice.call(document.querySelectorAll(".lang button"));
   function setze(lang) {
     knoten.forEach(function (e) { e.k.nodeValue = lang === "en" ? e.en : e.de; });
