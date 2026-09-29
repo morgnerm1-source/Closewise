@@ -63,7 +63,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ---------- Hero ---------- */
 .hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
-.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
+.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.ph-hero{position:absolute;inset:0;background:linear-gradient(135deg,#3a3733,#1a1814)}
+.ph-hero::before{content:"Video";top:auto;bottom:150px;right:80px}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15) 60%,rgba(0,0,0,.1)),linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
 .hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:156px 0 32px}
 .hero h1{font-size:64px;line-height:72px;font-weight:400;letter-spacing:-.01em;max-width:650px}
@@ -120,8 +123,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .pcard .hd{display:flex;gap:10px;align-items:center;padding:20px 24px;font-size:16px;font-weight:500}
 .pcard .tag{width:20px;height:20px;border-radius:4px;font-size:10px;font-weight:600;color:#fff;display:grid;place-items:center}
 .pcard .media{background:var(--dark);border-radius:16px 16px 0 0;height:300px;padding:32px;overflow:hidden;position:relative}
-.pcard .media img{width:100%;height:100%;object-fit:cover;border-radius:12px;transition:transform 1.2s var(--ease)}
-.pcard:hover .media img{transform:scale(1.04)}
+.pcard .media .ph{width:100%;height:100%;border-radius:12px;transition:transform 1.2s var(--ease)}
+.pcard:hover .media .ph{transform:scale(1.04)}
 .pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px}
 .pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
 .pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
@@ -133,7 +136,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .quotes{background:#fff;padding:120px 0;overflow:hidden}
 .qtrack{position:relative;height:650px}
 .qslide{position:absolute;top:0;left:50%;width:min(1280px,100% - 160px);height:650px;margin-left:calc(min(1280px,100% - 160px)/-2);border-radius:24px;overflow:hidden;color:#fff;transition:transform 1s var(--ease),opacity 1s var(--ease)}
-.qslide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.qslide .ph{position:absolute;inset:0}
 .qslide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,40,.75),rgba(0,0,0,.25) 55%,rgba(0,0,0,.45))}
 .qslide .c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:64px}
 .qslide .eyebrow{color:#fff}
@@ -160,8 +163,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .scroller{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc((100vw - min(1280px,100vw - 160px))/2);scrollbar-width:none;cursor:grab}
 .scroller::-webkit-scrollbar{display:none}
 .scard{flex:0 0 466px;height:488px;border-radius:12px;position:relative;overflow:hidden;color:#fff;scroll-snap-align:start}
-.scard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.scard:hover img{transform:scale(1.05)}
+.scard .ph{position:absolute;inset:0;transition:transform 1.2s var(--ease)}
+.scard:hover .ph{transform:scale(1.05)}
 .scard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.1) 60%)}
 .scard .c{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}
 .scard h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
@@ -195,7 +198,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .bento .ocard:nth-child(3){grid-column:auto}
 .bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
 .ocard{position:relative;height:492px;border-radius:12px;overflow:hidden;color:#fff;padding:40px;display:flex;flex-direction:column;justify-content:space-between}
-.ocard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ocard .ph{position:absolute;inset:0;z-index:0}
 .ocard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));z-index:1}
 .ocard>*{position:relative;z-index:2}
 .ocard .mark{font-size:22px;font-weight:600;letter-spacing:-.02em;opacity:.9}
@@ -336,7 +339,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 <div class="stage">
 <!-- Hero -->
 <section class="hero" id="top">
-  <video id="heroVideo" autoplay muted loop playsinline poster="hero-scroll.jpg"><source src="hero-scroll.mp4" type="video/mp4"></video>
+  <div class="ph ph-hero" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">Große Headline über drei Zeilen, die das Versprechen trägt.</h1>
@@ -411,12 +414,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <div class="cards3">
       <a href="#" class="pcard rv" style="--d:.1s">
         <div class="hd"><span class="tag" style="background:#1f7a6a">A</span>Produkt A</div>
-        <div class="media"><img src="restaurant-abend.jpg" alt="" loading="lazy"></div>
+        <div class="media"><div class="ph" aria-hidden="true"></div></div>
         <div class="ft"><h3>Produkt A</h3><p>Zwei Zeilen Beschreibung des Produkts, damit die Karte die gleiche Höhe wie in der Vorlage hat.</p></div>
       </a>
       <a href="#" class="pcard rv" style="--d:.2s">
         <div class="hd"><span class="tag" style="background:#d9763f">B</span>Produkt B</div>
-        <div class="media"><img src="haus-1.jpg" alt="" loading="lazy"></div>
+        <div class="media"><div class="ph" aria-hidden="true"></div></div>
         <div class="ft"><h3>Produkt B</h3><p>Zwei Zeilen Beschreibung des zweiten Produkts, gleich lang wie die erste.</p></div>
       </a>
       <a href="#" class="pcard rv" style="--d:.3s">
@@ -433,10 +436,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <!-- Zitat-Karussell -->
   <section class="quotes" aria-roledescription="Karussell">
     <div class="qtrack" id="qtrack">
-      <article class="qslide"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><img src="haus-2.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><img src="haus-3.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
       <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
       <div class="dots" id="dots"></div>
@@ -450,11 +453,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
       <div class="arrows"><button id="sPrev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
     </div>
     <div class="scroller" id="scroller">
-      <a href="#" class="scard"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><img src="glocke-empfang.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><img src="restaurant-abend.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><img src="haus-3.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
     </div>
   </section>
 
@@ -484,11 +487,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <h2 class="h2 rv" style="--d:.1s">Zweizeilige<br>Überschrift.</h2>
     <p class="lead rv" style="--d:.2s">Eine Zeile Einleitung.</p>
     <div class="bento">
-      <article class="ocard rv"><img src="restaurant-abend.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-      <article class="ocard rv" style="--d:.1s"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
       <div class="row2">
-        <article class="ocard rv"><img src="haus-2.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-        <article class="ocard rv" style="--d:.1s"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
       </div>
     </div>
   </section>
@@ -559,12 +562,13 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   setTab(1); if (!reduce) cycle();
   tabs.forEach((t,i) => t.addEventListener('mouseenter', () => { setTab(i); cycle(); }));
   const vid = document.getElementById('heroVideo'), pb = document.getElementById('pause');
-  if (reduce) { vid.pause(); pb.classList.add('paused'); }
+  if (reduce) { vid?.pause(); pb.classList.add('paused'); }
   pb.addEventListener('click', () => {
     paused = !paused; pb.classList.toggle('paused', paused);
     pb.setAttribute('aria-label', paused ? 'Video abspielen' : 'Video anhalten');
     document.querySelectorAll('.tab .bar').forEach(b => b.style.animationPlayState = paused ? 'paused' : 'running');
-    paused ? vid.pause() : (vid.play(), cycle());
+    if (vid) paused ? vid.pause() : vid.play();
+    if (!paused) cycle();
   });
 
   // Diagramm: Leitungen zeichnen, Frage wird getippt
