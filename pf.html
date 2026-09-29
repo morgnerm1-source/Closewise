@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closewise</title>
+<!-- Aufbau nach Vorlage nachgebaut; alle Texte sind Platzhalter und werden beim Umbau ersetzt. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
+  --line:rgba(26,24,20,.1); --card:#f0efee; --dark:#1a1814; --dark-2:#282622; --dark-3:#35332e;
+  --peach:#f99d72; --peach-deep:#ca7b57; --teal:#27a896; --teal-glow:#16ffde;
+  --ease:cubic-bezier(.22,1,.36,1); --wrap:1280px; --gut:80px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--dark);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{width:min(var(--wrap),100% - 2*var(--gut));margin-inline:auto}
+
+/* Knöpfe */
+.btn{display:inline-flex;align-items:center;gap:8px;height:43px;padding:10px 14px;border-radius:999px;font-size:16px;font-weight:500;letter-spacing:-.01em;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn-white{background:#fff;color:#211e1c}
+.btn-glass{background:rgba(255,255,255,.24);color:#fff;backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.34)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-ghost{border:1px solid rgba(26,24,20,.2)}
+
+/* Eyebrow */
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted-2);letter-spacing:-.006em;margin-bottom:16px}
+.eyebrow::before{content:"";width:6px;height:10px;background:radial-gradient(circle,currentColor 1px,transparent 1.4px) 0 0/3px 3.3px}
+.h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
+.lead{font-size:14px;line-height:20px;color:var(--muted);margin-top:16px}
+
+/* ---------- Navigation ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:center;padding-top:8px;pointer-events:none}
+.nav-in{pointer-events:auto;width:min(1320px,100% - 40px);height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-radius:16px;color:#fff;border:1px solid transparent;transition:all .6s var(--ease)}
+.nav.solid .nav-in{width:min(1280px,100% - 40px);color:var(--ink);background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-color:var(--line)}
+.logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.logo svg{width:24px;height:24px}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:16px;font-weight:500}
+.nav-links a{display:flex;align-items:center;gap:6px;opacity:.95}
+.nav-links a:hover{opacity:.7}
+.nav-links .chev{width:10px;height:10px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translateY(-3px)}
+.nav-cta{display:flex;gap:14px}
+.nav .signin{background:rgba(255,255,255,.18)}
+.nav.solid .signin{background:transparent;border:1px solid rgba(26,24,20,.2);color:var(--ink)}
+.nav .book{background:#fff;color:var(--ink)}
+.nav.solid .book{background:var(--dark);color:#fff}
+.burger{display:none;width:40px;height:40px;border-radius:999px;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:25px}
+.nav.open .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mob{display:none}
+
+/* ---------- Hero ---------- */
+.hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15) 60%,rgba(0,0,0,.1)),linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
+.hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:156px 0 32px}
+.hero h1{font-size:64px;line-height:72px;font-weight:400;letter-spacing:-.01em;max-width:650px}
+.hero .sub{font-size:18px;line-height:24px;margin-top:24px;max-width:650px;opacity:.92}
+.hero .ctas{display:flex;gap:12px;margin-top:40px}
+.tabs{display:grid;grid-template-columns:repeat(4,215px);gap:16px}
+.tab{position:relative;height:102px;padding:20px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;font-size:16px;font-weight:500;overflow:hidden;transition:background .5s var(--ease),color .5s var(--ease)}
+.tab .ico{width:20px;height:20px;border-radius:4px;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff}
+.tab.on{background:#fff;color:var(--ink)}
+.tab .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ink)}
+.tab.on .bar{animation:fill var(--dur,6s) linear forwards}
+@keyframes fill{to{width:100%}}
+.pause{position:absolute;right:0;bottom:0;width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);display:grid;place-items:center}
+.pause i{width:10px;height:12px;border:solid #fff;border-width:0 3px}
+.pause.paused i{border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;width:0;height:0}
+
+/* ---------- Inhalt, schiebt sich über das Hero ---------- */
+.sheet{position:relative;z-index:5;background:var(--bg);border-radius:24px 24px 0 0;margin-top:-4px}
+.logos{height:120px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.logos-track{display:flex;gap:120px;width:max-content;height:100%;align-items:center;animation:marquee 40s linear infinite}
+.logos-track span{font-size:22px;font-weight:600;letter-spacing:-.02em;color:#1a1814;opacity:.8;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.how{padding:120px 0 0}
+.diagram{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;height:790px;position:relative;overflow:hidden}
+.src{position:absolute;left:84px;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:16px;width:162px}
+.src b{width:18px;height:18px;border-radius:4px;background:var(--c)}
+.wires{position:absolute;inset:0;width:100%;height:100%}
+.wires path{fill:none;stroke:var(--teal);stroke-width:1.2;stroke-dasharray:900;stroke-dashoffset:900;transition:stroke-dashoffset 1.6s var(--ease)}
+.wires path.grey{stroke:#bbb}
+.diagram.in .wires path{stroke-dashoffset:0}
+.ask{position:absolute;left:440px;top:232px;width:402px;border-radius:14px;background:#fff;box-shadow:0 1px 0 var(--line),0 20px 40px -20px rgba(0,0,0,.2);padding:12px 16px 14px;border:1px solid var(--line)}
+.ask::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--peach),var(--teal-glow));opacity:.8}
+.ask .top{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:500;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.ask .field{font-size:14px;color:#444;padding:12px 0 18px;min-height:46px}
+.ask .field .caret{display:inline-block;width:1px;height:16px;background:#111;vertical-align:middle;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ask .row{display:flex;justify-content:space-between;align-items:center}
+.ask .send{width:24px;height:24px;border-radius:6px;background:var(--peach-deep)}
+.answer{position:absolute;right:86px;top:120px;width:258px;border-radius:16px;border:1.5px solid var(--teal);padding:8px;background:#fff;opacity:0;transform:translateY(18px);transition:all 1s var(--ease) 1.2s}
+.diagram.in .answer{opacity:1;transform:none}
+.answer .in{border:1px solid var(--line);border-radius:10px;padding:14px}
+.answer .l{height:8px;border-radius:4px;background:#ecebea;margin:8px 0}
+.answer .chip{display:inline-flex;margin-top:10px;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#555}
+
+/* Produkte */
+.engine{padding:160px 0 120px;text-align:center}
+.engine .eyebrow{justify-content:center}
+.engine .h2{max-width:600px;margin-inline:auto}
+.engine .lead{max-width:600px;margin-inline:auto}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;text-align:left}
+.pcard{border-radius:18px;background:rgba(0,0,0,.04);padding:2px;display:flex;flex-direction:column;transition:transform .6s var(--ease)}
+.pcard:hover{transform:translateY(-4px)}
+.pcard .hd{display:flex;gap:10px;align-items:center;padding:20px 24px;font-size:16px;font-weight:500}
+.pcard .tag{width:20px;height:20px;border-radius:4px;font-size:10px;font-weight:600;color:#fff;display:grid;place-items:center}
+.pcard .media{background:var(--dark);border-radius:16px 16px 0 0;height:300px;padding:32px;overflow:hidden;position:relative}
+.pcard .media img{width:100%;height:100%;object-fit:cover;border-radius:12px;transition:transform 1.2s var(--ease)}
+.pcard:hover .media img{transform:scale(1.04)}
+.pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px}
+.pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
+.pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
+.icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
+.icons i{width:42px;height:42px;border-radius:999px;background:var(--dark-3);border:1px solid rgba(255,255,255,.1);display:block;animation:pulse 4s var(--ease) infinite;animation-delay:calc(var(--i)*.25s)}
+@keyframes pulse{0%,70%,100%{background:var(--dark-3)}20%{background:#4a473f}}
+
+/* Zitat-Karussell */
+.quotes{background:#fff;padding:120px 0;overflow:hidden}
+.qtrack{position:relative;height:650px}
+.qslide{position:absolute;top:0;left:50%;width:min(1280px,100% - 160px);height:650px;margin-left:calc(min(1280px,100% - 160px)/-2);border-radius:24px;overflow:hidden;color:#fff;transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.qslide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.qslide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,40,.75),rgba(0,0,0,.25) 55%,rgba(0,0,0,.45))}
+.qslide .c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:64px}
+.qslide .eyebrow{color:#fff}
+.qslide h2{font-size:48px;line-height:56px;font-weight:400;max-width:800px;letter-spacing:-.01em}
+.qslide .btn{margin-top:24px}
+.qslide .who b{display:block;font-size:18px;font-weight:500}
+.qslide .who span{font-size:16px;opacity:.8}
+.qnav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:999px;background:#fff;color:#131313;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.qnav.prev{left:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav.next{right:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav svg{width:16px;height:16px}
+.dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px}
+.dots button{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .5s var(--ease)}
+.dots button.on{background:#fff}
+
+/* Lösungen */
+.solutions{background:#fff;padding:0 0 120px}
+.sol-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;transition:background .3s}
+.arrows button:hover{background:#f3f2f1}
+.arrows button:disabled{opacity:.35}
+.arrows svg{width:16px;height:16px}
+.scroller{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc((100vw - min(1280px,100vw - 160px))/2);scrollbar-width:none;cursor:grab}
+.scroller::-webkit-scrollbar{display:none}
+.scard{flex:0 0 466px;height:488px;border-radius:12px;position:relative;overflow:hidden;color:#fff;scroll-snap-align:start}
+.scard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.scard:hover img{transform:scale(1.05)}
+.scard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.1) 60%)}
+.scard .c{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}
+.scard h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.scard p{font-size:14px;line-height:20px;opacity:.8;margin-top:12px;max-width:380px}
+.scard .more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;font-weight:500;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);transition:background .3s}
+.scard .more:hover{background:rgba(255,255,255,.28)}
+
+/* Vertrauen */
+.trust{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 120px}
+.trust-grid{display:grid;grid-template-columns:1fr 612px;gap:56px}
+.trust .lead{max-width:420px}
+.tlist{position:relative;margin-top:260px;padding-left:32px;border-left:1px solid var(--line)}
+.tlist .prog{position:absolute;left:-1px;top:0;width:2px;height:0;background:var(--teal)}
+.titem{padding-bottom:28px;opacity:.4;transition:opacity .6s var(--ease)}
+.titem.on{opacity:1}
+.titem h3{font-size:16px;font-weight:500}
+.titem p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px;max-width:470px}
+.tpanel{position:sticky;top:120px;height:596px;border:1px solid var(--line);border-radius:18px;background:var(--bg);display:grid;place-items:center;overflow:hidden}
+.layers{position:relative;width:300px;height:300px}
+.layers div{position:absolute;inset:0;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:0 20px 50px -30px rgba(0,0,0,.3);transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.layers div:nth-child(1){transform:translateY(60px) scale(.8)}
+.layers div:nth-child(2){transform:translateY(30px) scale(.9)}
+.layers div:nth-child(3){display:grid;place-items:center}
+.layers svg{width:64px;height:64px;color:var(--teal)}
+.tpanel[data-step="1"] .layers div:nth-child(1),.tpanel[data-step="2"] .layers div:nth-child(1){transform:translateY(80px) scale(.8);border-color:var(--teal)}
+.tpanel[data-step="2"] .layers div:nth-child(2){transform:translateY(40px) scale(.9);border-color:var(--teal)}
+
+/* Ergebnisse */
+.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 144px}
+.bento{display:grid;grid-template-columns:500px 1fr;gap:16px;margin-top:56px}
+.bento .ocard:nth-child(3){grid-column:auto}
+.bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
+.ocard{position:relative;height:492px;border-radius:12px;overflow:hidden;color:#fff;padding:40px;display:flex;flex-direction:column;justify-content:space-between}
+.ocard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ocard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));z-index:1}
+.ocard>*{position:relative;z-index:2}
+.ocard .mark{font-size:22px;font-weight:600;letter-spacing:-.02em;opacity:.9}
+.ocard .num{font-size:80px;line-height:1;font-weight:300;letter-spacing:-.02em;margin-top:28px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ocard .num span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
+.ocard .num span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
+.ocard blockquote{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-.02em;max-width:460px;margin-top:auto}
+.ocard .who{margin-top:40px;font-size:14px}
+.ocard .who b{display:block;font-size:16px;font-weight:500}
+.ocard .who span{opacity:.6}
+
+/* CTA */
+.cta-wrap{background:#fff;padding-bottom:88px}
+.cta{position:relative;height:436px;border-radius:24px;overflow:hidden;background:#000;color:#fff;display:grid;place-items:center;text-align:center}
+.blob{position:absolute;width:520px;height:1100px;filter:blur(60px);opacity:.85;transform:rotate(-35deg);border-radius:50%}
+.blob.a{background:linear-gradient(#1fb89f,#0b5f55);left:-80px;top:-300px;animation:drift 14s var(--ease) infinite alternate}
+.blob.b{background:linear-gradient(#e0835a,#5a2c18);left:520px;top:-340px;animation:drift 18s var(--ease) infinite alternate-reverse}
+.blob.d{background:linear-gradient(#1a8c7c,#000);right:-160px;top:-200px;width:380px;animation:drift 16s var(--ease) infinite alternate}
+@keyframes drift{from{transform:rotate(-35deg) translateX(0)}to{transform:rotate(-28deg) translateX(120px)}}
+.cta .c{position:relative;z-index:2}
+.cta h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.01em}
+.cta p{font-size:14px;line-height:20px;margin:24px 0 20px}
+
+/* Footer mit Enthüllung */
+.stage{position:relative}
+.footer{position:relative;z-index:5;background:#fff;border-radius:0 0 24px 24px;padding:88px 0 0}
+.fcols{display:grid;grid-template-columns:1fr auto auto auto auto;gap:64px}
+.fbrand p{font-size:14px;color:var(--muted);margin-top:20px}
+.news{display:flex;align-items:center;margin-top:28px;width:320px;height:48px;border:1px solid var(--line);border-radius:999px;padding:4px 4px 4px 20px}
+.news input{flex:1;border:0;outline:0;font:inherit;font-size:14px;background:transparent}
+.news button{height:36px;padding:0 18px;border-radius:999px;background:var(--dark);color:#fff;font-size:13px;font-weight:500}
+.fcol h4{font-size:16px;font-weight:500;margin-bottom:22px}
+.fcol a{display:block;font-size:14px;color:var(--muted);margin-bottom:14px;transition:color .3s}
+.fcol a:hover{color:var(--ink)}
+.fbar{display:flex;justify-content:space-between;align-items:center;margin-top:64px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.fbar nav{display:flex;gap:16px}
+.fnote{padding:18px 0 24px;font-size:12px;color:var(--muted)}
+.ghost{position:fixed;left:0;right:0;bottom:0;z-index:-1;height:360px;background:var(--bg);overflow:hidden;display:flex;align-items:flex-end}
+.ghost-space{height:336px}
+.ghost span{display:block;width:100%;font-size:min(23vw,330px);line-height:.78;font-weight:500;letter-spacing:-.05em;color:var(--ink);text-align:center;transform:translateY(12%)}
+
+/* Einblenden beim Scrollen */
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+  .rv.in{opacity:1;transform:none;filter:none}
+  .hero .rv{transition-duration:1.2s}
+}
+@media (prefers-reduced-motion:reduce){
+  .logos-track,.blob,.icons i{animation:none}
+  .wires path{stroke-dashoffset:0;transition:none}
+  .answer{opacity:1;transform:none}
+}
+
+/* ---------- Tablet / Handy ---------- */
+@media (max-width:1180px){
+  :root{--gut:32px}
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-cta .signin{display:none}
+  .mob{display:flex;flex-direction:column;gap:18px;pointer-events:auto;position:fixed;inset:88px 20px auto;padding:24px;border-radius:16px;background:#fff;color:var(--ink);font-size:18px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:all .4s var(--ease);box-shadow:0 20px 50px -20px rgba(0,0,0,.3)}
+  .nav.open .mob{opacity:1;transform:none;visibility:visible}
+  .tabs{grid-template-columns:repeat(4,1fr)}
+  .diagram{height:auto;padding:40px}
+  .diagram .src,.diagram .wires{display:none}
+  .ask,.answer{position:relative;left:auto;right:auto;top:auto;width:100%;max-width:420px;margin:0 auto 20px}
+  .cards3{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .tlist{margin-top:48px}
+  .tpanel{position:relative;top:0;height:420px}
+  .bento,.bento .row2{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
+}
+@media (max-width:720px){
+  :root{--gut:16px}
+  .nav-in{padding:0 12px 0 16px;height:60px}
+  .nav-cta .book{height:38px;font-size:14px}
+  .hero{min-height:640px}
+  .hero-in{padding:120px 0 24px}
+  .hero h1{font-size:40px;line-height:46px}
+  .hero .sub{font-size:16px}
+  .tabs{grid-template-columns:1fr 1fr;gap:8px}
+  .tab{height:72px;padding:12px;font-size:14px}
+  .tab:nth-child(n+3){display:none}
+  .pause{bottom:auto;top:-48px}
+  .h2,.cta h2,.qslide h2{font-size:32px;line-height:38px}
+  .how,.engine{padding-top:80px}
+  .engine{padding-bottom:80px}
+  .cards3{grid-template-columns:1fr}
+  .quotes{padding:80px 0}
+  .qtrack,.qslide{height:560px}
+  .qslide{width:calc(100% - 32px);margin-left:calc((100% - 32px)/-2)}
+  .qslide .c{padding:28px}
+  .qnav{display:none}
+  .sol-head{flex-direction:column;align-items:flex-start;gap:20px}
+  .scroller{padding:0 16px}
+  .scard{flex-basis:84vw;height:440px}
+  .ocard{height:auto;min-height:420px;padding:28px}
+  .ocard .num{font-size:56px}
+  .ocard blockquote{font-size:24px;line-height:30px;margin-top:40px}
+  .cta{height:auto;padding:80px 20px}
+  .fcols{grid-template-columns:1fr 1fr;gap:32px}
+  .news{width:100%}
+  .fbar{flex-direction:column;align-items:flex-start;gap:14px}
+  .fbar nav{flex-wrap:wrap}
+  .ghost{height:160px}
+  .ghost-space{height:136px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#" class="logo" aria-label="Closewise Startseite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Closewise
+    </a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#produkte">Menüpunkt <i class="chev"></i></a>
+      <a href="#ablauf">Menüpunkt</a>
+      <a href="#vertrauen">Menüpunkt</a>
+      <a href="#ergebnisse">Menüpunkt <i class="chev"></i></a>
+      <a href="#loesungen">Menüpunkt <i class="chev"></i></a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="btn signin">Anmelden</a>
+      <a href="#kontakt" class="btn book">Demo buchen</a>
+      <button class="burger" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mob" id="mob">
+    <a href="#produkte">Menüpunkt</a><a href="#ablauf">Menüpunkt</a><a href="#vertrauen">Menüpunkt</a><a href="#ergebnisse">Menüpunkt</a><a href="#" class="btn btn-ghost" style="align-self:flex-start">Anmelden</a>
+  </div>
+</header>
+
+<div class="stage">
+<!-- Hero -->
+<section class="hero" id="top">
+  <video id="heroVideo" autoplay muted loop playsinline poster="hero-scroll.jpg"><source src="hero-scroll.mp4" type="video/mp4"></video>
+  <div class="wrap hero-in">
+    <div>
+      <h1 class="rv">Große Headline über drei Zeilen, die das Versprechen trägt.</h1>
+      <p class="sub rv" style="--d:.15s">Untertitel in einer Zeile, der die Headline erklärt.</p>
+      <div class="ctas rv" style="--d:.3s">
+        <a href="#produkte" class="btn btn-white">Mehr ansehen</a>
+        <a href="#kontakt" class="btn btn-glass">Demo buchen</a>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="tabs rv" style="--d:.45s" id="tabs">
+        <a href="#" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)">◎</span>Übersicht<i class="bar"></i></a>
+        <a href="#" class="tab"><span class="ico" style="background:#1f7a6a">A</span>Produkt A<i class="bar"></i></a>
+        <a href="#" class="tab"><span class="ico" style="background:#d9763f">B</span>Produkt B<i class="bar"></i></a>
+        <a href="#" class="tab"><span class="ico" style="background:#594aff">C</span>Bald verfügbar<i class="bar"></i></a>
+      </div>
+      <button class="pause" id="pause" aria-label="Video anhalten"><i></i></button>
+    </div>
+  </div>
+</section>
+
+<main class="sheet">
+  <!-- Logo-Laufband -->
+  <div class="wrap logos" aria-label="Kunden">
+    <div class="logos-track">
+      <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span><span>Logo 4</span><span>Logo 5</span><span>Logo 6</span>
+      <span aria-hidden="true">Logo 1</span><span aria-hidden="true">Logo 2</span><span aria-hidden="true">Logo 3</span><span aria-hidden="true">Logo 4</span><span aria-hidden="true">Logo 5</span><span aria-hidden="true">Logo 6</span>
+    </div>
+  </div>
+
+  <!-- So funktioniert es -->
+  <section class="how wrap" id="ablauf">
+    <p class="eyebrow rv">Eyebrow-Zeile</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:560px">Zweizeilige Überschrift für den Ablauf.</h2>
+    <div class="diagram rv" id="diagram">
+      <svg class="wires" viewBox="0 0 1280 790" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M246 138 H330 Q368 138 368 176 V270"/>
+        <path class="grey" d="M246 200 H368"/>
+        <path d="M246 262 H368"/>
+        <path d="M246 324 H368"/>
+        <path class="grey" d="M246 386 H368"/>
+        <path d="M246 448 H330 Q368 448 368 410 V300"/>
+        <path class="grey" d="M368 294 H440"/>
+        <path d="M842 294 H900 Q936 294 936 258 V220 Q936 186 970 186 H936"/>
+      </svg>
+      <div class="src" style="top:116px"><b style="--c:#f5b43c"></b>Quelle 1</div>
+      <div class="src" style="top:178px"><b style="--c:#2a9d58"></b>Quelle 2</div>
+      <div class="src" style="top:240px"><b style="--c:#e3463a"></b>Quelle 3</div>
+      <div class="src" style="top:302px"><b style="--c:#d44638"></b>Quelle 4</div>
+      <div class="src" style="top:364px"><b style="--c:#1e9e5a"></b>Quelle 5</div>
+      <div class="src" style="top:426px"><b style="--c:#2b5fd9"></b>Quelle 6</div>
+      <div class="ask">
+        <div class="top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Closewise</div>
+        <div class="field"><span id="typed"></span><span class="caret"></span></div>
+        <div class="row"><span style="font-size:18px;color:#777">+ ▢</span><span class="send"></span></div>
+      </div>
+      <div class="answer">
+        <div class="in">
+          <div style="font-size:13px;font-weight:500">Antwort-Karte</div>
+          <div class="l" style="width:90%"></div><div class="l" style="width:70%"></div><div class="l" style="width:80%"></div>
+          <span class="chip">Quelle anzeigen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produkte -->
+  <section class="engine wrap" id="produkte">
+    <p class="eyebrow rv">Eyebrow-Zeile für den Abschnitt</p>
+    <h2 class="h2 rv" style="--d:.1s">Zweizeilige, zentrierte Überschrift hier.</h2>
+    <p class="lead rv" style="--d:.2s">Eine Zeile Erklärung, die den Abschnitt kurz einordnet.</p>
+    <div class="cards3">
+      <a href="#" class="pcard rv" style="--d:.1s">
+        <div class="hd"><span class="tag" style="background:#1f7a6a">A</span>Produkt A</div>
+        <div class="media"><img src="restaurant-abend.jpg" alt="" loading="lazy"></div>
+        <div class="ft"><h3>Produkt A</h3><p>Zwei Zeilen Beschreibung des Produkts, damit die Karte die gleiche Höhe wie in der Vorlage hat.</p></div>
+      </a>
+      <a href="#" class="pcard rv" style="--d:.2s">
+        <div class="hd"><span class="tag" style="background:#d9763f">B</span>Produkt B</div>
+        <div class="media"><img src="haus-1.jpg" alt="" loading="lazy"></div>
+        <div class="ft"><h3>Produkt B</h3><p>Zwei Zeilen Beschreibung des zweiten Produkts, gleich lang wie die erste.</p></div>
+      </a>
+      <a href="#" class="pcard rv" style="--d:.3s">
+        <div class="hd"><span class="tag" style="background:#594aff">C</span>Bald verfügbar</div>
+        <div class="media"><div class="icons">
+          <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
+          <i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
+        </div></div>
+        <div class="ft"><h3>Mehr folgt</h3></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Zitat-Karussell -->
+  <section class="quotes" aria-roledescription="Karussell">
+    <div class="qtrack" id="qtrack">
+      <article class="qslide"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><img src="haus-2.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><img src="haus-3.jpg" alt="" loading="lazy"><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <!-- Lösungen nach Rolle -->
+  <section class="solutions" id="loesungen">
+    <div class="wrap sol-head">
+      <div><p class="eyebrow rv">Eyebrow</p><h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift.</h2></div>
+      <div class="arrows"><button id="sPrev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="scroller" id="scroller">
+      <a href="#" class="scard"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><img src="glocke-empfang.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><img src="restaurant-abend.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><img src="haus-3.jpg" alt="" loading="lazy"><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+    </div>
+  </section>
+
+  <!-- Vertrauen -->
+  <section class="trust wrap" id="vertrauen">
+    <div class="trust-grid">
+      <div>
+        <p class="eyebrow rv">Eyebrow</p>
+        <h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift hier.</h2>
+        <p class="lead rv" style="--d:.2s">Zwei Zeilen Einleitung zum Thema Vertrauen und Sicherheit der Daten.</p>
+        <div class="tlist" id="tlist">
+          <i class="prog"></i>
+          <div class="titem"><h3>Punkt eins</h3><p>Eine Zeile Erklärung zu diesem Punkt.</p></div>
+          <div class="titem"><h3>Punkt zwei</h3><p>Zwei Zeilen Erklärung zu diesem Punkt, damit der Abstand stimmt wie in der Vorlage.</p></div>
+          <div class="titem"><h3>Punkt drei</h3><p>Eine Zeile Erklärung zu diesem Punkt.</p></div>
+        </div>
+      </div>
+      <div class="tpanel rv" id="tpanel" data-step="0">
+        <div class="layers"><div></div><div></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ergebnisse -->
+  <section class="outcomes wrap" id="ergebnisse">
+    <p class="eyebrow rv">Eyebrow</p>
+    <h2 class="h2 rv" style="--d:.1s">Zweizeilige<br>Überschrift.</h2>
+    <p class="lead rv" style="--d:.2s">Eine Zeile Einleitung.</p>
+    <div class="bento">
+      <article class="ocard rv"><img src="restaurant-abend.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><img src="kofferwagen-lobby.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <div class="row2">
+        <article class="ocard rv"><img src="haus-2.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><img src="rezeption-nacht.jpg" alt="" loading="lazy"><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-wrap" id="kontakt">
+    <div class="wrap cta rv">
+      <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
+      <div class="c">
+        <h2>Abschluss-Headline.<br>Zweite Zeile.</h2>
+        <p>Eine Zeile, die zum Gespräch einlädt.<br>Und eine zweite Zeile dazu.</p>
+        <a href="#" class="btn btn-white">Demo buchen</a>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fcols">
+      <div class="fbrand">
+        <a href="#" class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Closewise</a>
+        <p>Eine Zeile Markenversprechen.</p>
+        <p>Eine Zeile zum Newsletter.</p>
+        <form class="news" onsubmit="return false"><input type="email" placeholder="name@firma.de" aria-label="E-Mail"><button>Abonnieren</button></form>
+      </div>
+      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a></div>
+      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
+      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
+      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
+    </div>
+    <div class="fbar">
+      <span>© 2026 Closewise</span>
+      <nav><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#">AGB</a><a href="#">Cookie-Einstellungen</a></nav>
+    </div>
+    <p class="fnote">Hinweiszeile im Footer.</p>
+  </div>
+</footer>
+<div class="ghost-space"></div>
+<div class="ghost" aria-hidden="true"><span>Closewise</span></div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Navigation: transparent über dem Hero, danach schwebende Glasleiste
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * .75);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const burger = nav.querySelector('.burger');
+  burger.addEventListener('click', () => {
+    const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o);
+  });
+  document.querySelectorAll('#mob a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // Einblenden beim Scrollen
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
+  const tabs = [...document.querySelectorAll('.tab')];
+  let ti = 1, timer, paused = false;
+  const setTab = i => { tabs.forEach((t,k) => t.classList.toggle('on', k === i)); ti = i; };
+  const cycle = () => { clearTimeout(timer); if (paused) return; timer = setTimeout(() => { setTab((ti + 1) % tabs.length); cycle(); }, 6000); };
+  setTab(1); if (!reduce) cycle();
+  tabs.forEach((t,i) => t.addEventListener('mouseenter', () => { setTab(i); cycle(); }));
+  const vid = document.getElementById('heroVideo'), pb = document.getElementById('pause');
+  if (reduce) { vid.pause(); pb.classList.add('paused'); }
+  pb.addEventListener('click', () => {
+    paused = !paused; pb.classList.toggle('paused', paused);
+    pb.setAttribute('aria-label', paused ? 'Video abspielen' : 'Video anhalten');
+    document.querySelectorAll('.tab .bar').forEach(b => b.style.animationPlayState = paused ? 'paused' : 'running');
+    paused ? vid.pause() : (vid.play(), cycle());
+  });
+
+  // Diagramm: Leitungen zeichnen, Frage wird getippt
+  const diagram = document.getElementById('diagram'), typed = document.getElementById('typed');
+  const q = 'Beispielfrage wird hier getippt …';
+  new IntersectionObserver((es, o) => es.forEach(e => {
+    if (!e.isIntersecting) return; o.disconnect(); diagram.classList.add('in');
+    if (reduce) { typed.textContent = q; return; }
+    let i = 0; const t = setInterval(() => { typed.textContent = q.slice(0, ++i); if (i >= q.length) clearInterval(t); }, 45);
+  }), {threshold:.3}).observe(diagram);
+
+  // Zitat-Karussell: Nachbarn schauen seitlich hinein
+  const slides = [...document.querySelectorAll('.qslide')], dots = document.getElementById('dots');
+  let qi = 0, qt;
+  slides.forEach((_,i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Zitat ' + (i+1)); b.onclick = () => go(i); dots.append(b); });
+  const go = i => {
+    qi = (i + slides.length) % slides.length;
+    slides.forEach((s,k) => {
+      let d = k - qi; if (d > slides.length/2) d -= slides.length; if (d < -slides.length/2) d += slides.length;
+      s.style.transform = `translateX(calc(${d} * (100% + 24px)))`;
+      s.style.opacity = Math.abs(d) > 1 ? 0 : 1; s.style.zIndex = d === 0 ? 2 : 1;
+      s.setAttribute('aria-hidden', d !== 0);
+    });
+    [...dots.children].forEach((b,k) => b.classList.toggle('on', k === qi));
+    clearTimeout(qt); if (!reduce) qt = setTimeout(() => go(qi + 1), 7000);
+  };
+  document.querySelector('.qnav.prev').onclick = () => go(qi - 1);
+  document.querySelector('.qnav.next').onclick = () => go(qi + 1);
+  go(0);
+
+  // Lösungen: Pfeile und Ziehen mit der Maus
+  const sc = document.getElementById('scroller'), sp = document.getElementById('sPrev'), sn = document.getElementById('sNext');
+  const step = () => sc.querySelector('.scard').offsetWidth + 24;
+  sp.onclick = () => sc.scrollBy({left:-step(), behavior:'smooth'});
+  sn.onclick = () => sc.scrollBy({left: step(), behavior:'smooth'});
+  const upd = () => { sp.disabled = sc.scrollLeft < 4; sn.disabled = sc.scrollLeft > sc.scrollWidth - sc.clientWidth - 4; };
+  sc.addEventListener('scroll', upd, {passive:true}); upd();
+  let down = false, sx = 0, sl = 0, moved = false;
+  sc.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = sc.scrollLeft; sc.style.scrollSnapType = 'none'; });
+  addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; sc.scrollLeft = sl - dx; });
+  addEventListener('pointerup', () => { if (!down) return; down = false; sc.style.scrollSnapType = ''; });
+  sc.addEventListener('click', e => { if (moved) e.preventDefault(); }, true);
+
+  // Vertrauen: Fortschrittslinie folgt dem Scrollen, Tafel wechselt Stufe
+  const tl = document.getElementById('tlist'), prog = tl.querySelector('.prog'), items = [...tl.querySelectorAll('.titem')], panel = document.getElementById('tpanel');
+  const trust = () => {
+    const r = tl.getBoundingClientRect(), mid = innerHeight * .6;
+    const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+    prog.style.height = (p * 100) + '%';
+    let s = 0; items.forEach((it,k) => { const on = it.getBoundingClientRect().top < mid; it.classList.toggle('on', on); if (on) s = k; });
+    panel.dataset.step = s;
+  };
+  addEventListener('scroll', trust, {passive:true}); trust();
+
+  // Ergebnisse: Zahlen laufen verwürfelt ein
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+  const scramble = el => {
+    const final = el.textContent; el.textContent = '';
+    const spans = [...final].map(c => { const s = document.createElement('span'); s.textContent = c === ' ' ? ' ' : c; el.append(s); return s; });
+    if (reduce) return;
+    spans.forEach((s,i) => {
+      const c = s.textContent; if (c === ' ') return;
+      s.classList.add('sc'); let n = 0;
+      const t = setInterval(() => {
+        s.textContent = chars[Math.random() * chars.length | 0];
+        if (++n > 8 + i * 2) { clearInterval(t); s.textContent = c; s.classList.remove('sc'); }
+      }, 50);
+    });
+  };
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { scramble(e.target); so.unobserve(e.target); } }), {threshold:.6});
+  document.querySelectorAll('[data-scramble]').forEach(el => so.observe(el));
+})();
+</script>
+</body>
+</html>
