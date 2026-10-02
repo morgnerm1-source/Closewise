@@ -69,6 +69,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
 .ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
 .ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+/* Bilder aus bilder/: liegen über dem Platzhalter; fehlt eine Datei, bleibt der Platzhalter */
+.ph{overflow:hidden}
+.ph>img,.ph>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ph:has(>img,>video)::before{display:none}
 .ph-hero{position:absolute;inset:0;background:linear-gradient(135deg,#3a3733,#1a1814)}
 .ph-hero::before{content:"Video";top:auto;bottom:150px;right:80px}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15) 60%,rgba(0,0,0,.1)),linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
@@ -358,7 +362,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 <div class="stage">
 <!-- Hero -->
 <section class="hero" id="top">
-  <div class="ph ph-hero" aria-hidden="true"></div>
+  <div class="ph ph-hero" aria-hidden="true"><video id="heroVideo" autoplay muted loop playsinline poster="bilder/hero.jpg"><source src="bilder/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video></div>
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">Große Headline über drei Zeilen, die das Versprechen trägt.</h1>
@@ -453,12 +457,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <div class="cards3">
       <a href="#" class="pcard rv" style="--d:.1s">
         <div class="hd"><span class="tag" style="background:#1f7a6a">A</span>Produkt A</div>
-        <div class="media"><div class="ph" aria-hidden="true"></div></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
         <div class="ft"><h3>Produkt A</h3><p>Zwei Zeilen Beschreibung des Produkts, damit die Karte die gleiche Höhe wie in der Vorlage hat.</p></div>
       </a>
       <a href="#" class="pcard rv" style="--d:.2s">
         <div class="hd"><span class="tag" style="background:#d9763f">B</span>Produkt B</div>
-        <div class="media"><div class="ph" aria-hidden="true"></div></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
         <div class="ft"><h3>Produkt B</h3><p>Zwei Zeilen Beschreibung des zweiten Produkts, gleich lang wie die erste.</p></div>
       </a>
       <a href="#" class="pcard rv" style="--d:.3s">
@@ -475,10 +479,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <!-- Zitat-Karussell -->
   <section class="quotes" aria-roledescription="Karussell">
     <div class="qtrack" id="qtrack">
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
       <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
       <div class="dots" id="dots"></div>
@@ -492,11 +496,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
       <div class="arrows"><button id="sPrev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
     </div>
     <div class="scroller" id="scroller">
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"></div><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
     </div>
   </section>
 
@@ -526,11 +530,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <h2 class="h2 rv" style="--d:.1s">Zweizeilige<br>Überschrift.</h2>
     <p class="lead rv" style="--d:.2s">Eine Zeile Einleitung.</p>
     <div class="bento">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
       <div class="row2">
-        <article class="ocard rv"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
       </div>
     </div>
   </section>
