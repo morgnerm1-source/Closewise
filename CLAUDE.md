@@ -86,8 +86,11 @@ Dieselbe Marke wie die Demo (demo.closewise.site). Quelle ist das Figma-Board
 - **Knöpfe** vollrund (`border-radius:999px`), Karten 14 px, Bänder 22 px.
 - **Produktfenster** zeigen, wie die Demo wirklich aussieht: Midnight-Sidebar
   mit Wortmarke + HOSPITALITY, weiße Arbeitsfläche. Immer als Demodaten.
-- **Keine unbelegten Behauptungen.** Keine Herstellerlogos (es gibt keine
-  Anbindungen, nur Exporte), kein „Server in Deutschland“ (die Datenbank liegt
+- **Keine unbelegten Behauptungen.** Herstellerlogos nur in der Leiste
+  „Liest die Exporte aus“ (`pf.html`, Dateien in `logos/`, offizielle
+  Brand-Kits, unverändert) und nur mit Marken-Hinweis im Footer — es gibt
+  keine Anbindungen und keine Partnerschaften, nur Exporte; nichts darf
+  nach Integration oder Partner klingen. Kein „Server in Deutschland“ (die Datenbank liegt
   in eu-west-1, Irland), kein „monatlich kündbar“ ohne Vertrag dazu.
   Belegt sind: 4 Quellen und 17 Fehlerbilder (Demo-Spec), 60–70 Minuten von
   Hand, 8,5 Minuten mit Closewise, 3–7 Punkte je Nacht, Import lehnt

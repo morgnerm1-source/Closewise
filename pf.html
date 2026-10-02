@@ -89,9 +89,14 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ---------- Inhalt, schiebt sich über das Hero ---------- */
 .sheet{position:relative;z-index:5;background:var(--bg);border-radius:24px 24px 0 0;margin-top:-4px}
-.logos{height:120px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.logos-track{display:flex;gap:120px;width:max-content;height:100%;align-items:center;animation:marquee 40s linear infinite}
-.logos-track span{font-size:22px;font-weight:600;letter-spacing:-.02em;color:#1a1814;opacity:.8;white-space:nowrap}
+.logos-wrap{padding-top:40px}
+.logos-wrap .eyebrow{margin-bottom:4px}
+.logos{height:100px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos-track{display:flex;width:max-content;height:100%;align-items:center;animation:marquee 32s linear infinite}
+.logos-track>*{flex:none;display:flex;align-items:center;height:48px;padding:0 48px;border-left:1px solid var(--line)}
+.logos-track img{height:var(--h,30px);width:auto}
+.logos-track .logo-txt,.logos-track .any{font-family:"Fragment Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap}
+.logos-track .logo-txt{font-family:Inter,sans-serif;font-size:22px;letter-spacing:-.02em;text-transform:none;font-weight:600;color:#1a1814}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 .how{padding:120px 0 0}
@@ -378,10 +383,13 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 <main class="sheet">
   <!-- Logo-Laufband -->
-  <div class="wrap logos" aria-label="Kunden">
-    <div class="logos-track">
-      <span>Logo 1</span><span>Logo 2</span><span>Logo 3</span><span>Logo 4</span><span>Logo 5</span><span>Logo 6</span>
-      <span aria-hidden="true">Logo 1</span><span aria-hidden="true">Logo 2</span><span aria-hidden="true">Logo 3</span><span aria-hidden="true">Logo 4</span><span aria-hidden="true">Logo 5</span><span aria-hidden="true">Logo 6</span>
+  <div class="wrap logos-wrap">
+    <p class="eyebrow">Liest die Exporte aus</p>
+    <div class="logos" aria-label="Systeme, deren Exporte Closewise liest">
+      <div class="logos-track">
+        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.svg" alt="Lightspeed" data-name="Lightspeed" style="--h:32px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify.svg" alt="Shopify" data-name="Shopify" style="--h:34px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span class="any">und jedes andere System</span>
+        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.svg" alt="" data-name="Lightspeed" style="--h:32px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify.svg" alt="" data-name="Shopify" style="--h:34px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true" class="any">und jedes andere System</span>
+      </div>
     </div>
   </div>
 
@@ -559,7 +567,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
       <span>© 2026 Closewise</span>
       <nav><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#">AGB</a><a href="#">Cookie-Einstellungen</a></nav>
     </div>
-    <p class="fnote">Hinweiszeile im Footer.</p>
+    <p class="fnote">Genannte Marken und Logos gehören ihren Inhabern. Closewise ist mit diesen Anbietern nicht verbunden.</p>
   </div>
 </footer>
 <div class="ghost-space"></div>
