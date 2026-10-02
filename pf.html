@@ -38,7 +38,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* Eyebrow */
 .eyebrow{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted-2);letter-spacing:-.006em;margin-bottom:16px}
-.eyebrow::before{content:"";width:6px;height:10px;background:radial-gradient(circle,currentColor 1px,transparent 1.4px) 0 0/3px 3.3px}
+.eyebrow dot-loader{flex:none}  /* Dot-Loader „snake“ (2 × 3 Punkte) aus dot-loader.js */
 .h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
 .lead{font-size:14px;line-height:20px;color:var(--muted);margin-top:16px}
 
@@ -383,7 +383,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 <main class="sheet">
   <!-- Logo-Laufband -->
   <div class="wrap logos-wrap">
-    <p class="eyebrow">Liest die Exporte aus</p>
+    <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Liest die Exporte aus</p>
     <div class="logos" aria-label="Systeme, deren Exporte Closewise liest">
       <div class="logos-track">
         <!-- lightspeed.png: vom Nutzer bereitgestellt, nur zugeschnitten und freigestellt -->
@@ -395,7 +395,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
   <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
-    <p class="eyebrow rv">Eyebrow-Zeile</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow-Zeile</p>
     <h2 class="h2 rv" style="--d:.1s;max-width:560px">Zweizeilige Überschrift für den Ablauf.</h2>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
@@ -447,7 +447,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
   <!-- Produkte -->
   <section class="engine wrap" id="produkte">
-    <p class="eyebrow rv">Eyebrow-Zeile für den Abschnitt</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow-Zeile für den Abschnitt</p>
     <h2 class="h2 rv" style="--d:.1s">Zweizeilige, zentrierte Überschrift hier.</h2>
     <p class="lead rv" style="--d:.2s">Eine Zeile Erklärung, die den Abschnitt kurz einordnet.</p>
     <div class="cards3">
@@ -475,10 +475,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <!-- Zitat-Karussell -->
   <section class="quotes" aria-roledescription="Karussell">
     <div class="qtrack" id="qtrack">
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow">Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
       <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
       <div class="dots" id="dots"></div>
@@ -488,7 +488,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <!-- Lösungen nach Rolle -->
   <section class="solutions" id="loesungen">
     <div class="wrap sol-head">
-      <div><p class="eyebrow rv">Eyebrow</p><h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift.</h2></div>
+      <div><p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p><h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift.</h2></div>
       <div class="arrows"><button id="sPrev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
     </div>
     <div class="scroller" id="scroller">
@@ -504,7 +504,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <section class="trust wrap" id="vertrauen">
     <div class="trust-grid">
       <div>
-        <p class="eyebrow rv">Eyebrow</p>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p>
         <h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift hier.</h2>
         <p class="lead rv" style="--d:.2s">Zwei Zeilen Einleitung zum Thema Vertrauen und Sicherheit der Daten.</p>
         <div class="tlist" id="tlist">
@@ -522,7 +522,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
   <!-- Ergebnisse -->
   <section class="outcomes wrap" id="ergebnisse">
-    <p class="eyebrow rv">Eyebrow</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p>
     <h2 class="h2 rv" style="--d:.1s">Zweizeilige<br>Überschrift.</h2>
     <p class="lead rv" style="--d:.2s">Eine Zeile Einleitung.</p>
     <div class="bento">
@@ -573,6 +573,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 <div class="ghost-space"></div>
 <div class="ghost" aria-hidden="true"><span>Closewise</span></div>
 
+<script src="dot-loader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
 <script>
 (() => {
