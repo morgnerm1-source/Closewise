@@ -92,12 +92,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .logos-wrap{padding-top:40px}
 .logos-wrap .eyebrow{margin-bottom:4px}
 .logos{height:100px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.logos-track{display:flex;width:max-content;height:100%;align-items:center;animation:marquee 32s linear infinite}
-.logos-track>*{flex:none;display:flex;align-items:center;height:48px;padding:0 48px;border-left:1px solid var(--line)}
+.logos-track{display:flex;width:max-content;height:100%;align-items:center;animation:marquee var(--dur,30s) linear infinite}
+.logos-track>*{flex:none;display:flex;align-items:center;height:48px;padding:0 88px;border-left:1px solid var(--line)}
 .logos-track img{height:var(--h,30px);width:auto}
-.logos-track .logo-txt{font-family:"Fragment Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap}
-.logos-track .logo-txt{font-family:Inter,sans-serif;font-size:22px;letter-spacing:-.02em;text-transform:none;font-weight:600;color:#1a1814}
-@keyframes marquee{to{transform:translateX(-50%)}}
+.logos-track .logo-txt{font-family:Inter,sans-serif;font-size:22px;letter-spacing:-.02em;font-weight:600;color:#1a1814;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(calc(var(--shift,50%) * -1))}}
 
 .how{padding:120px 0 0}
 /* Ablauf-Animation (aus dem Design „Closewise Ablauf“), Bühne 1600 × 720, per Skript skaliert */
@@ -620,6 +619,30 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     if (vid) paused ? vid.pause() : vid.play();
     if (!paused) cycle();
   });
+
+  // Logo-Laufband: nahtlos um genau eine Folge, konstant ~50 px/s wie die Vorlage
+  const track = document.querySelector('.logos-track');
+  if (track && !reduce) {
+    const SPEED = 50;
+    const set = [...track.children].filter(el => !el.hasAttribute('aria-hidden'));
+    const imgs = [...track.querySelectorAll('img')];
+    const loaded = Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.addEventListener('load', r, {once:true}); i.addEventListener('error', r, {once:true}); })));
+    const layout = () => {
+      const copies = track.children.length / set.length;
+      const w = track.children[set.length].offsetLeft - track.children[0].offsetLeft;
+      // Genug Kopien, damit nie eine Lücke einläuft: Sichtbreite + eine Folge
+      const need = Math.ceil(track.parentElement.clientWidth / w) + 1;
+      for (let c = copies; c < need; c++) set.forEach(el => {
+        const k = el.cloneNode(true); k.setAttribute('aria-hidden', 'true');
+        k.querySelectorAll('img').forEach(i => i.alt = ''); track.append(k);
+      });
+      track.style.setProperty('--shift', w + 'px');
+      track.style.setProperty('--dur', (w / SPEED) + 's');
+    };
+    loaded.then(() => { layout(); new ResizeObserver(layout).observe(track.parentElement); });
+    // Ersatzlogos (onerror-Kette) laden später nach – dann neu messen
+    track.addEventListener('load', () => loaded.then(layout), true);
+  }
 
   // Ablauf-Animation: Zeitachse 11 s in Schleife, Tempo 1,5 – wie im Design „Closewise Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
