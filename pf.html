@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Closewise</title>
-<!-- Aufbau nach Vorlage nachgebaut; alle Texte sind Platzhalter und werden beim Umbau ersetzt. -->
+<title>Closewise – Nächtlicher Kassenabschluss für Hotels</title>
+<meta name="description" content="Nächtlicher Kassenabschluss für Hotels und ihre Outlets. Closewise sagt Ihnen nur, was nicht zusammenpasst.">
+<!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
@@ -127,6 +128,13 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .flow-btns{display:flex;gap:10px;margin-top:18px}
 .flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;font-size:15px;color:#98a2b3}
 
+/* Vier Schritte unter der Ablauf-Animation */
+.steps{padding-top:112px;scroll-margin-top:96px}
+.steps-row{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.steps-row li{border-top:1px solid var(--line);padding-top:20px}
+.steps-row .n{font:500 12px/1 "Fragment Mono",monospace;letter-spacing:.08em;color:var(--muted-2)}
+.steps-row h3{font-size:18px;font-weight:500;letter-spacing:-.01em;margin-top:16px}
+.steps-row p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px}
 /* Produkte */
 .engine{padding:160px 0 120px;text-align:center}
 .engine .eyebrow{justify-content:center}
@@ -140,7 +148,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .pcard .media{background:var(--dark);border-radius:16px 16px 0 0;height:300px;padding:32px;overflow:hidden;position:relative}
 .pcard .media .ph{width:100%;height:100%;border-radius:12px;transition:transform 1.2s var(--ease)}
 .pcard:hover .media .ph{transform:scale(1.04)}
-.pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px}
+.pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px;flex:1}
 .pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
 .pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
 .icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
@@ -158,7 +166,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .qslide h2{font-size:48px;line-height:56px;font-weight:400;max-width:800px;letter-spacing:-.01em}
 .qslide .btn{margin-top:24px}
 .qslide .who b{display:block;font-size:18px;font-weight:500}
-.qslide .who span{font-size:16px;opacity:.8}
+.qslide .who{max-width:560px}
+.qslide .who span{font-size:18px;line-height:26px;opacity:.9}
 .qnav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:999px;background:#fff;color:#131313;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.15)}
 .qnav.prev{left:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
 .qnav.next{right:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
@@ -240,11 +249,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 /* Footer mit Enthüllung */
 .stage{position:relative}
 .footer{position:relative;z-index:5;background:#fff;border-radius:0 0 24px 24px;padding:88px 0 0}
-.fcols{display:grid;grid-template-columns:1fr auto auto auto auto;gap:64px}
-.fbrand p{font-size:14px;color:var(--muted);margin-top:20px}
-.news{display:flex;align-items:center;margin-top:28px;width:320px;height:48px;border:1px solid var(--line);border-radius:999px;padding:4px 4px 4px 20px}
-.news input{flex:1;border:0;outline:0;font:inherit;font-size:14px;background:transparent}
-.news button{height:36px;padding:0 18px;border-radius:999px;background:var(--dark);color:#fff;font-size:13px;font-weight:500}
+.fcols{display:grid;grid-template-columns:1fr auto auto auto;gap:72px}
+.fbrand p{font-size:14px;line-height:22px;color:var(--muted);margin-top:20px}
 .fcol h4{font-size:16px;font-weight:500;margin-bottom:22px}
 .fcol a{display:block;font-size:14px;color:var(--muted);margin-bottom:14px;transition:color .3s}
 .fcol a:hover{color:var(--ink)}
@@ -267,6 +273,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ---------- Tablet / Handy ---------- */
 @media (max-width:1180px){
+  .steps-row{grid-template-columns:1fr 1fr}
   :root{--gut:32px}
   .nav-links{display:none}
   .burger{display:block}
@@ -296,6 +303,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .flow-btns{flex-wrap:wrap}
 }
 @media (max-width:720px){
+  .steps{padding-top:72px}
+  .steps-row{grid-template-columns:1fr}
   :root{--gut:16px}
   .nav-in{padding:0 12px 0 16px;height:60px}
   .nav-cta .book{height:38px;font-size:14px}
@@ -324,8 +333,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .ocard blockquote{font-size:24px;line-height:30px;margin-top:40px}
   .cta{height:auto;padding:80px 20px}
   .fcols{grid-template-columns:1fr 1fr;gap:32px}
-  .news{width:100%}
-  .fbar{flex-direction:column;align-items:flex-start;gap:14px}
+    .fbar{flex-direction:column;align-items:flex-start;gap:14px}
   .fbar nav{flex-wrap:wrap}
   .ghost{height:160px}
   .ghost-space{height:136px}
@@ -342,20 +350,20 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
       Closewise
     </a>
     <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="#produkte">Menüpunkt <i class="chev"></i></a>
-      <a href="#ablauf">Menüpunkt</a>
-      <a href="#vertrauen">Menüpunkt</a>
-      <a href="#ergebnisse">Menüpunkt <i class="chev"></i></a>
-      <a href="#loesungen">Menüpunkt <i class="chev"></i></a>
+      <a href="#ablauf">Das Problem</a>
+      <a href="#ablauf-schritte">So funktioniert es</a>
+      <a href="#produkte">Betrieb</a>
+      <a href="#vertrauen">Sicherheit</a>
+      <a href="https://closewise.site/de/faq.html">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <a href="#" class="btn signin">Anmelden</a>
-      <a href="#kontakt" class="btn book">Demo buchen</a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn signin">Live ansehen</a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">Termin buchen</a>
       <button class="burger" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mob" id="mob">
-    <a href="#produkte">Menüpunkt</a><a href="#ablauf">Menüpunkt</a><a href="#vertrauen">Menüpunkt</a><a href="#ergebnisse">Menüpunkt</a><a href="#" class="btn btn-ghost" style="align-self:flex-start">Anmelden</a>
+    <a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a><a href="https://closewise.site/de/faq.html">FAQ</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start">Live ansehen</a>
   </div>
 </header>
 
@@ -365,19 +373,19 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <div class="ph ph-hero" aria-hidden="true"><video id="heroVideo" autoplay muted loop playsinline poster="bilder/hero.jpg"><source src="bilder/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video></div>
   <div class="wrap hero-in">
     <div>
-      <h1 class="rv">Große Headline über drei Zeilen, die das Versprechen trägt.</h1>
-      <p class="sub rv" style="--d:.15s">Untertitel in einer Zeile, der die Headline erklärt.</p>
+      <h1 class="rv">Die zusätzliche Stunde: endgültig vorbei.</h1>
+      <p class="sub rv" style="--d:.15s">Closewise schließt die Nacht ab und zeigt nur, was nicht zusammenpasst.</p>
       <div class="ctas rv" style="--d:.3s">
-        <a href="#produkte" class="btn btn-white">Mehr ansehen</a>
-        <a href="#kontakt" class="btn btn-glass">Demo buchen</a>
+        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a>
+        <a href="#ablauf-schritte" class="btn btn-glass">So funktioniert es</a>
       </div>
     </div>
     <div style="position:relative">
       <div class="tabs rv" style="--d:.45s" id="tabs">
-        <a href="#" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)">◎</span>Übersicht<i class="bar"></i></a>
-        <a href="#" class="tab"><span class="ico" style="background:#1f7a6a">A</span>Produkt A<i class="bar"></i></a>
-        <a href="#" class="tab"><span class="ico" style="background:#d9763f">B</span>Produkt B<i class="bar"></i></a>
-        <a href="#" class="tab"><span class="ico" style="background:#594aff">C</span>Bald verfügbar<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>Alle Quellen<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#1f7a6a"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg></span>Nur Abweichungen<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#d9763f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>Fehlermuster<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#594aff"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Gästekonten &amp; Kasse<i class="bar"></i></a>
       </div>
       <button class="pause" id="pause" aria-label="Video anhalten"><i></i></button>
     </div>
@@ -399,8 +407,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
   <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow-Zeile</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:560px">Zweizeilige Überschrift für den Ablauf.</h2>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Systeme. Keines spricht mit dem anderen.</h2>
+    <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
         <svg class="flow-wires" width="1600" height="720" viewBox="0 0 1600 720" fill="none" aria-hidden="true">
@@ -447,42 +456,52 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
         </div>
       </div>
     </div>
+    <div class="steps" id="ablauf-schritte">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
+      <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Schritte, und die Nacht ist abgeschlossen.</h2>
+      <ol class="steps-row">
+        <li class="rv" style="--d:0.0s"><span class="n">01</span><h3>Anbinden</h3><p>Closewise liest die Exporte, die Ihr PMS, Ihr Kassensystem und Ihre Bank ohnehin erzeugen. Nichts Neues an der Kasse.</p></li>
+        <li class="rv" style="--d:0.1s"><span class="n">02</span><h3>Abgleichen</h3><p>Ein deterministischer Algorithmus prüft jede Rechnung gegen den Terminalabschluss, das Gästekonto und den Kassenbestand. Regeln, kein Raten.</p></li>
+        <li class="rv" style="--d:0.2s"><span class="n">03</span><h3>Markieren</h3><p>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag zurück – und einer KI-Erklärung, was schiefgelaufen ist.</p></li>
+        <li class="rv" style="--d:0.3s"><span class="n">04</span><h3>Abschließen</h3><p>Ein Export im Format, das Ihre Buchhaltung erwartet. Starten, Feierabend.</p></li>
+      </ol>
+    </div>
   </section>
 
   <!-- Produkte -->
   <section class="engine wrap" id="produkte">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow-Zeile für den Abschnitt</p>
-    <h2 class="h2 rv" style="--d:.1s">Zweizeilige, zentrierte Überschrift hier.</h2>
-    <p class="lead rv" style="--d:.2s">Eine Zeile Erklärung, die den Abschnitt kurz einordnet.</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Betrieb</p>
+    <h2 class="h2 rv" style="--d:.1s">Jede Zahl, die Ihre Nacht erzeugt.</h2>
+    <p class="lead rv" style="--d:.2s">Kassenbelege, Terminalabschluss, Gästekonto und Kassenbestand – in einem Abgleich.</p>
     <div class="cards3">
-      <a href="#" class="pcard rv" style="--d:.1s">
-        <div class="hd"><span class="tag" style="background:#1f7a6a">A</span>Produkt A</div>
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.1s">
+        <div class="hd"><span class="tag" style="background:#1f7a6a">1</span>Abgleich</div>
         <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Produkt A</h3><p>Zwei Zeilen Beschreibung des Produkts, damit die Karte die gleiche Höhe wie in der Vorlage hat.</p></div>
+        <div class="ft"><h3>Alle Quellen, ein Klick</h3><p>Jede Rechnung gegen Terminalabschluss, Gästekonto, Kassenbestand und Korrekturprotokoll geprüft. Deterministisch – Regeln, kein Modell.</p></div>
       </a>
-      <a href="#" class="pcard rv" style="--d:.2s">
-        <div class="hd"><span class="tag" style="background:#d9763f">B</span>Produkt B</div>
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.2s">
+        <div class="hd"><span class="tag" style="background:#d9763f">2</span>Abweichungen</div>
         <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Produkt B</h3><p>Zwei Zeilen Beschreibung des zweiten Produkts, gleich lang wie die erste.</p></div>
+        <div class="ft"><h3>Nur was nicht aufging</h3><p>Nicht aufgehende Positionen kommen einzeln zurück, sortiert nach gefährdetem Eurobetrag. Die Erklärung darunter schreibt eine KI.</p></div>
       </a>
-      <a href="#" class="pcard rv" style="--d:.3s">
-        <div class="hd"><span class="tag" style="background:#594aff">C</span>Bald verfügbar</div>
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.3s">
+        <div class="hd"><span class="tag" style="background:#594aff">3</span>Muster</div>
         <div class="media"><div class="icons">
           <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
           <i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
         </div></div>
-        <div class="ft"><h3>Mehr folgt</h3></div>
+        <div class="ft"><h3>Derselbe Fehler, vier Nächte in Folge</h3><p>Wiederholte Ursachen gruppiert: ein defektes Terminal, eine PMS-Synchronisation, eine Gewohnheit. Eine schlechte Nacht ist Rauschen – vier sind behebbar.</p></div>
       </a>
     </div>
   </section>
 
   <!-- Zitat-Karussell -->
-  <section class="quotes" aria-roledescription="Karussell">
+  <section class="quotes" aria-roledescription="Karussell" aria-label="So fangen Sie an">
     <div class="qtrack" id="qtrack">
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zitat als Platzhalter über eine bis zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Zweites Zitat als Platzhalter, hier bewusst etwas länger über mehrere Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Drittes Zitat als Platzhalter über zwei Zeilen.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Kategorie</p><h2>„Viertes Zitat als Platzhalter.“</h2><a href="#" class="btn btn-white">Mehr ansehen</a></div><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 1/4</p><h2>Termin buchen</h2><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a></div><div class="who"><span>Zwanzig Minuten. Wir nehmen eine Nacht aus Ihrem Haus und zeigen genau, was Closewise erledigt hätte.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 2/4</p><h2>Wir binden Ihre Systeme an</h2></div><div class="who"><span>Wir richten Closewise auf die Exporte, die Ihr PMS, Ihr Kassensystem und Ihre Bank ohnehin erzeugen. An Ihren Systemen ändert sich nichts.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 3/4</p><h2>Wir schließen eine Nacht parallel ab</h2></div><div class="who"><span>Sie schließen von Hand ab, Closewise parallel, und wir vergleichen beides. Sie sehen, was es gefunden hat.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 4/4</p><h2>Sie hören auf, von Hand abzuschließen</h2></div><div class="who"><span>Nach Dienstschluss starten. Was nicht aufging, kommt als kurze Liste zurück – sonst nichts.</span></div></div></article>
       <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
       <div class="dots" id="dots"></div>
@@ -492,15 +511,15 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <!-- Lösungen nach Rolle -->
   <section class="solutions" id="loesungen">
     <div class="wrap sol-head">
-      <div><p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p><h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift.</h2></div>
+      <div><p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Für wen</p><h2 class="h2 rv" style="--d:.1s">Für jeden, der die Nacht abschließt.</h2></div>
       <div class="arrows"><button id="sPrev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
     </div>
     <div class="scroller" id="scroller">
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 1</h3><p>Ein bis zwei Zeilen, was diese Rolle mit dem Produkt gewinnt.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 2</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 3</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 4</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
-      <a href="#" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Rolle 5</h3><p>Eine Zeile Nutzen für diese Rolle.</p><span class="more">Mehr ansehen ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Night Auditor</h3><p>Kein Zeilenlesen mehr um drei Uhr. Closewise gleicht ab, Sie prüfen nur, was nicht aufging.</p><span class="more">Termin buchen ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Front Office</h3><p>Zimmerbuchungen gegen den Outlet geprüft, der sie erzeugt hat – noch in derselben Nacht.</p><span class="more">Termin buchen ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>F&amp;B-Leitung</h3><p>Stornos ohne Freigabe und fehlende Kartenzahlungen je Outlet, sortiert nach Eurobetrag.</p><span class="more">Termin buchen ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Controlling</h3><p>Ein Export im Format, das Ihre Buchhaltung erwartet – und die Fehlermuster dahinter.</p><span class="more">Termin buchen ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>General Manager</h3><p>Der gefährdete Eurobetrag jeder Nacht auf einen Blick.</p><span class="more">Termin buchen ›</span></div></a>
     </div>
   </section>
 
@@ -508,14 +527,14 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <section class="trust wrap" id="vertrauen">
     <div class="trust-grid">
       <div>
-        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p>
-        <h2 class="h2 rv" style="--d:.1s">Einzeilige Überschrift hier.</h2>
-        <p class="lead rv" style="--d:.2s">Zwei Zeilen Einleitung zum Thema Vertrauen und Sicherheit der Daten.</p>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Sicherheit</p>
+        <h2 class="h2 rv" style="--d:.1s">Es liest Ihre Zahlen. Sonst nichts.</h2>
+        <p class="lead rv" style="--d:.2s">Closewise bekommt fertige Exporte, gleicht sie ab und berichtet. Mehr Zugriff braucht es nicht.</p>
         <div class="tlist" id="tlist">
           <i class="prog"></i>
-          <div class="titem"><h3>Punkt eins</h3><p>Eine Zeile Erklärung zu diesem Punkt.</p></div>
-          <div class="titem"><h3>Punkt zwei</h3><p>Zwei Zeilen Erklärung zu diesem Punkt, damit der Abstand stimmt wie in der Vorlage.</p></div>
-          <div class="titem"><h3>Punkt drei</h3><p>Eine Zeile Erklärung zu diesem Punkt.</p></div>
+          <div class="titem"><h3>Verarbeitung in der EU</h3><p>Der Abgleich läuft auf Servern in der EU (Irland). Ihre Daten verlassen die EU nicht.</p></div>
+          <div class="titem"><h3>Ihr Journal wird nicht gespeichert</h3><p>Ihre Nacht wird gelesen, abgeglichen und berichtet. Gespeichert wird der Abweichungsnachweis – was markiert wurde, wo und warum –, nicht das Rohjournal.</p></div>
+          <div class="titem"><h3>Es bekommt Exporte</h3><p>Closewise schreibt nie in Ihr PMS, Ihr Kassensystem oder Ihre Bank. Ein Schreibzugriff ist nicht möglich und nicht bloß unterlassen.</p></div>
         </div>
       </div>
       <div class="tpanel rv" id="tpanel" data-step="0">
@@ -526,15 +545,15 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
   <!-- Ergebnisse -->
   <section class="outcomes wrap" id="ergebnisse">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Eyebrow</p>
-    <h2 class="h2 rv" style="--d:.1s">Zweizeilige<br>Überschrift.</h2>
-    <p class="lead rv" style="--d:.2s">Eine Zeile Einleitung.</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
+    <h2 class="h2 rv" style="--d:.1s">Dieselbe Nacht,<br>zweimal abgeschlossen.</h2>
+    <p class="lead rv" style="--d:.2s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
     <div class="bento">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0x</div></div><blockquote>Kurzes Ergebnis in zwei Zeilen.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>000 Einheit</div></div><blockquote>Längeres Ergebnis als Platzhalter über vier Zeilen, damit die Karte gefüllt wirkt.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8,5 Min.</div></div><blockquote>für den Abschluss – statt 60 bis 70 Minuten von Hand.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 Std.</div></div><blockquote>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       <div class="row2">
-        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Stunde</div></div><blockquote>Ergebnis als Platzhalter über drei Zeilen hier.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
-        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="mark">Logo</div><div class="num" data-scramble>0 Markt</div></div><blockquote>Ergebnis als Platzhalter über vier Zeilen, gleich lang wie das zweite.</blockquote><div class="who"><b>Name Nachname</b><span>Rolle, Firma</span></div></article>
+        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>5.443 €</div></div><blockquote>Risiko in einer einzigen Nacht gefunden.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       </div>
     </div>
   </section>
@@ -544,9 +563,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <div class="wrap cta rv">
       <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
       <div class="c">
-        <h2>Abschluss-Headline.<br>Zweite Zeile.</h2>
-        <p>Eine Zeile, die zum Gespräch einlädt.<br>Und eine zweite Zeile dazu.</p>
-        <a href="#" class="btn btn-white">Demo buchen</a>
+        <h2>Sehen Sie es an<br>Ihren eigenen Zahlen.</h2>
+        <p>Bringen Sie eine Nacht mit, die Ärger gemacht hat.<br>Zwanzig Minuten reichen, um zu zeigen, was Closewise darin gefunden hätte.</p>
+        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Demo anfragen</a>
       </div>
     </div>
   </section>
@@ -557,19 +576,16 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   <div class="wrap">
     <div class="fcols">
       <div class="fbrand">
-        <a href="#" class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Closewise</a>
-        <p>Eine Zeile Markenversprechen.</p>
-        <p>Eine Zeile zum Newsletter.</p>
-        <form class="news" onsubmit="return false"><input type="email" placeholder="name@firma.de" aria-label="E-Mail"><button>Abonnieren</button></form>
+        <a href="#top" class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Closewise</a>
+        <p>Nächtlicher Kassenabschluss für Hotels und ihre Outlets.<br>Closewise sagt Ihnen nur, was nicht zusammenpasst.</p>
       </div>
-      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a></div>
-      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
-      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
-      <div class="fcol"><h4>Spalte</h4><a href="#">Link</a><a href="#">Link</a><a href="#">Link</a></div>
+      <div class="fcol"><h4>Produkt</h4><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a></div>
+      <div class="fcol"><h4>Unternehmen</h4><a href="mailto:info@closewise.eu">Kontakt</a><a href="https://closewise.site/de/faq.html">FAQ</a></div>
+      <div class="fcol"><h4>Folgen</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
     <div class="fbar">
       <span>© 2026 Closewise</span>
-      <nav><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="#">AGB</a><a href="#">Cookie-Einstellungen</a></nav>
+      <nav><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
     </div>
     <p class="fnote">Genannte Marken und Logos gehören ihren Inhabern. Closewise ist mit diesen Anbietern nicht verbunden.</p>
   </div>
