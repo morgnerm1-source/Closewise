@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ – Closewise</title>
+<meta name="description" content="Nächtlicher Kassenabschluss für Hotels und ihre Outlets. Closewise sagt Ihnen nur, was nicht zusammenpasst.">
+<!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
+  --line:rgba(26,24,20,.1); --card:#f0efee; --dark:#1a1814; --dark-2:#282622; --dark-3:#35332e;
+  --peach:#f99d72; --peach-deep:#ca7b57; --teal:#27a896; --teal-glow:#16ffde;
+  --ease:cubic-bezier(.22,1,.36,1); --wrap:1280px; --gut:80px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+/* Weiches Scrollen (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--dark);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{width:min(var(--wrap),100% - 2*var(--gut));margin-inline:auto}
+
+/* Knöpfe */
+.btn{display:inline-flex;align-items:center;gap:8px;height:43px;padding:10px 14px;border-radius:999px;font-size:16px;font-weight:500;letter-spacing:-.01em;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn-white{background:#fff;color:#211e1c}
+.btn-glass{background:rgba(255,255,255,.24);color:#fff;backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.34)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-ghost{border:1px solid rgba(26,24,20,.2)}
+
+/* Eyebrow */
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted-2);letter-spacing:-.006em;margin-bottom:16px}
+.eyebrow dot-loader{flex:none}  /* Dot-Loader „snake“ (2 × 3 Punkte) aus dot-loader.js */
+.h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
+.lead{font-size:14px;line-height:20px;color:var(--muted);margin-top:16px}
+
+/* ---------- Navigation ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:center;padding-top:8px;pointer-events:none}
+.nav-in{pointer-events:auto;width:min(1320px,100% - 40px);height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-radius:16px;color:#fff;border:1px solid transparent;transition:all .6s var(--ease)}
+.nav.solid .nav-in{width:min(1280px,100% - 40px);color:var(--ink);background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-color:var(--line)}
+.logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.logo svg{width:24px;height:24px}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:16px;font-weight:500}
+.nav-links a{display:flex;align-items:center;gap:6px;opacity:.95}
+.nav-links a:hover{opacity:.7}
+.nav-links .chev{width:10px;height:10px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translateY(-3px)}
+.nav-cta{display:flex;gap:14px}
+.nav .signin{background:rgba(255,255,255,.18)}
+.nav.solid .signin{background:transparent;border:1px solid rgba(26,24,20,.2);color:var(--ink)}
+.nav .book{background:#fff;color:var(--ink)}
+.nav.solid .book{background:var(--dark);color:#fff}
+.burger{display:none;width:40px;height:40px;border-radius:999px;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:25px}
+.nav.open .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mob{display:none}
+
+/* ---------- Hero ---------- */
+.hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
+.ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
+.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+/* Bilder aus bilder/: liegen über dem Platzhalter; fehlt eine Datei, bleibt der Platzhalter */
+.ph{overflow:hidden}
+.ph>img,.ph>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ph:has(>img,>video)::before{display:none}
+.ph-hero{position:absolute;inset:0;background:linear-gradient(135deg,#3a3733,#1a1814)}
+.ph-hero::before{content:"Video";top:auto;bottom:150px;right:80px}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15) 60%,rgba(0,0,0,.1)),linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
+.hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:156px 0 32px}
+.hero h1{font-size:64px;line-height:72px;font-weight:400;letter-spacing:-.01em;max-width:650px}
+.hero .sub{font-size:18px;line-height:24px;margin-top:24px;max-width:650px;opacity:.92}
+.hero .ctas{display:flex;gap:12px;margin-top:40px}
+.tabs{display:grid;grid-template-columns:repeat(4,215px);gap:16px}
+.tab{position:relative;height:102px;padding:20px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;font-size:16px;font-weight:500;overflow:hidden;transition:background .5s var(--ease),color .5s var(--ease)}
+.tab .ico{width:20px;height:20px;border-radius:4px;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff}
+.tab.on{background:#fff;color:var(--ink)}
+.tab .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ink)}
+.tab.on .bar{animation:fill var(--dur,6s) linear forwards}
+@keyframes fill{to{width:100%}}
+.pause{position:absolute;right:0;bottom:0;width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);display:grid;place-items:center}
+.pause i{width:10px;height:12px;border:solid #fff;border-width:0 3px}
+.pause.paused i{border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;width:0;height:0}
+
+/* ---------- Inhalt, schiebt sich über das Hero ---------- */
+.sheet{position:relative;z-index:5;background:var(--bg);border-radius:24px 24px 0 0;margin-top:-4px}
+.logos-wrap{padding-top:40px}
+.logos-wrap .eyebrow{margin-bottom:4px}
+.logos{height:100px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos-track{display:flex;width:max-content;height:100%;align-items:center;animation:marquee var(--dur,30s) linear infinite}
+.logos-track>*{flex:none;display:flex;align-items:center;height:48px;padding:0 88px;border-left:1px solid var(--line)}
+.logos-track img{height:var(--h,30px);width:auto}
+.logos-track .logo-txt{font-family:Inter,sans-serif;font-size:22px;letter-spacing:-.02em;font-weight:600;color:#1a1814;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(calc(var(--shift,50%) * -1))}}
+
+.how{padding:120px 0 0}
+/* Ablauf-Animation (aus dem Design „Closewise Ablauf“), Bühne 1600 × 720, per Skript skaliert */
+.flow{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden;aspect-ratio:1600/720;font-family:Geist,Inter,system-ui,sans-serif;color:#101828}
+.flow-stage{position:absolute;left:0;top:0;width:1600px;height:720px;transform-origin:0 0}
+.flow-wires{position:absolute;left:0;top:0}
+.flow-src{position:absolute;left:40px;top:128px;display:flex;flex-direction:column;gap:36px}
+.flow-src>div{width:240px;height:64px;border:1px solid #e4e7ec;border-radius:32px;background:#fff;display:flex;align-items:center;gap:14px;padding:0 24px;font-size:20px;letter-spacing:-.01em}
+.flow-card{position:absolute;left:500px;top:360px;transform:translateY(-50%);width:480px;background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:22px 26px 24px;box-shadow:0 18px 40px -28px rgba(16,24,40,.25)}
+.flow-head{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid #eaecf0;font-size:19px;font-weight:500;letter-spacing:-.01em}
+.flow-head i{width:14px;height:14px;border-radius:50%;border:1.6px solid #101828}
+.flow-phase{font-size:16px;color:#475467;margin-top:18px}
+.flow-bar{height:4px;border-radius:2px;background:#eaecf0;margin-top:12px;overflow:hidden}
+.flow-bar i{display:block;height:100%;width:0;background:#1f4fd1}
+.flow-rows{display:flex;flex-direction:column;margin-top:14px}
+.flow-row{display:flex;align-items:center;gap:12px;height:44px;border-bottom:1px solid #f2f4f7;font-size:15px;opacity:0}
+.flow-row .ar{width:110px}
+.flow-row .tx{flex:1}
+.flow-row .ck{width:18px;height:18px;border-radius:50%;border:1.5px solid #d0d5dd;display:flex;align-items:center;justify-content:center}
+.flow-export{position:absolute;left:1140px;top:360px;transform:translateY(-50%);width:400px;border-radius:22px;padding:8px;border:1.5px solid rgba(31,79,209,.15)}
+.flow-export>div{background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:22px 24px 24px}
+.flow-export h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.flow-sub{font-size:15px;color:#475467;margin-top:6px}
+.flow-btns{display:flex;gap:10px;margin-top:18px}
+.flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;font-size:15px;color:#98a2b3}
+
+/* Vier Schritte unter der Ablauf-Animation */
+.steps{padding-top:112px;scroll-margin-top:96px}
+.steps-row{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.steps-row li{border-top:1px solid var(--line);padding-top:20px}
+.steps-row .n{font:500 12px/1 "Fragment Mono",monospace;letter-spacing:.08em;color:var(--muted-2)}
+.steps-row h3{font-size:18px;font-weight:500;letter-spacing:-.01em;margin-top:16px}
+.steps-row p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px}
+/* Produkte */
+.engine{padding:160px 0 120px;text-align:center}
+.engine .eyebrow{justify-content:center}
+.engine .h2{max-width:600px;margin-inline:auto}
+.engine .lead{max-width:600px;margin-inline:auto}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;text-align:left}
+.pcard{border-radius:18px;background:rgba(0,0,0,.04);padding:2px;display:flex;flex-direction:column;transition:transform .6s var(--ease)}
+.pcard:hover{transform:translateY(-4px)}
+.pcard .hd{display:flex;gap:10px;align-items:center;padding:20px 24px;font-size:16px;font-weight:500}
+.pcard .tag{width:20px;height:20px;border-radius:4px;font-size:10px;font-weight:600;color:#fff;display:grid;place-items:center}
+.pcard .media{background:var(--dark);border-radius:16px 16px 0 0;height:300px;padding:32px;overflow:hidden;position:relative}
+.pcard .media .ph{width:100%;height:100%;border-radius:12px;transition:transform 1.2s var(--ease)}
+.pcard:hover .media .ph{transform:scale(1.04)}
+.pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px;flex:1}
+.pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
+.pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
+.icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
+.icons i{width:42px;height:42px;border-radius:999px;background:var(--dark-3);border:1px solid rgba(255,255,255,.1);display:block;animation:pulse 4s var(--ease) infinite;animation-delay:calc(var(--i)*.25s)}
+@keyframes pulse{0%,70%,100%{background:var(--dark-3)}20%{background:#4a473f}}
+
+/* Zitat-Karussell */
+.quotes{background:#fff;padding:120px 0;overflow:hidden}
+.qtrack{position:relative;height:650px}
+.qslide{position:absolute;top:0;left:50%;width:min(1280px,100% - 160px);height:650px;margin-left:calc(min(1280px,100% - 160px)/-2);border-radius:24px;overflow:hidden;color:#fff;transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.qslide .ph{position:absolute;inset:0}
+.qslide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,40,.75),rgba(0,0,0,.25) 55%,rgba(0,0,0,.45))}
+.qslide .c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:64px}
+.qslide .eyebrow{color:#fff}
+.qslide h2{font-size:48px;line-height:56px;font-weight:400;max-width:800px;letter-spacing:-.01em}
+.qslide .btn{margin-top:24px}
+.qslide .who b{display:block;font-size:18px;font-weight:500}
+.qslide .who{max-width:560px}
+.qslide .who span{font-size:18px;line-height:26px;opacity:.9}
+.qnav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:999px;background:#fff;color:#131313;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.qnav.prev{left:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav.next{right:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav svg{width:16px;height:16px}
+.dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px}
+.dots button{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .5s var(--ease)}
+.dots button.on{background:#fff}
+
+/* Lösungen */
+.solutions{background:#fff;padding:0 0 120px}
+.sol-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;transition:background .3s}
+.arrows button:hover{background:#f3f2f1}
+.arrows button:disabled{opacity:.35}
+.arrows svg{width:16px;height:16px}
+.scroller{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc((100vw - min(1280px,100vw - 160px))/2);scrollbar-width:none;cursor:grab}
+.scroller::-webkit-scrollbar{display:none}
+.scard{flex:0 0 466px;height:488px;border-radius:12px;position:relative;overflow:hidden;color:#fff;scroll-snap-align:start}
+.scard .ph{position:absolute;inset:0;transition:transform 1.2s var(--ease)}
+.scard:hover .ph{transform:scale(1.05)}
+.scard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.1) 60%)}
+.scard .c{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}
+.scard h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.scard p{font-size:14px;line-height:20px;opacity:.8;margin-top:12px;max-width:380px}
+.scard .more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;font-weight:500;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);transition:background .3s}
+.scard .more:hover{background:rgba(255,255,255,.28)}
+
+/* Vertrauen */
+.trust{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 120px}
+.trust-grid{display:grid;grid-template-columns:1fr 612px;gap:56px}
+.trust .lead{max-width:420px}
+.tlist{position:relative;margin-top:260px;padding-left:32px;border-left:1px solid var(--line)}
+.tlist .prog{position:absolute;left:-1px;top:0;width:2px;height:0;background:var(--teal)}
+.titem{padding-bottom:28px;opacity:.4;transition:opacity .6s var(--ease)}
+.titem.on{opacity:1}
+.titem h3{font-size:16px;font-weight:500}
+.titem p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px;max-width:470px}
+.tpanel{position:sticky;top:120px;height:596px;border:1px solid var(--line);border-radius:18px;background:var(--bg);display:grid;place-items:center;overflow:hidden}
+.layers{position:relative;width:300px;height:300px}
+.layers div{position:absolute;inset:0;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:0 20px 50px -30px rgba(0,0,0,.3);transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.layers div:nth-child(1){transform:translateY(60px) scale(.8)}
+.layers div:nth-child(2){transform:translateY(30px) scale(.9)}
+.layers div:nth-child(3){display:grid;place-items:center}
+.layers svg{width:64px;height:64px;color:var(--teal)}
+.tpanel[data-step="1"] .layers div:nth-child(1),.tpanel[data-step="2"] .layers div:nth-child(1){transform:translateY(80px) scale(.8);border-color:var(--teal)}
+.tpanel[data-step="2"] .layers div:nth-child(2){transform:translateY(40px) scale(.9);border-color:var(--teal)}
+
+/* Ergebnisse */
+.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 144px}
+.bento{display:grid;grid-template-columns:500px 1fr;gap:16px;margin-top:56px}
+.bento .ocard:nth-child(3){grid-column:auto}
+.bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
+.ocard{position:relative;height:492px;border-radius:12px;overflow:hidden;color:#fff;padding:40px;display:flex;flex-direction:column;justify-content:space-between}
+.ocard .ph{position:absolute;inset:0;z-index:0}
+.ocard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));z-index:1}
+.ocard>*{position:relative;z-index:2}
+.ocard .mark{font-size:22px;font-weight:600;letter-spacing:-.02em;opacity:.9}
+.ocard .num{font-size:80px;line-height:1;font-weight:300;letter-spacing:-.02em;margin-top:28px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ocard .num span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
+.ocard .num span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
+.ocard blockquote{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-.02em;max-width:460px;margin-top:auto}
+.ocard .who{margin-top:40px;font-size:14px}
+.ocard .who b{display:block;font-size:16px;font-weight:500}
+.ocard .who span{opacity:.6}
+
+/* CTA */
+.cta-wrap{background:#fff;padding-bottom:88px}
+.cta{position:relative;height:436px;border-radius:24px;overflow:hidden;background:#000;color:#fff;display:grid;place-items:center;text-align:center}
+.blob{position:absolute;width:520px;height:1100px;filter:blur(60px);opacity:.85;transform:rotate(-35deg);border-radius:50%}
+.blob.a{background:linear-gradient(#1fb89f,#0b5f55);left:-80px;top:-300px;animation:drift 14s var(--ease) infinite alternate}
+.blob.b{background:linear-gradient(#e0835a,#5a2c18);left:520px;top:-340px;animation:drift 18s var(--ease) infinite alternate-reverse}
+.blob.d{background:linear-gradient(#1a8c7c,#000);right:-160px;top:-200px;width:380px;animation:drift 16s var(--ease) infinite alternate}
+@keyframes drift{from{transform:rotate(-35deg) translateX(0)}to{transform:rotate(-28deg) translateX(120px)}}
+.cta .c{position:relative;z-index:2}
+.cta h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.01em}
+.cta p{font-size:14px;line-height:20px;margin:24px 0 20px}
+
+/* Footer mit Enthüllung */
+.stage{position:relative}
+.footer{position:relative;z-index:5;background:#fff;border-radius:0 0 24px 24px;padding:88px 0 0}
+.fcols{display:grid;grid-template-columns:1fr auto auto auto;gap:72px}
+.fbrand p{font-size:14px;line-height:22px;color:var(--muted);margin-top:20px}
+.fcol h4{font-size:16px;font-weight:500;margin-bottom:22px}
+.fcol a{display:block;font-size:14px;color:var(--muted);margin-bottom:14px;transition:color .3s}
+.fcol a:hover{color:var(--ink)}
+.fbar{display:flex;justify-content:space-between;align-items:center;margin-top:64px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.fbar nav{display:flex;gap:16px}
+.fnote{padding:18px 0 24px;font-size:12px;color:var(--muted)}
+.ghost{position:fixed;left:0;right:0;bottom:0;z-index:-1;height:360px;background:var(--bg);overflow:hidden;display:flex;align-items:flex-end}
+.ghost-space{height:336px}
+.ghost span{display:block;width:100%;font-size:min(23vw,330px);line-height:.78;font-weight:500;letter-spacing:-.05em;color:var(--ink);text-align:center;transform:translateY(12%)}
+
+/* Einblenden beim Scrollen */
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+  .rv.in{opacity:1;transform:none;filter:none}
+  .hero .rv{transition-duration:1.2s}
+}
+@media (prefers-reduced-motion:reduce){
+  .logos-track,.blob,.icons i{animation:none}
+}
+
+/* ---------- Tablet / Handy ---------- */
+@media (max-width:1180px){
+  .steps-row{grid-template-columns:1fr 1fr}
+  :root{--gut:32px}
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-cta .signin{display:none}
+  .mob{display:flex;flex-direction:column;gap:18px;pointer-events:auto;position:fixed;inset:88px 20px auto;padding:24px;border-radius:16px;background:#fff;color:var(--ink);font-size:18px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:all .4s var(--ease);box-shadow:0 20px 50px -20px rgba(0,0,0,.3)}
+  .nav.open .mob{opacity:1;transform:none;visibility:visible}
+  .tabs{grid-template-columns:repeat(4,1fr)}
+  .cards3{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .tlist{margin-top:48px}
+  .tpanel{position:relative;top:0;height:420px}
+  .bento,.bento .row2{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .flow{aspect-ratio:auto;padding:20px}
+  .flow-stage{position:static;width:auto;height:auto;transform:none!important;display:flex;flex-direction:column;gap:16px}
+  .flow-wires{display:none}
+  .flow-src{position:static;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .flow-src>div{width:auto;height:44px;gap:10px;padding:0 14px;font-size:14px}
+  .flow-src svg{width:18px;height:18px;flex:none}
+  .flow-card,.flow-export{position:static;transform:none;width:auto}
+  .flow-card{padding:18px}
+  .flow-row{font-size:13px;gap:8px}
+  .flow-row .ar{width:84px}
+  .flow-btns{flex-wrap:wrap}
+}
+@media (max-width:720px){
+  .steps{padding-top:72px}
+  .steps-row{grid-template-columns:1fr}
+  :root{--gut:16px}
+  .nav-in{padding:0 12px 0 16px;height:60px}
+  .nav-cta .book{height:38px;font-size:14px}
+  .hero{min-height:640px}
+  .hero-in{padding:120px 0 24px}
+  .hero h1{font-size:40px;line-height:46px}
+  .hero .sub{font-size:16px}
+  .tabs{grid-template-columns:1fr 1fr;gap:8px}
+  .tab{height:72px;padding:12px;font-size:14px}
+  .tab:nth-child(n+3){display:none}
+  .pause{bottom:auto;top:-48px}
+  .h2,.cta h2,.qslide h2{font-size:32px;line-height:38px}
+  .how,.engine{padding-top:80px}
+  .engine{padding-bottom:80px}
+  .cards3{grid-template-columns:1fr}
+  .quotes{padding:80px 0}
+  .qtrack,.qslide{height:560px}
+  .qslide{width:calc(100% - 32px);margin-left:calc((100% - 32px)/-2)}
+  .qslide .c{padding:28px}
+  .qnav{display:none}
+  .sol-head{flex-direction:column;align-items:flex-start;gap:20px}
+  .scroller{padding:0 16px}
+  .scard{flex-basis:84vw;height:440px}
+  .ocard{height:auto;min-height:420px;padding:28px}
+  .ocard .num{font-size:56px}
+  .ocard blockquote{font-size:24px;line-height:30px;margin-top:40px}
+  .cta{height:auto;padding:80px 20px}
+  .fcols{grid-template-columns:1fr 1fr;gap:32px}
+    .fbar{flex-direction:column;align-items:flex-start;gap:14px}
+  .fbar nav{flex-wrap:wrap}
+  .ghost{height:160px}
+  .ghost-space{height:136px}
+}
+
+/* ---------- FAQ-Seite ---------- */
+body{background:var(--bg)}
+.faq{padding:176px 0 120px;position:relative;z-index:5;background:var(--bg)}
+.faq-grid{display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:start}
+.faq-head{position:sticky;top:120px}
+.faq h1{font-size:56px;line-height:62px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;font-size:20px;line-height:28px;font-weight:400;letter-spacing:-.01em;color:var(--ink-2)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{position:relative;flex:none;width:32px;height:32px;border-radius:999px;border:1px solid var(--line);transition:transform .6s var(--ease),background .3s}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:currentColor;transform:translate(-50%,-50%)}
+.qa summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.qa[open] summary i{transform:rotate(45deg);background:#fff}
+.qa summary:hover i{background:#fff}
+.qa-a{overflow:hidden}
+.qa-a p{font-size:16px;line-height:26px;color:var(--muted);padding:0 56px 28px 0;max-width:680px}
+
+.ask-box{margin-top:72px;padding:40px;border-radius:24px;background:#fff;border:1px solid var(--line)}
+.ask-box h2{font-size:28px;line-height:34px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
+.ask-box .lead{margin-top:10px}
+.ask-line{display:flex;align-items:center;gap:8px;margin-top:24px;height:60px;padding:6px 6px 6px 24px;border:1px solid rgba(26,24,20,.16);border-radius:999px;background:var(--bg);transition:border-color .3s,box-shadow .3s}
+.ask-line:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px rgba(26,24,20,.06)}
+.ask-line input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:16px;color:var(--ink)}
+.ask-line button{flex:none;width:48px;height:48px;border-radius:999px;background:var(--dark);color:#fff;display:grid;place-items:center;transition:transform .3s var(--ease),opacity .3s}
+.ask-line button:hover{transform:translateY(-1px)}
+.ask-line button:disabled{opacity:.35;transform:none;cursor:default}
+.ask-line button svg{width:18px;height:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:13px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);transition:background .3s,color .3s}
+.chip:hover{background:var(--bg);color:var(--ink)}
+.answers{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.answer{padding:22px 24px;border-radius:16px;background:var(--bg);border:1px solid var(--line);animation:auf .8s var(--ease)}
+@keyframes auf{from{opacity:0;transform:translateY(12px)}}
+.answer .q{font-size:14px;font-weight:500;color:var(--ink-2)}
+.answer .a{font-size:16px;line-height:26px;color:var(--ink);margin-top:10px;white-space:pre-line}
+.answer .wait{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:14px;color:var(--muted-2)}
+.answer.err .a{color:#b42318}
+.answer .note{font-size:12px;color:var(--muted-2);margin-top:14px}
+.answer .note a{text-decoration:underline;text-underline-offset:2px}
+@media (max-width:1180px){
+  .faq-grid{grid-template-columns:1fr;gap:40px}
+  .faq-head{position:static}
+}
+@media (max-width:720px){
+  .faq{padding:128px 0 80px}
+  .faq h1{font-size:38px;line-height:44px}
+  .qa summary{font-size:17px;line-height:24px;padding:20px 0}
+  .qa-a p{padding-right:0}
+  .ask-box{padding:24px 20px;margin-top:48px}
+  .ask-box h2{font-size:22px;line-height:28px}
+  .ask-line{height:54px;padding-left:18px}
+  .ask-line button{width:42px;height:42px}
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="nav solid" id="nav">
+  <div class="nav-in">
+    <a href="pf.html" class="logo" aria-label="Closewise Startseite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Closewise
+    </a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="pf.html#ablauf">Das Problem</a>
+      <a href="pf.html#ablauf-schritte">So funktioniert es</a>
+      <a href="pf.html#produkte">Betrieb</a>
+      <a href="pf.html#vertrauen">Sicherheit</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn signin">Live ansehen</a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">Termin buchen</a>
+      <button class="burger" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mob" id="mob">
+    <a href="pf.html#ablauf">Das Problem</a><a href="pf.html#ablauf-schritte">So funktioniert es</a><a href="pf.html#produkte">Betrieb</a><a href="pf.html#vertrauen">Sicherheit</a><a href="faq.html" aria-current="page">FAQ</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start">Live ansehen</a>
+  </div>
+</header>
+
+<main class="sheet faq">
+  <div class="wrap faq-grid">
+    <div class="faq-head">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Fragen</p>
+      <h1 class="rv" style="--d:.1s">Was Betreiber uns fragen.</h1>
+      <p class="lead rv" style="--d:.2s;max-width:340px">Was in jedem ersten Gespräch auftaucht, klar beantwortet. Ihre Frage ist nicht dabei? Stellen Sie sie unten.</p>
+    </div>
+    <div>
+      <div class="qas" id="qas">
+        <details class="qa rv" style="--d:0.00s"><summary>Was macht Closewise eigentlich?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Es nimmt die Belege, die Ihre Systeme nach Dienstschluss erzeugen – Kassenbons, den Terminalabschluss, die Gästekonten und den gezählten Kassenbestand – und prüft jede Zeile des einen gegen die anderen. Was übereinstimmt, wird abgehakt und Ihnen nie gezeigt. Was nicht übereinstimmt, wird zu einer kurzen Liste mit Beleg, Betrag und Grund.</p></div></details>
+        <details class="qa rv" style="--d:0.05s"><summary>Wie wird es an meine bestehenden Systeme angebunden?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Über die Exporte, die sie ohnehin erzeugen. Es gibt nichts umzustellen und keine neue Software an der Kasse. Fehlt eine Quelle, prüft Closewise gegen die übrigen und schweigt zu der, die es nicht sehen kann, statt eine Abweichung zu erfinden.</p></div></details>
+        <details class="qa rv" style="--d:0.10s"><summary>Kann ich den fertigen Abschluss für meine Buchhaltung exportieren?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Ja. Der fertige Abschluss erzeugt einen Buchungssatz – Bargeld, Karte und Umsatz nach Kategorie auf die jeweils eigenen Konten – und exportiert als CSV in dem Format, das Ihre Buchhaltung ohnehin erwartet.</p></div></details>
+        <details class="qa rv" style="--d:0.15s"><summary>Was bringt die Trendansicht?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Ein einzelner markierter Rabatt ist Rauschen. Dieselbe Markierung am selben Terminal, an vier von vierzehn Nächten, ist ein Muster, auf das man reagieren sollte. Closewise behält die Historie, damit die Wiederholung von selbst auffällt, statt davon abzuhängen, wer sich zufällig an letzten Freitag erinnert.</p></div></details>
+        <details class="qa rv" style="--d:0.20s"><summary>Ersetzt Closewise meine Buchhaltung?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Nein, und auch nicht Ihre Kasse oder Ihr Hotelsystem. Es ersetzt die Stunde, die jede Nacht jemand damit verbringt nachzuweisen, dass drei Berichte übereinstimmen. Ihre Buchhaltung bekommt einen Abschluss, der bereits aufgeht – am Morgen danach statt zum Monatsende.</p></div></details>
+        <details class="qa rv" style="--d:0.25s"><summary>Auf welche Daten greift Closewise zu?<i aria-hidden="true"></i></summary><div class="qa-a"><p>Nur Umsatzdaten: Beträge, Zahlungsarten, Zeiten, Tische und Zimmernummern. Verarbeitet in der EU. Es liest keine Gästenamen und verarbeitet nie vollständige Kartennummern.</p></div></details>
+      </div>
+
+      <section class="ask-box rv" aria-labelledby="ask-title">
+        <p class="eyebrow"><dot-loader variant="wave" size="3" aria-hidden="true"></dot-loader>Frage stellen</p>
+        <h2 id="ask-title">Ihre Frage ist nicht dabei?</h2>
+        <p class="lead">Fragen Sie direkt. Eine KI antwortet auf Basis unserer Angaben zu Closewise.</p>
+        <form class="ask-line" id="askForm" autocomplete="off">
+          <label for="askInput" class="sr">Ihre Frage</label>
+          <input id="askInput" name="frage" type="text" maxlength="300" placeholder="Zum Beispiel: Wie lange dauert die Einrichtung?" required>
+          <button type="submit" id="askBtn" aria-label="Frage senden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <div class="chips" id="chips">
+          <button type="button" class="chip">Wie lange dauert die Einrichtung?</button>
+          <button type="button" class="chip">Was kostet Closewise?</button>
+          <button type="button" class="chip">Funktioniert es mit mehreren Outlets?</button>
+        </div>
+        <div class="answers" id="answers" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div class="stage">
+<main class="sheet" style="background:#fff;border-radius:0">
+  <!-- CTA -->
+  <section class="cta-wrap" id="kontakt">
+    <div class="wrap cta rv">
+      <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
+      <div class="c">
+        <h2>Sehen Sie es an<br>Ihren eigenen Zahlen.</h2>
+        <p>Bringen Sie eine Nacht mit, die Ärger gemacht hat.<br>Zwanzig Minuten reichen, um zu zeigen, was Closewise darin gefunden hätte.</p>
+        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Demo anfragen</a>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fcols">
+      <div class="fbrand">
+        <a href="pf.html" class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Closewise</a>
+        <p>Nächtlicher Kassenabschluss für Hotels und ihre Outlets.<br>Closewise sagt Ihnen nur, was nicht zusammenpasst.</p>
+      </div>
+      <div class="fcol"><h4>Produkt</h4><a href="pf.html#ablauf">Das Problem</a><a href="pf.html#ablauf-schritte">So funktioniert es</a><a href="pf.html#produkte">Betrieb</a><a href="pf.html#vertrauen">Sicherheit</a></div>
+      <div class="fcol"><h4>Unternehmen</h4><a href="mailto:info@closewise.eu">Kontakt</a><a href="faq.html">FAQ</a></div>
+      <div class="fcol"><h4>Folgen</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+    <div class="fbar">
+      <span>© 2026 Closewise</span>
+      <nav><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+    </div>
+    <p class="fnote">Genannte Marken und Logos gehören ihren Inhabern. Closewise ist mit diesen Anbietern nicht verbunden.</p>
+  </div>
+</footer>
+<div class="ghost-space"></div>
+<div class="ghost" aria-hidden="true"><span>Closewise</span></div>
+
+<script src="dot-loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lenis = null;
+  if (!reduce && window.Lenis) lenis = new Lenis({lerp:.1, autoRaf:true, anchors:{offset:-96}});
+
+  // Handy-Menü
+  const nav = document.getElementById('nav'), burger = nav.querySelector('.burger');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); o ? lenis?.stop() : lenis?.start(); });
+
+  // Einblenden beim Scrollen
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Akkordeon: immer nur eine Antwort offen, Höhe weich animiert
+  const qas = [...document.querySelectorAll('.qa')];
+  qas.forEach(d => {
+    const sum = d.querySelector('summary'), body = d.querySelector('.qa-a');
+    sum.addEventListener('click', e => {
+      e.preventDefault();
+      const open = !d.open;
+      if (open) qas.forEach(o => { if (o !== d && o.open) toggle(o, false); });
+      toggle(d, open);
+    });
+    function noop(){}
+  });
+  function toggle(d, open) {
+    const body = d.querySelector('.qa-a');
+    if (reduce) { d.open = open; return; }
+    if (open) d.open = true;
+    const h = body.scrollHeight;
+    body.animate(open ? [{height:'0px',opacity:0},{height:h+'px',opacity:1}] : [{height:h+'px',opacity:1},{height:'0px',opacity:0}],
+      {duration:600, easing:'cubic-bezier(.22,1,.36,1)'}).onfinish = () => { if (!open) d.open = false; };
+  }
+
+  // Fragezeile: Frage an /api/frage, Antwort als Karte (neueste oben)
+  const form = document.getElementById('askForm'), input = document.getElementById('askInput'),
+        btn = document.getElementById('askBtn'), list = document.getElementById('answers');
+  const MAX = 10; let count = 0, busy = false;
+  const CAL = 'https://calendly.com/besher-asfari-code/new-meeting';
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { input.value = c.textContent; ask(); }));
+  form.addEventListener('submit', e => { e.preventDefault(); ask(); });
+
+  async function ask() {
+    const frage = input.value.trim();
+    if (busy || frage.length < 3) return;
+    if (count >= MAX) { return card(frage, 'Für heute sind genug Fragen gestellt. Schreiben Sie uns gern an info@closewise.eu oder buchen Sie ein Gespräch.', true); }
+    busy = true; btn.disabled = true; count++;
+    const el = card(frage, null);
+    try {
+      const r = await fetch('/api/frage', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({frage})});
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.antwort) throw new Error(data.fehler || 'Fehler');
+      fill(el, data.antwort, false);
+      input.value = '';
+    } catch (err) {
+      fill(el, (err && err.message && err.message !== 'Failed to fetch' && err.message !== 'Fehler' ? err.message + ' ' : '') +
+        'Die Antwort konnte gerade nicht geladen werden. Schreiben Sie uns an info@closewise.eu oder buchen Sie ein kurzes Gespräch.', true);
+    } finally { busy = false; btn.disabled = false; }
+  }
+  function card(frage, text, err) {
+    const el = document.createElement('div');
+    el.className = 'answer';
+    el.innerHTML = '<div class="q">' + esc(frage) + '</div>' +
+      '<div class="wait"><dot-loader variant="wave" size="4" label="Antwort wird geladen"></dot-loader>Closewise denkt nach …</div>';
+    list.prepend(el);
+    if (text !== null) fill(el, text, err);
+    return el;
+  }
+  function fill(el, text, err) {
+    el.classList.toggle('err', !!err);
+    el.querySelector('.wait')?.remove();
+    const a = document.createElement('div'); a.className = 'a'; a.textContent = text; el.append(a);
+    const n = document.createElement('div'); n.className = 'note';
+    n.innerHTML = err ? '<a href="' + CAL + '" target="_blank" rel="noopener">Termin buchen</a> · <a href="mailto:info@closewise.eu">info@closewise.eu</a>'
+                      : 'Antwort von einer KI auf Basis unserer Angaben. Verbindlich ist das Gespräch – <a href="' + CAL + '" target="_blank" rel="noopener">Termin buchen</a>.';
+    el.append(n);
+  }
+})();
+</script>
+</body>
+</html>

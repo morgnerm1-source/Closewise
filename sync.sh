@@ -29,6 +29,11 @@ cp step-1-en.png step-2-en.png step-3-en.png "$ZIEL/"
 cp impressum.html datenschutz.html "$ZIEL/"
 cp -r fonts "$ZIEL/"
 
+# Neue Seite (primefold-look): Landingpage, FAQ mit KI-Fragezeile und Serverfunktion
+cp pf.html faq.html dot-loader.js "$ZIEL/"
+cp -r logos bilder api "$ZIEL/"
+cp package.json package-lock.json "$ZIEL/"
+
 echo "closewise/ neu angelegt:"
 ls -1sh "$ZIEL" | sed 's/^/  /'
 
