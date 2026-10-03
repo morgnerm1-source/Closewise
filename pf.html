@@ -105,29 +105,38 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @keyframes marquee{to{transform:translateX(calc(var(--shift,50%) * -1))}}
 
 .how{padding:120px 0 0}
-/* Ablauf-Animation (aus dem Design „Closewise Ablauf“), Bühne 1600 × 720, per Skript skaliert */
+/* Ablauf-Animation v2 (Design „Closewise Ablauf“), Bühne 1600 × 720, per Skript skaliert */
 .flow{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden;aspect-ratio:1600/720;font-family:Geist,Inter,system-ui,sans-serif;color:#101828}
 .flow-stage{position:absolute;left:0;top:0;width:1600px;height:720px;transform-origin:0 0}
+.flow-glow{position:absolute;left:490px;top:120px;width:500px;height:480px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,107,255,.14),rgba(122,90,248,.06) 60%,rgba(255,255,255,0));opacity:0}
 .flow-wires{position:absolute;left:0;top:0}
+.flow-dots i{position:absolute;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#2f6bff;box-shadow:0 0 0 4px rgba(47,107,255,.15);opacity:0}
 .flow-src{position:absolute;left:40px;top:128px;display:flex;flex-direction:column;gap:36px}
-.flow-src>div{width:240px;height:64px;border:1px solid #e4e7ec;border-radius:32px;background:#fff;display:flex;align-items:center;gap:14px;padding:0 24px;font-size:20px;letter-spacing:-.01em}
-.flow-card{position:absolute;left:500px;top:360px;transform:translateY(-50%);width:480px;background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:22px 26px 24px;box-shadow:0 18px 40px -28px rgba(16,24,40,.25)}
-.flow-head{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid #eaecf0;font-size:19px;font-weight:500;letter-spacing:-.01em}
-.flow-head i{width:14px;height:14px;border-radius:50%;border:1.6px solid #101828}
+.flow-src>div{width:240px;height:64px;border:1px solid #e4e7ec;border-radius:32px;background:#fff;display:flex;align-items:center;gap:12px;padding:0 20px 0 12px;font-size:19px;letter-spacing:-.01em;opacity:0}
+.flow-src .fi{width:40px;height:40px;border-radius:20px;background:rgba(47,107,255,.12);display:flex;align-items:center;justify-content:center;flex:none}
+.flow-src .fi svg{width:20px;height:20px}
+.flow-card{position:absolute;left:500px;top:360px;transform:translateY(-50%);width:480px;background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:22px 26px 24px;box-shadow:0 18px 40px -28px rgba(16,24,40,.3);opacity:0}
+.flow-head{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid #eaecf0}
+.flow-logo{height:22px;width:auto;display:block;color:#101828}
+.flow-tag{margin-left:auto;font-size:13px;font-weight:500;padding:3px 10px;border-radius:12px;background:#eff4ff;color:#2f6bff}
 .flow-phase{font-size:16px;color:#475467;margin-top:18px}
-.flow-bar{height:4px;border-radius:2px;background:#eaecf0;margin-top:12px;overflow:hidden}
-.flow-bar i{display:block;height:100%;width:0;background:#1f4fd1}
-.flow-rows{display:flex;flex-direction:column;margin-top:14px}
-.flow-row{display:flex;align-items:center;gap:12px;height:44px;border-bottom:1px solid #f2f4f7;font-size:15px;opacity:0}
-.flow-row .ar{width:110px}
+.flow-bar{position:relative;height:6px;border-radius:3px;background:#eef1f6;margin-top:12px;overflow:hidden}
+.flow-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#2f6bff}
+.flow-bar b{position:absolute;top:0;bottom:0;width:80px;left:-80px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.7),rgba(255,255,255,0));opacity:0}
+.flow-rows{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.flow-row{display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border-radius:10px;font-size:15px;opacity:0}
+.flow-row .dot{width:8px;height:8px;border-radius:50%;background:#f04438;flex:none}
+.flow-row .ar{width:104px}
 .flow-row .tx{flex:1}
-.flow-row .ck{width:18px;height:18px;border-radius:50%;border:1.5px solid #d0d5dd;display:flex;align-items:center;justify-content:center}
-.flow-export{position:absolute;left:1140px;top:360px;transform:translateY(-50%);width:400px;border-radius:22px;padding:8px;border:1.5px solid rgba(31,79,209,.15)}
+.flow-row .ck{width:20px;height:20px;border-radius:50%;border:1.5px solid #d0d5dd;display:flex;align-items:center;justify-content:center;flex:none}
+.flow-chips span{position:absolute;left:980px;top:360px;height:26px;padding:0 10px;border-radius:13px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;opacity:0;transform:translate(-50%,-50%)}
+.flow-export{position:absolute;left:1140px;top:360px;transform:translateY(-50%);width:400px;border-radius:22px;padding:8px;border:1.5px solid rgba(47,107,255,.15)}
 .flow-export>div{background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:22px 24px 24px}
 .flow-export h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
 .flow-sub{font-size:15px;color:#475467;margin-top:6px}
 .flow-btns{display:flex;gap:10px;margin-top:18px}
-.flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;font-size:15px;color:#98a2b3}
+.flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;background:#fff;font-size:15px;color:#98a2b3}
+.flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
 
 /* Vier Schritte: Reiter links, große dunkle Bühne rechts (Muster wie Hero-Reiter und Produktkarten) */
 .steps{padding-top:112px;scroll-margin-top:96px}
@@ -380,13 +389,14 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @media (max-width:900px){
   .flow{aspect-ratio:auto;padding:20px}
   .flow-stage{position:static;width:auto;height:auto;transform:none!important;display:flex;flex-direction:column;gap:16px}
-  .flow-wires{display:none}
+  .flow-wires,.flow-glow,.flow-dots,.flow-chips,.flow-cursor{display:none}
   .flow-src{position:static;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .flow-src>div{width:auto;height:44px;gap:10px;padding:0 14px;font-size:14px}
-  .flow-src svg{width:18px;height:18px;flex:none}
-  .flow-card,.flow-export{position:static;transform:none;width:auto}
+  .flow-src>div{width:auto;height:48px;gap:8px;padding:0 12px 0 6px;font-size:14px;transform:none!important}
+  .flow-src .fi{width:34px;height:34px}
+  .flow-src .fi svg{width:17px;height:17px}
+  .flow-card,.flow-export{position:static;transform:none!important;width:auto}
   .flow-card{padding:18px}
-  .flow-row{font-size:13px;gap:8px}
+  .flow-row{font-size:13px;gap:8px;padding:0 8px;transform:none!important}
   .flow-row .ar{width:84px}
   .flow-btns{flex-wrap:wrap}
 }
@@ -512,41 +522,44 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
+        <div class="flow-glow" id="fGlow"></div>
         <svg class="flow-wires" width="1600" height="720" viewBox="0 0 1600 720" fill="none" aria-hidden="true">
           <g stroke="#e4e7ec" stroke-width="1.5">
-            <path d="M280 160 H360 Q400 160 400 200 V360 H500"/>
-            <path d="M280 260 H400"/>
-            <path d="M280 360 H500"/>
-            <path d="M280 460 H400"/>
-            <path d="M280 560 H360 Q400 560 400 520 V360"/>
+            <path id="fp0" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path id="fp1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path id="fp2" d="M280 360 H500"/>
+            <path id="fp3" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path id="fp4" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
             <path d="M980 360 H1140"/>
           </g>
-          <g id="flowLines" stroke="#1f4fd1" stroke-width="1.5" stroke-dasharray="1 1">
-            <path pathLength="1" stroke-dashoffset="1" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
-            <path pathLength="1" stroke-dashoffset="1" d="M280 260 H400"/>
-            <path pathLength="1" stroke-dashoffset="1" d="M280 360 H500"/>
-            <path pathLength="1" stroke-dashoffset="1" d="M280 460 H400"/>
-            <path pathLength="1" stroke-dashoffset="1" d="M280 560 H360 Q400 560 400 520 V360"/>
-            <path pathLength="1" stroke-dashoffset="1" d="M980 360 H1140"/>
+          <g id="flowLines" stroke-width="1.5" stroke-dasharray="1 1">
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
+            <path stroke="#12805c" pathLength="1" stroke-dashoffset="1" d="M980 360 H1140"/>
           </g>
         </svg>
+        <div class="flow-dots" id="fDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="flow-src">
-          <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4fd1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg>Kassenbelege</div>
-          <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4fd1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 10h18M7 15h3"/></svg>Kartenterminal</div>
-          <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4fd1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Gästekonto</div>
-          <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4fd1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM7 10V4h10v6M8 14h2M14 14h2M8 17h2M14 17h2"/></svg>Kassensystem</div>
-          <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1f4fd1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg>Bankkonto</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>Kassenbelege</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 10h18M7 15h3"/></svg></span>Kartenterminal</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span>Gästekonto</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM7 10V4h10v6M8 14h2M14 14h2M8 17h2M14 17h2"/></svg></span>Kassensystem</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span>Bankkonto</div>
         </div>
-        <div class="flow-card">
-          <div class="flow-head"><i></i>Closewise</div>
-          <div class="flow-phase" id="flowPhase">Warte auf Daten …</div>
-          <div class="flow-bar"><i id="flowBar"></i></div>
+        <div class="flow-card" id="fCard">
+          <div class="flow-head"><svg class="flow-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg><span class="flow-tag" id="fTag">Live</span></div>
+          <div class="flow-phase" id="flowPhase">Verbinde Datenquellen …</div>
+          <div class="flow-bar"><i id="flowBar"></i><b id="fShine"></b></div>
           <div class="flow-rows" id="flowRows">
-            <div class="flow-row"><span class="ar">Bar</span><span class="tx">Kartenzahlung fehlt</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#12805c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            <div class="flow-row"><span class="ar">Restaurant</span><span class="tx">Storno ohne Freigabe</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#12805c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            <div class="flow-row"><span class="ar">Zimmerservice</span><span class="tx">Nicht aufs Zimmer gebucht</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#12805c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Bar</span><span class="tx">Kartenzahlung fehlt</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Restaurant</span><span class="tx">Storno ohne Freigabe</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Zimmerservice</span><span class="tx">Nicht aufs Zimmer gebucht</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
           </div>
         </div>
+        <div class="flow-chips" aria-hidden="true"><span style="background:#2f6bff">DATEV</span><span style="background:#101828">CSV</span></div>
         <div class="flow-export" id="flowExport">
           <div>
             <h3>Export für Steuerberater</h3>
@@ -554,6 +567,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
             <div class="flow-btns"><div class="flow-btn" id="flowB1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>DATEV-Export</div><div class="flow-btn" id="flowB2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CSV</div></div>
           </div>
         </div>
+        <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
     <div class="steps" id="ablauf-schritte">
@@ -858,49 +872,120 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
     }), {threshold:.35}).observe(hw);
   }
 
-  // Ablauf-Animation: Zeitachse 11 s in Schleife, Tempo 1,5 – wie im Design „Closewise Ablauf“
+  // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „Closewise Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
-  const lines = [...document.querySelectorAll('#flowLines path')], linesG = document.getElementById('flowLines');
-  const fRows = [...flow.querySelectorAll('.flow-row')], fPhase = document.getElementById('flowPhase'), fBar = document.getElementById('flowBar');
-  const fExp = document.getElementById('flowExport'), fSub = document.getElementById('flowSub');
-  const fBtn = [document.getElementById('flowB1'), document.getElementById('flowB2')];
+  const $ = id => document.getElementById(id);
+  const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
+  const gPaths = [0,1,2,3,4].map(i => $('fp' + i)), pLen = gPaths.map(p => p.getTotalLength());
+  const dotsEl = [...$('fDots').children], pills = [...flow.querySelectorAll('.flow-src > div')];
+  const fRows = [...flow.querySelectorAll('.flow-row')], chipsEl = [...flow.querySelectorAll('.flow-chips span')];
+  const fCard = $('fCard'), fTag = $('fTag'), fPhase = $('flowPhase'), fBar = $('flowBar'), fShine = $('fShine');
+  const fExp = $('flowExport'), fSub = $('flowSub'), fGlow = $('fGlow'), fCur = $('fCur');
+  const fBtn = [$('flowB1'), $('flowB2')];
   const narrow = matchMedia('(max-width:900px)');
-  const fit = () => { stage.style.transform = narrow.matches ? '' : `scale(${flow.clientWidth / 1600})`; };
+  let flowScale = 1;
+  const fit = () => { flowScale = flow.clientWidth / 1600; stage.style.transform = narrow.matches ? '' : `scale(${flowScale})`; };
   new ResizeObserver(fit).observe(flow); fit();
 
   const ICON_DL = 'M12 4v11M7 10l5 5 5-5M5 20h14', ICON_OK = 'M5 12.5l4.5 4.5L19 7';
   const cl = x => Math.max(0, Math.min(1, x));
   const ease = x => 1 - Math.pow(1 - x, 3);
-  const ROWS = [[4.8, .3], [5.5, .6], [6.2, .9]];
+  const back = x => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+  const ROWS = [[4.9, .3], [5.5, .6], [6.1, .9]];
+  const center = el => { const a = el.getBoundingClientRect(), b = stage.getBoundingClientRect(); return { x: (a.left - b.left + a.width / 2) / flowScale, y: (a.top - b.top + a.height / 2) / flowScale }; };
+  const BLUE = '#2f6bff';
+
   const drawFlow = t => {
     const seg = (a, b) => cl((t - a) / (b - a));
-    const fade = 1 - seg(10.3, 10.9);
+    const bump = (a, d) => Math.sin(Math.PI * seg(a, a + d));
+    const fade = 1 - seg(10.3, 10.9), live = fade > .5, wide = !narrow.matches;
     linesG.style.opacity = fade;
-    for (let i = 0; i < 5; i++) { const a = .3 + i * .1; lines[i].style.strokeDashoffset = 1 - ease(seg(a, a + 1)); }
-    lines[5].style.strokeDashoffset = 1 - ease(seg(6.6, 7.3));
-    const prog = ease(seg(1.5, 4));
+    const prog = ease(seg(1.6, 4.2)), streaming = t > 1.2 && t < 4.4;
+
+    // Quellen, Leitungen, Datenpunkte
+    let di = 0;
+    pills.forEach((el, i) => {
+      const a = i * .1, inP = ease(seg(a, a + .5));
+      lines[i].style.strokeDashoffset = 1 - ease(seg(.4 + a, 1.4 + a));
+      let hit = 0;
+      for (let k = 0; k < 2; k++) {
+        const d = dotsEl[di++];
+        if (!wide || !streaming) { d.style.opacity = 0; continue; }
+        const u = ((t - 1.2) * .75 + k / 2 + i * .13) % 1, pt = gPaths[i].getPointAtLength(u * pLen[i]);
+        d.style.transform = `translate(${pt.x}px,${pt.y}px)`;
+        d.style.opacity = cl(u / .08) * cl((1 - u) / .08) * cl((4.4 - t) / .3);
+        if (u < .12) hit = Math.max(hit, 1 - u / .12);
+      }
+      el.style.opacity = inP * fade;
+      el.style.transform = `translateX(${(1 - inP) * -24}px)`;
+      el.style.borderColor = hit > 0 ? rgba(BLUE, .25 + .4 * hit) : '#e4e7ec';
+      el.firstElementChild.style.transform = `scale(${1 + .1 * hit})`;
+    });
+    lines[5].style.strokeDashoffset = 1 - ease(seg(6.5, 7.1));
+    fGlow.style.opacity = seg(1, 1.6) * (1 - seg(6.3, 7)) * fade;
+    fGlow.style.transform = `scale(${1 + .04 * Math.sin(t * 3)})`;
+
+    // Closewise-Karte
+    const cIn = back(seg(.5, 1.1));
+    fCard.style.opacity = cl(seg(.5, .8)) * fade;
+    fCard.style.transform = wide ? `translateY(-50%) scale(${.94 + .06 * cIn})` : '';
     let open = 0;
     ROWS.forEach(([at, th], i) => {
-      const done = t >= at && fade > .5, r = fRows[i];
-      if (!done) open++;
-      r.style.opacity = cl((prog - th + .1) / .1) * fade;
+      const r = fRows[i], done = t >= at && live; if (!done) open++;
+      const inP = ease(cl((prog - th + .12) / .12)), flash = done ? 1 - seg(at, at + .8) : 0;
+      r.style.opacity = inP * fade;
+      r.style.transform = `translateX(${(1 - inP) * 16}px)`;
+      r.style.background = done ? rgba('#12805c', .05 + .12 * flash) : (inP > 0 ? '#fef3f2' : 'transparent');
       r.querySelector('.tx').style.color = done ? '#98a2b3' : '#d92d20';
-      r.querySelector('.ck').style.borderColor = done ? '#12805c' : '#d0d5dd';
-      r.querySelector('.ck svg').style.opacity = done ? 1 : 0;
+      r.querySelector('.dot').style.background = done ? '#12805c' : '#f04438';
+      const ck = r.querySelector('.ck');
+      ck.style.borderColor = done ? '#12805c' : '#d0d5dd';
+      ck.style.background = done ? '#12805c' : '#fff';
+      ck.style.transform = `scale(${done ? 1 + .35 * bump(at, .3) : 1})`;
+      ck.firstElementChild.style.opacity = done ? 1 : 0;
     });
-    fPhase.textContent = prog < .01 ? 'Warte auf Daten …' : prog < 1 ? `Abgleich läuft · ${Math.round(prog * 148)} von 148 Buchungen` : open ? `${open} Differenzen offen` : 'Tagesabschluss vollständig';
+    fPhase.textContent = prog < .01 ? 'Verbinde Datenquellen …' : prog < 1 ? `Abgleich läuft · ${Math.round(prog * 148)} von 148 Buchungen` : open ? `${open} ${open === 1 ? 'Differenz' : 'Differenzen'} offen` : 'Tagesabschluss vollständig';
+    const allDone = open === 0 && live;
+    fTag.textContent = allDone ? 'Abgeschlossen' : prog > 0 && prog < 1 ? 'Synchronisiert' : open && prog >= 1 ? 'Prüfung' : 'Live';
+    fTag.style.background = allDone ? '#ecfdf3' : prog >= 1 ? '#fffaeb' : '#eff4ff';
+    fTag.style.color = allDone ? '#067647' : prog >= 1 ? '#b54708' : BLUE;
     fBar.style.width = (prog * 100) + '%';
-    const ready = t >= 7.2 && fade > .5;
-    const done = [t >= 8 && fade > .5, t >= 8.8 && fade > .5];
-    const press = [t >= 7.8 && t < 8, t >= 8.6 && t < 8.8];
-    fBtn.forEach((b, i) => {
-      b.style.color = done[i] ? '#12805c' : ready ? '#101828' : '#98a2b3';
-      b.style.borderColor = done[i] ? '#b7dfcc' : '#e4e7ec';
-      b.style.transform = press[i] ? 'scale(.96)' : '';
-      b.querySelector('path').setAttribute('d', done[i] ? ICON_OK : ICON_DL);
+    fShine.style.left = (-80 + ((t * 260) % 540)) + 'px';
+    fShine.style.opacity = prog > 0 && prog < 1 ? 1 : 0;
+
+    // Chips DATEV / CSV über die grüne Leitung
+    [[6.6], [6.85]].forEach(([a], i) => {
+      const u = ease(seg(a, a + .7)), c = chipsEl[i];
+      c.style.left = (980 + u * 170) + 'px';
+      c.style.opacity = cl(seg(a, a + .1)) * (1 - seg(a + .6, a + .75)) * fade;
+      c.style.transform = `translate(-50%,-50%) scale(${.8 + .2 * bump(a, .7)})`;
     });
+
+    // Export-Karte, Knöpfe, Mauszeiger
+    const ready = t >= 7.3 && live, done = [t >= 8 && live, t >= 8.8 && live], clickAt = [8, 8.8];
+    fBtn.forEach((b, i) => {
+      const d = done[i];
+      b.querySelector('path').setAttribute('d', d ? ICON_OK : ICON_DL);
+      b.style.color = d ? '#067647' : ready ? '#101828' : '#98a2b3';
+      b.style.borderColor = d ? '#abefc6' : ready ? '#d0d5dd' : '#e4e7ec';
+      b.style.background = d ? '#ecfdf3' : '#fff';
+      b.style.transform = `scale(${1 - .06 * bump(clickAt[i] - .1, .2) + (d ? .05 * bump(clickAt[i] + .05, .3) : 0)})`;
+      b.querySelector('svg').style.transform = `translateY(${ready && !d ? 2 * Math.sin(t * 8) : 0}px)`;
+    });
+    const success = seg(8.8, 9.3) * fade;
+    fExp.style.transform = wide ? `translateY(-50%) scale(${1 + .02 * bump(7.1, .4)})` : '';
+    fExp.style.borderColor = success > 0 ? rgba('#12805c', .2 + .6 * success) : ready ? 'rgba(47,107,255,.45)' : 'rgba(47,107,255,.15)';
+    fExp.style.boxShadow = `0 0 0 ${10 * success}px ${rgba('#12805c', .08 * (1 - seg(9.3, 10.3)) + .04)}`;
     fSub.textContent = done[1] ? 'Dateien heruntergeladen – bereit für die Kanzlei.' : ready ? 'Abschluss fertig. Export herunterladen.' : 'Wartet auf den Abschluss.';
-    fExp.style.borderColor = `rgba(31,79,209,${(.15 + seg(8, 8.4) * fade * .75).toFixed(3)})`;
+    if (wide) {
+      const c1 = center(fBtn[0]), c2 = center(fBtn[1]), st = { x: 1500, y: 560 };
+      const m1 = ease(seg(7.3, 7.9)), m2 = ease(seg(8.15, 8.7));
+      let x = st.x + (c1.x - st.x) * m1, y = st.y + (c1.y - st.y) * m1;
+      if (t >= 8.15) { x = c1.x + (c2.x - c1.x) * m2; y = c1.y + (c2.y - c1.y) * m2; }
+      fCur.style.opacity = seg(7.2, 7.4) * (1 - seg(9.1, 9.4)) * fade;
+      fCur.style.transform = `translate(${x}px,${y}px) scale(${1 - .12 * (bump(7.9, .2) + bump(8.7, .2))})`;
+    }
   };
   if (reduce) drawFlow(9.5);  // Endzustand ohne Bewegung
   else {
