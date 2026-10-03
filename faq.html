@@ -344,6 +344,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 body{background:var(--bg)}
 .faq{padding:176px 0 120px;position:relative;z-index:5;background:var(--bg)}
 .faq-grid{display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:start}
+.faq-grid>*{min-width:0}
 .faq-head{position:sticky;top:120px}
 .faq h1{font-size:56px;line-height:62px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
 .qa{border-bottom:1px solid var(--line)}
@@ -395,6 +396,8 @@ body{background:var(--bg)}
   .ask-line button{width:42px;height:42px}
 }
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:720px){.nav .logo .cw-logo{height:17px}}
+@media (max-width:360px){.nav-in,.nav.solid .nav-in{width:calc(100% - 16px)}.nav .logo .cw-logo{height:14px}.nav-cta{gap:8px}.nav-cta .book{height:34px;padding:6px 12px;font-size:13px}}
 </style>
 </head>
 <body>
