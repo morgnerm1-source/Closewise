@@ -10,7 +10,7 @@
 <!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
@@ -72,7 +72,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 /* ---------- Hero ---------- */
 .hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
 .ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
-.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55)}
 /* Bilder aus bilder/: liegen über dem Platzhalter; fehlt eine Datei, bleibt der Platzhalter */
 .ph{overflow:hidden}
 .ph>img,.ph>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
@@ -151,7 +151,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .hw-ico{grid-row:1/3;width:40px;height:40px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);background:#fff;color:var(--muted);transition:all .5s var(--ease)}
 .hw-ico svg{width:18px;height:18px}
 .hw-tab.on .hw-ico{background:#1f4fd1;border-color:#1f4fd1;color:#fff}
-.hw-n{font:500 12px/1 "Fragment Mono",monospace;letter-spacing:.08em;color:var(--muted-2)}
+.hw-n{font:500 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted-2)}
 .hw-name{grid-column:2;font-size:22px;line-height:28px;letter-spacing:-.01em;margin-top:4px}
 .hw-more{grid-column:2;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
 .hw-more>span{overflow:hidden;font-size:15px;line-height:22px;color:var(--muted)}
@@ -164,7 +164,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .hw-panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
 .hw-panel.on{opacity:1;transform:none;pointer-events:auto}
 .hw-cap{position:absolute;left:28px;bottom:24px;display:flex;gap:10px;align-items:center;font-size:14px;color:rgba(255,255,255,.75)}
-.hw-cap span{font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff}
+.hw-cap span{font:500 12px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff}
 .hw-card{width:min(470px,100%);background:#fff;border-radius:16px;padding:20px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);font-family:Geist,Inter,sans-serif;font-size:15px;color:#101828}
 .hw svg.ck{width:11px;height:11px}
 .hw-row{display:flex;align-items:center;gap:12px;height:42px;border-bottom:1px solid #f2f4f7}

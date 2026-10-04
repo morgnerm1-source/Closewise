@@ -10,7 +10,7 @@
 <!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
@@ -72,7 +72,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 /* ---------- Hero ---------- */
 .hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
 .ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
-.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55)}
 /* Bilder aus bilder/: liegen über dem Platzhalter; fehlt eine Datei, bleibt der Platzhalter */
 .ph{overflow:hidden}
 .ph>img,.ph>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
@@ -133,11 +133,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* Vier Schritte unter der Ablauf-Animation */
 .steps{padding-top:112px;scroll-margin-top:96px}
-.steps-row{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
-.steps-row li{border-top:1px solid var(--line);padding-top:20px}
-.steps-row .n{font:500 12px/1 "Fragment Mono",monospace;letter-spacing:.08em;color:var(--muted-2)}
-.steps-row h3{font-size:18px;font-weight:500;letter-spacing:-.01em;margin-top:16px}
-.steps-row p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px}
 /* Produkte */
 .engine{padding:160px 0 120px;text-align:center}
 .engine .eyebrow{justify-content:center}
@@ -276,8 +271,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ---------- Tablet / Handy ---------- */
 @media (max-width:1180px){
-  .steps-row{grid-template-columns:1fr 1fr}
-  :root{--gut:32px}
+    :root{--gut:32px}
   .nav-links{display:none}
   .burger{display:block}
   .nav-cta .signin{display:none}
@@ -307,8 +301,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 }
 @media (max-width:720px){
   .steps{padding-top:72px}
-  .steps-row{grid-template-columns:1fr}
-  :root{--gut:16px}
+    :root{--gut:16px}
   .nav-in{padding:0 12px 0 16px;height:60px}
   .nav-cta .book{height:38px;font-size:14px}
   .hero{min-height:640px}
