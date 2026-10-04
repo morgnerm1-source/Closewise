@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Closewise – Nächtlicher Kassenabschluss für Hotels</title>
 <link rel="alternate" hreflang="de" href="pf.html">
 <link rel="alternate" hreflang="en" href="pf-en.html">
@@ -459,6 +459,85 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font-weight:600}
 .lang-mob{font-size:16px}
 @media (max-width:720px){.nav-cta .lang{display:none}}
+
+/* ===== Handy & Touch (am Ende, damit diese Regeln gewinnen) ===== */
+html{-webkit-text-size-adjust:100%}
+a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn:active,.chip:active,.tab:active,.hw-tab:active,.scard:active,.pcard:active{transform:scale(.97)}
+.nav .logo{min-height:44px}
+.burger{width:44px;height:44px}
+.burger span{left:13px;right:13px}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:26px}
+.ph-hero{background:#1a1814 url(bilder/hero.jpg) center/cover}
+.hero{height:100vh;height:100svh}
+@media (max-width:1180px){
+  .nav{padding-top:max(8px,env(safe-area-inset-top))}
+  .nav-in{position:relative;z-index:2}
+  .nav.open .nav-in{width:min(1280px,100% - 40px);color:var(--ink);background:#fff;border-color:var(--line)}
+  .nav.open .book{background:var(--dark);color:#fff}
+  .mob{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:calc(max(8px,env(safe-area-inset-top)) + 96px) 24px calc(env(safe-area-inset-bottom) + 24px);border-radius:0;background:var(--bg);box-shadow:none;font-size:22px;overflow-y:auto;overscroll-behavior:contain}
+  .mob-links{display:flex;flex-direction:column}
+  .mob-links a{display:flex;align-items:center;justify-content:space-between;min-height:58px;border-bottom:1px solid var(--line);letter-spacing:-.01em;color:var(--ink)}
+  .mob-links a::after{content:"›";font-size:22px;color:var(--muted-2)}
+  .mob-foot{display:flex;flex-direction:column;gap:10px}
+  .mob-foot .btn{justify-content:center;height:52px;font-size:16px}
+  .mob-foot .btn-dark{background:var(--dark);color:#fff}
+  .mob-foot .lang{justify-content:center;margin-top:6px}
+  .mob-foot .lang a{min-width:44px;min-height:44px;display:grid;place-items:center}
+}
+@media (max-width:720px){
+  .hero{min-height:560px}
+  .hero-in{padding:112px 0 calc(20px + env(safe-area-inset-bottom))}
+  .pause{width:44px;height:44px}
+  .nav-cta .book{height:44px}
+  .dots{bottom:10px;gap:0}
+  .dots button{width:44px;height:44px;background:none;display:grid;place-items:center}
+  .dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .4s var(--ease)}
+  .dots button.on::before{background:#fff;width:20px}
+  .qtrack{touch-action:pan-y}
+  .solutions{padding-bottom:80px}
+  .trust{padding-bottom:80px}
+  .outcomes{padding-bottom:88px}
+  .cta-wrap{padding-bottom:56px}
+  .footer{padding-top:56px}
+  .fcols{gap:8px 24px}
+  .fcol h4{margin-bottom:4px}
+  .fcol a{display:flex;align-items:center;min-height:44px;margin:0}
+  .fbar nav{gap:4px}
+  .fbar nav a{display:flex;align-items:center;min-height:44px;padding:0 8px}
+  .fbar nav a:first-child{padding-left:0}
+  .chip{min-height:44px;padding:10px 16px}
+  .ask-line{height:56px}
+  .ask-line input{font-size:16px}
+  .hw-tab{min-height:64px}
+}
+@media (max-width:360px){
+  .nav-cta .book{height:42px}
+}
+
+/* Touch-Geräte jeder Breite (auch Handy quer, Tablets): Tippflächen ≥ 44 px */
+@media (max-width:720px),(pointer:coarse){
+  .btn{min-height:44px;height:auto}
+  .nav-cta .book{height:44px}
+  .lang a{min-width:44px;min-height:44px;display:inline-grid;place-items:center;padding:0 6px}
+  .arrows button,.qnav{width:44px;height:44px}
+  .pause{width:44px;height:44px}
+  .footer .logo{min-height:44px}
+  .dots{gap:0}
+  .dots button{width:44px;height:44px;background:none;display:grid;place-items:center}
+  .dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .4s var(--ease)}
+  .dots button.on::before{background:#fff;width:20px}
+  .qtrack{touch-action:pan-y}
+  .fcol a{display:flex;align-items:center;min-height:44px;margin:0}
+  .fcol h4{margin-bottom:4px}
+  .fbar nav a{display:flex;align-items:center;min-height:44px;padding:0 8px}
+  .fbar nav a:first-child{padding-left:0}
+  .chip{min-height:44px;padding:10px 16px}
+  .ask-line{height:56px}
+  .ask-line input{align-self:stretch;font-size:16px}
+  .ask-line button{width:44px;height:44px}
+}
+@media (max-width:360px){.nav-cta .book{height:44px;padding:0 12px}}
 </style>
 </head>
 <body>
@@ -482,16 +561,16 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
       <button class="burger" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
-  <div class="mob" id="mob">
-    <a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a><a href="faq.html">FAQ</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start">Live ansehen</a>
-    <span class="lang lang-mob" aria-label="Sprache"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span>
+  <div class="mob" id="mob" aria-label="Menü">
+    <nav class="mob-links"><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a><a href="faq.html">FAQ</a></nav>
+    <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Termin buchen</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost">Live ansehen</a><span class="lang" aria-label="Sprache"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span></div>
   </div>
 </header>
 
 <div class="stage">
 <!-- Hero -->
 <section class="hero" id="top">
-  <div class="ph ph-hero" aria-hidden="true"><video id="heroVideo" autoplay muted loop playsinline poster="bilder/hero.jpg"><source src="bilder/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video></div>
+  <div class="ph ph-hero" aria-hidden="true"><video id="heroVideo" muted loop playsinline preload="none" poster="bilder/hero.jpg"><source src="bilder/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video></div>
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">Die zusätzliche Stunde: endgültig vorbei.</h1>
@@ -799,7 +878,11 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
     const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o);
     o ? lenis?.stop() : lenis?.start();
   });
-  document.querySelectorAll('#mob a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); lenis?.start(); }));
+  const mob = document.getElementById('mob');
+  const closeMenu = () => { if (!nav.classList.contains('open')) return; nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); lenis?.start(); };
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  mob.addEventListener('click', e => { if (e.target === mob) closeMenu(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
   // Einblenden beim Scrollen
   const io = new IntersectionObserver(es => es.forEach(e => {
@@ -814,8 +897,14 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
   const cycle = () => { clearTimeout(timer); if (paused) return; timer = setTimeout(() => { setTab((ti + 1) % tabs.length); cycle(); }, 6000); };
   setTab(1); if (!reduce) cycle();
   tabs.forEach((t,i) => t.addEventListener('mouseenter', () => { setTab(i); cycle(); }));
-  const vid = document.getElementById('heroVideo'), pb = document.getElementById('pause');
-  if (reduce) { vid?.pause(); pb.classList.add('paused'); }
+  let vid = document.getElementById('heroVideo');
+  const pb = document.getElementById('pause');
+  // Handy mit Datensparmodus oder langsamer Verbindung: nur das Standbild, kein 5-MB-Video
+  const conn = navigator.connection;
+  const slow = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+  if (vid && matchMedia('(max-width:720px)').matches && slow) { vid.remove(); vid = null; }
+  if (reduce) { pb.classList.add('paused'); }
+  else if (vid) { vid.preload = 'auto'; vid.play().catch(() => {}); }
   pb.addEventListener('click', () => {
     paused = !paused; pb.classList.toggle('paused', paused);
     pb.setAttribute('aria-label', paused ? 'Video abspielen' : 'Video anhalten');
@@ -868,7 +957,13 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
       started = Date.now(); timer = setTimeout(() => select((cur + 1) % tabs.length), left);
     };
     tabs.forEach((t, k) => {
-      t.addEventListener('click', () => select(k));
+      t.addEventListener('click', () => {
+        select(k);
+        // Am Handy steht die Bühne über der Liste – nach dem Tipp ins Bild holen
+        const st = hw.querySelector('.hw-stage'), r = st.getBoundingClientRect();
+        if (matchMedia('(max-width:1180px)').matches && (r.top < 70 || r.bottom > innerHeight))
+          lenis ? lenis.scrollTo(st, {offset:-90}) : st.scrollIntoView({behavior:'smooth', block:'start'});
+      });
       t.addEventListener('keydown', e => {
         const d = {ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1}[e.key];
         if (d) { e.preventDefault(); select((cur + d + tabs.length) % tabs.length, true); }
@@ -1032,6 +1127,16 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
   document.querySelector('.qnav.prev').onclick = () => go(qi - 1);
   document.querySelector('.qnav.next').onclick = () => go(qi + 1);
   go(0);
+  // Wischen auf Touch-Geräten (vertikales Scrollen bleibt frei: touch-action pan-y)
+  const qtrack = document.getElementById('qtrack');
+  let qx = null, qy = 0;
+  qtrack.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') return; qx = e.clientX; qy = e.clientY; clearTimeout(qt); });
+  qtrack.addEventListener('pointerup', e => {
+    if (qx === null) return;
+    const dx = e.clientX - qx, dy = e.clientY - qy; qx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(qi + (dx < 0 ? 1 : -1)); else go(qi);
+  });
+  qtrack.addEventListener('pointercancel', () => { qx = null; go(qi); });
 
   // Lösungen: Pfeile und Ziehen mit der Maus
   const sc = document.getElementById('scroller'), sp = document.getElementById('sPrev'), sn = document.getElementById('sNext');
