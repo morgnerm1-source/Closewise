@@ -30,7 +30,8 @@ cp impressum.html datenschutz.html "$ZIEL/"
 cp -r fonts "$ZIEL/"
 
 # Neue Seite (primefold-look): Landingpage, FAQ mit KI-Fragezeile und Serverfunktion
-cp pf.html faq.html dot-loader.js "$ZIEL/"
+node build-en.mjs                  # erzeugt pf-en.html und faq-en.html, bricht bei deutschen Resten ab
+cp pf.html faq.html pf-en.html faq-en.html dot-loader.js "$ZIEL/"
 cp -r logos bilder api "$ZIEL/"
 cp package.json package-lock.json "$ZIEL/"
 

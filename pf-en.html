@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Closewise – Nightly close for hotels</title>
+<link rel="alternate" hreflang="de" href="pf.html">
+<link rel="alternate" hreflang="en" href="pf-en.html">
+<meta name="description" content="Nightly close reconciliation for hotels and the outlets inside them. It tells you only what did not match.">
+<!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
+  --line:rgba(26,24,20,.1); --card:#f0efee; --dark:#1a1814; --dark-2:#282622; --dark-3:#35332e;
+  --peach:#f99d72; --peach-deep:#ca7b57; --teal:#27a896; --teal-glow:#16ffde;
+  --ease:cubic-bezier(.22,1,.36,1); --wrap:1280px; --gut:80px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+/* Weiches Scrollen (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--dark);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{width:min(var(--wrap),100% - 2*var(--gut));margin-inline:auto}
+
+/* Knöpfe */
+.btn{display:inline-flex;align-items:center;gap:8px;height:43px;padding:10px 14px;border-radius:999px;font-size:16px;font-weight:500;letter-spacing:-.01em;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn-white{background:#fff;color:#211e1c}
+.btn-glass{background:rgba(255,255,255,.24);color:#fff;backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.34)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-ghost{border:1px solid rgba(26,24,20,.2)}
+
+/* Eyebrow */
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted-2);letter-spacing:-.006em;margin-bottom:16px}
+.eyebrow dot-loader{flex:none}  /* Dot-Loader „snake“ (2 × 3 Punkte) aus dot-loader.js */
+.h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2)}
+.lead{font-size:14px;line-height:20px;color:var(--muted);margin-top:16px}
+
+/* ---------- Navigation ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:center;padding-top:8px;pointer-events:none}
+.nav-in{pointer-events:auto;width:min(1320px,100% - 40px);height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-radius:16px;color:#fff;border:1px solid transparent;transition:all .6s var(--ease)}
+.nav.solid .nav-in{width:min(1280px,100% - 40px);color:var(--ink);background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-color:var(--line)}
+.logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.logo .cw-logo{height:28px;width:auto;display:block}
+.footer .logo .cw-logo{height:32px}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:16px;font-weight:500}
+.nav-links a{display:flex;align-items:center;gap:6px;opacity:.95}
+.nav-links a:hover{opacity:.7}
+.nav-links .chev{width:10px;height:10px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translateY(-3px)}
+.nav-cta{display:flex;gap:14px}
+.nav .signin{background:rgba(255,255,255,.18)}
+.nav.solid .signin{background:transparent;border:1px solid rgba(26,24,20,.2);color:var(--ink)}
+.nav .book{background:#fff;color:var(--ink)}
+.nav.solid .book{background:var(--dark);color:#fff}
+.burger{display:none;width:40px;height:40px;border-radius:999px;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:25px}
+.nav.open .burger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.nav.open .burger span:nth-child(2){opacity:0}
+.nav.open .burger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mob{display:none}
+
+/* ---------- Hero ---------- */
+.hero{position:sticky;top:0;height:100vh;min-height:720px;overflow:hidden;color:#fff;background:#111}
+.ph{background:linear-gradient(135deg,#8f8b85,#5f5c57);position:relative}
+.ph::before{content:"Bild";position:absolute;right:16px;top:14px;font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+/* Bilder aus bilder/: liegen über dem Platzhalter; fehlt eine Datei, bleibt der Platzhalter */
+.ph{overflow:hidden}
+.ph>img,.ph>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ph:has(>img,>video)::before{display:none}
+.ph-hero{position:absolute;inset:0;background:linear-gradient(135deg,#3a3733,#1a1814)}
+.ph-hero::before{content:"Video";top:auto;bottom:150px;right:80px}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15) 60%,rgba(0,0,0,.1)),linear-gradient(0deg,rgba(0,0,0,.45),transparent 40%)}
+.hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:156px 0 32px}
+.hero h1{font-size:64px;line-height:72px;font-weight:400;letter-spacing:-.01em;max-width:650px}
+.hero .sub{font-size:18px;line-height:24px;margin-top:24px;max-width:650px;opacity:.92}
+.hero .ctas{display:flex;gap:12px;margin-top:40px}
+.tabs{display:grid;grid-template-columns:repeat(4,215px);gap:16px}
+.tab{position:relative;height:102px;padding:20px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:space-between;font-size:16px;font-weight:500;overflow:hidden;transition:background .5s var(--ease),color .5s var(--ease)}
+.tab .ico{width:20px;height:20px;border-radius:4px;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff}
+.tab.on{background:#fff;color:var(--ink)}
+.tab .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ink)}
+.tab.on .bar{animation:fill var(--dur,6s) linear forwards}
+@keyframes fill{to{width:100%}}
+.pause{position:absolute;right:0;bottom:0;width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);display:grid;place-items:center}
+.pause i{width:10px;height:12px;border:solid #fff;border-width:0 3px}
+.pause.paused i{border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff;width:0;height:0}
+
+/* ---------- Inhalt, schiebt sich über das Hero ---------- */
+.sheet{position:relative;z-index:5;background:var(--bg);border-radius:24px 24px 0 0;margin-top:-4px}
+.logos-wrap{padding-top:40px}
+.logos-wrap .eyebrow{margin-bottom:4px}
+.logos{height:100px;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos-track{display:flex;width:max-content;height:100%;align-items:center;animation:marquee var(--dur,30s) linear infinite}
+.logos-track>*{flex:none;display:flex;align-items:center;height:48px;padding:0 88px;border-left:1px solid var(--line)}
+.logos-track img{height:var(--h,30px);width:auto}
+.logos-track .logo-txt{font-family:Inter,sans-serif;font-size:22px;letter-spacing:-.02em;font-weight:600;color:#1a1814;white-space:nowrap}
+@keyframes marquee{to{transform:translateX(calc(var(--shift,50%) * -1))}}
+
+.how{padding:120px 0 0}
+/* Ablauf-Animation v2 (Design „Closewise Ablauf“), Bühne 1600 × 720, per Skript skaliert */
+.flow{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden;aspect-ratio:1600/720;font-family:Geist,Inter,system-ui,sans-serif;color:#101828}
+.flow-stage{position:absolute;left:0;top:0;width:1600px;height:720px;transform-origin:0 0}
+.flow-glow{position:absolute;left:490px;top:120px;width:500px;height:480px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,107,255,.14),rgba(122,90,248,.06) 60%,rgba(255,255,255,0));opacity:0}
+.flow-wires{position:absolute;left:0;top:0}
+.flow-dots i{position:absolute;left:0;top:0;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#2f6bff;box-shadow:0 0 0 4px rgba(47,107,255,.15);opacity:0}
+.flow-src{position:absolute;left:40px;top:128px;display:flex;flex-direction:column;gap:36px}
+.flow-src>div{width:240px;height:64px;border:1px solid #e4e7ec;border-radius:32px;background:#fff;display:flex;align-items:center;gap:12px;padding:0 20px 0 12px;font-size:19px;letter-spacing:-.01em;opacity:0}
+.flow-src .fi{width:40px;height:40px;border-radius:20px;background:rgba(47,107,255,.12);display:flex;align-items:center;justify-content:center;flex:none}
+.flow-src .fi svg{width:20px;height:20px}
+.flow-card{position:absolute;left:500px;top:360px;transform:translateY(-50%);width:480px;background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:22px 26px 24px;box-shadow:0 18px 40px -28px rgba(16,24,40,.3);opacity:0}
+.flow-head{display:flex;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid #eaecf0}
+.flow-logo{height:22px;width:auto;display:block;color:#101828}
+.flow-tag{margin-left:auto;font-size:13px;font-weight:500;padding:3px 10px;border-radius:12px;background:#eff4ff;color:#2f6bff}
+.flow-phase{font-size:16px;color:#475467;margin-top:18px}
+.flow-bar{position:relative;height:6px;border-radius:3px;background:#eef1f6;margin-top:12px;overflow:hidden}
+.flow-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#2f6bff}
+.flow-bar b{position:absolute;top:0;bottom:0;width:80px;left:-80px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.7),rgba(255,255,255,0));opacity:0}
+.flow-rows{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.flow-row{display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border-radius:10px;font-size:15px;opacity:0}
+.flow-row .dot{width:8px;height:8px;border-radius:50%;background:#f04438;flex:none}
+.flow-row .ar{width:104px}
+.flow-row .tx{flex:1}
+.flow-row .ck{width:20px;height:20px;border-radius:50%;border:1.5px solid #d0d5dd;display:flex;align-items:center;justify-content:center;flex:none}
+.flow-chips span{position:absolute;left:980px;top:360px;height:26px;padding:0 10px;border-radius:13px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em;display:flex;align-items:center;opacity:0;transform:translate(-50%,-50%)}
+.flow-export{position:absolute;left:1140px;top:360px;transform:translateY(-50%);width:400px;border-radius:22px;padding:8px;border:1.5px solid rgba(47,107,255,.15)}
+.flow-export>div{background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:22px 24px 24px}
+.flow-export h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.flow-sub{font-size:15px;color:#475467;margin-top:6px}
+.flow-btns{display:flex;gap:10px;margin-top:18px}
+.flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;background:#fff;font-size:15px;color:#98a2b3}
+.flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
+
+/* Vier Schritte: Reiter links, große dunkle Bühne rechts (Muster wie Hero-Reiter und Produktkarten) */
+.steps{padding-top:112px;scroll-margin-top:96px}
+.hw{display:grid;grid-template-columns:400px 1fr;gap:56px;margin-top:48px;align-items:stretch}
+.hw-tabs{display:flex;flex-direction:column;justify-content:center}
+.hw-tab{position:relative;display:grid;grid-template-columns:40px 1fr;column-gap:14px;align-items:center;text-align:left;padding:22px 0;border-top:1px solid var(--line);color:var(--ink-2);opacity:.45;transition:opacity .5s var(--ease)}
+.hw-tab:last-child{border-bottom:1px solid var(--line)}
+.hw-tab:hover,.hw-tab.on{opacity:1}
+.hw-tab:focus-visible{outline:2px solid #1f4fd1;outline-offset:4px;border-radius:8px}
+.hw-ico{grid-row:1/3;width:40px;height:40px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);background:#fff;color:var(--muted);transition:all .5s var(--ease)}
+.hw-ico svg{width:18px;height:18px}
+.hw-tab.on .hw-ico{background:#1f4fd1;border-color:#1f4fd1;color:#fff}
+.hw-n{font:500 12px/1 "Fragment Mono",monospace;letter-spacing:.08em;color:var(--muted-2)}
+.hw-name{grid-column:2;font-size:22px;line-height:28px;letter-spacing:-.01em;margin-top:4px}
+.hw-more{grid-column:2;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.hw-more>span{overflow:hidden;font-size:15px;line-height:22px;color:var(--muted)}
+.hw-tab.on .hw-more{grid-template-rows:1fr}
+.hw-tab.on .hw-more>span{padding-top:8px}
+.hw-bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--ink)}
+.hw-tab.on .hw-bar{animation:fill var(--hw-dur,5s) linear forwards}
+.hw.paused .hw-bar{animation-play-state:paused}
+.hw-stage{position:relative;min-height:520px;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 85% 0%,#35332e,var(--dark) 60%)}
+.hw-panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.hw-panel.on{opacity:1;transform:none;pointer-events:auto}
+.hw-cap{position:absolute;left:28px;bottom:24px;display:flex;gap:10px;align-items:center;font-size:14px;color:rgba(255,255,255,.75)}
+.hw-cap span{font:500 11px/1 "Fragment Mono",monospace;letter-spacing:.08em;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff}
+.hw-card{width:min(470px,100%);background:#fff;border-radius:16px;padding:20px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);font-family:Geist,Inter,sans-serif;font-size:15px;color:#101828}
+.hw svg.ck{width:11px;height:11px}
+.hw-row{display:flex;align-items:center;gap:12px;height:42px;border-bottom:1px solid #f2f4f7}
+.hw-row>span:first-child{flex:1}
+.hw-amt{color:#475467;font-variant-numeric:tabular-nums;min-width:82px;text-align:right}
+.hw-row i{width:20px;height:20px;border-radius:50%;border:1.5px solid #d0d5dd;display:grid;place-items:center;color:#12805c;font-style:normal;flex:none}
+.hw-row i svg{opacity:0}
+.hw-th{height:32px;font-size:12px;color:#667085;border-bottom:1px solid #eaecf0}
+.hw-th em{font-style:normal;width:20px;display:flex;justify-content:center;white-space:nowrap;font-size:11px}
+.hw-th em:last-child{margin-left:18px}
+.hw-s2 .hw-row i+i{margin-left:18px}
+/* Zustand „gespielt“: .on spielt mit Verzögerungen ab, .keep hält den Endzustand beim Ausblenden */
+.hw-panel.on *{transition-delay:calc(var(--k,0)*.35s + .3s)}
+/* 1 Anbinden */
+.hw-s1{display:flex;align-items:center;justify-content:center;gap:18px;padding:28px}
+.hw-files{display:flex;flex-direction:column;gap:12px}
+.hw-chip{display:flex;align-items:center;gap:8px;height:40px;padding:0 10px 0 14px;border-radius:999px;border:1px solid #e4e7ec;font-size:14px;white-space:nowrap;transition:transform .7s var(--ease),border-color .4s}
+.hw-chip>svg{width:16px;height:16px;color:#1f4fd1}
+.hw-chip i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#e7f4ee;color:#12805c;opacity:0;transition:opacity .3s}
+.hw-arrow{color:#98a2b3}.hw-arrow svg{width:22px;height:22px}
+.hw-cw{display:flex;flex-direction:column;align-items:center;gap:6px;width:120px;padding:18px 8px;border-radius:14px;border:1px solid #e4e7ec;background:#fcfcfd}
+.hw-mark{width:38px;height:32px}
+.hw-cw b{font-size:15px;font-weight:500;opacity:0;transition:opacity .4s}
+.hw-cw small{font-size:12px;color:#667085;opacity:0;transition:opacity .4s}
+.hw-panel:is(.on,.keep) .hw-chip{transform:translateX(8px);border-color:#b7dfcc}
+.hw-panel:is(.on,.keep) .hw-chip i,.hw-panel:is(.on,.keep) .hw-cw :is(b,small){opacity:1}
+.hw-panel.on .hw-cw b,.hw-panel.on .hw-cw small{transition-delay:1.5s}
+/* 2 Abgleichen */
+.hw-s2 .hw-row i{transition:border-color .3s}
+.hw-s2 .hw-row i svg{transition:opacity .3s}
+.hw-panel:is(.on,.keep) .hw-s2 .hw-row i{border-color:#12805c}
+.hw-panel:is(.on,.keep) .hw-s2 .hw-row i svg{opacity:1}
+.hw-count{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:13px;color:#475467}
+.hw-count b{font-weight:500;color:#101828}
+.hw-prog{flex:1;height:4px;border-radius:2px;background:#eaecf0;overflow:hidden}
+.hw-prog i{display:block;height:100%;background:#1f4fd1;transform:scaleX(0);transform-origin:left;transition:transform 2s var(--ease)}
+.hw-panel:is(.on,.keep) .hw-prog i{transform:none}
+.hw-panel.on .hw-prog i{transition-delay:.3s}
+/* 3 Markieren */
+.hw-alert{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:8px 10px;border-radius:10px;background:#fef3f2;color:#b42318;font-size:13px;opacity:0;transition:opacity .4s}
+.hw-alert b{font-weight:600}
+.hw-dot{width:18px;height:18px;border-radius:50%;background:#d92d20;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.hw-s3 .ok i{border-color:#12805c}.hw-s3 .ok i svg{opacity:1}
+.hw-s3 .bad{border-radius:8px;margin:0 -8px;padding:0 8px;transition:background .4s,color .4s}
+.hw-s3 .bad .x{font-size:11px;font-weight:700;color:#fff;transition:all .4s}
+.hw-ai{margin-top:14px;padding:12px 14px;border-radius:12px;background:#101828;color:#fff;font-size:14px;line-height:20px;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .7s var(--ease)}
+.hw-ai b{display:block;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:4px}
+.hw-panel:is(.on,.keep) .hw-s3 .bad{background:#fef3f2;color:#b42318}
+.hw-panel:is(.on,.keep) .hw-s3 .bad .hw-amt{color:#d92d20}
+.hw-panel:is(.on,.keep) .hw-s3 .bad .x{background:#d92d20;border-color:#d92d20}
+.hw-panel:is(.on,.keep) .hw-s3 :is(.hw-alert,.hw-ai){opacity:1;transform:none}
+.hw-panel.on .hw-s3 .hw-ai{transition-delay:1s}
+.hw-panel.on .hw-s3 .hw-alert{transition-delay:.6s}
+/* 4 Abschließen */
+.hw-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.hw-sub{font-size:13px;color:#667085;margin-top:4px}
+.hw-btns{display:flex;gap:10px;margin-top:18px}
+.hw-btn{position:relative;display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;border:1px solid #e4e7ec;color:#101828;font-size:14px;white-space:nowrap;transition:all .4s}
+.hw-btn svg.dl{width:16px;height:16px;transition:opacity .3s}
+.hw-btn em{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:grid;opacity:0;transition:opacity .3s}
+.hw-panel.on .hw-btn,.hw-panel.on .hw-btn :is(svg,em){transition-delay:calc(var(--k)*.7s + .4s)}
+.hw-panel:is(.on,.keep) .hw-btn{color:#12805c;border-color:#b7dfcc;background:#f3faf6}
+.hw-panel:is(.on,.keep) .hw-btn svg.dl{opacity:0}
+.hw-panel:is(.on,.keep) .hw-btn em{opacity:1}
+.hw-done{display:flex;align-items:center;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid #eaecf0;font-size:14px;color:#475467;opacity:0;transition:opacity .5s}
+.hw-done svg{width:16px;height:16px;color:#1f4fd1}
+.hw-panel:is(.on,.keep) .hw-done{opacity:1}
+.hw-panel.on .hw-done{transition-delay:1.8s}
+/* Produkte */
+.engine{padding:160px 0 120px;text-align:center}
+.engine .eyebrow{justify-content:center}
+.engine .h2{max-width:600px;margin-inline:auto}
+.engine .lead{max-width:600px;margin-inline:auto}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;text-align:left}
+.pcard{border-radius:18px;background:rgba(0,0,0,.04);padding:2px;display:flex;flex-direction:column;transition:transform .6s var(--ease)}
+.pcard:hover{transform:translateY(-4px)}
+.pcard .hd{display:flex;gap:10px;align-items:center;padding:20px 24px;font-size:16px;font-weight:500}
+.pcard .tag{width:20px;height:20px;border-radius:4px;font-size:10px;font-weight:600;color:#fff;display:grid;place-items:center}
+.pcard .media{background:var(--dark);border-radius:16px 16px 0 0;height:300px;padding:32px;overflow:hidden;position:relative}
+.pcard .media .ph{width:100%;height:100%;border-radius:12px;transition:transform 1.2s var(--ease)}
+.pcard:hover .media .ph{transform:scale(1.04)}
+.pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px;flex:1}
+.pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
+.pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
+.icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
+.icons i{width:42px;height:42px;border-radius:999px;background:var(--dark-3);border:1px solid rgba(255,255,255,.1);display:block;animation:pulse 4s var(--ease) infinite;animation-delay:calc(var(--i)*.25s)}
+@keyframes pulse{0%,70%,100%{background:var(--dark-3)}20%{background:#4a473f}}
+
+/* Zitat-Karussell */
+.quotes{background:#fff;padding:120px 0;overflow:hidden}
+.qtrack{position:relative;height:650px}
+.qslide{position:absolute;top:0;left:50%;width:min(1280px,100% - 160px);height:650px;margin-left:calc(min(1280px,100% - 160px)/-2);border-radius:24px;overflow:hidden;color:#fff;transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.qslide .ph{position:absolute;inset:0}
+.qslide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,40,.75),rgba(0,0,0,.25) 55%,rgba(0,0,0,.45))}
+.qslide .c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:64px}
+.qslide .eyebrow{color:#fff}
+.qslide h2{font-size:48px;line-height:56px;font-weight:400;max-width:800px;letter-spacing:-.01em}
+.qslide .btn{margin-top:24px}
+.qslide .who b{display:block;font-size:18px;font-weight:500}
+.qslide .who{max-width:560px}
+.qslide .who span{font-size:18px;line-height:26px;opacity:.9}
+.qnav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:999px;background:#fff;color:#131313;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.qnav.prev{left:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav.next{right:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
+.qnav svg{width:16px;height:16px}
+.dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px}
+.dots button{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .5s var(--ease)}
+.dots button.on{background:#fff}
+
+/* Lösungen */
+.solutions{background:#fff;padding:0 0 120px}
+.sol-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.arrows{display:flex;gap:8px}
+.arrows button{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;transition:background .3s}
+.arrows button:hover{background:#f3f2f1}
+.arrows button:disabled{opacity:.35}
+.arrows svg{width:16px;height:16px}
+.scroller{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 calc((100vw - min(1280px,100vw - 160px))/2);scrollbar-width:none;cursor:grab}
+.scroller::-webkit-scrollbar{display:none}
+.scard{flex:0 0 466px;height:488px;border-radius:12px;position:relative;overflow:hidden;color:#fff;scroll-snap-align:start}
+.scard .ph{position:absolute;inset:0;transition:transform 1.2s var(--ease)}
+.scard:hover .ph{transform:scale(1.05)}
+.scard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.1) 60%)}
+.scard .c{position:absolute;left:32px;right:32px;bottom:32px;z-index:2}
+.scard h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.scard p{font-size:14px;line-height:20px;opacity:.8;margin-top:12px;max-width:380px}
+.scard .more{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;font-weight:500;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);transition:background .3s}
+.scard .more:hover{background:rgba(255,255,255,.28)}
+
+/* Vertrauen */
+.trust{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 120px}
+.trust-grid{display:grid;grid-template-columns:1fr 612px;gap:56px}
+.trust .lead{max-width:420px}
+.tlist{position:relative;margin-top:260px;padding-left:32px;border-left:1px solid var(--line)}
+.tlist .prog{position:absolute;left:-1px;top:0;width:2px;height:0;background:var(--teal)}
+.titem{padding-bottom:28px;opacity:.4;transition:opacity .6s var(--ease)}
+.titem.on{opacity:1}
+.titem h3{font-size:16px;font-weight:500}
+.titem p{font-size:14px;line-height:20px;color:var(--muted);margin-top:8px;max-width:470px}
+.tpanel{position:sticky;top:120px;height:596px;border:1px solid var(--line);border-radius:18px;background:var(--bg);display:grid;place-items:center;overflow:hidden}
+.layers{position:relative;width:300px;height:300px}
+.layers div{position:absolute;inset:0;border-radius:24px;border:1px solid var(--line);background:#fff;box-shadow:0 20px 50px -30px rgba(0,0,0,.3);transition:transform 1s var(--ease),opacity 1s var(--ease)}
+.layers div:nth-child(1){transform:translateY(60px) scale(.8)}
+.layers div:nth-child(2){transform:translateY(30px) scale(.9)}
+.layers div:nth-child(3){display:grid;place-items:center}
+.layers svg{width:64px;height:64px;color:var(--teal)}
+.tpanel[data-step="1"] .layers div:nth-child(1),.tpanel[data-step="2"] .layers div:nth-child(1){transform:translateY(80px) scale(.8);border-color:var(--teal)}
+.tpanel[data-step="2"] .layers div:nth-child(2){transform:translateY(40px) scale(.9);border-color:var(--teal)}
+
+/* Ergebnisse */
+.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 144px}
+.bento{display:grid;grid-template-columns:500px 1fr;gap:16px;margin-top:56px}
+.bento .ocard:nth-child(3){grid-column:auto}
+.bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
+.ocard{position:relative;height:492px;border-radius:12px;overflow:hidden;color:#fff;padding:40px;display:flex;flex-direction:column;justify-content:space-between}
+.ocard .ph{position:absolute;inset:0;z-index:0}
+.ocard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));z-index:1}
+.ocard>*{position:relative;z-index:2}
+.ocard .mark{font-size:22px;font-weight:600;letter-spacing:-.02em;opacity:.9}
+.ocard .num{font-size:80px;line-height:1;font-weight:300;letter-spacing:-.02em;margin-top:28px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ocard .num span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
+.ocard .num span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
+.ocard blockquote{font-size:32px;line-height:40px;font-weight:500;letter-spacing:-.02em;max-width:460px;margin-top:auto}
+.ocard .who{margin-top:40px;font-size:14px}
+.ocard .who b{display:block;font-size:16px;font-weight:500}
+.ocard .who span{opacity:.6}
+
+/* CTA */
+.cta-wrap{background:#fff;padding-bottom:88px}
+.cta{position:relative;height:436px;border-radius:24px;overflow:hidden;background:#000;color:#fff;display:grid;place-items:center;text-align:center}
+.blob{position:absolute;width:520px;height:1100px;filter:blur(60px);opacity:.85;transform:rotate(-35deg);border-radius:50%}
+.blob.a{background:linear-gradient(#1fb89f,#0b5f55);left:-80px;top:-300px;animation:drift 14s var(--ease) infinite alternate}
+.blob.b{background:linear-gradient(#e0835a,#5a2c18);left:520px;top:-340px;animation:drift 18s var(--ease) infinite alternate-reverse}
+.blob.d{background:linear-gradient(#1a8c7c,#000);right:-160px;top:-200px;width:380px;animation:drift 16s var(--ease) infinite alternate}
+@keyframes drift{from{transform:rotate(-35deg) translateX(0)}to{transform:rotate(-28deg) translateX(120px)}}
+.cta .c{position:relative;z-index:2}
+.cta h2{font-size:48px;line-height:56px;font-weight:400;letter-spacing:-.01em}
+.cta p{font-size:14px;line-height:20px;margin:24px 0 20px}
+
+/* Footer mit Enthüllung */
+.stage{position:relative}
+.footer{position:relative;z-index:5;background:#fff;border-radius:0 0 24px 24px;padding:88px 0 0}
+.fcols{display:grid;grid-template-columns:1fr auto auto auto;gap:72px}
+.fbrand p{font-size:14px;line-height:22px;color:var(--muted);margin-top:20px}
+.fcol h4{font-size:16px;font-weight:500;margin-bottom:22px}
+.fcol a{display:block;font-size:14px;color:var(--muted);margin-bottom:14px;transition:color .3s}
+.fcol a:hover{color:var(--ink)}
+.fbar{display:flex;justify-content:space-between;align-items:center;margin-top:64px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+.fbar nav{display:flex;gap:16px}
+.fnote{padding:18px 0 24px;font-size:12px;color:var(--muted)}
+.ghost{position:fixed;left:0;right:0;bottom:0;z-index:-1;height:360px;background:var(--bg);overflow:hidden;display:flex;align-items:flex-end}
+.ghost-space{height:336px}
+.ghost span{display:block;width:100%;font-size:min(23vw,330px);line-height:.78;font-weight:500;letter-spacing:-.05em;color:var(--ink);text-align:center;transform:translateY(12%)}
+
+/* Einblenden beim Scrollen */
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+  .rv.in{opacity:1;transform:none;filter:none}
+  .hero .rv{transition-duration:1.2s}
+}
+@media (prefers-reduced-motion:reduce){
+  .logos-track,.blob,.icons i{animation:none}
+}
+
+/* ---------- Tablet / Handy ---------- */
+@media (max-width:1180px){
+  .hw{grid-template-columns:1fr;gap:28px}
+  .hw-stage{order:-1;min-height:420px}
+  :root{--gut:32px}
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-cta .signin{display:none}
+  .mob{display:flex;flex-direction:column;gap:18px;pointer-events:auto;position:fixed;inset:88px 20px auto;padding:24px;border-radius:16px;background:#fff;color:var(--ink);font-size:18px;opacity:0;transform:translateY(-10px);visibility:hidden;transition:all .4s var(--ease);box-shadow:0 20px 50px -20px rgba(0,0,0,.3)}
+  .nav.open .mob{opacity:1;transform:none;visibility:visible}
+  .tabs{grid-template-columns:repeat(4,1fr)}
+  .cards3{grid-template-columns:1fr 1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .tlist{margin-top:48px}
+  .tpanel{position:relative;top:0;height:420px}
+  .bento,.bento .row2{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .flow{aspect-ratio:auto;padding:20px}
+  .flow-stage{position:static;width:auto;height:auto;transform:none!important;display:flex;flex-direction:column;gap:16px}
+  .flow-wires,.flow-glow,.flow-dots,.flow-chips,.flow-cursor{display:none}
+  .flow-src{position:static;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .flow-src>div{width:auto;height:48px;gap:8px;padding:0 12px 0 6px;font-size:14px;transform:none!important}
+  .flow-src .fi{width:34px;height:34px}
+  .flow-src .fi svg{width:17px;height:17px}
+  .flow-card,.flow-export{position:static;transform:none!important;width:auto}
+  .flow-card{padding:18px}
+  .flow-row{font-size:13px;gap:8px;padding:0 8px;transform:none!important}
+  .flow-row .ar{width:84px}
+  .flow-btns{flex-wrap:wrap}
+}
+@media (max-width:720px){
+  .nav .logo .cw-logo{height:18px}
+  .steps{padding-top:72px}
+  .hw-stage{min-height:440px}
+  .hw-panel{padding:20px 16px 72px}
+  .hw-th em,.hw-s2 .hw-row i+i{display:none}
+  .hw-card{padding:16px;font-size:14px}
+  .hw-s1{gap:10px;padding:18px 12px}
+  .hw-chip{height:34px;font-size:12px;padding:0 8px 0 10px}
+  .hw-cw{width:92px;padding:12px 4px}
+  .hw-arrow svg{width:16px;height:16px}
+  .hw-amt{min-width:64px}
+  .hw-btns{flex-wrap:wrap}
+  .hw-cap{left:16px;right:16px;bottom:16px;font-size:13px}
+  .hw-name{font-size:19px;line-height:24px}
+  .hw-tab{padding:18px 0}
+  :root{--gut:16px}
+  .nav-in{padding:0 12px 0 16px;height:60px}
+  .nav-cta .book{height:38px;font-size:14px}
+  .hero{min-height:640px}
+  .hero-in{padding:120px 0 24px}
+  .hero h1{font-size:40px;line-height:46px}
+  .hero .sub{font-size:16px}
+  .tabs{grid-template-columns:1fr 1fr;gap:8px}
+  .tab{height:72px;padding:12px;font-size:14px}
+  .tab:nth-child(n+3){display:none}
+  .pause{bottom:auto;top:-48px}
+  .h2,.cta h2,.qslide h2{font-size:32px;line-height:38px}
+  .how,.engine{padding-top:80px}
+  .engine{padding-bottom:80px}
+  .cards3{grid-template-columns:1fr}
+  .quotes{padding:80px 0}
+  .qtrack,.qslide{height:560px}
+  .qslide{width:calc(100% - 32px);margin-left:calc((100% - 32px)/-2)}
+  .qslide .c{padding:28px}
+  .qnav{display:none}
+  .sol-head{flex-direction:column;align-items:flex-start;gap:20px}
+  .scroller{padding:0 16px}
+  .scard{flex-basis:84vw;height:440px}
+  .ocard{height:auto;min-height:420px;padding:28px}
+  .ocard .num{font-size:56px}
+  .ocard blockquote{font-size:24px;line-height:30px;margin-top:40px}
+  .cta{height:auto;padding:80px 20px}
+  .fcols{grid-template-columns:1fr 1fr;gap:32px}
+    .fbar{flex-direction:column;align-items:flex-start;gap:14px}
+  .fbar nav{flex-wrap:wrap}
+  .ghost{height:160px}
+  .ghost-space{height:136px}
+}
+@media (max-width:360px){.nav-in,.nav.solid .nav-in{width:calc(100% - 16px)}.nav .logo .cw-logo{height:15px}.nav-cta{gap:8px}.nav-cta .book{height:34px;padding:6px 12px;font-size:13px}}
+/* Sprachumschalter DE · EN – aktive Sprache folgt aus <html lang> */
+.lang{display:flex;align-items:center;font-size:14px;font-weight:500;margin-right:2px}
+.lang a{padding:6px 7px;opacity:.5;transition:opacity .3s}
+.lang a:hover{opacity:.85}
+html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font-weight:600}
+.lang-mob{font-size:16px}
+@media (max-width:720px){.nav-cta .lang{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cw" viewBox="0 0 1316 219"><path d="M379.186 151.2C391.986 151.2 402.586 144.8 407.786 133L431.486 145C417.986 173.6 382.586 183 354.086 171.3C328.086 160.626 321.286 145.8 318.786 124.6C316.286 103.4 330.286 73.2 355.486 63.4C371.086 57.4 388.086 57.7 403.686 63.7C415.886 69 425.586 77.5 431.586 90L407.986 101.9C402.886 91.8 393.786 85.3 382.386 84.2C363.386 82.4 347.186 95.5 345.586 114.6C343.986 133.7 358.686 151 379.286 151.2H379.186Z"/><path d="M471.586 14.8H445.086V173.5H471.586V14.8Z"/><path d="M91.2861 124L133.986 124.6L110.664 159.583C109.366 161.53 107.18 162.7 104.84 162.7H46.6861C29.6861 162.8 13.9861 155.8 5.38609 140.8C-1.91391 128 -2.21391 110.8 7.08609 98.8L66.3861 22.3C76.2861 9.5 91.0861 0 107.786 0H182.086C196.086 0 205.486 16.2 195.486 30.4L179.386 53.2C176.786 56.9 172.186 57.7 167.786 57.7L91.1861 58.3C71.7861 58.4 58.6861 77 61.0861 95.5C63.6861 110.6 75.4861 122.8 91.3861 124H91.2861Z"/><path d="M87.5 196.794L105.1 170.894C106.9 168.194 110.3 166.694 113.7 166.694H183.5C196.4 166.894 206.5 158.694 206.7 145.994C206.9 133.294 196.5 124.594 183.6 124.594H134L171 69.9937C173.1 66.8937 178 65.6937 181.5 65.6937L217.5 65.8937C227.1 65.8937 236.1 69.4937 243.8 75.3937C260.4 88.0937 266.6 111.794 255 130.394L211.4 193.294C201.9 207.094 187.9 218.494 170.5 218.594L95.6 218.794C90.7 218.794 87 213.794 85.8 210.694C84 205.894 84.5 201.294 87.5 196.894V196.794Z"/><path d="M1035.29 61.7L1003.39 152.5L996.186 173.4L968.786 173.3L942.886 100.3L916.686 173.3L889.486 173.4L851.386 61.9L880.186 61.7L904.486 140.1L931.686 61.8L954.486 61.6L981.586 140.5L1006.19 61.8L1035.29 61.7Z"/><path d="M666.886 175.9C649.086 175.2 633.786 167.3 623.186 153L641.186 137.1C650.886 150.7 667.286 156.7 682.286 151.6C687.786 149.2 691.886 144.2 689.386 138.5C686.886 132.8 683.486 132.5 679.786 131.3L656.986 124.1C648.186 121.3 639.586 116.8 634.386 108.8C623.986 92.9 630.886 72.1 647.986 64.1C668.886 54.2 700.886 58.2 714.086 78.5L696.286 94.3C688.586 82.9 674.686 78.8 662.186 83.3C658.486 85.1 656.186 87.7 655.986 91.5C655.786 95.3 658.086 99 662.086 100.3L690.186 110.1C697.986 112.8 705.886 116.6 710.886 123.4C722.286 139.2 715.986 160.9 698.986 170C681.986 179.1 678.786 176.8 667.086 176L666.886 175.9Z"/><path d="M1184.19 149.5C1177.19 175.2 1144.89 180.7 1119.89 173C1108.39 169.4 1099.09 162.4 1092.39 152.9L1110.39 137.2C1119.79 150.7 1136.79 156.9 1151.99 151.6C1156.19 149.5 1159.19 146.3 1159.19 142.1C1159.19 137.9 1156.39 134.2 1152.09 132.7L1121.59 122.3C1113.79 119.6 1106.49 114.8 1102.39 107.5C1093.19 91.2 1100.59 71.3 1117.59 63.9C1129.89 58.5 1143.09 57.7 1156.29 60.6C1166.89 63 1176.39 68.5 1182.89 77.9L1165.49 93.9C1157.49 82.5 1143.19 78.2 1130.99 83.1C1127.59 85.2 1125.19 87.7 1124.99 91.1C1124.79 94.5 1126.59 98.4 1130.09 99.6L1154.29 108.2C1160.29 110.3 1165.69 112.3 1170.99 115.6C1182.59 122.8 1187.79 136 1184.09 149.4L1184.19 149.5Z"/><path d="M1049.99 61.5V173.5H1076.99V61.5H1049.99Z"/><path d="M1064.19 47.6C1073.24 47.6 1080.59 40.2575 1080.59 31.2C1080.59 22.1425 1073.24 14.8 1064.19 14.8C1055.13 14.8 1047.79 22.1425 1047.79 31.2C1047.79 40.2575 1055.13 47.6 1064.19 47.6Z"/><path d="M575.686 172.2C556.886 178.9 536.586 177 519.786 167.4C502.986 157.8 491.086 138.8 490.486 119C489.886 98.5 500.486 79.3 518.386 68.5C537.986 56.7 562.586 55.8 582.986 66.1C603.386 76.4 612.886 92.4 614.386 112.6C616.486 139.2 601.286 163.2 575.586 172.3L575.686 172.2ZM552.686 151.9C571.629 151.9 586.986 136.588 586.986 117.7C586.986 98.8119 571.629 83.5 552.686 83.5C533.743 83.5 518.386 98.8119 518.386 117.7C518.386 136.588 533.743 151.9 552.686 151.9Z"/><path d="M797.286 151.8C807.386 150.8 815.786 146.4 821.786 137.9L842.086 152.6C825.586 175.4 793.086 180.9 767.486 172.3C741.886 163.7 729.586 143 728.786 118.6C727.986 93.9 741.986 72.1 765.086 63.3C780.686 57.4 797.786 57.4 813.286 63.6C837.986 73.6 848.986 100.2 845.486 126.8L756.986 127.1C760.686 145.8 778.686 154.5 797.186 151.8H797.286ZM756.686 107.2L819.686 107H819.786C817.186 90.8 804.986 82 790.486 81.7C774.086 80.9 760.186 91.1 756.686 107.2Z"/><path d="M1279.79 147.7C1284.19 145 1287.19 142.1 1290.69 137.9L1310.79 152.7C1293.79 175.8 1260.79 181.3 1234.99 171.9C1209.19 162.5 1199.89 145.3 1197.79 122.8C1195.29 96.9 1209.29 72.5 1233.79 63.4C1249.59 57.5 1266.59 57.4 1282.09 63.8C1306.59 74 1318.09 100.6 1314.39 127L1225.79 127.2C1227.59 136.6 1232.89 143.7 1240.99 147.9C1253.09 154.2 1267.09 153.6 1279.79 147.7ZM1225.49 107.1L1288.09 107.3L1287.99 107.2C1286.29 92.6 1276.39 82.5 1260.09 81.5C1243.79 80.5 1228.99 90 1225.49 107.1Z"/></symbol></svg>
+
+<!-- Navigation -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#" class="logo" aria-label="Closewise home"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#ablauf">The problem</a>
+      <a href="#ablauf-schritte">How it works</a>
+      <a href="#produkte">Operations</a>
+      <a href="#vertrauen">Security</a>
+      <a href="faq-en.html">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="lang" aria-label="Language"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn signin">See it live</a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">Book a call</a>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mob" id="mob">
+    <a href="#ablauf">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a><a href="faq-en.html">FAQ</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start">See it live</a>
+    <span class="lang lang-mob" aria-label="Language"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span>
+  </div>
+</header>
+
+<div class="stage">
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="ph ph-hero" aria-hidden="true"><video id="heroVideo" autoplay muted loop playsinline poster="bilder/hero.jpg"><source src="bilder/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video></div>
+  <div class="wrap hero-in">
+    <div>
+      <h1 class="rv">That extra hour, gone. For good.</h1>
+      <p class="sub rv" style="--d:.15s">Closewise closes the night and shows you only what did not match.</p>
+      <div class="ctas rv" style="--d:.3s">
+        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Book a call</a>
+        <a href="#ablauf-schritte" class="btn btn-glass">How it works</a>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="tabs rv" style="--d:.45s" id="tabs">
+        <a href="#produkte" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>Every source<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#1f7a6a"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg></span>Only exceptions<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#d9763f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>Fault patterns<i class="bar"></i></a>
+        <a href="#produkte" class="tab"><span class="ico" style="background:#594aff"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Folios &amp; drawer<i class="bar"></i></a>
+      </div>
+      <button class="pause" id="pause" aria-label="Pause video"><i></i></button>
+    </div>
+  </div>
+</section>
+
+<main class="sheet">
+  <!-- Logo-Laufband -->
+  <div class="wrap logos-wrap">
+    <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Reads the exports from</p>
+    <div class="logos" aria-label="Systems whose exports Closewise reads">
+      <div class="logos-track">
+        <!-- lightspeed.png: vom Nutzer bereitgestellt, nur zugeschnitten und freigestellt -->
+        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.png" alt="Lightspeed" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify-pos.png" alt="Shopify POS" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
+        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.png" alt="" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify-pos.png" alt="" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- So funktioniert es -->
+  <section class="how wrap" id="ablauf">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The problem</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Four systems. None of them talk to each other.</h2>
+    <p class="lead rv" style="--d:.2s;max-width:520px">Four systems that don't know each other. Every night, a person becomes the link between them.</p>
+    <div class="flow rv" id="flow" role="img" aria-label="Flow: till receipts, card terminal, guest ledger, POS system and bank account come together in Closewise, differences are cleared, then the export for your accountant as a DATEV file or CSV.">
+      <div class="flow-stage" id="flowStage">
+        <div class="flow-glow" id="fGlow"></div>
+        <svg class="flow-wires" width="1600" height="720" viewBox="0 0 1600 720" fill="none" aria-hidden="true">
+          <g stroke="#e4e7ec" stroke-width="1.5">
+            <path id="fp0" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path id="fp1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path id="fp2" d="M280 360 H500"/>
+            <path id="fp3" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path id="fp4" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
+            <path d="M980 360 H1140"/>
+          </g>
+          <g id="flowLines" stroke-width="1.5" stroke-dasharray="1 1">
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
+            <path stroke="#12805c" pathLength="1" stroke-dashoffset="1" d="M980 360 H1140"/>
+          </g>
+        </svg>
+        <div class="flow-dots" id="fDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="flow-src">
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>Till receipts</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 10h18M7 15h3"/></svg></span>Card terminal</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span>Guest ledger</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM7 10V4h10v6M8 14h2M14 14h2M8 17h2M14 17h2"/></svg></span>POS system</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span>Bank account</div>
+        </div>
+        <div class="flow-card" id="fCard">
+          <div class="flow-head"><svg class="flow-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg><span class="flow-tag" id="fTag">Live</span></div>
+          <div class="flow-phase" id="flowPhase">Connecting data sources …</div>
+          <div class="flow-bar"><i id="flowBar"></i><b id="fShine"></b></div>
+          <div class="flow-rows" id="flowRows">
+            <div class="flow-row"><span class="dot"></span><span class="ar">Bar</span><span class="tx">Card payment missing</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Restaurant</span><span class="tx">Void without approval</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Room service</span><span class="tx">Not posted to the room</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </div>
+        <div class="flow-chips" aria-hidden="true"><span style="background:#2f6bff">DATEV</span><span style="background:#101828">CSV</span></div>
+        <div class="flow-export" id="flowExport">
+          <div>
+            <h3>Export for your accountant</h3>
+            <div class="flow-sub" id="flowSub">Waiting for the close.</div>
+            <div class="flow-btns"><div class="flow-btn" id="flowB1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>DATEV export</div><div class="flow-btn" id="flowB2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CSV</div></div>
+          </div>
+        </div>
+        <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <div class="steps" id="ablauf-schritte">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>How it works</p>
+      <h2 class="h2 rv" style="--d:.1s;max-width:640px">Four steps, and the night is closed.</h2>
+      <div class="hw rv" id="hw">
+        <div class="hw-tabs" role="tablist" aria-label="Four steps">
+          <button class="hw-tab on" role="tab" id="hw-t0" aria-controls="hw-p0" aria-selected="true" tabindex="0">
+            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="hw-n">01</span><span class="hw-name">Connect</span>
+            <span class="hw-more"><span>Closewise reads the exports your PMS, your POS and your bank already produce. Nothing new at the point of sale.</span></span><i class="hw-bar"></i>
+          </button>
+          <button class="hw-tab" role="tab" id="hw-t1" aria-controls="hw-p1" aria-selected="false" tabindex="-1">
+            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="hw-n">02</span><span class="hw-name">Match</span>
+            <span class="hw-more"><span>Every check is tested against the terminal batch, the guest ledger and the drawer count. Rules, not guesswork.</span></span><i class="hw-bar"></i>
+          </button>
+          <button class="hw-tab" role="tab" id="hw-t2" aria-controls="hw-p2" aria-selected="false" tabindex="-1">
+            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="hw-n">03</span><span class="hw-name">Flag</span>
+            <span class="hw-more"><span>What didn't balance comes back with the euro value at risk and an AI explanation.</span></span><i class="hw-bar"></i>
+          </button>
+          <button class="hw-tab" role="tab" id="hw-t3" aria-controls="hw-p3" aria-selected="false" tabindex="-1">
+            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="hw-n">04</span><span class="hw-name">Close</span>
+            <span class="hw-more"><span>One export in the format your books expect. Click run, go home.</span></span><i class="hw-bar"></i>
+          </button>
+        </div>
+        <div class="hw-stage">
+          <div class="hw-panel on" role="tabpanel" id="hw-p0" aria-labelledby="hw-t0">
+            <div class="hw-card hw-s1">
+              <div class="hw-files">
+                <span class="hw-chip" style="--k:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>PMS export<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+                <span class="hw-chip" style="--k:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>POS.csv<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+                <span class="hw-chip" style="--k:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>Bank.csv<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
+              </div>
+              <div class="hw-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+              <div class="hw-cw"><svg class="hw-mark" viewBox="0 0 262 219" fill="currentColor"><use href="#cw" width="1316" height="219"/></svg><b>3 exports</b><small>read</small></div>
+            </div>
+            <p class="hw-cap"><span>01</span>Nothing changes in the systems you run.</p>
+          </div>
+          <div class="hw-panel" role="tabpanel" id="hw-p1" aria-labelledby="hw-t1">
+            <div class="hw-card hw-s2">
+              <div class="hw-row hw-th"><span>Check</span><span class="hw-amt">Amount</span><em>Terminal</em><em>Guest ledger</em></div>
+              <div class="hw-row" style="--k:0"><span>1041</span><span class="hw-amt">€84.00</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:1"><span>1042</span><span class="hw-amt">€126.50</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:2"><span>1043</span><span class="hw-amt">€42.50</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:3"><span>1044</span><span class="hw-amt">€63.00</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:4"><span>1045</span><span class="hw-amt">€210.00</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+              <div class="hw-count"><span class="hw-prog"><i></i></span><b>148 of 148</b> checked</div>
+            </div>
+            <p class="hw-cap"><span>02</span>What agrees is ticked off – and never shown.</p>
+          </div>
+          <div class="hw-panel" role="tabpanel" id="hw-p2" aria-labelledby="hw-t2">
+            <div class="hw-card hw-s3">
+              <div class="hw-alert"><span class="hw-dot">!</span>1 exception · <b>€42.50</b> at risk</div>
+              <div class="hw-row ok"><span>1042</span><span class="hw-amt">€126.50</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+              <div class="hw-row bad"><span>1043 · Bar</span><span class="hw-amt">−€42.50</span><i class="x">!</i></div>
+              <div class="hw-row ok"><span>1044</span><span class="hw-amt">€63.00</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+              <div class="hw-ai"><b>AI explanation</b>The card payment at the bar is missing from the terminal batch. Probably taken on the second device.</div>
+            </div>
+            <p class="hw-cap"><span>03</span>Only what doesn't balance lands on your list.</p>
+          </div>
+          <div class="hw-panel" role="tabpanel" id="hw-p3" aria-labelledby="hw-t3">
+            <div class="hw-card hw-s4">
+              <div class="hw-title">Export for your books</div>
+              <div class="hw-sub">Close of Oct 2 · all outlets</div>
+              <div class="hw-btns">
+                <span class="hw-btn" style="--k:0"><svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><em><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></em>DATEV export</span>
+                <span class="hw-btn" style="--k:1"><svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><em><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></em>CSV</span>
+              </div>
+              <div class="hw-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>Close complete. Go home.</div>
+            </div>
+            <p class="hw-cap"><span>04</span>Your accountant gets a close that already ties out.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produkte -->
+  <section class="engine wrap" id="produkte">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Operations</p>
+    <h2 class="h2 rv" style="--d:.1s">Every number your night produces.</h2>
+    <p class="lead rv" style="--d:.2s">Till receipts, terminal batch, guest ledger and drawer count – in one match.</p>
+    <div class="cards3">
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.1s">
+        <div class="hd"><span class="tag" style="background:#1f7a6a">1</span>Match</div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
+        <div class="ft"><h3>Every source, one action</h3><p>Every check tested against the terminal batch, the guest ledger, the drawer count and the correction log. Deterministic – rules, not a model.</p></div>
+      </a>
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.2s">
+        <div class="hd"><span class="tag" style="background:#d9763f">2</span>Exceptions</div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
+        <div class="ft"><h3>Only what failed</h3><p>Non-balancing lines come back on their own, ranked by euro value. The explanation beneath each is written by AI.</p></div>
+      </a>
+      <a href="#ablauf-schritte" class="pcard rv" style="--d:.3s">
+        <div class="hd"><span class="tag" style="background:#594aff">3</span>Trends</div>
+        <div class="media"><div class="icons">
+          <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
+          <i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
+        </div></div>
+        <div class="ft"><h3>The same fault, four nights running</h3><p>Repeat causes grouped: a failing terminal, a PMS sync, a habit. One bad night is noise; the same fault on four is fixable.</p></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Zitat-Karussell -->
+  <section class="quotes" aria-roledescription="Karussell" aria-label="Getting started">
+    <div class="qtrack" id="qtrack">
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Getting started · 1/4</p><h2>Book a call</h2><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Book a call</a></div><div class="who"><span>Twenty minutes. We take one night from your property and show you exactly what Closewise would have cleared.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Getting started · 2/4</p><h2>We connect your systems</h2></div><div class="who"><span>We point Closewise at the exports your PMS, your POS and your bank already produce. Nothing changes in the systems you run.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Getting started · 3/4</p><h2>We close one night alongside you</h2></div><div class="who"><span>You close by hand, Closewise closes in parallel, and we compare the two. You see what it caught.</span></div></div></article>
+      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Getting started · 4/4</p><h2>You stop closing by hand</h2></div><div class="who"><span>Click run at the end of service. What did not balance comes back as a short list, and nothing else does.</span></div></div></article>
+      <button class="qnav prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="qnav next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <!-- Lösungen nach Rolle -->
+  <section class="solutions" id="loesungen">
+    <div class="wrap sol-head">
+      <div><p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Who it's for</p><h2 class="h2 rv" style="--d:.1s">For everyone who closes the night.</h2></div>
+      <div class="arrows"><button id="sPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="sNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="scroller" id="scroller">
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Night Auditor</h3><p>No more reading line by line at 3 a.m. Closewise matches; you only check what didn't balance.</p><span class="more">Book a call ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Front Office</h3><p>Room postings checked against the outlet that raised them – the same night.</p><span class="more">Book a call ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>F&amp;B manager</h3><p>Voids without approval and missing card payments per outlet, ranked by euro value.</p><span class="more">Book a call ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>Controlling</h3><p>One export in the format your books expect – and the fault patterns behind it.</p><span class="more">Book a call ›</span></div></a>
+      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="scard"><div class="ph" aria-hidden="true"><img src="bilder/rolle-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><h3>General Manager</h3><p>Every night's euro value at risk, at a glance.</p><span class="more">Book a call ›</span></div></a>
+    </div>
+  </section>
+
+  <!-- Vertrauen -->
+  <section class="trust wrap" id="vertrauen">
+    <div class="trust-grid">
+      <div>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Security</p>
+        <h2 class="h2 rv" style="--d:.1s">It reads your numbers. Nothing else.</h2>
+        <p class="lead rv" style="--d:.2s">Closewise is handed finished exports, matches them and reports. It needs no more access than that.</p>
+        <div class="tlist" id="tlist">
+          <i class="prog"></i>
+          <div class="titem"><h3>Processed in the EU</h3><p>Matching runs on servers in the EU (Ireland). Your data does not leave the EU.</p></div>
+          <div class="titem"><h3>Your ledger is not kept</h3><p>Your night is read, matched and reported. What is kept is the exception record – what was flagged, where, and why – not the raw ledger.</p></div>
+          <div class="titem"><h3>It is handed exports</h3><p>Closewise never writes to your PMS, your POS or your bank. A write is not possible rather than merely not done.</p></div>
+        </div>
+      </div>
+      <div class="tpanel rv" id="tpanel" data-step="0">
+        <div class="layers"><div></div><div></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ergebnisse -->
+  <section class="outcomes wrap" id="ergebnisse">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>With Closewise</p>
+    <h2 class="h2 rv" style="--d:.1s">The same night,<br>closed twice.</h2>
+    <p class="lead rv" style="--d:.2s">A representative night at a mid-sized property. Your own numbers will differ.</p>
+    <div class="bento">
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8.5 min</div></div><blockquote>to close – instead of 60 to 70 minutes by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 h</div></div><blockquote>back per year that used to go into the night close.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
+      <div class="row2">
+        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>€5,443</div></div><blockquote>at risk, found in a single night.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>exceptions reported, instead of reading every line by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-wrap" id="kontakt">
+    <div class="wrap cta rv">
+      <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
+      <div class="c">
+        <h2>See it on<br>your own numbers.</h2>
+        <p>Bring a night that caused trouble.<br>Twenty minutes is enough to show what Closewise would have found in it.</p>
+        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Ask for a demo</a>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fcols">
+      <div class="fbrand">
+        <a href="#top" class="logo"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
+        <p>Nightly close reconciliation for hotels and the outlets inside them.<br>It tells you only what did not match.</p>
+      </div>
+      <div class="fcol"><h4>Product</h4><a href="#ablauf">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a></div>
+      <div class="fcol"><h4>Company</h4><a href="mailto:info@closewise.eu">Contact</a><a href="faq-en.html">FAQ</a></div>
+      <div class="fcol"><h4>Follow</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+    <div class="fbar">
+      <span>© 2026 Closewise</span>
+      <nav><a href="impressum.html">Legal notice</a><a href="datenschutz.html">Privacy</a></nav>
+    </div>
+    <p class="fnote">Brands and logos mentioned belong to their owners. Closewise is not affiliated with these providers.</p>
+  </div>
+</footer>
+<div class="ghost-space"></div>
+<div class="ghost" aria-hidden="true"><span>Closewise</span></div>
+
+<script src="dot-loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Weiches Scrollen: Rad und Trackpad gleiten nach, Ankerlinks fahren weich an
+  let lenis = null;
+  if (!reduce && window.Lenis) {
+    lenis = new Lenis({lerp:.1, wheelMultiplier:1, autoRaf:true, anchors:{offset:-96}});
+  } else {
+    document.documentElement.style.scrollBehavior = 'smooth';
+  }
+
+  // Navigation: transparent über dem Hero, danach schwebende Glasleiste
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * .75);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const burger = nav.querySelector('.burger');
+  burger.addEventListener('click', () => {
+    const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o);
+    o ? lenis?.stop() : lenis?.start();
+  });
+  document.querySelectorAll('#mob a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); lenis?.start(); }));
+
+  // Einblenden beim Scrollen
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
+  const tabs = [...document.querySelectorAll('.tab')];
+  let ti = 1, timer, paused = false;
+  const setTab = i => { tabs.forEach((t,k) => t.classList.toggle('on', k === i)); ti = i; };
+  const cycle = () => { clearTimeout(timer); if (paused) return; timer = setTimeout(() => { setTab((ti + 1) % tabs.length); cycle(); }, 6000); };
+  setTab(1); if (!reduce) cycle();
+  tabs.forEach((t,i) => t.addEventListener('mouseenter', () => { setTab(i); cycle(); }));
+  const vid = document.getElementById('heroVideo'), pb = document.getElementById('pause');
+  if (reduce) { vid?.pause(); pb.classList.add('paused'); }
+  pb.addEventListener('click', () => {
+    paused = !paused; pb.classList.toggle('paused', paused);
+    pb.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+    document.querySelectorAll('.tab .bar').forEach(b => b.style.animationPlayState = paused ? 'paused' : 'running');
+    if (vid) paused ? vid.pause() : vid.play();
+    if (!paused) cycle();
+  });
+
+  // Logo-Laufband: nahtlos um genau eine Folge, konstant ~50 px/s wie die Vorlage
+  const track = document.querySelector('.logos-track');
+  if (track && !reduce) {
+    const SPEED = 50;
+    const set = [...track.children].filter(el => !el.hasAttribute('aria-hidden'));
+    const imgs = [...track.querySelectorAll('img')];
+    const loaded = Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.addEventListener('load', r, {once:true}); i.addEventListener('error', r, {once:true}); })));
+    const layout = () => {
+      const copies = track.children.length / set.length;
+      const w = track.children[set.length].offsetLeft - track.children[0].offsetLeft;
+      // Genug Kopien, damit nie eine Lücke einläuft: Sichtbreite + eine Folge
+      const need = Math.ceil(track.parentElement.clientWidth / w) + 1;
+      for (let c = copies; c < need; c++) set.forEach(el => {
+        const k = el.cloneNode(true); k.setAttribute('aria-hidden', 'true');
+        k.querySelectorAll('img').forEach(i => i.alt = ''); track.append(k);
+      });
+      track.style.setProperty('--shift', w + 'px');
+      track.style.setProperty('--dur', (w / SPEED) + 's');
+    };
+    loaded.then(() => { layout(); new ResizeObserver(layout).observe(track.parentElement); });
+    // Ersatzlogos (onerror-Kette) laden später nach – dann neu messen
+    track.addEventListener('load', () => loaded.then(layout), true);
+  }
+
+  // Vier Schritte: Reiter steuern die Bühne; Autoplay mit Ladebalken, nur im Sichtbereich, Pause bei Hover
+  const hw = document.getElementById('hw');
+  if (hw) {
+    const tabs = [...hw.querySelectorAll('.hw-tab')], panels = [...hw.querySelectorAll('.hw-panel')];
+    const DUR = 5000; let cur = 0, timer = 0, visible = false, hover = false, left = DUR, started = 0;
+    hw.style.setProperty('--hw-dur', DUR / 1000 + 's');
+    const select = (i, focus) => {
+      if (i !== cur) { const old = panels[cur]; old.classList.add('keep'); setTimeout(() => old.classList.remove('keep'), 550); }
+      tabs.forEach((t, k) => { const on = k === i; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+      panels.forEach((p, k) => p.classList.toggle('on', k === i));
+      // Ladebalken neu starten
+      const bar = tabs[i].querySelector('.hw-bar'); bar.style.animation = 'none'; bar.offsetWidth; bar.style.animation = '';
+      cur = i; if (focus) tabs[i].focus(); left = DUR; schedule();
+    };
+    const schedule = () => {
+      clearTimeout(timer); timer = 0;
+      if (reduce || !visible || hover) return;
+      started = Date.now(); timer = setTimeout(() => select((cur + 1) % tabs.length), left);
+    };
+    tabs.forEach((t, k) => {
+      t.addEventListener('click', () => select(k));
+      t.addEventListener('keydown', e => {
+        const d = {ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1}[e.key];
+        if (d) { e.preventDefault(); select((cur + d + tabs.length) % tabs.length, true); }
+      });
+    });
+    hw.addEventListener('mouseenter', () => { hover = true; if (timer) left -= Date.now() - started; clearTimeout(timer); timer = 0; hw.classList.add('paused'); });
+    hw.addEventListener('mouseleave', () => { hover = false; hw.classList.remove('paused'); schedule(); });
+    if (reduce) hw.querySelectorAll('.hw-bar').forEach(b => b.style.display = 'none');
+    new IntersectionObserver(es => es.forEach(e => {
+      visible = e.isIntersecting;
+      if (visible) { hw.classList.remove('paused'); schedule(); } else { if (timer) left -= Date.now() - started; clearTimeout(timer); timer = 0; hw.classList.add('paused'); }
+    }), {threshold:.35}).observe(hw);
+  }
+
+  // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „Closewise Ablauf“
+  const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
+  const $ = id => document.getElementById(id);
+  const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
+  const gPaths = [0,1,2,3,4].map(i => $('fp' + i)), pLen = gPaths.map(p => p.getTotalLength());
+  const dotsEl = [...$('fDots').children], pills = [...flow.querySelectorAll('.flow-src > div')];
+  const fRows = [...flow.querySelectorAll('.flow-row')], chipsEl = [...flow.querySelectorAll('.flow-chips span')];
+  const fCard = $('fCard'), fTag = $('fTag'), fPhase = $('flowPhase'), fBar = $('flowBar'), fShine = $('fShine');
+  const fExp = $('flowExport'), fSub = $('flowSub'), fGlow = $('fGlow'), fCur = $('fCur');
+  const fBtn = [$('flowB1'), $('flowB2')];
+  const narrow = matchMedia('(max-width:900px)');
+  let flowScale = 1;
+  const fit = () => { flowScale = flow.clientWidth / 1600; stage.style.transform = narrow.matches ? '' : `scale(${flowScale})`; };
+  new ResizeObserver(fit).observe(flow); fit();
+
+  const ICON_DL = 'M12 4v11M7 10l5 5 5-5M5 20h14', ICON_OK = 'M5 12.5l4.5 4.5L19 7';
+  const cl = x => Math.max(0, Math.min(1, x));
+  const ease = x => 1 - Math.pow(1 - x, 3);
+  const back = x => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+  const ROWS = [[4.9, .3], [5.5, .6], [6.1, .9]];
+  const center = el => { const a = el.getBoundingClientRect(), b = stage.getBoundingClientRect(); return { x: (a.left - b.left + a.width / 2) / flowScale, y: (a.top - b.top + a.height / 2) / flowScale }; };
+  const BLUE = '#2f6bff';
+
+  const drawFlow = t => {
+    const seg = (a, b) => cl((t - a) / (b - a));
+    const bump = (a, d) => Math.sin(Math.PI * seg(a, a + d));
+    const fade = 1 - seg(10.3, 10.9), live = fade > .5, wide = !narrow.matches;
+    linesG.style.opacity = fade;
+    const prog = ease(seg(1.6, 4.2)), streaming = t > 1.2 && t < 4.4;
+
+    // Quellen, Leitungen, Datenpunkte
+    let di = 0;
+    pills.forEach((el, i) => {
+      const a = i * .1, inP = ease(seg(a, a + .5));
+      lines[i].style.strokeDashoffset = 1 - ease(seg(.4 + a, 1.4 + a));
+      let hit = 0;
+      for (let k = 0; k < 2; k++) {
+        const d = dotsEl[di++];
+        if (!wide || !streaming) { d.style.opacity = 0; continue; }
+        const u = ((t - 1.2) * .75 + k / 2 + i * .13) % 1, pt = gPaths[i].getPointAtLength(u * pLen[i]);
+        d.style.transform = `translate(${pt.x}px,${pt.y}px)`;
+        d.style.opacity = cl(u / .08) * cl((1 - u) / .08) * cl((4.4 - t) / .3);
+        if (u < .12) hit = Math.max(hit, 1 - u / .12);
+      }
+      el.style.opacity = inP * fade;
+      el.style.transform = `translateX(${(1 - inP) * -24}px)`;
+      el.style.borderColor = hit > 0 ? rgba(BLUE, .25 + .4 * hit) : '#e4e7ec';
+      el.firstElementChild.style.transform = `scale(${1 + .1 * hit})`;
+    });
+    lines[5].style.strokeDashoffset = 1 - ease(seg(6.5, 7.1));
+    fGlow.style.opacity = seg(1, 1.6) * (1 - seg(6.3, 7)) * fade;
+    fGlow.style.transform = `scale(${1 + .04 * Math.sin(t * 3)})`;
+
+    // Closewise-Karte
+    const cIn = back(seg(.5, 1.1));
+    fCard.style.opacity = cl(seg(.5, .8)) * fade;
+    fCard.style.transform = wide ? `translateY(-50%) scale(${.94 + .06 * cIn})` : '';
+    let open = 0;
+    ROWS.forEach(([at, th], i) => {
+      const r = fRows[i], done = t >= at && live; if (!done) open++;
+      const inP = ease(cl((prog - th + .12) / .12)), flash = done ? 1 - seg(at, at + .8) : 0;
+      r.style.opacity = inP * fade;
+      r.style.transform = `translateX(${(1 - inP) * 16}px)`;
+      r.style.background = done ? rgba('#12805c', .05 + .12 * flash) : (inP > 0 ? '#fef3f2' : 'transparent');
+      r.querySelector('.tx').style.color = done ? '#98a2b3' : '#d92d20';
+      r.querySelector('.dot').style.background = done ? '#12805c' : '#f04438';
+      const ck = r.querySelector('.ck');
+      ck.style.borderColor = done ? '#12805c' : '#d0d5dd';
+      ck.style.background = done ? '#12805c' : '#fff';
+      ck.style.transform = `scale(${done ? 1 + .35 * bump(at, .3) : 1})`;
+      ck.firstElementChild.style.opacity = done ? 1 : 0;
+    });
+    fPhase.textContent = prog < .01 ? 'Connecting data sources …' : prog < 1 ? `Matching · ${Math.round(prog * 148)} of 148 bookings` : open ? `${open} ${open === 1 ? 'difference' : 'differences'} open` : 'Close complete';
+    const allDone = open === 0 && live;
+    fTag.textContent = allDone ? 'Closed' : prog > 0 && prog < 1 ? 'Syncing' : open && prog >= 1 ? 'Review' : 'Live';
+    fTag.style.background = allDone ? '#ecfdf3' : prog >= 1 ? '#fffaeb' : '#eff4ff';
+    fTag.style.color = allDone ? '#067647' : prog >= 1 ? '#b54708' : BLUE;
+    fBar.style.width = (prog * 100) + '%';
+    fShine.style.left = (-80 + ((t * 260) % 540)) + 'px';
+    fShine.style.opacity = prog > 0 && prog < 1 ? 1 : 0;
+
+    // Chips DATEV / CSV über die grüne Leitung
+    [[6.6], [6.85]].forEach(([a], i) => {
+      const u = ease(seg(a, a + .7)), c = chipsEl[i];
+      c.style.left = (980 + u * 170) + 'px';
+      c.style.opacity = cl(seg(a, a + .1)) * (1 - seg(a + .6, a + .75)) * fade;
+      c.style.transform = `translate(-50%,-50%) scale(${.8 + .2 * bump(a, .7)})`;
+    });
+
+    // Export-Karte, Knöpfe, Mauszeiger
+    const ready = t >= 7.3 && live, done = [t >= 8 && live, t >= 8.8 && live], clickAt = [8, 8.8];
+    fBtn.forEach((b, i) => {
+      const d = done[i];
+      b.querySelector('path').setAttribute('d', d ? ICON_OK : ICON_DL);
+      b.style.color = d ? '#067647' : ready ? '#101828' : '#98a2b3';
+      b.style.borderColor = d ? '#abefc6' : ready ? '#d0d5dd' : '#e4e7ec';
+      b.style.background = d ? '#ecfdf3' : '#fff';
+      b.style.transform = `scale(${1 - .06 * bump(clickAt[i] - .1, .2) + (d ? .05 * bump(clickAt[i] + .05, .3) : 0)})`;
+      b.querySelector('svg').style.transform = `translateY(${ready && !d ? 2 * Math.sin(t * 8) : 0}px)`;
+    });
+    const success = seg(8.8, 9.3) * fade;
+    fExp.style.transform = wide ? `translateY(-50%) scale(${1 + .02 * bump(7.1, .4)})` : '';
+    fExp.style.borderColor = success > 0 ? rgba('#12805c', .2 + .6 * success) : ready ? 'rgba(47,107,255,.45)' : 'rgba(47,107,255,.15)';
+    fExp.style.boxShadow = `0 0 0 ${10 * success}px ${rgba('#12805c', .08 * (1 - seg(9.3, 10.3)) + .04)}`;
+    fSub.textContent = done[1] ? 'Files downloaded – ready for your accountant.' : ready ? 'Close complete. Download the export.' : 'Waiting for the close.';
+    if (wide) {
+      const c1 = center(fBtn[0]), c2 = center(fBtn[1]), st = { x: 1500, y: 560 };
+      const m1 = ease(seg(7.3, 7.9)), m2 = ease(seg(8.15, 8.7));
+      let x = st.x + (c1.x - st.x) * m1, y = st.y + (c1.y - st.y) * m1;
+      if (t >= 8.15) { x = c1.x + (c2.x - c1.x) * m2; y = c1.y + (c2.y - c1.y) * m2; }
+      fCur.style.opacity = seg(7.2, 7.4) * (1 - seg(9.1, 9.4)) * fade;
+      fCur.style.transform = `translate(${x}px,${y}px) scale(${1 - .12 * (bump(7.9, .2) + bump(8.7, .2))})`;
+    }
+  };
+  if (reduce) drawFlow(9.5);  // Endzustand ohne Bewegung
+  else {
+    let ft = 0, last = 0, raf = 0;
+    const tick = now => {
+      const dt = last ? Math.min(.1, (now - last) / 1000) : 0; last = now;
+      ft = (ft + dt * 1.5) % 11; drawFlow(ft);
+      raf = requestAnimationFrame(tick);
+    };
+    drawFlow(0);
+    // Läuft nur, solange die Animation im Bild ist
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !raf) { last = 0; raf = requestAnimationFrame(tick); }
+      else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+    }), {threshold:.2}).observe(flow);
+  }
+
+  // Zitat-Karussell: Nachbarn schauen seitlich hinein
+  const slides = [...document.querySelectorAll('.qslide')], dots = document.getElementById('dots');
+  let qi = 0, qt;
+  slides.forEach((_,i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Slide ' + (i+1)); b.onclick = () => go(i); dots.append(b); });
+  const go = i => {
+    qi = (i + slides.length) % slides.length;
+    slides.forEach((s,k) => {
+      let d = k - qi; if (d > slides.length/2) d -= slides.length; if (d < -slides.length/2) d += slides.length;
+      s.style.transform = `translateX(calc(${d} * (100% + 24px)))`;
+      s.style.opacity = Math.abs(d) > 1 ? 0 : 1; s.style.zIndex = d === 0 ? 2 : 1;
+      s.setAttribute('aria-hidden', d !== 0);
+    });
+    [...dots.children].forEach((b,k) => b.classList.toggle('on', k === qi));
+    clearTimeout(qt); if (!reduce) qt = setTimeout(() => go(qi + 1), 7000);
+  };
+  document.querySelector('.qnav.prev').onclick = () => go(qi - 1);
+  document.querySelector('.qnav.next').onclick = () => go(qi + 1);
+  go(0);
+
+  // Lösungen: Pfeile und Ziehen mit der Maus
+  const sc = document.getElementById('scroller'), sp = document.getElementById('sPrev'), sn = document.getElementById('sNext');
+  const step = () => sc.querySelector('.scard').offsetWidth + 24;
+  sp.onclick = () => sc.scrollBy({left:-step(), behavior:'smooth'});
+  sn.onclick = () => sc.scrollBy({left: step(), behavior:'smooth'});
+  const upd = () => { sp.disabled = sc.scrollLeft < 4; sn.disabled = sc.scrollLeft > sc.scrollWidth - sc.clientWidth - 4; };
+  sc.addEventListener('scroll', upd, {passive:true}); upd();
+  let down = false, sx = 0, sl = 0, moved = false;
+  sc.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = sc.scrollLeft; sc.style.scrollSnapType = 'none'; });
+  addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; sc.scrollLeft = sl - dx; });
+  addEventListener('pointerup', () => { if (!down) return; down = false; sc.style.scrollSnapType = ''; });
+  sc.addEventListener('click', e => { if (moved) e.preventDefault(); }, true);
+
+  // Vertrauen: Fortschrittslinie folgt dem Scrollen, Tafel wechselt Stufe
+  const tl = document.getElementById('tlist'), prog = tl.querySelector('.prog'), items = [...tl.querySelectorAll('.titem')], panel = document.getElementById('tpanel');
+  const trust = () => {
+    const r = tl.getBoundingClientRect(), mid = innerHeight * .6;
+    const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
+    prog.style.height = (p * 100) + '%';
+    let s = 0; items.forEach((it,k) => { const on = it.getBoundingClientRect().top < mid; it.classList.toggle('on', on); if (on) s = k; });
+    panel.dataset.step = s;
+  };
+  addEventListener('scroll', trust, {passive:true}); trust();
+
+  // Ergebnisse: Zahlen laufen verwürfelt ein
+  const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+  const scramble = el => {
+    const final = el.textContent; el.textContent = '';
+    const spans = [...final].map(c => { const s = document.createElement('span'); s.textContent = c === ' ' ? ' ' : c; el.append(s); return s; });
+    if (reduce) return;
+    spans.forEach((s,i) => {
+      const c = s.textContent; if (c === ' ') return;
+      s.classList.add('sc'); let n = 0;
+      const t = setInterval(() => {
+        s.textContent = chars[Math.random() * chars.length | 0];
+        if (++n > 8 + i * 2) { clearInterval(t); s.textContent = c; s.classList.remove('sc'); }
+      }, 50);
+    });
+  };
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { scramble(e.target); so.unobserve(e.target); } }), {threshold:.6});
+  document.querySelectorAll('[data-scramble]').forEach(el => so.observe(el));
+})();
+</script>
+</body>
+</html>

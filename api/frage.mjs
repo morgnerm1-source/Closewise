@@ -5,7 +5,11 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-const ABLEHNUNG = "Dazu kann ich hier nichts sagen – fragen Sie gern im Gespräch.";
+// Feste Texte je Sprache (de = Standard)
+const TEXTE = {
+  de: { ablehnung: "Dazu kann ich hier nichts sagen – fragen Sie gern im Gespräch.", laenge: "Bitte eine Frage mit 3 bis 300 Zeichen.", viel: "Gerade viele Anfragen – bitte gleich noch einmal.", fehler: "Die Antwort konnte gerade nicht erzeugt werden." },
+  en: { ablehnung: "I can't help with that here – feel free to ask on a call.", laenge: "Please ask a question of 3 to 300 characters.", viel: "A lot of requests right now – please try again in a moment.", fehler: "The answer could not be generated just now." },
+};
 
 // Fest und unveränderlich, damit der Prompt-Cache greift: keine Zeitstempel o. Ä.
 const SYSTEM = `Sie sind der Assistent auf der FAQ-Seite von Closewise. Besucher sind Hoteliers, Night Auditors, F&B-Leitungen und Controller. Beantworten Sie ihre Fragen ausschließlich mit den Angaben in der Wissensbasis.
@@ -73,8 +77,10 @@ export default async function handler(req, res) {
     try { body = JSON.parse(body); } catch { body = {}; }
   }
   const frage = typeof body?.frage === "string" ? body.frage.trim() : "";
+  const lang = body?.lang === "en" ? "en" : "de";
+  const T = TEXTE[lang];
   if (frage.length < 3 || frage.length > 300) {
-    return res.status(400).json({ fehler: "Bitte eine Frage mit 3 bis 300 Zeichen." });
+    return res.status(400).json({ fehler: T.laenge });
   }
 
   try {
@@ -85,27 +91,28 @@ export default async function handler(req, res) {
       betas: ["server-side-fallback-2026-07-01"],
       fallbacks: "default",
       system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
-      messages: [{ role: "user", content: frage }],
+      // Sprache steht im Nutzerturn, damit der gecachte System-Prompt für beide Sprachen gleich bleibt
+      messages: [{ role: "user", content: lang === "en" ? `${frage}\n\n(Answer in English.)` : frage }],
     });
 
     if (response.stop_reason === "refusal") {
-      return res.status(200).json({ antwort: ABLEHNUNG });
+      return res.status(200).json({ antwort: T.ablehnung });
     }
     const antwort = response.content
       .filter((b) => b.type === "text")
       .map((b) => b.text)
       .join("")
       .trim();
-    return res.status(200).json({ antwort: antwort || ABLEHNUNG });
+    return res.status(200).json({ antwort: antwort || T.ablehnung });
   } catch (error) {
     if (error instanceof Anthropic.RateLimitError) {
-      return res.status(429).json({ fehler: "Gerade viele Anfragen – bitte gleich noch einmal." });
+      return res.status(429).json({ fehler: T.viel });
     }
     if (error instanceof Anthropic.APIError) {
       console.error("Claude API", error.status, error.message);
     } else {
       console.error(error);
     }
-    return res.status(502).json({ fehler: "Die Antwort konnte gerade nicht erzeugt werden." });
+    return res.status(502).json({ fehler: T.fehler });
   }
 }
