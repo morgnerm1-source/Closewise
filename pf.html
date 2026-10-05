@@ -140,99 +140,45 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .flow-btn{display:flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:19px;border:1px solid #e4e7ec;background:#fff;font-size:15px;color:#98a2b3}
 .flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
 
-/* Vier Schritte: Reiter links, große dunkle Bühne rechts (Muster wie Hero-Reiter und Produktkarten) */
-.steps{padding-top:112px;scroll-margin-top:96px}
-.hw{display:grid;grid-template-columns:400px 1fr;gap:56px;margin-top:48px;align-items:stretch}
-.hw-tabs{display:flex;flex-direction:column;justify-content:center}
-.hw-tab{position:relative;display:grid;grid-template-columns:40px 1fr;column-gap:14px;align-items:center;text-align:left;padding:22px 0;border-top:1px solid var(--line);color:var(--ink-2);opacity:.45;transition:opacity .5s var(--ease)}
-.hw-tab:last-child{border-bottom:1px solid var(--line)}
-.hw-tab:hover,.hw-tab.on{opacity:1}
-.hw-tab:focus-visible{outline:2px solid #1f4fd1;outline-offset:4px;border-radius:8px}
-.hw-ico{grid-row:1/3;width:40px;height:40px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);background:#fff;color:var(--muted);transition:all .5s var(--ease)}
-.hw-ico svg{width:18px;height:18px}
-.hw-tab.on .hw-ico{background:#1f4fd1;border-color:#1f4fd1;color:#fff}
-.hw-n{font:500 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted-2)}
-.hw-name{grid-column:2;font-size:22px;line-height:28px;letter-spacing:-.01em;margin-top:4px}
-.hw-more{grid-column:2;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
-.hw-more>span{overflow:hidden;font-size:15px;line-height:22px;color:var(--muted)}
-.hw-tab.on .hw-more{grid-template-rows:1fr}
-.hw-tab.on .hw-more>span{padding-top:8px}
-.hw-bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--ink)}
-.hw-tab.on .hw-bar{animation:fill var(--hw-dur,5s) linear forwards}
-.hw.paused .hw-bar{animation-play-state:paused}
-.hw-stage{position:relative;min-height:520px;border-radius:18px;overflow:hidden;background:radial-gradient(120% 90% at 85% 0%,#35332e,var(--dark) 60%)}
-.hw-panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.hw-panel.on{opacity:1;transform:none;pointer-events:auto}
-.hw-cap{position:absolute;left:28px;bottom:24px;display:flex;gap:10px;align-items:center;font-size:14px;color:rgba(255,255,255,.75)}
-.hw-cap span{font:500 12px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.12);color:#fff}
-.hw-card{width:min(470px,100%);background:#fff;border-radius:16px;padding:20px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);font-family:Geist,Inter,sans-serif;font-size:15px;color:#101828}
-.hw svg.ck{width:11px;height:11px}
-.hw-row{display:flex;align-items:center;gap:12px;height:42px;border-bottom:1px solid #f2f4f7}
-.hw-row>span:first-child{flex:1}
-.hw-amt{color:#475467;font-variant-numeric:tabular-nums;min-width:82px;text-align:right}
-.hw-row i{width:20px;height:20px;border-radius:50%;border:1.5px solid #d0d5dd;display:grid;place-items:center;color:#12805c;font-style:normal;flex:none}
-.hw-row i svg{opacity:0}
-.hw-th{height:32px;font-size:12px;color:#667085;border-bottom:1px solid #eaecf0}
-.hw-th em{font-style:normal;width:20px;display:flex;justify-content:center;white-space:nowrap;font-size:11px}
-.hw-th em:last-child{margin-left:18px}
-.hw-s2 .hw-row i+i{margin-left:18px}
-/* Zustand „gespielt“: .on spielt mit Verzögerungen ab, .keep hält den Endzustand beim Ausblenden */
-.hw-panel.on *{transition-delay:calc(var(--k,0)*.35s + .3s)}
-/* 1 Anbinden */
-.hw-s1{display:flex;align-items:center;justify-content:center;gap:18px;padding:28px}
-.hw-files{display:flex;flex-direction:column;gap:12px}
-.hw-chip{display:flex;align-items:center;gap:8px;height:40px;padding:0 10px 0 14px;border-radius:999px;border:1px solid #e4e7ec;font-size:14px;white-space:nowrap;transition:transform .7s var(--ease),border-color .4s}
-.hw-chip>svg{width:16px;height:16px;color:#1f4fd1}
-.hw-chip i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#e7f4ee;color:#12805c;opacity:0;transition:opacity .3s}
-.hw-arrow{color:#98a2b3}.hw-arrow svg{width:22px;height:22px}
-.hw-cw{display:flex;flex-direction:column;align-items:center;gap:6px;width:120px;padding:18px 8px;border-radius:14px;border:1px solid #e4e7ec;background:#fcfcfd}
-.hw-mark{width:38px;height:32px}
-.hw-cw b{font-size:15px;font-weight:500;opacity:0;transition:opacity .4s}
-.hw-cw small{font-size:12px;color:#667085;opacity:0;transition:opacity .4s}
-.hw-panel:is(.on,.keep) .hw-chip{transform:translateX(8px);border-color:#b7dfcc}
-.hw-panel:is(.on,.keep) .hw-chip i,.hw-panel:is(.on,.keep) .hw-cw :is(b,small){opacity:1}
-.hw-panel.on .hw-cw b,.hw-panel.on .hw-cw small{transition-delay:1.5s}
-/* 2 Abgleichen */
-.hw-s2 .hw-row i{transition:border-color .3s}
-.hw-s2 .hw-row i svg{transition:opacity .3s}
-.hw-panel:is(.on,.keep) .hw-s2 .hw-row i{border-color:#12805c}
-.hw-panel:is(.on,.keep) .hw-s2 .hw-row i svg{opacity:1}
-.hw-count{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:13px;color:#475467}
-.hw-count b{font-weight:500;color:#101828}
-.hw-prog{flex:1;height:4px;border-radius:2px;background:#eaecf0;overflow:hidden}
-.hw-prog i{display:block;height:100%;background:#1f4fd1;transform:scaleX(0);transform-origin:left;transition:transform 2s var(--ease)}
-.hw-panel:is(.on,.keep) .hw-prog i{transform:none}
-.hw-panel.on .hw-prog i{transition-delay:.3s}
-/* 3 Markieren */
-.hw-alert{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:8px 10px;border-radius:10px;background:#fef3f2;color:#b42318;font-size:13px;opacity:0;transition:opacity .4s}
-.hw-alert b{font-weight:600}
-.hw-dot{width:18px;height:18px;border-radius:50%;background:#d92d20;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
-.hw-s3 .ok i{border-color:#12805c}.hw-s3 .ok i svg{opacity:1}
-.hw-s3 .bad{border-radius:8px;margin:0 -8px;padding:0 8px;transition:background .4s,color .4s}
-.hw-s3 .bad .x{font-size:11px;font-weight:700;color:#fff;transition:all .4s}
-.hw-ai{margin-top:14px;padding:12px 14px;border-radius:12px;background:#101828;color:#fff;font-size:14px;line-height:20px;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .7s var(--ease)}
-.hw-ai b{display:block;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:4px}
-.hw-panel:is(.on,.keep) .hw-s3 .bad{background:#fef3f2;color:#b42318}
-.hw-panel:is(.on,.keep) .hw-s3 .bad .hw-amt{color:#d92d20}
-.hw-panel:is(.on,.keep) .hw-s3 .bad .x{background:#d92d20;border-color:#d92d20}
-.hw-panel:is(.on,.keep) .hw-s3 :is(.hw-alert,.hw-ai){opacity:1;transform:none}
-.hw-panel.on .hw-s3 .hw-ai{transition-delay:1s}
-.hw-panel.on .hw-s3 .hw-alert{transition-delay:.6s}
-/* 4 Abschließen */
-.hw-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
-.hw-sub{font-size:13px;color:#667085;margin-top:4px}
-.hw-btns{display:flex;gap:10px;margin-top:18px}
-.hw-btn{position:relative;display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;border:1px solid #e4e7ec;color:#101828;font-size:14px;white-space:nowrap;transition:all .4s}
-.hw-btn svg.dl{width:16px;height:16px;transition:opacity .3s}
-.hw-btn em{position:absolute;left:18px;top:50%;transform:translateY(-50%);display:grid;opacity:0;transition:opacity .3s}
-.hw-panel.on .hw-btn,.hw-panel.on .hw-btn :is(svg,em){transition-delay:calc(var(--k)*.7s + .4s)}
-.hw-panel:is(.on,.keep) .hw-btn{color:#12805c;border-color:#b7dfcc;background:#f3faf6}
-.hw-panel:is(.on,.keep) .hw-btn svg.dl{opacity:0}
-.hw-panel:is(.on,.keep) .hw-btn em{opacity:1}
-.hw-done{display:flex;align-items:center;gap:8px;margin-top:18px;padding-top:14px;border-top:1px solid #eaecf0;font-size:14px;color:#475467;opacity:0;transition:opacity .5s}
-.hw-done svg{width:16px;height:16px;color:#1f4fd1}
-.hw-panel:is(.on,.keep) .hw-done{opacity:1}
-.hw-panel.on .hw-done{transition-delay:1.8s}
+/* Schritt-Leiste unter der Ablauf-Animation – folgt der Animation */
+.fsteps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;scroll-margin-top:110px}
+.fs{position:relative;overflow:hidden;padding:18px 18px 22px;border-radius:14px;background:#fff;border:1px solid var(--line);transition:border-color .5s var(--ease),box-shadow .5s var(--ease)}
+.fs>*:not(.fs-bar){opacity:.5;transition:opacity .5s var(--ease)}
+.fs.on>*:not(.fs-bar){opacity:1}
+.fs.on{border-color:rgba(47,107,255,.35);box-shadow:0 14px 30px -24px rgba(47,107,255,.6)}
+.fs-top{display:flex;align-items:center;gap:10px}
+.fs-ico{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);transition:all .5s var(--ease)}
+.fs-ico svg{width:16px;height:16px}
+.fs.on .fs-ico{background:#2f6bff;border-color:#2f6bff;color:#fff}
+.fs-n{font:500 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted-2)}
+.fs h3{font-size:17px;font-weight:500;letter-spacing:-.01em;margin-top:14px;color:var(--ink-2)}
+.fs p{font-size:14px;line-height:20px;color:var(--muted);margin-top:6px}
+.fs-bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:#2f6bff}
+/* Einstieg als Zeitleiste */
+.start{padding:120px 0 104px}
+.tl{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px;position:relative}
+.tl::before{content:"";position:absolute;left:18px;right:18px;top:18px;height:1px;background:var(--line)}
+.tl li{position:relative}
+.tl-dot{position:relative;z-index:1;width:36px;height:36px;border-radius:999px;display:grid;place-items:center;background:var(--bg);border:1px solid var(--line);font:500 14px/1 Inter,sans-serif;color:var(--ink-2)}
+.tl li:first-child .tl-dot{background:var(--dark);border-color:var(--dark);color:#fff}
+.tl h3{font-size:18px;font-weight:500;letter-spacing:-.01em;margin-top:18px;color:var(--ink-2)}
+.tl p{font-size:14px;line-height:21px;color:var(--muted);margin-top:8px}
+.tl-cta{margin-top:40px}
+.btn-dark{background:var(--dark);color:#fff}
+@media (max-width:1180px){.fsteps{grid-template-columns:1fr 1fr}.tl{grid-template-columns:1fr 1fr;row-gap:36px}.tl::before{display:none}}
+@media (max-width:720px){
+  .start{padding:80px 0 72px}
+  .tl{grid-template-columns:1fr;gap:0;margin-top:32px}
+  .tl li{display:grid;grid-template-columns:36px 1fr;column-gap:16px;padding-bottom:26px}
+  .tl li::before{content:"";position:absolute;left:18px;top:36px;bottom:0;width:1px;background:var(--line)}
+  .tl li:last-child::before{display:none}
+  .tl-dot{grid-row:1/3}
+  .tl h3{margin-top:6px;font-size:17px}
+  .tl p{grid-column:2}
+  .fs{padding:14px 14px 18px}
+  .fs h3{font-size:15px;margin-top:10px}
+  .fs p{font-size:13px;line-height:18px}
+}
 /* Produkte */
 .engine{padding:160px 0 120px;text-align:center}
 .engine .eyebrow{justify-content:center}
@@ -255,17 +201,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* Zitat-Karussell */
 .quotes{background:#fff;padding:120px 0;overflow:hidden}
-.qtrack{position:relative;height:650px}
-.qslide{position:absolute;top:0;left:50%;width:min(1280px,100% - 160px);height:650px;margin-left:calc(min(1280px,100% - 160px)/-2);border-radius:24px;overflow:hidden;color:#fff;transition:transform 1s var(--ease),opacity 1s var(--ease)}
-.qslide .ph{position:absolute;inset:0}
-.qslide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,40,.75),rgba(0,0,0,.25) 55%,rgba(0,0,0,.45))}
-.qslide .c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:64px}
-.qslide .eyebrow{color:#fff}
-.qslide h2{font-size:48px;line-height:56px;font-weight:400;max-width:800px;letter-spacing:-.01em}
-.qslide .btn{margin-top:24px}
-.qslide .who b{display:block;font-size:18px;font-weight:500}
-.qslide .who{max-width:560px}
-.qslide .who span{font-size:18px;line-height:26px;opacity:.9}
 .qnav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:999px;background:#fff;color:#131313;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.15)}
 .qnav.prev{left:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
 .qnav.next{right:calc(50% - min(1280px,100vw - 160px)/2 - 20px)}
@@ -315,7 +250,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .tpanel[data-step="2"] .layers div:nth-child(2){transform:translateY(40px) scale(.9);border-color:var(--teal)}
 
 /* Ergebnisse */
-.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:0 0 144px}
+.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:120px 0 144px;margin-top:120px}
 .bento{display:grid;grid-template-columns:500px 1fr;gap:16px;margin-top:56px}
 .bento .ocard:nth-child(3){grid-column:auto}
 .bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
@@ -371,8 +306,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ---------- Tablet / Handy ---------- */
 @media (max-width:1180px){
-  .hw{grid-template-columns:1fr;gap:28px}
-  .hw-stage{order:-1;min-height:420px}
   :root{--gut:32px}
   .nav-links{display:none}
   .burger{display:block}
@@ -404,20 +337,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 }
 @media (max-width:720px){
   .nav .logo .cw-logo{height:18px}
-  .steps{padding-top:72px}
-  .hw-stage{min-height:440px}
-  .hw-panel{padding:20px 16px 72px}
-  .hw-th em,.hw-s2 .hw-row i+i{display:none}
-  .hw-card{padding:16px;font-size:14px}
-  .hw-s1{gap:10px;padding:18px 12px}
-  .hw-chip{height:34px;font-size:12px;padding:0 8px 0 10px}
-  .hw-cw{width:92px;padding:12px 4px}
-  .hw-arrow svg{width:16px;height:16px}
-  .hw-amt{min-width:64px}
-  .hw-btns{flex-wrap:wrap}
-  .hw-cap{left:16px;right:16px;bottom:16px;font-size:13px}
-  .hw-name{font-size:19px;line-height:24px}
-  .hw-tab{padding:18px 0}
   :root{--gut:16px}
   .nav-in{padding:0 12px 0 16px;height:60px}
   .nav-cta .book{height:38px;font-size:14px}
@@ -429,14 +348,11 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .tab{height:72px;padding:12px;font-size:14px}
   .tab:nth-child(n+3){display:none}
   .pause{bottom:auto;top:-48px}
-  .h2,.cta h2,.qslide h2{font-size:32px;line-height:38px}
+  .h2,.cta h2{font-size:32px;line-height:38px}
   .how,.engine{padding-top:80px}
   .engine{padding-bottom:80px}
   .cards3{grid-template-columns:1fr}
   .quotes{padding:80px 0}
-  .qtrack,.qslide{height:560px}
-  .qslide{width:calc(100% - 32px);margin-left:calc((100% - 32px)/-2)}
-  .qslide .c{padding:28px}
   .qnav{display:none}
   .sol-head{flex-direction:column;align-items:flex-start;gap:20px}
   .scroller{padding:0 16px}
@@ -463,7 +379,7 @@ html[lang=de] .lang a[data-l=de],html[lang=en] .lang a[data-l=en]{opacity:1;font
 /* ===== Handy & Touch (am Ende, damit diese Regeln gewinnen) ===== */
 html{-webkit-text-size-adjust:100%}
 a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.btn:active,.chip:active,.tab:active,.hw-tab:active,.scard:active,.pcard:active{transform:scale(.97)}
+.btn:active,.chip:active,.tab:active,.scard:active,.pcard:active{transform:scale(.97)}
 .nav .logo{min-height:44px}
 .burger{width:44px;height:44px}
 .burger span{left:13px;right:13px}
@@ -494,10 +410,9 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .dots button{width:44px;height:44px;background:none;display:grid;place-items:center}
   .dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .4s var(--ease)}
   .dots button.on::before{background:#fff;width:20px}
-  .qtrack{touch-action:pan-y}
   .solutions{padding-bottom:80px}
   .trust{padding-bottom:80px}
-  .outcomes{padding-bottom:88px}
+  .outcomes{padding-top:72px;padding-bottom:88px;margin-top:72px}
   .cta-wrap{padding-bottom:56px}
   .footer{padding-top:56px}
   .fcols{gap:8px 24px}
@@ -509,7 +424,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .chip{min-height:44px;padding:10px 16px}
   .ask-line{height:56px}
   .ask-line input{font-size:16px}
-  .hw-tab{min-height:64px}
 }
 @media (max-width:360px){
   .nav-cta .book{height:42px}
@@ -527,7 +441,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .dots button{width:44px;height:44px;background:none;display:grid;place-items:center}
   .dots button::before{content:"";width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.45);transition:all .4s var(--ease)}
   .dots button.on::before{background:#fff;width:20px}
-  .qtrack{touch-action:pan-y}
   .fcol a{display:flex;align-items:center;min-height:44px;margin:0}
   .fcol h4{margin-bottom:4px}
   .fbar nav a{display:flex;align-items:center;min-height:44px;padding:0 8px}
@@ -582,10 +495,10 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
     <div style="position:relative">
       <div class="tabs rv" style="--d:.45s" id="tabs">
-        <a href="#produkte" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>Alle Quellen<i class="bar"></i></a>
-        <a href="#produkte" class="tab"><span class="ico" style="background:#1f7a6a"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg></span>Nur Abweichungen<i class="bar"></i></a>
-        <a href="#produkte" class="tab"><span class="ico" style="background:#d9763f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>Fehlermuster<i class="bar"></i></a>
-        <a href="#produkte" class="tab"><span class="ico" style="background:#594aff"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Gästekonten &amp; Kasse<i class="bar"></i></a>
+        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>Anbinden<i class="bar"></i></a>
+        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#1f7a6a"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg></span>Abgleichen<i class="bar"></i></a>
+        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#d9763f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>Markieren<i class="bar"></i></a>
+        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#594aff"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Abschließen<i class="bar"></i></a>
       </div>
       <button class="pause" id="pause" aria-label="Video anhalten"><i></i></button>
     </div>
@@ -660,72 +573,25 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <div class="steps" id="ablauf-schritte">
-      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
-      <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Schritte, und die Nacht ist abgeschlossen.</h2>
-      <div class="hw rv" id="hw">
-        <div class="hw-tabs" role="tablist" aria-label="Vier Schritte">
-          <button class="hw-tab on" role="tab" id="hw-t0" aria-controls="hw-p0" aria-selected="true" tabindex="0">
-            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="hw-n">01</span><span class="hw-name">Anbinden</span>
-            <span class="hw-more"><span>Closewise liest die Exporte, die PMS, Kasse und Bank ohnehin erzeugen. Nichts Neues an der Kasse.</span></span><i class="hw-bar"></i>
-          </button>
-          <button class="hw-tab" role="tab" id="hw-t1" aria-controls="hw-p1" aria-selected="false" tabindex="-1">
-            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="hw-n">02</span><span class="hw-name">Abgleichen</span>
-            <span class="hw-more"><span>Jede Rechnung wird gegen Terminalabschluss, Gästekonto und Kassenbestand geprüft. Regeln, kein Raten.</span></span><i class="hw-bar"></i>
-          </button>
-          <button class="hw-tab" role="tab" id="hw-t2" aria-controls="hw-p2" aria-selected="false" tabindex="-1">
-            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="hw-n">03</span><span class="hw-name">Markieren</span>
-            <span class="hw-more"><span>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag und einer KI-Erklärung zurück.</span></span><i class="hw-bar"></i>
-          </button>
-          <button class="hw-tab" role="tab" id="hw-t3" aria-controls="hw-p3" aria-selected="false" tabindex="-1">
-            <span class="hw-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="hw-n">04</span><span class="hw-name">Abschließen</span>
-            <span class="hw-more"><span>Ein Export im Format, das Ihre Buchhaltung erwartet. Starten, Feierabend.</span></span><i class="hw-bar"></i>
-          </button>
-        </div>
-        <div class="hw-stage">
-          <div class="hw-panel on" role="tabpanel" id="hw-p0" aria-labelledby="hw-t0">
-            <div class="hw-card hw-s1">
-              <div class="hw-files">
-                <span class="hw-chip" style="--k:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>PMS-Export<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
-                <span class="hw-chip" style="--k:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>Kasse.csv<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
-                <span class="hw-chip" style="--k:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7zM14 3v4h4"/></svg>Bank.csv<i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></span>
-              </div>
-              <div class="hw-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-              <div class="hw-cw"><svg class="hw-mark" viewBox="0 0 262 219" fill="currentColor"><use href="#cw" width="1316" height="219"/></svg><b>3 Exporte</b><small>gelesen</small></div>
-            </div>
-            <p class="hw-cap"><span>01</span>An Ihren Systemen ändert sich nichts.</p>
-          </div>
-          <div class="hw-panel" role="tabpanel" id="hw-p1" aria-labelledby="hw-t1">
-            <div class="hw-card hw-s2">
-              <div class="hw-row hw-th"><span>Rechnung</span><span class="hw-amt">Betrag</span><em>Terminal</em><em>Gästekonto</em></div>
-              <div class="hw-row" style="--k:0"><span>1041</span><span class="hw-amt">84,00 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:1"><span>1042</span><span class="hw-amt">126,50 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:2"><span>1043</span><span class="hw-amt">42,50 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:3"><span>1044</span><span class="hw-amt">63,00 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="hw-row" style="--k:4"><span>1045</span><span class="hw-amt">210,00 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
-              <div class="hw-count"><span class="hw-prog"><i></i></span><b>148 von 148</b> geprüft</div>
-            </div>
-            <p class="hw-cap"><span>02</span>Was übereinstimmt, wird abgehakt – und nie gezeigt.</p>
-          </div>
-          <div class="hw-panel" role="tabpanel" id="hw-p2" aria-labelledby="hw-t2">
-            <div class="hw-card hw-s3">
-              <div class="hw-alert"><span class="hw-dot">!</span>1 Abweichung · <b>42,50 €</b> gefährdet</div>
-              <div class="hw-row ok"><span>1042</span><span class="hw-amt">126,50 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
-              <div class="hw-row bad"><span>1043 · Bar</span><span class="hw-amt">− 42,50 €</span><i class="x">!</i></div>
-              <div class="hw-row ok"><span>1044</span><span class="hw-amt">63,00 €</span><i><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
-              <div class="hw-ai"><b>KI-Erklärung</b>Die Kartenzahlung an der Bar fehlt im Terminalabschluss. Vermutlich am zweiten Gerät gebucht.</div>
-            </div>
-            <p class="hw-cap"><span>03</span>Nur was nicht aufgeht, landet auf Ihrer Liste.</p>
-          </div>
-          <div class="hw-panel" role="tabpanel" id="hw-p3" aria-labelledby="hw-t3">
-            <div class="hw-card hw-s4">
-              <div class="hw-title">Export für die Buchhaltung</div>
-              <div class="hw-sub">Abschluss vom 02.10. · alle Outlets</div>
-              <div class="hw-btns">
-                <span class="hw-btn" style="--k:0"><svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><em><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></em>DATEV-Export</span>
-                <span class="hw-btn" style="--k:1"><svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><em><svg class="ck" viewBox="0 0 10 10" fill="none"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></em>CSV</span>
-              </div>
-              <div class="hw-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>Abschluss fertig. Feierabend.</div>
-            </div>
-            <p class="hw-cap"><span>04</span>Die Buchhaltung bekommt einen Abschluss, der aufgeht.</p>
-          </div>
-        </div>
+    <ol class="fsteps" id="ablauf-schritte" aria-label="So funktioniert es">
+      <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Closewise liest die Exporte, die PMS, Kasse und Bank ohnehin erzeugen. Nichts Neues an der Kasse.</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Jede Rechnung wird gegen Terminalabschluss, Gästekonto und Kassenbestand geprüft. Regeln, kein Raten.</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag und einer KI-Erklärung zurück.</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.24s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="fs-n">04</span></div><h3>Abschließen</h3><p>Ein Export im Format, das Ihre Buchhaltung erwartet. Starten, Feierabend.</p><i class="fs-bar"></i></li>
+    </ol>
+  </section>
+
+  <!-- Ergebnisse -->
+  <section class="outcomes wrap" id="ergebnisse">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
+    <h2 class="h2 rv" style="--d:.1s">Dieselbe Nacht,<br>zweimal abgeschlossen.</h2>
+    <p class="lead rv" style="--d:.2s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
+    <div class="bento">
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8,5 Min.</div></div><blockquote>für den Abschluss – statt 60 bis 70 Minuten von Hand.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 Std.</div></div><blockquote>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
+      <div class="row2">
+        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>5.443 €</div></div><blockquote>Risiko in einer einzigen Nacht gefunden.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
+        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       </div>
     </div>
   </section>
@@ -734,39 +600,26 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <section class="engine wrap" id="produkte">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Betrieb</p>
     <h2 class="h2 rv" style="--d:.1s">Jede Zahl, die Ihre Nacht erzeugt.</h2>
-    <p class="lead rv" style="--d:.2s">Kassenbelege, Terminalabschluss, Gästekonto und Kassenbestand – in einem Abgleich.</p>
+    <p class="lead rv" style="--d:.2s">Über den Abgleich hinaus – was Sie jeden Morgen zusätzlich bekommen.</p>
     <div class="cards3">
-      <a href="#ablauf-schritte" class="pcard rv" style="--d:.1s">
-        <div class="hd"><span class="tag" style="background:#1f7a6a">1</span>Abgleich</div>
-        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Alle Quellen, ein Klick</h3><p>Jede Rechnung gegen Terminalabschluss, Gästekonto, Kassenbestand und Korrekturprotokoll geprüft. Deterministisch – Regeln, kein Modell.</p></div>
-      </a>
-      <a href="#ablauf-schritte" class="pcard rv" style="--d:.2s">
-        <div class="hd"><span class="tag" style="background:#d9763f">2</span>Abweichungen</div>
-        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Nur was nicht aufging</h3><p>Nicht aufgehende Positionen kommen einzeln zurück, sortiert nach gefährdetem Eurobetrag. Die Erklärung darunter schreibt eine KI.</p></div>
-      </a>
-      <a href="#ablauf-schritte" class="pcard rv" style="--d:.3s">
-        <div class="hd"><span class="tag" style="background:#594aff">3</span>Muster</div>
+      <a href="#ablauf" class="pcard rv" style="--d:.1s">
+        <div class="hd"><span class="tag" style="background:#594aff">1</span>Muster</div>
         <div class="media"><div class="icons">
           <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
           <i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
         </div></div>
         <div class="ft"><h3>Derselbe Fehler, vier Nächte in Folge</h3><p>Wiederholte Ursachen gruppiert: ein defektes Terminal, eine PMS-Synchronisation, eine Gewohnheit. Eine schlechte Nacht ist Rauschen – vier sind behebbar.</p></div>
       </a>
-    </div>
-  </section>
-
-  <!-- Zitat-Karussell -->
-  <section class="quotes" aria-roledescription="Karussell" aria-label="So fangen Sie an">
-    <div class="qtrack" id="qtrack">
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 1/4</p><h2>Termin buchen</h2><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a></div><div class="who"><span>Zwanzig Minuten. Wir nehmen eine Nacht aus Ihrem Haus und zeigen genau, was Closewise erledigt hätte.</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 2/4</p><h2>Wir binden Ihre Systeme an</h2></div><div class="who"><span>Wir richten Closewise auf die Exporte, die Ihr PMS, Ihr Kassensystem und Ihre Bank ohnehin erzeugen. An Ihren Systemen ändert sich nichts.</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 3/4</p><h2>Wir schließen eine Nacht parallel ab</h2></div><div class="who"><span>Sie schließen von Hand ab, Closewise parallel, und wir vergleichen beides. Sie sehen, was es gefunden hat.</span></div></div></article>
-      <article class="qslide"><div class="ph" aria-hidden="true"><img src="bilder/zitat-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="c"><div><p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an · 4/4</p><h2>Sie hören auf, von Hand abzuschließen</h2></div><div class="who"><span>Nach Dienstschluss starten. Was nicht aufging, kommt als kurze Liste zurück – sonst nichts.</span></div></div></article>
-      <button class="qnav prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button class="qnav next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg></button>
-      <div class="dots" id="dots"></div>
+      <a href="#ablauf" class="pcard rv" style="--d:.2s">
+        <div class="hd"><span class="tag" style="background:#1f7a6a">2</span>Gästekonten &amp; Kasse</div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
+        <div class="ft"><h3>Gästekonten und die Kasse</h3><p>Zimmerbuchungen gegen den Outlet geprüft, der sie erzeugt hat, und der gezählte Kassenbestand gegen das, was das System erfasst hat – noch in derselben Nacht.</p></div>
+      </a>
+      <a href="#ablauf" class="pcard rv" style="--d:.3s">
+        <div class="hd"><span class="tag" style="background:#d9763f">3</span>Export</div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
+        <div class="ft"><h3>Export für die Buchhaltung</h3><p>Der fertige Abschluss erzeugt einen Buchungssatz – Bargeld, Karte und Umsatz nach Kategorie auf eigenen Konten – als CSV oder DATEV-Export.</p></div>
+      </a>
     </div>
   </section>
 
@@ -805,19 +658,17 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </section>
 
-  <!-- Ergebnisse -->
-  <section class="outcomes wrap" id="ergebnisse">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
-    <h2 class="h2 rv" style="--d:.1s">Dieselbe Nacht,<br>zweimal abgeschlossen.</h2>
-    <p class="lead rv" style="--d:.2s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
-    <div class="bento">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8,5 Min.</div></div><blockquote>für den Abschluss – statt 60 bis 70 Minuten von Hand.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
-      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 Std.</div></div><blockquote>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
-      <div class="row2">
-        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>5.443 €</div></div><blockquote>Risiko in einer einzigen Nacht gefunden.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
-        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
-      </div>
-    </div>
+  <!-- Einstieg -->
+  <section class="start wrap" id="einstieg">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vom ersten Gespräch zum ersten Abschluss.</h2>
+    <ol class="tl">
+      <li class="rv" style="--d:0.0s"><span class="tl-dot">1</span><h3>Termin buchen</h3><p>Zwanzig Minuten. Wir nehmen eine Nacht aus Ihrem Haus und zeigen genau, was Closewise erledigt hätte.</p></li>
+      <li class="rv" style="--d:0.1s"><span class="tl-dot">2</span><h3>Wir binden Ihre Systeme an</h3><p>Wir richten Closewise auf die Exporte, die Ihr PMS, Ihr Kassensystem und Ihre Bank ohnehin erzeugen. An Ihren Systemen ändert sich nichts.</p></li>
+      <li class="rv" style="--d:0.2s"><span class="tl-dot">3</span><h3>Wir schließen eine Nacht parallel ab</h3><p>Sie schließen von Hand ab, Closewise parallel, und wir vergleichen beides. Sie sehen, was es gefunden hat.</p></li>
+      <li class="rv" style="--d:0.3s"><span class="tl-dot">4</span><h3>Sie hören auf, von Hand abzuschließen</h3><p>Nach Dienstschluss starten. Was nicht aufging, kommt als kurze Liste zurück – sonst nichts.</p></li>
+    </ol>
+    <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark rv tl-cta">Termin buchen</a>
   </section>
 
   <!-- CTA -->
@@ -937,49 +788,9 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     track.addEventListener('load', () => loaded.then(layout), true);
   }
 
-  // Vier Schritte: Reiter steuern die Bühne; Autoplay mit Ladebalken, nur im Sichtbereich, Pause bei Hover
-  const hw = document.getElementById('hw');
-  if (hw) {
-    const tabs = [...hw.querySelectorAll('.hw-tab')], panels = [...hw.querySelectorAll('.hw-panel')];
-    const DUR = 5000; let cur = 0, timer = 0, visible = false, hover = false, left = DUR, started = 0;
-    hw.style.setProperty('--hw-dur', DUR / 1000 + 's');
-    const select = (i, focus) => {
-      if (i !== cur) { const old = panels[cur]; old.classList.add('keep'); setTimeout(() => old.classList.remove('keep'), 550); }
-      tabs.forEach((t, k) => { const on = k === i; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-      panels.forEach((p, k) => p.classList.toggle('on', k === i));
-      // Ladebalken neu starten
-      const bar = tabs[i].querySelector('.hw-bar'); bar.style.animation = 'none'; bar.offsetWidth; bar.style.animation = '';
-      cur = i; if (focus) tabs[i].focus(); left = DUR; schedule();
-    };
-    const schedule = () => {
-      clearTimeout(timer); timer = 0;
-      if (reduce || !visible || hover) return;
-      started = Date.now(); timer = setTimeout(() => select((cur + 1) % tabs.length), left);
-    };
-    tabs.forEach((t, k) => {
-      t.addEventListener('click', () => {
-        select(k);
-        // Am Handy steht die Bühne über der Liste – nach dem Tipp ins Bild holen
-        const st = hw.querySelector('.hw-stage'), r = st.getBoundingClientRect();
-        if (matchMedia('(max-width:1180px)').matches && (r.top < 70 || r.bottom > innerHeight))
-          lenis ? lenis.scrollTo(st, {offset:-90}) : st.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-      t.addEventListener('keydown', e => {
-        const d = {ArrowDown:1, ArrowRight:1, ArrowUp:-1, ArrowLeft:-1}[e.key];
-        if (d) { e.preventDefault(); select((cur + d + tabs.length) % tabs.length, true); }
-      });
-    });
-    hw.addEventListener('mouseenter', () => { hover = true; if (timer) left -= Date.now() - started; clearTimeout(timer); timer = 0; hw.classList.add('paused'); });
-    hw.addEventListener('mouseleave', () => { hover = false; hw.classList.remove('paused'); schedule(); });
-    if (reduce) hw.querySelectorAll('.hw-bar').forEach(b => b.style.display = 'none');
-    new IntersectionObserver(es => es.forEach(e => {
-      visible = e.isIntersecting;
-      if (visible) { hw.classList.remove('paused'); schedule(); } else { if (timer) left -= Date.now() - started; clearTimeout(timer); timer = 0; hw.classList.add('paused'); }
-    }), {threshold:.35}).observe(hw);
-  }
-
   // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „Closewise Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
+  const fSteps = [...document.querySelectorAll('#ablauf-schritte .fs')];
   const $ = id => document.getElementById(id);
   const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
   const gPaths = [0,1,2,3,4].map(i => $('fp' + i)), pLen = gPaths.map(p => p.getTotalLength());
@@ -1003,6 +814,12 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   const BLUE = '#2f6bff';
 
   const drawFlow = t => {
+    // Schritt-Leiste: Phase aus der Zeitachse (0–1,6 / 1,6–4,2 / 4,2–6,5 / 6,5–11 s)
+    const PH = [0, 1.6, 4.2, 6.5, 11], ph = t < 1.6 ? 0 : t < 4.2 ? 1 : t < 6.5 ? 2 : 3;
+    fSteps.forEach((el, k) => {
+      el.classList.toggle('on', k === ph);
+      el.lastElementChild.style.width = k < ph ? '0%' : k === ph ? Math.min(100, (t - PH[k]) / (PH[k + 1] - PH[k]) * 100) + '%' : '0%';
+    });
     const seg = (a, b) => cl((t - a) / (b - a));
     const bump = (a, d) => Math.sin(Math.PI * seg(a, a + d));
     const fade = 1 - seg(10.3, 10.9), live = fade > .5, wide = !narrow.matches;
@@ -1108,35 +925,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
       else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
     }), {threshold:.2}).observe(flow);
   }
-
-  // Zitat-Karussell: Nachbarn schauen seitlich hinein
-  const slides = [...document.querySelectorAll('.qslide')], dots = document.getElementById('dots');
-  let qi = 0, qt;
-  slides.forEach((_,i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Zitat ' + (i+1)); b.onclick = () => go(i); dots.append(b); });
-  const go = i => {
-    qi = (i + slides.length) % slides.length;
-    slides.forEach((s,k) => {
-      let d = k - qi; if (d > slides.length/2) d -= slides.length; if (d < -slides.length/2) d += slides.length;
-      s.style.transform = `translateX(calc(${d} * (100% + 24px)))`;
-      s.style.opacity = Math.abs(d) > 1 ? 0 : 1; s.style.zIndex = d === 0 ? 2 : 1;
-      s.setAttribute('aria-hidden', d !== 0);
-    });
-    [...dots.children].forEach((b,k) => b.classList.toggle('on', k === qi));
-    clearTimeout(qt); if (!reduce) qt = setTimeout(() => go(qi + 1), 7000);
-  };
-  document.querySelector('.qnav.prev').onclick = () => go(qi - 1);
-  document.querySelector('.qnav.next').onclick = () => go(qi + 1);
-  go(0);
-  // Wischen auf Touch-Geräten (vertikales Scrollen bleibt frei: touch-action pan-y)
-  const qtrack = document.getElementById('qtrack');
-  let qx = null, qy = 0;
-  qtrack.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') return; qx = e.clientX; qy = e.clientY; clearTimeout(qt); });
-  qtrack.addEventListener('pointerup', e => {
-    if (qx === null) return;
-    const dx = e.clientX - qx, dy = e.clientY - qy; qx = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(qi + (dx < 0 ? 1 : -1)); else go(qi);
-  });
-  qtrack.addEventListener('pointercancel', () => { qx = null; go(qi); });
 
   // Lösungen: Pfeile und Ziehen mit der Maus
   const sc = document.getElementById('scroller'), sp = document.getElementById('sPrev'), sn = document.getElementById('sNext');

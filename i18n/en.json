@@ -15,17 +15,14 @@
     "Termin buchen": "Book a call",
     "Termin buchen ›": "Book a call ›",
     "Video anhalten": "Pause video",
-
     "Die zusätzliche Stunde: endgültig vorbei.": "That extra hour, gone. For good.",
     "Closewise schließt die Nacht ab und zeigt nur, was nicht zusammenpasst.": "Closewise closes the night and shows you only what did not match.",
     "Alle Quellen": "Every source",
     "Nur Abweichungen": "Only exceptions",
     "Fehlermuster": "Fault patterns",
     "Gästekonten &amp; Kasse": "Folios &amp; drawer",
-
     "Liest die Exporte aus": "Reads the exports from",
     "Systeme, deren Exporte Closewise liest": "Systems whose exports Closewise reads",
-
     "Vier Systeme. Keines spricht mit dem anderen.": "Four systems. None of them talk to each other.",
     "Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.": "Four systems that don't know each other. Every night, a person becomes the link between them.",
     "Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.": "Flow: till receipts, card terminal, guest ledger, POS system and bank account come together in Closewise, differences are cleared, then the export for your accountant as a DATEV file or CSV.",
@@ -42,7 +39,6 @@
     "Export für Steuerberater": "Export for your accountant",
     "Wartet auf den Abschluss.": "Waiting for the close.",
     "DATEV-Export": "DATEV export",
-
     "Vier Schritte": "Four steps",
     "Vier Schritte, und die Nacht ist abgeschlossen.": "Four steps, and the night is closed.",
     "Anbinden": "Connect",
@@ -78,7 +74,6 @@
     "63,00 €": "€63.00",
     "210,00 €": "€210.00",
     "− 42,50 €": "−€42.50",
-
     "Jede Zahl, die Ihre Nacht erzeugt.": "Every number your night produces.",
     "Kassenbelege, Terminalabschluss, Gästekonto und Kassenbestand – in einem Abgleich.": "Till receipts, terminal batch, guest ledger and drawer count – in one match.",
     "Abgleich": "Match",
@@ -90,7 +85,6 @@
     "Muster": "Trends",
     "Derselbe Fehler, vier Nächte in Folge": "The same fault, four nights running",
     "Wiederholte Ursachen gruppiert: ein defektes Terminal, eine PMS-Synchronisation, eine Gewohnheit. Eine schlechte Nacht ist Rauschen – vier sind behebbar.": "Repeat causes grouped: a failing terminal, a PMS sync, a habit. One bad night is noise; the same fault on four is fixable.",
-
     "So fangen Sie an": "Getting started",
     "So fangen Sie an · 1/4": "Getting started · 1/4",
     "So fangen Sie an · 2/4": "Getting started · 2/4",
@@ -105,7 +99,6 @@
     "Nach Dienstschluss starten. Was nicht aufging, kommt als kurze Liste zurück – sonst nichts.": "Click run at the end of service. What did not balance comes back as a short list, and nothing else does.",
     "Zurück": "Previous",
     "Weiter": "Next",
-
     "Für wen": "Who it's for",
     "Für jeden, der die Nacht abschließt.": "For everyone who closes the night.",
     "Kein Zeilenlesen mehr um drei Uhr. Closewise gleicht ab, Sie prüfen nur, was nicht aufging.": "No more reading line by line at 3 a.m. Closewise matches; you only check what didn't balance.",
@@ -114,7 +107,6 @@
     "Stornos ohne Freigabe und fehlende Kartenzahlungen je Outlet, sortiert nach Eurobetrag.": "Voids without approval and missing card payments per outlet, ranked by euro value.",
     "Ein Export im Format, das Ihre Buchhaltung erwartet – und die Fehlermuster dahinter.": "One export in the format your books expect – and the fault patterns behind it.",
     "Der gefährdete Eurobetrag jeder Nacht auf einen Blick.": "Every night's euro value at risk, at a glance.",
-
     "Es liest Ihre Zahlen. Sonst nichts.": "It reads your numbers. Nothing else.",
     "Closewise bekommt fertige Exporte, gleicht sie ab und berichtet. Mehr Zugriff braucht es nicht.": "Closewise is handed finished exports, matches them and reports. It needs no more access than that.",
     "Verarbeitung in der EU": "Processed in the EU",
@@ -123,7 +115,6 @@
     "Ihre Nacht wird gelesen, abgeglichen und berichtet. Gespeichert wird der Abweichungsnachweis – was markiert wurde, wo und warum –, nicht das Rohjournal.": "Your night is read, matched and reported. What is kept is the exception record – what was flagged, where, and why – not the raw ledger.",
     "Es bekommt Exporte": "It is handed exports",
     "Closewise schreibt nie in Ihr PMS, Ihr Kassensystem oder Ihre Bank. Ein Schreibzugriff ist nicht möglich und nicht bloß unterlassen.": "Closewise never writes to your PMS, your POS or your bank. A write is not possible rather than merely not done.",
-
     "Mit Closewise": "With Closewise",
     "Dieselbe Nacht,": "The same night,",
     "zweimal abgeschlossen.": "closed twice.",
@@ -136,13 +127,11 @@
     "5.443 €": "€5,443",
     "Risiko in einer einzigen Nacht gefunden.": "at risk, found in a single night.",
     "Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.": "exceptions reported, instead of reading every line by hand.",
-
     "Sehen Sie es an": "See it on",
     "Ihren eigenen Zahlen.": "your own numbers.",
     "Bringen Sie eine Nacht mit, die Ärger gemacht hat.": "Bring a night that caused trouble.",
     "Zwanzig Minuten reichen, um zu zeigen, was Closewise darin gefunden hätte.": "Twenty minutes is enough to show what Closewise would have found in it.",
     "Demo anfragen": "Ask for a demo",
-
     "Nächtlicher Kassenabschluss für Hotels und ihre Outlets.": "Nightly close reconciliation for hotels and the outlets inside them.",
     "Closewise sagt Ihnen nur, was nicht zusammenpasst.": "It tells you only what did not match.",
     "Produkt": "Product",
@@ -152,7 +141,6 @@
     "Impressum": "Legal notice",
     "Datenschutz": "Privacy",
     "Genannte Marken und Logos gehören ihren Inhabern. Closewise ist mit diesen Anbietern nicht verbunden.": "Brands and logos mentioned belong to their owners. Closewise is not affiliated with these providers.",
-
     "Fragen": "Questions",
     "Was Betreiber uns fragen.": "What operators ask us.",
     "Was in jedem ersten Gespräch auftaucht, klar beantwortet. Ihre Frage ist nicht dabei? Stellen Sie sie unten.": "The things that come up on every first call, answered plainly. Yours isn't here? Ask it below.",
@@ -176,7 +164,13 @@
     "Was kostet Closewise?": "What does Closewise cost?",
     "Funktioniert es mit mehreren Outlets?": "Does it work with several outlets?",
     "Zum Beispiel: Wie lange dauert die Einrichtung?": "For example: How long does setup take?",
-    "Frage senden": "Send question"
+    "Frage senden": "Send question",
+    "Über den Abgleich hinaus – was Sie jeden Morgen zusätzlich bekommen.": "Beyond the match – what you get on top, every morning.",
+    "Gästekonten und die Kasse": "Folios and the drawer",
+    "Zimmerbuchungen gegen den Outlet geprüft, der sie erzeugt hat, und der gezählte Kassenbestand gegen das, was das System erfasst hat – noch in derselben Nacht.": "Room postings checked against the outlet that raised them, and the drawer against what the system recorded – the same night.",
+    "Export": "Export",
+    "Der fertige Abschluss erzeugt einen Buchungssatz – Bargeld, Karte und Umsatz nach Kategorie auf eigenen Konten – als CSV oder DATEV-Export.": "The finished close builds an accounting entry – cash, card and revenue by category on their own accounts – as CSV or DATEV export.",
+    "Vom ersten Gespräch zum ersten Abschluss.": "From the first call to the first close."
   },
   "js": {
     "'Video abspielen'": "'Play video'",
