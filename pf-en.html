@@ -179,6 +179,44 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .fs h3{font-size:15px;margin-top:10px}
   .fs p{font-size:13px;line-height:18px}
 }
+/* Problem, Statistik, Lösung, Validierung – große, gut lesbare Absätze */
+.prob{padding:120px 0 0;scroll-margin-top:90px}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.prob-text p{font-size:20px;line-height:31px;color:var(--ink-2)}
+.prob-text p+p{margin-top:18px}
+.prob-em{font-weight:500}
+.stats-head{margin-top:72px;font-size:14px;font-weight:500;color:var(--muted-2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+.stat b{display:block;font-size:52px;line-height:1;font-weight:400;letter-spacing:-.02em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:16px;font-size:15px;line-height:22px;color:var(--muted)}
+.stats-note{margin-top:24px;font-size:17px;line-height:26px;color:var(--ink-2);max-width:780px}
+.stats-src{margin-top:10px;font-size:13px;color:var(--muted-2)}
+.how{scroll-margin-top:90px}
+.sol-text{font-size:20px;line-height:31px;color:var(--ink-2);max-width:820px;margin-top:20px}
+.how-intro{margin-top:56px;scroll-margin-top:100px}
+.how-intro p{font-size:18px;line-height:28px;color:var(--ink-2);max-width:760px}
+.valid{padding:120px 0 0}
+.valid-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:end}
+.valid-text{font-size:20px;line-height:31px;color:var(--ink-2);margin-top:20px;max-width:640px}
+.valid-num{padding:32px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.valid-num b{display:block;font-size:88px;line-height:1;font-weight:400;letter-spacing:-.03em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.valid-num span{display:block;margin-top:16px;font-size:16px;line-height:24px;color:var(--muted)}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:1180px){.prob-grid,.valid-grid{grid-template-columns:1fr;gap:24px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:360px){.stats{grid-template-columns:1fr}.stat{display:flex;align-items:baseline;gap:14px}.stat span{margin-top:0}.stat b{flex:none;font-size:32px}}
+@media (max-width:720px){
+  .prob,.valid{padding-top:80px}
+  .prob-text p,.sol-text,.valid-text{font-size:18px;line-height:28px}
+  .how-intro p{font-size:17px;line-height:26px}
+  .stats-head{margin-top:48px}
+  .stats{gap:10px}
+  .stat{padding:18px 16px}
+  .stat b{font-size:36px}
+  .stat span{font-size:14px;line-height:20px;margin-top:10px}
+  .valid-num{padding:24px}
+  .valid-num b{font-size:64px}
+}
 /* Produkte */
 .engine{padding:160px 0 120px;text-align:center}
 .engine .eyebrow{justify-content:center}
@@ -461,7 +499,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <div class="nav-in">
     <a href="#" class="logo" aria-label="Closewise home"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
     <nav class="nav-links" aria-label="Main navigation">
-      <a href="#ablauf">The problem</a>
+      <a href="#problem">The problem</a>
       <a href="#ablauf-schritte">How it works</a>
       <a href="#produkte">Operations</a>
       <a href="#vertrauen">Security</a>
@@ -475,7 +513,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menu">
-    <nav class="mob-links"><a href="#ablauf">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a><a href="faq-en.html">FAQ</a></nav>
+    <nav class="mob-links"><a href="#problem">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a><a href="faq-en.html">FAQ</a></nav>
     <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Book a call</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost">See it live</a><span class="lang" aria-label="Language"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span></div>
   </div>
 </header>
@@ -518,11 +556,34 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
 
-  <!-- So funktioniert es -->
+  <!-- Problem -->
+  <section class="prob wrap" id="problem">
+    <div class="prob-grid">
+      <div>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The problem</p>
+        <h2 class="h2 rv" style="--d:.1s">Four systems. None of them talk to each other.</h2>
+      </div>
+      <div class="prob-text rv" style="--d:.15s">
+        <p>Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it's happening, there's one less person on the floor. The rest of the team ends up staying late, waiting for it to finish.</p>
+        <p class="prob-em">That hour is not just lost time. It is overtime pay. A tired team. And hours that should have gone to guests instead.</p>
+      </div>
+    </div>
+    <p class="stats-head rv">Statistics</p>
+    <div class="stats">
+      <div class="stat rv" style="--d:0.00s"><b>91%</b><span>of hotels still rely on manual reporting, even inside automated systems.</span></div>
+      <div class="stat rv" style="--d:0.08s"><b>4 in 5</b><span>spend one to two full days a week buried in spreadsheets.</span></div>
+      <div class="stat rv" style="--d:0.16s"><b>3–8%</b><span>of gross revenue lost to leakage across travel and hospitality, on industry estimates.</span></div>
+      <div class="stat rv" style="--d:0.24s"><b>~5%</b><span>more again from occupational fraud.</span></div>
+    </div>
+    <p class="stats-note rv">Night auditor roles at major international hotel brands still list manually comparing cashier reports and reconciling guest ledgers as part of the job.</p>
+    <p class="stats-src rv">Industry estimates, not Closewise measurements. Sources on request.</p>
+  </section>
+
+  <!-- Lösung + So funktioniert es -->
   <section class="how wrap" id="ablauf">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The problem</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Four systems. None of them talk to each other.</h2>
-    <p class="lead rv" style="--d:.2s;max-width:520px">Four systems that don't know each other. Every night, a person becomes the link between them.</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The solution</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:760px">Closewise checks every transaction for you.</h2>
+    <p class="sol-text rv" style="--d:.2s">Closewise checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight's close, that's it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. It hands you back the one thing closing never gave you before. Time.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Flow: till receipts, card terminal, guest ledger, POS system and bank account come together in Closewise, differences are cleared, then the export for your accountant as a DATEV file or CSV.">
       <div class="flow-stage" id="flowStage">
         <div class="flow-glow" id="fGlow"></div>
@@ -573,7 +634,11 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <ol class="fsteps" id="ablauf-schritte" aria-label="How it works">
+    <div class="how-intro" id="ablauf-schritte">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>How it works</p>
+      <p class="rv" style="--d:.1s">Closewise checks the numbers first, using straightforward, deterministic matching, not guesswork. Only once something is actually found does it explain what happened, in plain language you can read at a glance.</p>
+    </div>
+    <ol class="fsteps" id="fsteps" aria-label="How it works">
       <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Connect</h3><p>Closewise reads the exports your PMS, your POS and your bank already produce. Nothing new at the point of sale.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Match</h3><p>Every check is tested against the terminal batch, the guest ledger and the drawer count. Rules, not guesswork.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Flag</h3><p>What didn't balance comes back with the euro value at risk and an AI explanation.</p><i class="fs-bar"></i></li>
@@ -593,6 +658,18 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>€5,443</div></div><blockquote>at risk, found in a single night.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
         <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>exceptions reported, instead of reading every line by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
       </div>
+    </div>
+  </section>
+
+  <!-- Validierung -->
+  <section class="valid wrap" id="validierung">
+    <div class="valid-grid">
+      <div>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Validation</p>
+        <h2 class="h2 rv" style="--d:.1s">Already live.</h2>
+        <p class="valid-text rv" style="--d:.2s">Closewise is already live in hospitality businesses, automating the nightly close every day. The market: Germany, Austria, Switzerland, Italy, and France alone are home to over 15,000 upscale hotels, most still closing by hand.</p>
+      </div>
+      <div class="valid-num rv" style="--d:.2s"><b>15,000+</b><span>upscale hotels in Germany, Austria, Switzerland, Italy and France – most still closing by hand.</span></div>
     </div>
   </section>
 
@@ -676,9 +753,9 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <div class="wrap cta rv">
       <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
       <div class="c">
-        <h2>See it on<br>your own numbers.</h2>
-        <p>Bring a night that caused trouble.<br>Twenty minutes is enough to show what Closewise would have found in it.</p>
-        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Ask for a demo</a>
+        <h2>See it on your own<br>numbers first.</h2>
+        <p>Book a short call or ask for a live demo.</p>
+        <div class="cta-btns"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Book a call</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-glass">Live demo</a></div>
       </div>
     </div>
   </section>
@@ -692,7 +769,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <a href="#top" class="logo"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
         <p>Nightly close reconciliation for hotels and the outlets inside them.<br>It tells you only what did not match.</p>
       </div>
-      <div class="fcol"><h4>Product</h4><a href="#ablauf">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a></div>
+      <div class="fcol"><h4>Product</h4><a href="#problem">The problem</a><a href="#ablauf-schritte">How it works</a><a href="#produkte">Operations</a><a href="#vertrauen">Security</a></div>
       <div class="fcol"><h4>Company</h4><a href="mailto:info@closewise.eu">Contact</a><a href="faq-en.html">FAQ</a></div>
       <div class="fcol"><h4>Follow</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
@@ -790,7 +867,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 
   // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „Closewise Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
-  const fSteps = [...document.querySelectorAll('#ablauf-schritte .fs')];
+  const fSteps = [...document.querySelectorAll('#fsteps .fs')];
   const $ = id => document.getElementById(id);
   const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
   const gPaths = [0,1,2,3,4].map(i => $('fp' + i)), pLen = gPaths.map(p => p.getTotalLength());

@@ -179,6 +179,44 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .fs h3{font-size:15px;margin-top:10px}
   .fs p{font-size:13px;line-height:18px}
 }
+/* Problem, Statistik, Lösung, Validierung – große, gut lesbare Absätze */
+.prob{padding:120px 0 0;scroll-margin-top:90px}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.prob-text p{font-size:20px;line-height:31px;color:var(--ink-2)}
+.prob-text p+p{margin-top:18px}
+.prob-em{font-weight:500}
+.stats-head{margin-top:72px;font-size:14px;font-weight:500;color:var(--muted-2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px}
+.stat b{display:block;font-size:52px;line-height:1;font-weight:400;letter-spacing:-.02em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:16px;font-size:15px;line-height:22px;color:var(--muted)}
+.stats-note{margin-top:24px;font-size:17px;line-height:26px;color:var(--ink-2);max-width:780px}
+.stats-src{margin-top:10px;font-size:13px;color:var(--muted-2)}
+.how{scroll-margin-top:90px}
+.sol-text{font-size:20px;line-height:31px;color:var(--ink-2);max-width:820px;margin-top:20px}
+.how-intro{margin-top:56px;scroll-margin-top:100px}
+.how-intro p{font-size:18px;line-height:28px;color:var(--ink-2);max-width:760px}
+.valid{padding:120px 0 0}
+.valid-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:end}
+.valid-text{font-size:20px;line-height:31px;color:var(--ink-2);margin-top:20px;max-width:640px}
+.valid-num{padding:32px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.valid-num b{display:block;font-size:88px;line-height:1;font-weight:400;letter-spacing:-.03em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.valid-num span{display:block;margin-top:16px;font-size:16px;line-height:24px;color:var(--muted)}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:1180px){.prob-grid,.valid-grid{grid-template-columns:1fr;gap:24px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:360px){.stats{grid-template-columns:1fr}.stat{display:flex;align-items:baseline;gap:14px}.stat span{margin-top:0}.stat b{flex:none;font-size:32px}}
+@media (max-width:720px){
+  .prob,.valid{padding-top:80px}
+  .prob-text p,.sol-text,.valid-text{font-size:18px;line-height:28px}
+  .how-intro p{font-size:17px;line-height:26px}
+  .stats-head{margin-top:48px}
+  .stats{gap:10px}
+  .stat{padding:18px 16px}
+  .stat b{font-size:36px}
+  .stat span{font-size:14px;line-height:20px;margin-top:10px}
+  .valid-num{padding:24px}
+  .valid-num b{font-size:64px}
+}
 /* Produkte */
 .engine{padding:160px 0 120px;text-align:center}
 .engine .eyebrow{justify-content:center}
@@ -461,7 +499,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <div class="nav-in">
     <a href="#" class="logo" aria-label="Closewise Startseite"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
     <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="#ablauf">Das Problem</a>
+      <a href="#problem">Das Problem</a>
       <a href="#ablauf-schritte">So funktioniert es</a>
       <a href="#produkte">Betrieb</a>
       <a href="#vertrauen">Sicherheit</a>
@@ -475,7 +513,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menü">
-    <nav class="mob-links"><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a><a href="faq.html">FAQ</a></nav>
+    <nav class="mob-links"><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a><a href="faq.html">FAQ</a></nav>
     <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Termin buchen</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost">Live ansehen</a><span class="lang" aria-label="Sprache"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span></div>
   </div>
 </header>
@@ -518,11 +556,34 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
 
-  <!-- So funktioniert es -->
+  <!-- Problem -->
+  <section class="prob wrap" id="problem">
+    <div class="prob-grid">
+      <div>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
+        <h2 class="h2 rv" style="--d:.1s">Vier Systeme. Keines spricht mit dem anderen.</h2>
+      </div>
+      <div class="prob-text rv" style="--d:.15s">
+        <p>Jede Nacht muss jemand aufhören und die Zahlen von Hand prüfen. Kassen, Belege und Zahlungen werden einzeln verglichen. Das dauert eine Stunde oder länger, komplett von Hand. Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist.</p>
+        <p class="prob-em">Diese Stunde ist nicht nur verlorene Zeit. Sie bedeutet Überstunden. Ein müdes Team. Und Stunden, die eigentlich den Gästen gehören.</p>
+      </div>
+    </div>
+    <p class="stats-head rv">Zahlen aus der Branche</p>
+    <div class="stats">
+      <div class="stat rv" style="--d:0.00s"><b>91 %</b><span>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</span></div>
+      <div class="stat rv" style="--d:0.08s"><b>4 von 5</b><span>verbringen ein bis zwei volle Tage pro Woche in Tabellen.</span></div>
+      <div class="stat rv" style="--d:0.16s"><b>3–8 %</b><span>Umsatzverlust in Reise und Gastgewerbe – laut Branchenschätzungen.</span></div>
+      <div class="stat rv" style="--d:0.24s"><b>~5 %</b><span>kommen durch Betrug am Arbeitsplatz noch hinzu.</span></div>
+    </div>
+    <p class="stats-note rv">Stellenanzeigen für Night Auditors großer internationaler Hotelmarken nennen das manuelle Abgleichen von Kassenberichten und Gästekonten noch immer als Aufgabe.</p>
+    <p class="stats-src rv">Branchenschätzungen, keine Closewise-Messungen. Quellen auf Anfrage.</p>
+  </section>
+
+  <!-- Lösung + So funktioniert es -->
   <section class="how wrap" id="ablauf">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Systeme. Keines spricht mit dem anderen.</h2>
-    <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Die Lösung</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:760px">Closewise prüft jede Buchung für Sie.</h2>
+    <p class="sol-text rv" style="--d:.2s">Closewise prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbuchung, jede Bankeinzahlung. Alles wird automatisch abgeglichen. Starten Sie den Abschluss für heute Nacht – das war’s. Was übereinstimmt, wird von selbst erledigt. Was nicht passt, wird markiert, der Grund steht schon dabei. Closewise gibt Ihnen zurück, was der Abschluss Ihnen nie gelassen hat: Zeit.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
         <div class="flow-glow" id="fGlow"></div>
@@ -573,7 +634,11 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <ol class="fsteps" id="ablauf-schritte" aria-label="So funktioniert es">
+    <div class="how-intro" id="ablauf-schritte">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
+      <p class="rv" style="--d:.1s">Closewise prüft zuerst die Zahlen – mit klarem, festem Regelabgleich, ohne Raten. Erst wenn wirklich etwas gefunden wurde, erklärt es, was passiert ist, in einfacher Sprache, auf einen Blick lesbar.</p>
+    </div>
+    <ol class="fsteps" id="fsteps" aria-label="So funktioniert es">
       <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Closewise liest die Exporte, die PMS, Kasse und Bank ohnehin erzeugen. Nichts Neues an der Kasse.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Jede Rechnung wird gegen Terminalabschluss, Gästekonto und Kassenbestand geprüft. Regeln, kein Raten.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag und einer KI-Erklärung zurück.</p><i class="fs-bar"></i></li>
@@ -593,6 +658,18 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>5.443 €</div></div><blockquote>Risiko in einer einzigen Nacht gefunden.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
         <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       </div>
+    </div>
+  </section>
+
+  <!-- Validierung -->
+  <section class="valid wrap" id="validierung">
+    <div class="valid-grid">
+      <div>
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Validierung</p>
+        <h2 class="h2 rv" style="--d:.1s">Schon im Einsatz.</h2>
+        <p class="valid-text rv" style="--d:.2s">Closewise ist bereits in Betrieben der Hotellerie live und automatisiert jeden Tag den Nachtabschluss. Der Markt: Allein Deutschland, Österreich, Schweiz, Italien und Frankreich haben über 15.000 gehobene Hotels – die meisten schließen noch von Hand ab.</p>
+      </div>
+      <div class="valid-num rv" style="--d:.2s"><b>15.000+</b><span>gehobene Hotels in Deutschland, Österreich, Schweiz, Italien und Frankreich – die meisten schließen noch von Hand ab.</span></div>
     </div>
   </section>
 
@@ -676,9 +753,9 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <div class="wrap cta rv">
       <span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
       <div class="c">
-        <h2>Sehen Sie es an<br>Ihren eigenen Zahlen.</h2>
-        <p>Bringen Sie eine Nacht mit, die Ärger gemacht hat.<br>Zwanzig Minuten reichen, um zu zeigen, was Closewise darin gefunden hätte.</p>
-        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Demo anfragen</a>
+        <h2>Sehen Sie es zuerst<br>an Ihren eigenen Zahlen.</h2>
+        <p>Buchen Sie ein kurzes Gespräch oder fordern Sie eine Live-Demo an.</p>
+        <div class="cta-btns"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-glass">Live-Demo</a></div>
       </div>
     </div>
   </section>
@@ -692,7 +769,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <a href="#top" class="logo"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
         <p>Nächtlicher Kassenabschluss für Hotels und ihre Outlets.<br>Closewise sagt Ihnen nur, was nicht zusammenpasst.</p>
       </div>
-      <div class="fcol"><h4>Produkt</h4><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a></div>
+      <div class="fcol"><h4>Produkt</h4><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="#vertrauen">Sicherheit</a></div>
       <div class="fcol"><h4>Unternehmen</h4><a href="mailto:info@closewise.eu">Kontakt</a><a href="faq.html">FAQ</a></div>
       <div class="fcol"><h4>Folgen</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
@@ -790,7 +867,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 
   // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „Closewise Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
-  const fSteps = [...document.querySelectorAll('#ablauf-schritte .fs')];
+  const fSteps = [...document.querySelectorAll('#fsteps .fs')];
   const $ = id => document.getElementById(id);
   const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
   const gPaths = [0,1,2,3,4].map(i => $('fp' + i)), pLen = gPaths.map(p => p.getTotalLength());
