@@ -95,12 +95,6 @@ Dieselbe Marke wie die Demo (demo.closewise.site). Quelle ist das Figma-Board
   Belegt sind: 4 Quellen und 17 Fehlerbilder (Demo-Spec), 60–70 Minuten von
   Hand, 8,5 Minuten mit Closewise, 3–7 Punkte je Nacht, Import lehnt
   vollständige Kartennummern ab, 800 € im Monat je Haus.
-  Vom Nutzer vorgegeben („website paragraphs.pdf“, Pflichttexte der Seite):
-  91 % manuelle Berichte, 4 von 5 verbringen 1–2 Tage/Woche in Tabellen,
-  3–8 % Umsatzverlust und ~5 % Betrug (Branchenschätzungen), Night-Auditor-
-  Stellenanzeigen, „bereits live im Einsatz“, 15.000+ gehobene Hotels in
-  DACH/IT/FR. Stehen mit Fußnote „Branchenschätzungen … Quellen auf Anfrage“;
-  Quellen müssen vorliegen.
 - **Bewegung:** kurze Wege (18 px), lange Zeiten (0,8–1,2 s), eine Kurve
   (`--ease`), nur Deckkraft und Transform, alles hinter
   `prefers-reduced-motion:no-preference`.
