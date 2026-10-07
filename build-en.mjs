@@ -1,6 +1,7 @@
 // Erzeugt die englischen Seiten aus den deutschen Quellen:
 //   pf.html  -> pf-en.html
 //   faq.html -> faq-en.html
+//   security.html -> security-en.html
 // Übersetzt wird nur, was Besucher sehen oder vorgelesen bekommen: Textknoten,
 // ausgewählte Attribute und Text-Zeichenketten in den Inline-Skripten
 // (Wörterbuch i18n/en.json). Klassen, IDs und Code bleiben unberührt.
@@ -15,7 +16,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const dict = JSON.parse(fs.readFileSync(path.join(here, "i18n/en.json"), "utf8"));
 const TEXT = dict.text;
 const JS = Object.entries(dict.js).sort((a, b) => b[0].length - a[0].length);
-const PAGES = { "pf.html": "pf-en.html", "faq.html": "faq-en.html" };
+const PAGES = { "pf.html": "pf-en.html", "faq.html": "faq-en.html", "security.html": "security-en.html" };
 const ATTRS = ["alt", "aria-label", "placeholder", "title", "content", "label", "data-name"];
 
 // Seite in Abschnitte teilen: Inline-Skripte, Styles, Kommentare und der Rest
@@ -34,7 +35,7 @@ function translateMarkup(part) {
   // Interne Links auf die englischen Seiten (nicht der Sprachumschalter)
   part = part.replace(/<a\b[^>]*>/g, tag => {
     if (/\sdata-l="/.test(tag)) return tag;
-    return tag.replace(/href="(pf|faq)\.html(#[^"]*)?"/, (m, n, h = "") => `href="${n}-en.html${h}"`);
+    return tag.replace(/href="(pf|faq|security)\.html(#[^"]*)?"/, (m, n, h = "") => `href="${n}-en.html${h}"`);
   });
   return part;
 }

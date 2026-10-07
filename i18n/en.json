@@ -170,7 +170,21 @@
     "Zimmerbuchungen gegen den Outlet geprüft, der sie erzeugt hat, und der gezählte Kassenbestand gegen das, was das System erfasst hat – noch in derselben Nacht.": "Room postings checked against the outlet that raised them, and the drawer against what the system recorded – the same night.",
     "Export": "Export",
     "Der fertige Abschluss erzeugt einen Buchungssatz – Bargeld, Karte und Umsatz nach Kategorie auf eigenen Konten – als CSV oder DATEV-Export.": "The finished close builds an accounting entry – cash, card and revenue by category on their own accounts – as CSV or DATEV export.",
-    "Vom ersten Gespräch zum ersten Abschluss.": "From the first call to the first close."
+    "Vom ersten Gespräch zum ersten Abschluss.": "From the first call to the first close.",
+    "Sicherheit – Closewise": "Security – Closewise",
+    "Closewise bekommt fertige Exporte, gleicht sie ab und berichtet. Es schreibt nichts zurück, braucht keine Gästenamen und behält das Rohjournal nicht.": "Closewise is handed finished exports, matches them and reports. It writes nothing back, needs no guest names and does not keep the raw ledger.",
+    "EU · Irland": "EU · Ireland",
+    "Wo Ihre Daten liegen": "Where your data lives",
+    "Drei Dinge, die Sie wissen sollten.": "Three things you should know.",
+    "Nur Umsatzdaten": "Sales data only",
+    "Beträge, Zahlungsarten, Zeiten, Tische und Zimmernummern. Keine Gästenamen, und vollständige Kartennummern lehnt der Import ab.": "Amounts, tender types, times, tables and room numbers. No guest names, and the import rejects full card numbers.",
+    "Nur lesen, nie schreiben": "Read only, never write",
+    "Closewise bekommt fertige Exporte. Ein Schreibzugriff auf PMS, Kasse oder Bank ist nicht möglich.": "Closewise is handed finished exports. Writing to your PMS, POS or bank is not possible.",
+    "Ihr Journal wird nicht gespeichert.": "Your ledger is not kept.",
+    "Ihre Nacht wird gelesen, abgeglichen und berichtet. Gespeichert wird nur der Abweichungsnachweis: was markiert wurde, wo und warum.": "Your night is read, matched and reported. Only the exception record is kept: what was flagged, where, and why.",
+    "Fragen zur Sicherheit?": "Questions about security?",
+    "Die häufigsten Antworten stehen in den FAQ. Alles andere klären wir in einem kurzen Gespräch.": "The most common answers are in the FAQ. Anything else we clear up on a short call.",
+    "Zu den FAQ": "Go to the FAQ"
   },
   "js": {
     "'Video abspielen'": "'Play video'",
