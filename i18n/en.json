@@ -184,7 +184,17 @@
     "Ihre Nacht wird gelesen, abgeglichen und berichtet. Gespeichert wird nur der Abweichungsnachweis: was markiert wurde, wo und warum.": "Your night is read, matched and reported. Only the exception record is kept: what was flagged, where, and why.",
     "Fragen zur Sicherheit?": "Questions about security?",
     "Die häufigsten Antworten stehen in den FAQ. Alles andere klären wir in einem kurzen Gespräch.": "The most common answers are in the FAQ. Anything else we clear up on a short call.",
-    "Zu den FAQ": "Go to the FAQ"
+    "Zu den FAQ": "Go to the FAQ",
+    "Wiederholte Ursachen": "Recurring causes",
+    "Noch in derselben Nacht": "The same night",
+    "CSV · DATEV": "CSV · DATEV",
+    "4 Nächte in Folge": "4 nights in a row",
+    "Terminal · PMS · Gewohnheit": "Terminal · PMS · habit",
+    "Zimmer ↔ Outlet": "Room ↔ outlet",
+    "Kasse ↔ System": "Drawer ↔ system",
+    "Bargeld · Karte · Umsatz": "Cash · card · revenue",
+    "Buchungssatz": "Journal entry",
+    "Ansehen ›": "Explore ›"
   },
   "js": {
     "'Video abspielen'": "'Play video'",

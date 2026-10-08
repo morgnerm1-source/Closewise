@@ -205,6 +205,32 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .pcard .ft{background:#fff;border-radius:0 0 16px 16px;padding:24px;min-height:124px;flex:1}
 .pcard .ft h3{font-size:20px;line-height:28px;font-weight:350;letter-spacing:-.01em}
 .pcard .ft p{font-size:14px;line-height:20px;color:#54524e;margin-top:10px}
+/* Betrieb: Zusatzinhalte, nur in der aufklappenden Desktop-Reihe sichtbar */
+.pcard .hd .meta,.pchips,.pcard .go{display:none}
+@media (hover:hover) and (min-width:1181px){
+  .cards3{display:flex}
+  .cards3 .pcard{flex:1 1 0;min-width:0;transition:flex-grow .8s var(--ease)}
+  .cards3 .pcard.open{flex-grow:2.6}
+  .cards3 .pcard:hover{transform:none}
+  .pcard .hd{white-space:nowrap}
+  .pcard .tag{flex:none}
+  .pcard .icons{transition:transform .8s var(--ease)}
+  .pcard.open .icons{transform:translateX(80px)}
+  .pcard .hd .meta{display:block;margin-left:auto;font-size:13px;font-weight:400;color:var(--teal);overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .3s}
+  .pchips{display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:absolute;left:44px;bottom:44px;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s var(--ease)}
+  .pchips span{padding:8px 14px;border-radius:999px;background:rgba(26,24,20,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;font-size:13px;line-height:18px;white-space:nowrap}
+  .pcard .ft{display:flex;align-items:center;gap:24px;min-height:150px}
+  .pcard .ft .tx{flex:1;min-width:0}
+  .pcard .ft p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .pcard .go{display:inline-flex;flex:none;align-items:center;height:44px;padding:0 20px;border-radius:999px;background:var(--ink);color:#fff;font-size:15px;font-weight:500;white-space:nowrap;opacity:0;width:0;padding-inline:0;overflow:hidden;transition:opacity .3s}
+  .pcard.open .hd .meta,.pcard.open .pchips,.pcard.open .go{opacity:1;transition-delay:.35s}
+  .pcard.open .pchips{transform:none}
+  .pcard.open .go{width:auto;padding-inline:20px}
+  .pcard.open .ft p{-webkit-line-clamp:4}
+}
+@media (hover:hover) and (min-width:1181px) and (prefers-reduced-motion:reduce){
+  .cards3 .pcard,.pcard .hd .meta,.pchips,.pcard .go{transition:none!important}
+}
 .icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
 .icons i{width:42px;height:42px;border-radius:999px;background:var(--dark-3);border:1px solid rgba(255,255,255,.1);display:block;animation:pulse 4s var(--ease) infinite;animation-delay:calc(var(--i)*.25s)}
 @keyframes pulse{0%,70%,100%{background:var(--dark-3)}20%{background:#4a473f}}
@@ -613,22 +639,22 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <p class="lead rv" style="--d:.2s">Beyond the match – what you get on top, every morning.</p>
     <div class="cards3">
       <a href="#ablauf" class="pcard rv" style="--d:.1s">
-        <div class="hd"><span class="tag" style="background:#594aff">1</span>Trends</div>
+        <div class="hd"><span class="tag" style="background:#594aff">1</span>Trends<span class="meta">Recurring causes</span></div>
         <div class="media"><div class="icons">
           <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
           <i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
-        </div></div>
-        <div class="ft"><h3>The same fault, four nights running</h3><p>Repeat causes grouped: a failing terminal, a PMS sync, a habit. One bad night is noise; the same fault on four is fixable.</p></div>
+        </div><div class="pchips" aria-hidden="true"><span>4 nights in a row</span><span>Terminal · PMS · habit</span></div></div>
+        <div class="ft"><div class="tx"><h3>The same fault, four nights running</h3><p>Repeat causes grouped: a failing terminal, a PMS sync, a habit. One bad night is noise; the same fault on four is fixable.</p></div><span class="go">Explore ›</span></div>
       </a>
       <a href="#ablauf" class="pcard rv" style="--d:.2s">
-        <div class="hd"><span class="tag" style="background:#1f7a6a">2</span>Folios &amp; drawer</div>
-        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Folios and the drawer</h3><p>Room postings checked against the outlet that raised them, and the drawer against what the system recorded – the same night.</p></div>
+        <div class="hd"><span class="tag" style="background:#1f7a6a">2</span>Folios &amp; drawer<span class="meta">The same night</span></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-a.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="pchips" aria-hidden="true"><span>Room ↔ outlet</span><span>Drawer ↔ system</span></div></div>
+        <div class="ft"><div class="tx"><h3>Folios and the drawer</h3><p>Room postings checked against the outlet that raised them, and the drawer against what the system recorded – the same night.</p></div><span class="go">Explore ›</span></div>
       </a>
       <a href="#ablauf" class="pcard rv" style="--d:.3s">
-        <div class="hd"><span class="tag" style="background:#d9763f">3</span>Export</div>
-        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
-        <div class="ft"><h3>Export for your books</h3><p>The finished close builds an accounting entry – cash, card and revenue by category on their own accounts – as CSV or DATEV export.</p></div>
+        <div class="hd"><span class="tag" style="background:#d9763f">3</span>Export<span class="meta">CSV · DATEV</span></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/produkt-b.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="pchips" aria-hidden="true"><span>Cash · card · revenue</span><span>Journal entry</span></div></div>
+        <div class="ft"><div class="tx"><h3>Export for your books</h3><p>The finished close builds an accounting entry – cash, card and revenue by category on their own accounts – as CSV or DATEV export.</p></div><span class="go">Explore ›</span></div>
       </a>
     </div>
   </section>
@@ -750,6 +776,16 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), {threshold:.15, rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Betrieb: Karte unter dem Zeiger geht auf, sonst die mittlere (wie primefold)
+  const prow = document.querySelector(".cards3");
+  if (prow) {
+    const pcs = [...prow.querySelectorAll(".pcard")];
+    const openP = i => pcs.forEach((c, k) => c.classList.toggle("open", k === i));
+    openP(1);
+    pcs.forEach((c, i) => { c.addEventListener("mouseenter", () => openP(i)); c.addEventListener("focusin", () => openP(i)); });
+    prow.addEventListener("mouseleave", () => openP(1));
+  }
 
   // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
   const tabs = [...document.querySelectorAll('.tab')];
