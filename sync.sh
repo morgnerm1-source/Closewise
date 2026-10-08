@@ -23,6 +23,7 @@ cp pf.html faq.html security.html pf-en.html faq-en.html security-en.html "$ZIEL
 cp impressum.html datenschutz.html dot-loader.js favicon.svg "$ZIEL/"
 cp -r fonts vendor logos bilder api "$ZIEL/"
 cp package.json package-lock.json "$ZIEL/"
+printf '.env*\n.vercel\n' > "$ZIEL/.vercelignore"   # keine Tokens/Umgebungsdateien hochladen
 
 echo "closewise/ neu angelegt:"
 ls -1sh "$ZIEL" | sed 's/^/  /'
