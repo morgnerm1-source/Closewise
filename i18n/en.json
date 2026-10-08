@@ -184,18 +184,7 @@
     "Ihre Nacht wird gelesen, abgeglichen und berichtet. Gespeichert wird nur der Abweichungsnachweis: was markiert wurde, wo und warum.": "Your night is read, matched and reported. Only the exception record is kept: what was flagged, where, and why.",
     "Fragen zur Sicherheit?": "Questions about security?",
     "Die häufigsten Antworten stehen in den FAQ. Alles andere klären wir in einem kurzen Gespräch.": "The most common answers are in the FAQ. Anything else we clear up on a short call.",
-    "Zu den FAQ": "Go to the FAQ",
-    "Jede Nacht: eine Stunde von Hand.": "Every night, an hour by hand.",
-    "Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen: Kassen, Belege und Zahlungen, eins nach dem anderen. Das dauert eine Stunde oder länger. Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist.": "Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it’s happening, there’s one less person on the floor. The rest of the team ends up staying late, waiting for it to finish.",
-    "Diese Stunde ist nicht nur verlorene Zeit.": "That hour is not just lost time.",
-    "Bezahlte Überstunden.": "It is overtime pay.",
-    "Ein müdes Team.": "A tired team.",
-    "Stunden, die den Gästen fehlen.": "And hours that should have gone to guests instead.",
-    "Erst rechnen. Dann erklären.": "Check first. Explain second.",
-    "Closewise prüft zuerst die Zahlen, mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.": "Closewise checks the numbers first, using straightforward, deterministic matching, not guesswork. Only once something is actually found does it explain what happened, in plain language you can read at a glance.",
-    "Ein Klick. Der Abschluss läuft.": "Click run. That’s it.",
-    "Closewise prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Sie klicken beim heutigen Abschluss auf Starten, das ist alles. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei.": "Closewise checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight’s close, that’s it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached.",
-    "Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.": "It hands you back the one thing closing never gave you before. Time."
+    "Zu den FAQ": "Go to the FAQ"
   },
   "js": {
     "'Video abspielen'": "'Play video'",

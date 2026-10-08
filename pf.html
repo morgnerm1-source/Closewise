@@ -141,15 +141,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
 
 /* Schritt-Leiste unter der Ablauf-Animation – folgt der Animation */
-/* Pflichttexte (PDF): gut lesbare Absätze, Kernsatz, Chips */
-.say{font-size:20px;line-height:31px;color:var(--ink-2);max-width:760px;margin-top:24px}
-.say-k{font-size:20px;line-height:28px;font-weight:500;color:var(--ink);margin-top:28px}
-.say-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.say-chips span{padding:9px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:15px;line-height:20px;color:var(--ink-2)}
-.flow-cap{margin-top:64px;font-size:14px;line-height:20px;color:var(--muted);max-width:560px}
-.flow-cap+.flow{margin-top:16px}
-.how-h{margin-top:88px;font-size:32px;line-height:40px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2);scroll-margin-top:110px}
-.how-h+.say{margin-top:14px;margin-bottom:28px}
 .fsteps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;scroll-margin-top:110px}
 .fs{position:relative;overflow:hidden;padding:18px 18px 22px;border-radius:14px;background:#fff;border:1px solid var(--line);transition:border-color .5s var(--ease),box-shadow .5s var(--ease)}
 .fs>*:not(.fs-bar){opacity:.5;transition:opacity .5s var(--ease)}
@@ -470,12 +461,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .ask-line button{width:44px;height:44px}
 }
 @media (max-width:360px){.nav-cta .book{height:44px;padding:0 12px}}
-@media (max-width:720px){
-  .say,.say-k{font-size:18px;line-height:28px}
-  .say-chips span{font-size:14px;padding:8px 14px}
-  .flow-cap{margin-top:44px}
-  .how-h{margin-top:64px;font-size:26px;line-height:32px}
-}
 </style>
 </head>
 <body>
@@ -546,11 +531,8 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:900px">Jede Nacht: eine Stunde von Hand.</h2>
-    <p class="say rv" style="--d:.15s">Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen: Kassen, Belege und Zahlungen, eins nach dem anderen. Das dauert eine Stunde oder länger. Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist.</p>
-    <p class="say-k rv" style="--d:.2s">Diese Stunde ist nicht nur verlorene Zeit.</p>
-    <div class="say-chips rv" style="--d:.25s"><span>Bezahlte Überstunden.</span><span>Ein müdes Team.</span><span>Stunden, die den Gästen fehlen.</span></div>
-    <p class="flow-cap rv">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Systeme. Keines spricht mit dem anderen.</h2>
+    <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
         <div class="flow-glow" id="fGlow"></div>
@@ -601,8 +583,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <h3 class="how-h rv">Erst rechnen. Dann erklären.</h3>
-    <p class="say rv" style="--d:.1s">Closewise prüft zuerst die Zahlen, mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.</p>
     <ol class="fsteps" id="ablauf-schritte" aria-label="So funktioniert es">
       <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Closewise liest die Exporte, die PMS, Kasse und Bank ohnehin erzeugen. Nichts Neues an der Kasse.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Jede Rechnung wird gegen Terminalabschluss, Gästekonto und Kassenbestand geprüft. Regeln, kein Raten.</p><i class="fs-bar"></i></li>
@@ -614,10 +594,8 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <!-- Ergebnisse -->
   <section class="outcomes wrap" id="ergebnisse">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:720px">Ein Klick. Der Abschluss läuft.</h2>
-    <p class="say rv" style="--d:.15s">Closewise prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Sie klicken beim heutigen Abschluss auf Starten, das ist alles. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei.</p>
-    <p class="say-k rv" style="--d:.2s">Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.</p>
-    <p class="lead rv" style="--d:.25s;margin-top:48px">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
+    <h2 class="h2 rv" style="--d:.1s">Dieselbe Nacht,<br>zweimal abgeschlossen.</h2>
+    <p class="lead rv" style="--d:.2s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
     <div class="bento">
       <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8,5 Min.</div></div><blockquote>für den Abschluss – statt 60 bis 70 Minuten von Hand.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 Std.</div></div><blockquote>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
