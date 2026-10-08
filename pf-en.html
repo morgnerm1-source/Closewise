@@ -9,15 +9,19 @@
 <style>
 #pl{display:none}
 .pl-on{overflow:hidden}
-.pl-on #pl{display:grid;place-items:center;position:fixed;inset:0;z-index:9999;background:#faf9f8;transition:transform .8s cubic-bezier(.76,0,.24,1)}
-#pl.out{transform:translateY(-100%)}
-#pl .pl-in{display:flex;flex-direction:column;align-items:center;gap:26px}
-#pl svg{width:76px;height:auto;overflow:visible}
-#pl .ln{fill:none;stroke:url(#plG);stroke-width:3;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
-#pl .fl{fill:#1a1814;opacity:0}
-#pl .pl-bar{width:120px;height:2px;border-radius:2px;background:rgba(26,24,20,.08);overflow:hidden}
+.pl-on #pl{display:grid;place-items:center;position:fixed;inset:0;z-index:9999;overflow:hidden;background:#1a1814;color:#fff;clip-path:inset(0 0 0 0 round 0 0 0 0);transition:clip-path .95s cubic-bezier(.76,0,.24,1)}
+#pl.out{clip-path:inset(0 0 100% 0 round 0 0 56px 56px)}
+#pl .pl-b{position:absolute;width:70vmax;height:70vmax;border-radius:50%;pointer-events:none;animation:plDrift 7s ease-in-out infinite alternate}
+#pl .pl-b.a{left:-28vmax;top:-30vmax;background:radial-gradient(closest-side,rgba(249,157,114,.28),rgba(249,157,114,0))}
+#pl .pl-b.b{right:-30vmax;bottom:-34vmax;background:radial-gradient(closest-side,rgba(39,168,150,.30),rgba(39,168,150,0));animation-direction:alternate-reverse}
+@keyframes plDrift{to{transform:translate(6vmax,4vmax) scale(1.08)}}
+#pl .pl-in{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:22px;transition:transform .9s cubic-bezier(.76,0,.24,1),opacity .6s}
+#pl.out .pl-in{transform:translateY(-48px);opacity:0}
+#pl .pl-logo{display:block;width:min(260px,58vw);height:auto;fill:currentColor;opacity:0;clip-path:inset(-10% 100% -10% 0)}
+#pl .pl-row{display:flex;align-items:center;gap:14px;width:100%}
+#pl .pl-bar{flex:1;height:1px;background:rgba(255,255,255,.14);overflow:hidden}
 #pl .pl-bar i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#f99d72,#27a896)}
-#pl .pl-n{font:500 12px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;color:#616161;font-variant-numeric:tabular-nums;margin-top:-12px}
+#pl .pl-n{min-width:3ch;text-align:right;font:500 12px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums}
 .pl-on:not(.pl-done) .hero .rv{opacity:0!important;transform:translateY(24px)!important;filter:blur(4px)!important}
 </style>
 <title>Closewise – Nightly close for hotels</title>
@@ -256,15 +260,18 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .sol{margin-top:20px;max-width:760px;font-size:18px;line-height:28px;color:var(--ink-2)}
 .sol b{font-weight:500;color:var(--ink)}
 .ind{padding:120px 0 0}
-.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-.igrid .ocard{height:420px;padding:32px;border-radius:16px;background:var(--dark)}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.igrid .ocard,.bento .ocard{height:360px;padding:32px;border-radius:16px;background:var(--dark)}
 .igrid .ocard::after{background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.7) 100%)}
-.igrid .ocard .num{margin-top:0;font-size:64px}
-.igrid .ocard blockquote{font-size:22px;line-height:29px}
+.igrid .ocard .num,.bento .ocard .num{margin-top:0;font-size:64px}
+.igrid .ocard blockquote,.bento .ocard blockquote{font-size:21px;line-height:28px}
 .igrid .ocard.wide{grid-column:1/-1;height:340px}
 .igrid .ocard.wide::after{background:linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.1) 100%)}
 .igrid .ocard.wide blockquote{font-size:30px;line-height:38px;max-width:620px}
-.inote{margin-top:16px;font-size:13px;color:var(--muted-2)}
+.inote{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-top:20px;font-size:15px;line-height:22px;color:var(--muted)}
+.inote b{font-weight:500;color:var(--ink-2)}
+.inote span{flex:none;font-size:13px;color:var(--muted-2)}
+@media (max-width:900px){.inote{flex-direction:column;gap:6px}.inote span{flex:initial}}
 .valid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;padding:96px 0 72px}
 .valid-num{font-size:120px;line-height:1;font-weight:300;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
 .valid-num span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
@@ -338,8 +345,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .tpanel[data-step="2"] .layers div:nth-child(2){transform:translateY(40px) scale(.9);border-color:var(--teal)}
 
 /* Ergebnisse */
-.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:120px 0 144px;margin-top:120px}
-.bento{display:grid;grid-template-columns:500px 1fr;gap:16px;margin-top:56px}
+.outcomes{background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);padding:96px 0 112px;margin-top:96px}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
 .bento .ocard:nth-child(3){grid-column:auto}
 .bento .row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 500px;gap:16px}
 .ocard{position:relative;height:492px;border-radius:12px;overflow:hidden;color:#fff;padding:40px;display:flex;flex-direction:column;justify-content:space-between}
@@ -405,7 +412,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .trust-grid{grid-template-columns:1fr}
   .tlist{margin-top:48px}
   .tpanel{position:relative;top:0;height:420px}
-  .bento,.bento .row2{grid-template-columns:1fr}
+  .bento,.igrid{grid-template-columns:1fr 1fr}
   .fcols{grid-template-columns:1fr 1fr}
   .fbrand{grid-column:1/-1}
 }
@@ -548,9 +555,9 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .cards3>.pcard,.bento .ocard,.igrid>.ocard{flex:0 0 84%;min-width:0;scroll-snap-align:start}
   .fsteps>.fs{flex:0 0 58%;min-width:0;scroll-snap-align:start}
   .cards3 .rv,.bento .rv,.igrid .rv,.fsteps .rv{opacity:1;transform:none;filter:none}
-  .ocard{height:auto;min-height:360px;padding:26px}
+  .ocard{height:auto;min-height:300px;padding:24px}
   .ocard blockquote{font-size:21px;line-height:27px}
-  .igrid .ocard{height:auto;min-height:340px}
+  .igrid .ocard,.bento .ocard{height:auto;min-height:300px}
   .igrid .ocard.wide{min-height:340px}
   .igrid .ocard.wide blockquote{font-size:22px;line-height:29px}
   .pcard .media{height:220px;padding:18px}
@@ -568,7 +575,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 </style>
 </head>
 <body>
-<div id="pl" aria-hidden="true" data-lenis-prevent><div class="pl-in"><svg viewBox="0 0 262 219"><defs><linearGradient id="plG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f99d72"/><stop offset="1" stop-color="#27a896"/></linearGradient></defs><path class="fl" d="M91.2861 124L133.986 124.6L110.664 159.583C109.366 161.53 107.18 162.7 104.84 162.7H46.6861C29.6861 162.8 13.9861 155.8 5.38609 140.8C-1.91391 128 -2.21391 110.8 7.08609 98.8L66.3861 22.3C76.2861 9.5 91.0861 0 107.786 0H182.086C196.086 0 205.486 16.2 195.486 30.4L179.386 53.2C176.786 56.9 172.186 57.7 167.786 57.7L91.1861 58.3C71.7861 58.4 58.6861 77 61.0861 95.5C63.6861 110.6 75.4861 122.8 91.3861 124H91.2861Z"/><path class="fl" d="M87.5 196.794L105.1 170.894C106.9 168.194 110.3 166.694 113.7 166.694H183.5C196.4 166.894 206.5 158.694 206.7 145.994C206.9 133.294 196.5 124.594 183.6 124.594H134L171 69.9937C173.1 66.8937 178 65.6937 181.5 65.6937L217.5 65.8937C227.1 65.8937 236.1 69.4937 243.8 75.3937C260.4 88.0937 266.6 111.794 255 130.394L211.4 193.294C201.9 207.094 187.9 218.494 170.5 218.594L95.6 218.794C90.7 218.794 87 213.794 85.8 210.694C84 205.894 84.5 201.294 87.5 196.894V196.794Z"/><path class="ln" pathLength="1" d="M91.2861 124L133.986 124.6L110.664 159.583C109.366 161.53 107.18 162.7 104.84 162.7H46.6861C29.6861 162.8 13.9861 155.8 5.38609 140.8C-1.91391 128 -2.21391 110.8 7.08609 98.8L66.3861 22.3C76.2861 9.5 91.0861 0 107.786 0H182.086C196.086 0 205.486 16.2 195.486 30.4L179.386 53.2C176.786 56.9 172.186 57.7 167.786 57.7L91.1861 58.3C71.7861 58.4 58.6861 77 61.0861 95.5C63.6861 110.6 75.4861 122.8 91.3861 124H91.2861Z"/><path class="ln" pathLength="1" d="M87.5 196.794L105.1 170.894C106.9 168.194 110.3 166.694 113.7 166.694H183.5C196.4 166.894 206.5 158.694 206.7 145.994C206.9 133.294 196.5 124.594 183.6 124.594H134L171 69.9937C173.1 66.8937 178 65.6937 181.5 65.6937L217.5 65.8937C227.1 65.8937 236.1 69.4937 243.8 75.3937C260.4 88.0937 266.6 111.794 255 130.394L211.4 193.294C201.9 207.094 187.9 218.494 170.5 218.594L95.6 218.794C90.7 218.794 87 213.794 85.8 210.694C84 205.894 84.5 201.294 87.5 196.894V196.794Z"/></svg><div class="pl-bar"><i></i></div><div class="pl-n">0</div></div></div>
+<div id="pl" aria-hidden="true" data-lenis-prevent><i class="pl-b a"></i><i class="pl-b b"></i><div class="pl-in"><svg class="pl-logo" viewBox="0 0 1316 219"><use href="#cw"/></svg><div class="pl-row"><div class="pl-bar"><i></i></div><span class="pl-n">00</span></div></div></div>
 <script src="preloader.js"></script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cw" viewBox="0 0 1316 219"><path d="M379.186 151.2C391.986 151.2 402.586 144.8 407.786 133L431.486 145C417.986 173.6 382.586 183 354.086 171.3C328.086 160.626 321.286 145.8 318.786 124.6C316.286 103.4 330.286 73.2 355.486 63.4C371.086 57.4 388.086 57.7 403.686 63.7C415.886 69 425.586 77.5 431.586 90L407.986 101.9C402.886 91.8 393.786 85.3 382.386 84.2C363.386 82.4 347.186 95.5 345.586 114.6C343.986 133.7 358.686 151 379.286 151.2H379.186Z"/><path d="M471.586 14.8H445.086V173.5H471.586V14.8Z"/><path d="M91.2861 124L133.986 124.6L110.664 159.583C109.366 161.53 107.18 162.7 104.84 162.7H46.6861C29.6861 162.8 13.9861 155.8 5.38609 140.8C-1.91391 128 -2.21391 110.8 7.08609 98.8L66.3861 22.3C76.2861 9.5 91.0861 0 107.786 0H182.086C196.086 0 205.486 16.2 195.486 30.4L179.386 53.2C176.786 56.9 172.186 57.7 167.786 57.7L91.1861 58.3C71.7861 58.4 58.6861 77 61.0861 95.5C63.6861 110.6 75.4861 122.8 91.3861 124H91.2861Z"/><path d="M87.5 196.794L105.1 170.894C106.9 168.194 110.3 166.694 113.7 166.694H183.5C196.4 166.894 206.5 158.694 206.7 145.994C206.9 133.294 196.5 124.594 183.6 124.594H134L171 69.9937C173.1 66.8937 178 65.6937 181.5 65.6937L217.5 65.8937C227.1 65.8937 236.1 69.4937 243.8 75.3937C260.4 88.0937 266.6 111.794 255 130.394L211.4 193.294C201.9 207.094 187.9 218.494 170.5 218.594L95.6 218.794C90.7 218.794 87 213.794 85.8 210.694C84 205.894 84.5 201.294 87.5 196.894V196.794Z"/><path d="M1035.29 61.7L1003.39 152.5L996.186 173.4L968.786 173.3L942.886 100.3L916.686 173.3L889.486 173.4L851.386 61.9L880.186 61.7L904.486 140.1L931.686 61.8L954.486 61.6L981.586 140.5L1006.19 61.8L1035.29 61.7Z"/><path d="M666.886 175.9C649.086 175.2 633.786 167.3 623.186 153L641.186 137.1C650.886 150.7 667.286 156.7 682.286 151.6C687.786 149.2 691.886 144.2 689.386 138.5C686.886 132.8 683.486 132.5 679.786 131.3L656.986 124.1C648.186 121.3 639.586 116.8 634.386 108.8C623.986 92.9 630.886 72.1 647.986 64.1C668.886 54.2 700.886 58.2 714.086 78.5L696.286 94.3C688.586 82.9 674.686 78.8 662.186 83.3C658.486 85.1 656.186 87.7 655.986 91.5C655.786 95.3 658.086 99 662.086 100.3L690.186 110.1C697.986 112.8 705.886 116.6 710.886 123.4C722.286 139.2 715.986 160.9 698.986 170C681.986 179.1 678.786 176.8 667.086 176L666.886 175.9Z"/><path d="M1184.19 149.5C1177.19 175.2 1144.89 180.7 1119.89 173C1108.39 169.4 1099.09 162.4 1092.39 152.9L1110.39 137.2C1119.79 150.7 1136.79 156.9 1151.99 151.6C1156.19 149.5 1159.19 146.3 1159.19 142.1C1159.19 137.9 1156.39 134.2 1152.09 132.7L1121.59 122.3C1113.79 119.6 1106.49 114.8 1102.39 107.5C1093.19 91.2 1100.59 71.3 1117.59 63.9C1129.89 58.5 1143.09 57.7 1156.29 60.6C1166.89 63 1176.39 68.5 1182.89 77.9L1165.49 93.9C1157.49 82.5 1143.19 78.2 1130.99 83.1C1127.59 85.2 1125.19 87.7 1124.99 91.1C1124.79 94.5 1126.59 98.4 1130.09 99.6L1154.29 108.2C1160.29 110.3 1165.69 112.3 1170.99 115.6C1182.59 122.8 1187.79 136 1184.09 149.4L1184.19 149.5Z"/><path d="M1049.99 61.5V173.5H1076.99V61.5H1049.99Z"/><path d="M1064.19 47.6C1073.24 47.6 1080.59 40.2575 1080.59 31.2C1080.59 22.1425 1073.24 14.8 1064.19 14.8C1055.13 14.8 1047.79 22.1425 1047.79 31.2C1047.79 40.2575 1055.13 47.6 1064.19 47.6Z"/><path d="M575.686 172.2C556.886 178.9 536.586 177 519.786 167.4C502.986 157.8 491.086 138.8 490.486 119C489.886 98.5 500.486 79.3 518.386 68.5C537.986 56.7 562.586 55.8 582.986 66.1C603.386 76.4 612.886 92.4 614.386 112.6C616.486 139.2 601.286 163.2 575.586 172.3L575.686 172.2ZM552.686 151.9C571.629 151.9 586.986 136.588 586.986 117.7C586.986 98.8119 571.629 83.5 552.686 83.5C533.743 83.5 518.386 98.8119 518.386 117.7C518.386 136.588 533.743 151.9 552.686 151.9Z"/><path d="M797.286 151.8C807.386 150.8 815.786 146.4 821.786 137.9L842.086 152.6C825.586 175.4 793.086 180.9 767.486 172.3C741.886 163.7 729.586 143 728.786 118.6C727.986 93.9 741.986 72.1 765.086 63.3C780.686 57.4 797.786 57.4 813.286 63.6C837.986 73.6 848.986 100.2 845.486 126.8L756.986 127.1C760.686 145.8 778.686 154.5 797.186 151.8H797.286ZM756.686 107.2L819.686 107H819.786C817.186 90.8 804.986 82 790.486 81.7C774.086 80.9 760.186 91.1 756.686 107.2Z"/><path d="M1279.79 147.7C1284.19 145 1287.19 142.1 1290.69 137.9L1310.79 152.7C1293.79 175.8 1260.79 181.3 1234.99 171.9C1209.19 162.5 1199.89 145.3 1197.79 122.8C1195.29 96.9 1209.29 72.5 1233.79 63.4C1249.59 57.5 1266.59 57.4 1282.09 63.8C1306.59 74 1318.09 100.6 1314.39 127L1225.79 127.2C1227.59 136.6 1232.89 143.7 1240.99 147.9C1253.09 154.2 1267.09 153.6 1279.79 147.7ZM1225.49 107.1L1288.09 107.3L1287.99 107.2C1286.29 92.6 1276.39 82.5 1260.09 81.5C1243.79 80.5 1228.99 90 1225.49 107.1Z"/></symbol></svg>
 
@@ -721,22 +728,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </section>
 
-  <!-- Ergebnisse -->
-  <section class="outcomes wrap" id="ergebnisse">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>With Closewise</p>
-    <h2 class="h2 rv" style="--d:.1s">Click run.<br>That’s it.</h2>
-    <p class="sol rv" style="--d:.2s">Closewise checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight’s close, that’s it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. <b>It hands you back the one thing closing never gave you before. Time.</b></p>
-    <p class="lead rv" style="--d:.25s">A representative night at a mid-sized property. Your own numbers will differ.</p>
-    <div class="bento">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8.5 min</div></div><blockquote>to close – instead of 60 to 70 minutes by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
-      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 h</div></div><blockquote>back per year that used to go into the night close.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
-      <div class="row2">
-        <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>€5,443</div></div><blockquote>at risk, found in a single night.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
-        <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>exceptions reported, instead of reading every line by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
-      </div>
-    </div>
-  </section>
-
   <!-- Branche in Zahlen: Zahlenkarten (Baustein wie „Mit Closewise“) -->
   <section class="ind wrap" id="branche">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The industry</p>
@@ -745,11 +736,22 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <div class="igrid">
       <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/branche-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91%</div><blockquote>of hotels still rely on manual reporting, even inside automated systems.</blockquote></article>
       <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/branche-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 in 5</div><blockquote>spend 1–2 full days a week in spreadsheets.</blockquote></article>
-      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/branche-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8%</div><blockquote>of gross revenue lost to leakage across travel and hospitality.</blockquote></article>
-      <article class="ocard rv" style="--d:.24s"><div class="ph" aria-hidden="true"><img src="bilder/branche-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>~5%</div><blockquote>more from occupational fraud.</blockquote></article>
-      <article class="ocard wide rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/branche-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="mark">Night auditor at major international hotel brands</div><blockquote>“Manually compare cashier reports, reconcile guest ledgers” is still part of the job.</blockquote></article>
+      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/branche-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8%</div><blockquote>of gross revenue lost to leakage across travel and hospitality, with occupational fraud adding roughly 5 percent more.</blockquote></article>
     </div>
-    <p class="inote rv">Industry estimates, not Closewise measurements.</p>
+    <div class="inote rv"><p><b>Night auditor roles at major international hotel brands:</b> “Manually compare cashier reports, reconcile guest ledgers” is still part of the job.</p><span>Industry estimates, not Closewise measurements.</span></div>
+  </section>
+
+  <!-- Ergebnisse -->
+  <section class="outcomes wrap" id="ergebnisse">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>With Closewise</p>
+    <h2 class="h2 rv" style="--d:.1s">Click run.<br>That’s it.</h2>
+    <p class="sol rv" style="--d:.2s">Closewise checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight’s close, that’s it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. <b>It hands you back the one thing closing never gave you before. Time.</b></p>
+    <p class="lead rv" style="--d:.25s">A representative night at a mid-sized property. Your own numbers will differ.</p>
+    <div class="bento">
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8.5 min</div></div><blockquote>to close – instead of 60 to 70 minutes by hand.</blockquote></article>
+      <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 h</div></div><blockquote>back per year that used to go into the night close.</blockquote></article>
+      <article class="ocard rv" style="--d:.2s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>exceptions reported, instead of reading every line by hand.</blockquote></article>
+    </div>
   </section>
 
   <!-- Produkte -->
