@@ -3,14 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Sicherheit – Closewise</title>
 <link rel="alternate" hreflang="de" href="security.html">
 <link rel="alternate" hreflang="en" href="security-en.html">
 <meta name="description" content="Nächtlicher Kassenabschluss für Hotels und ihre Outlets. Closewise sagt Ihnen nur, was nicht zusammenpasst.">
 <!-- Aufbau nach Vorlage nachgebaut; Texte aus closewise.site/de. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Schriften selbst ausgeliefert (keine Verbindung zu Google, siehe Datenschutz) -->
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/inter-latin.woff2") format("woff2")}
+@font-face{font-family:"Geist";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/geist-var-latin.woff2") format("woff2")}
+</style>
 <style>
 :root{
   --bg:#faf9f8; --white:#fff; --ink:#1a1814; --ink-2:#212121; --muted:#545454; --muted-2:#616161;
@@ -649,7 +653,7 @@ body{background:var(--bg)}
 <div class="ghost" aria-hidden="true"><span>Closewise</span></div>
 
 <script src="dot-loader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

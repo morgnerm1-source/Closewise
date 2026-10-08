@@ -1,45 +1,33 @@
 #!/bin/bash
-# Legt den Veröffentlichungsordner neu an.
-# Danach den Ordner "closewise" auf vercel.com/new ziehen.
+# Legt den Veröffentlichungsordner für Vercel neu an (nur die neue Seite).
+# Veröffentlichen: ./deploy.sh (oder den Ordner "closewise" auf vercel.com/new ziehen).
 #
-# design.html liegt dort zweimal: einmal als index.html (die Adresse
-# ohne Dateinamen) und einmal unter eigenem Namen, weil die
-# Unterseiten mit href="design.html" zurückverweisen.
+# pf.html liegt dort zweimal: einmal als index.html (die Adresse ohne
+# Dateinamen) und einmal unter eigenem Namen, weil die Seiten mit
+# href="pf.html" aufeinander verweisen. Die alten Entwürfe (design.html,
+# v2.html, ablauf.html) werden nicht mehr veröffentlicht.
 
 set -e
 cd "$(dirname "$0")"
 
 ZIEL=closewise
+# .vercel (Projektverknüpfung) über den Neuaufbau retten
+[ -d "$ZIEL/.vercel" ] && mv "$ZIEL/.vercel" .vercel-keep
 rm -rf "$ZIEL"
 mkdir -p "$ZIEL"
+[ -d .vercel-keep ] && mv .vercel-keep "$ZIEL/.vercel"
 
-cp design.html "$ZIEL/index.html"
-cp design.html "$ZIEL/design.html"
-cp v2.html "$ZIEL/v2.html"          # die Umbau-Fassung, erreichbar unter /v2
-cp ablauf.html "$ZIEL/"
-cp stil.css seite.js "$ZIEL/"
-cp textur-dunkel.png textur-hell.png flaechen-dunkel.svg "$ZIEL/"
-cp restaurant-abend.jpg rezeption-nacht.jpg "$ZIEL/"
-cp kofferwagen-lobby.jpg glocke-empfang.jpg "$ZIEL/"
-cp produkt-demo.mp4 produkt-demo.jpg "$ZIEL/"
-cp hero-scroll.mp4 hero-scroll.jpg "$ZIEL/"
-cp haus-1.jpg haus-2.jpg haus-3.jpg "$ZIEL/"
-cp step-1.png step-2.png step-3.png "$ZIEL/"
-cp step-1-en.png step-2-en.png step-3-en.png "$ZIEL/"
-cp impressum.html datenschutz.html "$ZIEL/"
-cp -r fonts "$ZIEL/"
-
-# Neue Seite (primefold-look): Landingpage, FAQ mit KI-Fragezeile und Serverfunktion
-node build-en.mjs                  # erzeugt pf-en.html und faq-en.html, bricht bei deutschen Resten ab
-cp pf.html faq.html security.html pf-en.html faq-en.html security-en.html dot-loader.js "$ZIEL/"
-cp -r logos bilder api "$ZIEL/"
+node build-en.mjs                  # erzeugt die EN-Seiten, bricht bei deutschen Resten ab
+cp pf.html "$ZIEL/index.html"
+cp pf.html faq.html security.html pf-en.html faq-en.html security-en.html "$ZIEL/"
+cp impressum.html datenschutz.html dot-loader.js favicon.svg "$ZIEL/"
+cp -r fonts vendor logos bilder api "$ZIEL/"
 cp package.json package-lock.json "$ZIEL/"
 
 echo "closewise/ neu angelegt:"
 ls -1sh "$ZIEL" | sed 's/^/  /'
 
-# Zum Schluss die Seite im Browser zeigen. Mit "./sync.sh still"
-# unterdrücken, etwa wenn schon ein Fenster offen ist.
+# Zum Schluss die Seite im Browser zeigen. Mit "./sync.sh still" unterdrücken.
 if [ "$1" != "still" ]; then
-  open design.html
+  open pf.html
 fi
