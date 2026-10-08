@@ -20,7 +20,7 @@ mkdir -p "$ZIEL"
 node build-en.mjs                  # erzeugt die EN-Seiten, bricht bei deutschen Resten ab
 cp pf.html "$ZIEL/index.html"
 cp pf.html faq.html security.html pf-en.html faq-en.html security-en.html "$ZIEL/"
-cp impressum.html datenschutz.html dot-loader.js favicon.svg "$ZIEL/"
+cp impressum.html datenschutz.html dot-loader.js favicon.svg preloader.js "$ZIEL/"
 cp -r fonts vendor logos bilder api "$ZIEL/"
 cp package.json package-lock.json "$ZIEL/"
 printf '.env*\n.vercel\n' > "$ZIEL/.vercelignore"   # keine Tokens/Umgebungsdateien hochladen
