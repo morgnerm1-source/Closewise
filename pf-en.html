@@ -522,6 +522,30 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .ask-line button{width:44px;height:44px}
 }
 @media (max-width:360px){.nav-cta .book{height:44px;padding:0 12px}}
+/* Handy: Kartenreihen als Wisch-Leisten mit Punkten – kürzere Seite, alles übersichtlich */
+.sdots{display:none}
+@media (max-width:720px){
+  .cards3,.bento,.igrid,.fsteps{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1 * var(--gut));padding-inline:var(--gut);scroll-padding-inline:var(--gut);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .cards3::-webkit-scrollbar,.bento::-webkit-scrollbar,.igrid::-webkit-scrollbar,.fsteps::-webkit-scrollbar{display:none}
+  .bento .row2{display:contents}
+  .cards3>.pcard,.bento .ocard,.igrid>.ocard{flex:0 0 84%;min-width:0;scroll-snap-align:start}
+  .fsteps>.fs{flex:0 0 70%;min-width:0;scroll-snap-align:start}
+  .cards3 .rv,.bento .rv,.igrid .rv,.fsteps .rv{opacity:1;transform:none;filter:none}
+  .ocard{height:auto;min-height:360px;padding:26px}
+  .ocard blockquote{font-size:21px;line-height:27px}
+  .ocard.dk{min-height:230px}
+  .pcard .media{height:220px;padding:18px}
+  .pcard .ft{min-height:0;padding:20px}
+  .pcard .ft p{font-size:14px;line-height:21px}
+  .pchips{display:flex;flex-direction:column;align-items:flex-start;gap:6px;position:absolute;left:28px;bottom:28px}
+  .pchips span{padding:6px 12px;border-radius:999px;background:rgba(26,24,20,.62);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-size:12px;line-height:16px;white-space:nowrap}
+  .fs h3{font-size:16px}
+  .fs p{font-size:14px;line-height:20px}
+  .sdots{display:flex;justify-content:center;margin-top:6px}
+  .sdots button{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .sdots button i{display:block;width:6px;height:6px;border-radius:999px;background:rgba(26,24,20,.22);transition:width .3s var(--ease),background .3s}
+  .sdots button.on i{width:18px;background:var(--ink)}
+}
 </style>
 </head>
 <body>
@@ -868,6 +892,23 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     prow.addEventListener("mouseleave", () => openP(1));
   });
 
+  // Handy: Punkte unter den Wisch-Leisten (aktive Karte), Tippen springt
+  const swipes = [...document.querySelectorAll('.cards3, .bento, .igrid, .fsteps')];
+  const swipeItems = row => row.classList.contains('bento') ? [...row.querySelectorAll('.ocard')] : [...row.children];
+  swipes.forEach(row => {
+    const cards = swipeItems(row); if (cards.length < 2) return;
+    const dots = document.createElement('div'); dots.className = 'sdots';
+    cards.forEach((c, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Card ' + (i + 1)); b.append(document.createElement('i'));
+      b.addEventListener('click', () => row.scrollTo({ left: c.offsetLeft - row.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft), behavior: reduce ? 'auto' : 'smooth' })); dots.append(b); });
+    row.after(dots);
+    const sync = () => { const x = row.scrollLeft; let k = 0, best = 1e9;
+      cards.forEach((c, i) => { const d = Math.abs(c.offsetLeft - row.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft) - x); if (d < best) { best = d; k = i; } });
+      if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 4) k = cards.length - 1;
+      [...dots.children].forEach((b, i) => b.classList.toggle('on', i === k)); };
+    row.addEventListener('scroll', sync, { passive: true }); sync();
+    row.addEventListener('pointerdown', () => row.dataset.touched = Date.now());
+  });
+
   // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
   const tabs = [...document.querySelectorAll('.tab')];
   let ti = 1, timer, paused = false;
@@ -943,6 +984,11 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   const drawFlow = t => {
     // Schritt-Leiste: Phase aus der Zeitachse (0–1,6 / 1,6–4,2 / 4,2–6,5 / 6,5–11 s)
     const PH = [0, 1.6, 4.2, 6.5, 11], ph = t < 1.6 ? 0 : t < 4.2 ? 1 : t < 6.5 ? 2 : 3;
+    // Handy: aktiven Schritt waagerecht ins Bild holen (nur bei Phasenwechsel, nicht während der Nutzer wischt)
+    const sRow = fSteps[0]?.parentElement;
+    if (sRow && sRow.dataset.ph != ph) { sRow.dataset.ph = ph;
+      if (sRow.scrollWidth > sRow.clientWidth + 4 && !(Date.now() - (sRow.dataset.touched || 0) < 5000))
+        sRow.scrollTo({ left: fSteps[ph].offsetLeft - sRow.offsetLeft - parseFloat(getComputedStyle(sRow).paddingLeft), behavior: reduce ? 'auto' : 'smooth' }); }
     fSteps.forEach((el, k) => {
       el.classList.toggle('on', k === ph);
       el.lastElementChild.style.width = k < ph ? '0%' : k === ph ? Math.min(100, (t - PH[k]) / (PH[k + 1] - PH[k]) * 100) + '%' : '0%';

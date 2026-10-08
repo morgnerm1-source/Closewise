@@ -259,6 +259,7 @@
     "label=\"Antwort wird geladen\"": "label=\"Loading answer\"",
     "Closewise denkt nach …": "Closewise is thinking …",
     ">Termin buchen</a>": ">Book a call</a>",
-    "Antwort von einer KI auf Basis unserer Angaben. Verbindlich ist das Gespräch – ": "Answer by an AI, based on what we have published. The call is what counts – "
+    "Antwort von einer KI auf Basis unserer Angaben. Verbindlich ist das Gespräch – ": "Answer by an AI, based on what we have published. The call is what counts – ",
+    "'Karte '": "'Card '"
   }
 }
