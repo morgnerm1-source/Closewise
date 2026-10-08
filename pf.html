@@ -231,6 +231,41 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @media (hover:hover) and (min-width:1181px) and (prefers-reduced-motion:reduce){
   .cards3 .pcard,.pcard .hd .meta,.pchips,.pcard .go{transition:none!important}
 }
+/* Pflichtinhalte: Notiz unter den Schritten, Lösungstext, Branche, Validierung */
+.how-note{margin-top:40px;max-width:820px;font-size:17px;line-height:27px;color:var(--muted)}
+.how-note b{color:var(--ink);font-weight:500}
+.sol{margin-top:20px;max-width:760px;font-size:18px;line-height:28px;color:var(--ink-2)}
+.sol b{font-weight:500;color:var(--ink)}
+.ind{padding:120px 0 0}
+.igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.ocard.dk{height:340px;padding:32px;border-radius:16px;background:radial-gradient(120% 80% at 0% 0%,rgba(39,168,150,.28),transparent 60%),radial-gradient(100% 80% at 100% 100%,rgba(249,157,114,.22),transparent 60%),var(--dark)}
+.ocard.dk::after{display:none}
+.ocard.dk .num{margin-top:0;font-size:64px}
+.ocard.dk blockquote{font-size:19px;line-height:27px;font-weight:400;letter-spacing:-.01em;color:rgba(255,255,255,.86)}
+.ocard.dk.wide{grid-column:1/-1;height:auto;min-height:220px;gap:28px}
+.ocard.dk.wide blockquote{font-size:28px;line-height:36px;max-width:980px;color:#fff}
+.inote{margin-top:16px;font-size:13px;color:var(--muted-2)}
+.valid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;padding:96px 0 72px}
+.valid-num{font-size:120px;line-height:1;font-weight:300;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.valid-num span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
+.valid-num span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
+.valid-p{margin-top:12px;font-size:24px;line-height:32px;letter-spacing:-.01em;color:var(--ink-2);max-width:620px}
+.valid-chip{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:10px 16px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:14px;line-height:20px;color:var(--ink-2)}
+.valid-chip i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(39,168,150,.18);flex:none}
+@media (max-width:1180px){.igrid{grid-template-columns:1fr 1fr}.valid{grid-template-columns:1fr;gap:16px}}
+@media (max-width:720px){
+  .ind{padding-top:80px}
+  .igrid{gap:10px;margin-top:36px}
+  .ocard.dk{height:auto;min-height:220px;padding:22px;gap:20px}
+  .ocard.dk .num{font-size:44px}
+  .ocard.dk blockquote{font-size:16px;line-height:23px;margin-top:0}
+  .ocard.dk.wide blockquote{font-size:20px;line-height:27px}
+  .valid{padding:64px 0 48px}
+  .valid-num{font-size:72px}
+  .valid-p{font-size:19px;line-height:27px}
+  .how-note,.sol{font-size:16px;line-height:25px}
+}
+@media (max-width:420px){.igrid{grid-template-columns:1fr}}
 .icons{display:grid;grid-template-columns:repeat(3,42px);gap:18px;justify-content:center;align-content:center;height:100%}
 .icons i{width:42px;height:42px;border-radius:999px;background:var(--dark-3);border:1px solid rgba(255,255,255,.1);display:block;animation:pulse 4s var(--ease) infinite;animation-delay:calc(var(--i)*.25s)}
 @keyframes pulse{0%,70%,100%{background:var(--dark-3)}20%{background:#4a473f}}
@@ -497,7 +532,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <div class="nav-in">
     <a href="#" class="logo" aria-label="Closewise Startseite"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
     <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="#ablauf">Das Problem</a>
+      <a href="#problem">Das Problem</a>
       <a href="#ablauf-schritte">So funktioniert es</a>
       <a href="#produkte">Betrieb</a>
       <a href="security.html">Sicherheit</a>
@@ -511,7 +546,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menü">
-    <nav class="mob-links"><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="security.html">Sicherheit</a><a href="faq.html">FAQ</a></nav>
+    <nav class="mob-links"><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="security.html">Sicherheit</a><a href="faq.html">FAQ</a></nav>
     <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Termin buchen</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost">Live ansehen</a><span class="lang" aria-label="Sprache"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span></div>
   </div>
 </header>
@@ -523,7 +558,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">Die zusätzliche Stunde: endgültig vorbei.</h1>
-      <p class="sub rv" style="--d:.15s">Closewise schließt die Nacht ab und zeigt nur, was nicht zusammenpasst.</p>
+      <p class="sub rv" style="--d:.15s">Closewise prüft jede Kasse, jede Zahlung, jede Zimmerbelastung und jede Bankeinzahlung. Ein Klick, und was passt, ist erledigt.</p>
       <div class="ctas rv" style="--d:.3s">
         <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a>
         <a href="#ablauf-schritte" class="btn btn-glass">So funktioniert es</a>
@@ -556,7 +591,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 
   <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
     <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Systeme. Keines spricht mit dem anderen.</h2>
     <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
@@ -615,13 +650,38 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
       <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag und einer KI-Erklärung zurück.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.24s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="fs-n">04</span></div><h3>Abschließen</h3><p>Ein Export im Format, das Ihre Buchhaltung erwartet. Starten, Feierabend.</p><i class="fs-bar"></i></li>
     </ol>
+    <p class="how-note rv"><b>Erst rechnen, dann erklären.</b> Closewise prüft zuerst die Zahlen, mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.</p>
+  </section>
+
+  <!-- Problem: drei aufklappende Karten (Baustein wie „Betrieb“) -->
+  <section class="engine wrap" id="problem">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
+    <h2 class="h2 rv" style="--d:.1s">Jede Nacht: eine Stunde von Hand.</h2>
+    <div class="cards3">
+      <a href="#ergebnisse" class="pcard rv" style="--d:.1s">
+        <div class="hd"><span class="tag" style="background:#d9763f">1</span>Von Hand<span class="meta">Jede Nacht</span></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/problem-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="pchips" aria-hidden="true"><span>Kassen · Belege · Zahlungen</span><span>Eins nach dem anderen</span></div></div>
+        <div class="ft"><div class="tx"><h3>Eine Stunde oder länger</h3><p>Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen: Kassen, Belege und Zahlungen, eins nach dem anderen. Das dauert eine Stunde oder länger.</p></div><span class="go">Die Lösung ›</span></div>
+      </a>
+      <a href="#ergebnisse" class="pcard rv" style="--d:.2s">
+        <div class="hd"><span class="tag" style="background:#d9763f">2</span>Im Service<span class="meta">Eine Person weniger</span></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/problem-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="pchips" aria-hidden="true"><span>Eine Person weniger</span><span>Das Team wartet</span></div></div>
+        <div class="ft"><div class="tx"><h3>Einer fehlt, alle warten</h3><p>Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist.</p></div><span class="go">Die Lösung ›</span></div>
+      </a>
+      <a href="#ergebnisse" class="pcard rv" style="--d:.3s">
+        <div class="hd"><span class="tag" style="background:#d9763f">3</span>Die Kosten<span class="meta">Nicht nur Zeit</span></div>
+        <div class="media"><div class="ph" aria-hidden="true"><img src="bilder/problem-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="pchips" aria-hidden="true"><span>Überstunden</span><span>Müdes Team</span><span>Weniger Zeit für Gäste</span></div></div>
+        <div class="ft"><div class="tx"><h3>Nicht nur verlorene Zeit</h3><p>Diese Stunde bedeutet bezahlte Überstunden. Ein müdes Team. Und Stunden, die eigentlich den Gästen gehören.</p></div><span class="go">Die Lösung ›</span></div>
+      </a>
+    </div>
   </section>
 
   <!-- Ergebnisse -->
   <section class="outcomes wrap" id="ergebnisse">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
-    <h2 class="h2 rv" style="--d:.1s">Dieselbe Nacht,<br>zweimal abgeschlossen.</h2>
-    <p class="lead rv" style="--d:.2s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
+    <h2 class="h2 rv" style="--d:.1s">Ein Klick.<br>Der Abschluss läuft.</h2>
+    <p class="sol rv" style="--d:.2s">Closewise prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei. <b>Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.</b></p>
+    <p class="lead rv" style="--d:.25s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
     <div class="bento">
       <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8,5 Min.</div></div><blockquote>für den Abschluss – statt 60 bis 70 Minuten von Hand.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 Std.</div></div><blockquote>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
@@ -630,6 +690,20 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>7</div></div><blockquote>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</blockquote><div class="who"><span>Repräsentative Nacht, mittelgroßes Haus</span></div></article>
       </div>
     </div>
+  </section>
+
+  <!-- Branche in Zahlen: Zahlenkarten (Baustein wie „Mit Closewise“) -->
+  <section class="ind wrap" id="branche">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Die Branche</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:720px">Die Branche schließt noch von Hand ab.</h2>
+    <div class="igrid">
+      <article class="ocard dk rv"><div class="num" data-scramble>91 %</div><blockquote>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
+      <article class="ocard dk rv" style="--d:.08s"><div class="num" data-scramble>4 von 5</div><blockquote>verbringen ein bis zwei volle Tage pro Woche in Tabellen.</blockquote></article>
+      <article class="ocard dk rv" style="--d:.16s"><div class="num" data-scramble>3–8 %</div><blockquote>des Bruttoumsatzes gehen in Reise und Gastgewerbe verloren.</blockquote></article>
+      <article class="ocard dk rv" style="--d:.24s"><div class="num" data-scramble>~5 %</div><blockquote>kommen durch Betrug am Arbeitsplatz noch dazu.</blockquote></article>
+      <article class="ocard dk wide rv" style="--d:.1s"><div class="mark">Night Auditor</div><blockquote>Stellenanzeigen großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen der Gästekonten noch immer als Aufgabe.</blockquote></article>
+    </div>
+    <p class="inote rv">Branchenschätzungen, keine Closewise-Messungen.</p>
   </section>
 
   <!-- Produkte -->
@@ -709,6 +783,14 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 
   <!-- CTA -->
   <section class="cta-wrap" id="kontakt">
+    <div class="wrap valid">
+      <div class="valid-num rv" data-scramble>15.000+</div>
+      <div class="valid-tx rv" style="--d:.1s">
+        <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Schon im Einsatz</p>
+        <p class="valid-p">gehobene Hotels in Deutschland, Österreich, der Schweiz, Italien und Frankreich. Die meisten schließen noch von Hand ab.</p>
+        <span class="valid-chip"><i></i>Closewise ist schon live und automatisiert jede Nacht den Abschluss.</span>
+      </div>
+    </div>
     <div class="wrap cta rv">
       <canvas class="cta-glow" id="ctaGlow" aria-hidden="true"></canvas><span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
       <div class="c">
@@ -728,7 +810,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <a href="#top" class="logo"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
         <p>Nächtlicher Kassenabschluss für Hotels und ihre Outlets.<br>Closewise sagt Ihnen nur, was nicht zusammenpasst.</p>
       </div>
-      <div class="fcol"><h4>Produkt</h4><a href="#ablauf">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="security.html">Sicherheit</a></div>
+      <div class="fcol"><h4>Produkt</h4><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="#produkte">Betrieb</a><a href="security.html">Sicherheit</a></div>
       <div class="fcol"><h4>Unternehmen</h4><a href="mailto:info@closewise.eu">Kontakt</a><a href="faq.html">FAQ</a></div>
       <div class="fcol"><h4>Folgen</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
@@ -778,14 +860,13 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
   // Betrieb: Karte unter dem Zeiger geht auf, sonst die mittlere (wie primefold)
-  const prow = document.querySelector(".cards3");
-  if (prow) {
+  document.querySelectorAll(".cards3").forEach(prow => {
     const pcs = [...prow.querySelectorAll(".pcard")];
     const openP = i => pcs.forEach((c, k) => c.classList.toggle("open", k === i));
     openP(1);
     pcs.forEach((c, i) => { c.addEventListener("mouseenter", () => openP(i)); c.addEventListener("focusin", () => openP(i)); });
     prow.addEventListener("mouseleave", () => openP(1));
-  }
+  });
 
   // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
   const tabs = [...document.querySelectorAll('.tab')];
