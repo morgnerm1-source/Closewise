@@ -141,6 +141,15 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
 
 /* Schritt-Leiste unter der Ablauf-Animation – folgt der Animation */
+/* Pflichttexte (PDF): gut lesbare Absätze, Kernsatz, Chips */
+.say{font-size:20px;line-height:31px;color:var(--ink-2);max-width:760px;margin-top:24px}
+.say-k{font-size:20px;line-height:28px;font-weight:500;color:var(--ink);margin-top:28px}
+.say-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.say-chips span{padding:9px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:15px;line-height:20px;color:var(--ink-2)}
+.flow-cap{margin-top:64px;font-size:14px;line-height:20px;color:var(--muted);max-width:560px}
+.flow-cap+.flow{margin-top:16px}
+.how-h{margin-top:88px;font-size:32px;line-height:40px;font-weight:400;letter-spacing:-.02em;color:var(--ink-2);scroll-margin-top:110px}
+.how-h+.say{margin-top:14px;margin-bottom:28px}
 .fsteps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;scroll-margin-top:110px}
 .fs{position:relative;overflow:hidden;padding:18px 18px 22px;border-radius:14px;background:#fff;border:1px solid var(--line);transition:border-color .5s var(--ease),box-shadow .5s var(--ease)}
 .fs>*:not(.fs-bar){opacity:.5;transition:opacity .5s var(--ease)}
@@ -461,6 +470,12 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .ask-line button{width:44px;height:44px}
 }
 @media (max-width:360px){.nav-cta .book{height:44px;padding:0 12px}}
+@media (max-width:720px){
+  .say,.say-k{font-size:18px;line-height:28px}
+  .say-chips span{font-size:14px;padding:8px 14px}
+  .flow-cap{margin-top:44px}
+  .how-h{margin-top:64px;font-size:26px;line-height:32px}
+}
 </style>
 </head>
 <body>
@@ -531,8 +546,11 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>The problem</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Four systems. None of them talk to each other.</h2>
-    <p class="lead rv" style="--d:.2s;max-width:520px">Four systems that don't know each other. Every night, a person becomes the link between them.</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:900px">Every night, an hour by hand.</h2>
+    <p class="say rv" style="--d:.15s">Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it’s happening, there’s one less person on the floor. The rest of the team ends up staying late, waiting for it to finish.</p>
+    <p class="say-k rv" style="--d:.2s">That hour is not just lost time.</p>
+    <div class="say-chips rv" style="--d:.25s"><span>It is overtime pay.</span><span>A tired team.</span><span>And hours that should have gone to guests instead.</span></div>
+    <p class="flow-cap rv">Four systems that don't know each other. Every night, a person becomes the link between them.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Flow: till receipts, card terminal, guest ledger, POS system and bank account come together in Closewise, differences are cleared, then the export for your accountant as a DATEV file or CSV.">
       <div class="flow-stage" id="flowStage">
         <div class="flow-glow" id="fGlow"></div>
@@ -583,6 +601,8 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
+    <h3 class="how-h rv">Check first. Explain second.</h3>
+    <p class="say rv" style="--d:.1s">Closewise checks the numbers first, using straightforward, deterministic matching, not guesswork. Only once something is actually found does it explain what happened, in plain language you can read at a glance.</p>
     <ol class="fsteps" id="ablauf-schritte" aria-label="How it works">
       <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Connect</h3><p>Closewise reads the exports your PMS, your POS and your bank already produce. Nothing new at the point of sale.</p><i class="fs-bar"></i></li>
       <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Match</h3><p>Every check is tested against the terminal batch, the guest ledger and the drawer count. Rules, not guesswork.</p><i class="fs-bar"></i></li>
@@ -594,8 +614,10 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <!-- Ergebnisse -->
   <section class="outcomes wrap" id="ergebnisse">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>With Closewise</p>
-    <h2 class="h2 rv" style="--d:.1s">The same night,<br>closed twice.</h2>
-    <p class="lead rv" style="--d:.2s">A representative night at a mid-sized property. Your own numbers will differ.</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:720px">Click run. That’s it.</h2>
+    <p class="say rv" style="--d:.15s">Closewise checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight’s close, that’s it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached.</p>
+    <p class="say-k rv" style="--d:.2s">It hands you back the one thing closing never gave you before. Time.</p>
+    <p class="lead rv" style="--d:.25s;margin-top:48px">A representative night at a mid-sized property. Your own numbers will differ.</p>
     <div class="bento">
       <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>8.5 min</div></div><blockquote>to close – instead of 60 to 70 minutes by hand.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
       <article class="ocard rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/ergebnis-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div><div class="num" data-scramble>678 h</div></div><blockquote>back per year that used to go into the night close.</blockquote><div class="who"><span>Representative night, mid-sized property</span></div></article>
