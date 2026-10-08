@@ -185,6 +185,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .cta.gl .blob{display:none}
 .cta.gl::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(55% 75% at 50% 50%,rgba(11,10,9,.5),rgba(11,10,9,.15) 60%,rgba(11,10,9,0) 85%)}
 .cta.gl .c{text-shadow:0 0 28px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.35)}
+/* eigene Ebene: sonst wird der weiche Textschatten über dem Shader jedes Bild neu gerechnet */
+.cta.gl .c{will-change:transform}
 .cta.gl .c .btn{text-shadow:none}
 @media (max-width:720px){.cta.gl::before{background:radial-gradient(90% 70% at 50% 50%,rgba(11,10,9,.62),rgba(11,10,9,.3) 70%,rgba(11,10,9,.12))}}
 /* Produkte */
@@ -981,7 +983,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   (() => {
     const box = document.querySelector('.cta'), cv = document.getElementById('ctaGlow');
     if (!box || !cv) return;
-    const gl = cv.getContext('webgl', { antialias: false, premultipliedAlpha: false, preserveDrawingBuffer: true });
+    const gl = cv.getContext('webgl', { antialias: false, premultipliedAlpha: false, preserveDrawingBuffer: false });
     if (!gl) return;
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
     const fs = `precision highp float;
@@ -1041,14 +1043,15 @@ void main(){
     const uRes = gl.getUniformLocation(pr, 'uRes'), uT = gl.getUniformLocation(pr, 'uT');
     box.classList.add('gl');
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = Math.min(Math.round(cv.clientWidth * dpr), 2560), h = Math.round(w * cv.clientHeight / Math.max(cv.clientWidth, 1));
+      // halbe CSS-Auflösung: der Shader ist weich, hochskaliert sieht man keinen Unterschied
+      const w = Math.min(Math.round(cv.clientWidth * .5), 1280), h = Math.round(w * cv.clientHeight / Math.max(cv.clientWidth, 1));
       if (w > 0 && (cv.width !== w || cv.height !== h)) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
     };
     const draw = t => { resize(); gl.uniform2f(uRes, cv.width, cv.height); gl.uniform1f(uT, t); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     let t = 0, last = 0, raf = 0;
-    const tick = now => { const dt = last ? Math.min((now - last) / 1000, .1) : 0; last = now; t = (t + dt) % 16; draw(t); raf = requestAnimationFrame(tick); };
+    // 30 Bilder/s genügen für das langsame Wabern
+    const tick = now => { raf = requestAnimationFrame(tick); if (last && now - last < 31) return; const dt = last ? Math.min((now - last) / 1000, .1) : 0; last = now; t = (t + dt) % 16; draw(t); };
     draw(5.2);
     new ResizeObserver(() => { if (!raf) draw(still ? 5.2 : t); }).observe(cv);
     if (still) return;
