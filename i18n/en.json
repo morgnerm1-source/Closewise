@@ -242,7 +242,7 @@
     "Exporte einlesen": "Read the exports",
     "Regeln, kein Raten": "Rules, not guesswork",
     "Mit Betrag und Grund": "With amount and reason",
-    "Regelbasierter Abgleich statt Raten – erklärt wird nur, was wirklich auffällt, in einfacher Sprache.": "Deterministic matching, not guesswork – only what’s actually found gets explained, in plain language you can read at a glance.",
+    "Regelbasierter Abgleich statt Raten – erklärt wird nur, was wirklich auffällt, in einfacher Sprache.": "Closewise checks the numbers first, using deterministic matching, not guesswork – only what’s actually found gets explained, in plain language you can read at a glance.",
     "Was Branchenzahlen über den Nachtabschluss sagen.": "What industry numbers say about the night close.",
     "der Hotels berichten noch von Hand.": "of hotels still rely on manual reporting.",
     "verlieren 1–2 Tage pro Woche an Tabellen.": "spend 1–2 full days a week in spreadsheets.",
