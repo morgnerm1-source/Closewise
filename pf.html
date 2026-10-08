@@ -141,19 +141,18 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .flow-cursor{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;opacity:0}
 
 /* Schritt-Leiste unter der Ablauf-Animation – folgt der Animation */
-.fsteps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;scroll-margin-top:110px}
-.fs{position:relative;overflow:hidden;padding:18px 18px 22px;border-radius:14px;background:#fff;border:1px solid var(--line);transition:border-color .5s var(--ease),box-shadow .5s var(--ease)}
-.fs>*:not(.fs-bar){opacity:.5;transition:opacity .5s var(--ease)}
+.fsteps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;scroll-margin-top:110px}
+.fs{position:relative;padding:20px 8px 0 0;border-top:1px solid var(--line)}
+.fs>*:not(.fs-bar){opacity:.42;transition:opacity .5s var(--ease)}
 .fs.on>*:not(.fs-bar){opacity:1}
-.fs.on{border-color:rgba(47,107,255,.35);box-shadow:0 14px 30px -24px rgba(47,107,255,.6)}
 .fs-top{display:flex;align-items:center;gap:10px}
-.fs-ico{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);transition:all .5s var(--ease)}
+.fs-ico{width:32px;height:32px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);transition:all .5s var(--ease);display:none}
 .fs-ico svg{width:16px;height:16px}
 .fs.on .fs-ico{background:#2f6bff;border-color:#2f6bff;color:#fff}
 .fs-n{font:500 13px/1 Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--muted-2)}
-.fs h3{font-size:17px;font-weight:500;letter-spacing:-.01em;margin-top:14px;color:var(--ink-2)}
-.fs p{font-size:14px;line-height:20px;color:var(--muted);margin-top:6px}
-.fs-bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:#2f6bff}
+.fs h3{font-size:18px;font-weight:500;letter-spacing:-.01em;margin-top:8px;color:var(--ink-2)}
+.fs p{font-size:14px;line-height:20px;color:var(--muted);margin-top:4px}
+.fs-bar{position:absolute;left:0;top:-1px;height:2px;width:0;background:#2f6bff}
 /* Einstieg als Zeitleiste */
 .start{padding:120px 0 104px}
 .tl{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px;position:relative}
@@ -175,9 +174,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .tl-dot{grid-row:1/3}
   .tl h3{margin-top:6px;font-size:17px}
   .tl p{grid-column:2}
-  .fs{padding:14px 14px 18px}
-  .fs h3{font-size:15px;margin-top:10px}
-  .fs p{font-size:13px;line-height:18px}
+  .fs{padding:16px 6px 0 0}
+  .fs h3{font-size:16px;margin-top:6px}
 }
 /* Leuchtband (WebGL) im Abschluss-Band */
 .cta-glow{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
@@ -232,18 +230,19 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .cards3 .pcard,.pcard .hd .meta,.pchips,.pcard .go{transition:none!important}
 }
 /* Pflichtinhalte: Notiz unter den Schritten, Lösungstext, Branche, Validierung */
-.how-note{margin-top:40px;max-width:820px;font-size:17px;line-height:27px;color:var(--muted)}
+.how-note{margin-top:36px;max-width:820px;font-size:16px;line-height:25px;color:var(--muted)}
 .how-note b{color:var(--ink);font-weight:500}
 .sol{margin-top:20px;max-width:760px;font-size:18px;line-height:28px;color:var(--ink-2)}
 .sol b{font-weight:500;color:var(--ink)}
 .ind{padding:120px 0 0}
 .igrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-.ocard.dk{height:340px;padding:32px;border-radius:16px;background:radial-gradient(120% 80% at 0% 0%,rgba(39,168,150,.28),transparent 60%),radial-gradient(100% 80% at 100% 100%,rgba(249,157,114,.22),transparent 60%),var(--dark)}
-.ocard.dk::after{display:none}
-.ocard.dk .num{margin-top:0;font-size:64px}
-.ocard.dk blockquote{font-size:19px;line-height:27px;font-weight:400;letter-spacing:-.01em;color:rgba(255,255,255,.86)}
-.ocard.dk.wide{grid-column:1/-1;height:auto;min-height:220px;gap:28px}
-.ocard.dk.wide blockquote{font-size:28px;line-height:36px;max-width:980px;color:#fff}
+.igrid .ocard{height:420px;padding:32px;border-radius:16px;background:var(--dark)}
+.igrid .ocard::after{background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.7) 100%)}
+.igrid .ocard .num{margin-top:0;font-size:64px}
+.igrid .ocard blockquote{font-size:22px;line-height:29px}
+.igrid .ocard.wide{grid-column:1/-1;height:340px}
+.igrid .ocard.wide::after{background:linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.1) 100%)}
+.igrid .ocard.wide blockquote{font-size:30px;line-height:38px;max-width:620px}
 .inote{margin-top:16px;font-size:13px;color:var(--muted-2)}
 .valid{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;padding:96px 0 72px}
 .valid-num{font-size:120px;line-height:1;font-weight:300;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -256,10 +255,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 @media (max-width:720px){
   .ind{padding-top:80px}
   .igrid{gap:10px;margin-top:36px}
-  .ocard.dk{height:auto;min-height:220px;padding:22px;gap:20px}
-  .ocard.dk .num{font-size:44px}
-  .ocard.dk blockquote{font-size:16px;line-height:23px;margin-top:0}
-  .ocard.dk.wide blockquote{font-size:20px;line-height:27px}
+  .igrid .ocard .num{font-size:48px}
   .valid{padding:64px 0 48px}
   .valid-num{font-size:72px}
   .valid-p{font-size:19px;line-height:27px}
@@ -529,11 +525,13 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .cards3::-webkit-scrollbar,.bento::-webkit-scrollbar,.igrid::-webkit-scrollbar,.fsteps::-webkit-scrollbar{display:none}
   .bento .row2{display:contents}
   .cards3>.pcard,.bento .ocard,.igrid>.ocard{flex:0 0 84%;min-width:0;scroll-snap-align:start}
-  .fsteps>.fs{flex:0 0 70%;min-width:0;scroll-snap-align:start}
+  .fsteps>.fs{flex:0 0 58%;min-width:0;scroll-snap-align:start}
   .cards3 .rv,.bento .rv,.igrid .rv,.fsteps .rv{opacity:1;transform:none;filter:none}
   .ocard{height:auto;min-height:360px;padding:26px}
   .ocard blockquote{font-size:21px;line-height:27px}
-  .ocard.dk{min-height:230px}
+  .igrid .ocard{height:auto;min-height:340px}
+  .igrid .ocard.wide{min-height:340px}
+  .igrid .ocard.wide blockquote{font-size:22px;line-height:29px}
   .pcard .media{height:220px;padding:18px}
   .pcard .ft{min-height:0;padding:20px}
   .pcard .ft p{font-size:14px;line-height:21px}
@@ -669,12 +667,12 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
       </div>
     </div>
     <ol class="fsteps" id="ablauf-schritte" aria-label="So funktioniert es">
-      <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Closewise liest die Exporte, die PMS, Kasse und Bank ohnehin erzeugen. Nichts Neues an der Kasse.</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Jede Rechnung wird gegen Terminalabschluss, Gästekonto und Kassenbestand geprüft. Regeln, kein Raten.</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Was nicht aufgeht, kommt mit dem gefährdeten Eurobetrag und einer KI-Erklärung zurück.</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.24s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="fs-n">04</span></div><h3>Abschließen</h3><p>Ein Export im Format, das Ihre Buchhaltung erwartet. Starten, Feierabend.</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Exporte einlesen</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Regeln, kein Raten</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Mit Betrag und Grund</p><i class="fs-bar"></i></li>
+      <li class="fs rv" style="--d:0.24s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="fs-n">04</span></div><h3>Abschließen</h3><p>Export für die Buchhaltung</p><i class="fs-bar"></i></li>
     </ol>
-    <p class="how-note rv"><b>Erst rechnen, dann erklären.</b> Closewise prüft zuerst die Zahlen, mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.</p>
+    <p class="how-note rv"><b>Erst rechnen, dann erklären.</b> Regelbasierter Abgleich statt Raten – erklärt wird nur, was wirklich auffällt, in einfacher Sprache.</p>
   </section>
 
   <!-- Problem: drei aufklappende Karten (Baustein wie „Betrieb“) -->
@@ -720,12 +718,13 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <section class="ind wrap" id="branche">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Die Branche</p>
     <h2 class="h2 rv" style="--d:.1s;max-width:720px">Die Branche schließt noch von Hand ab.</h2>
+    <p class="lead rv" style="--d:.2s">Was Branchenzahlen über den Nachtabschluss sagen.</p>
     <div class="igrid">
-      <article class="ocard dk rv"><div class="num" data-scramble>91 %</div><blockquote>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
-      <article class="ocard dk rv" style="--d:.08s"><div class="num" data-scramble>4 von 5</div><blockquote>verbringen ein bis zwei volle Tage pro Woche in Tabellen.</blockquote></article>
-      <article class="ocard dk rv" style="--d:.16s"><div class="num" data-scramble>3–8 %</div><blockquote>des Bruttoumsatzes gehen in Reise und Gastgewerbe verloren.</blockquote></article>
-      <article class="ocard dk rv" style="--d:.24s"><div class="num" data-scramble>~5 %</div><blockquote>kommen durch Betrug am Arbeitsplatz noch dazu.</blockquote></article>
-      <article class="ocard dk wide rv" style="--d:.1s"><div class="mark">Night Auditor</div><blockquote>Stellenanzeigen großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen der Gästekonten noch immer als Aufgabe.</blockquote></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/branche-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91 %</div><blockquote>der Hotels berichten noch von Hand.</blockquote></article>
+      <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/branche-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 von 5</div><blockquote>verlieren 1–2 Tage pro Woche an Tabellen.</blockquote></article>
+      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/branche-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8 %</div><blockquote>des Umsatzes gehen unbemerkt verloren.</blockquote></article>
+      <article class="ocard rv" style="--d:.24s"><div class="ph" aria-hidden="true"><img src="bilder/branche-4.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>~5 %</div><blockquote>kommen durch Betrug noch dazu.</blockquote></article>
+      <article class="ocard wide rv" style="--d:.1s"><div class="ph" aria-hidden="true"><img src="bilder/branche-5.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="mark">Night Auditor heute</div><blockquote>„Kassenberichte von Hand vergleichen“ steht noch in der Stellenanzeige.</blockquote></article>
     </div>
     <p class="inote rv">Branchenschätzungen, keine Closewise-Messungen.</p>
   </section>
