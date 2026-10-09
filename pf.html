@@ -637,7 +637,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <a href="#" class="logo" aria-label="Closewise Startseite"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
     <nav class="nav-links" aria-label="Hauptnavigation">
       <a href="#problem">Das Problem</a>
-      <a href="#ablauf-schritte">So funktioniert es</a>
+      <a href="#ablauf">So funktioniert es</a>
       
       <a href="security.html">Sicherheit</a>
       <a href="faq.html">FAQ</a>
@@ -650,7 +650,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menü">
-    <nav class="mob-links"><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="security.html">Sicherheit</a><a href="faq.html">FAQ</a></nav>
+    <nav class="mob-links"><a href="#problem">Das Problem</a><a href="#ablauf">So funktioniert es</a><a href="security.html">Sicherheit</a><a href="faq.html">FAQ</a></nav>
     <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Termin buchen</a><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-ghost">Live ansehen</a><span class="lang" aria-label="Sprache"><a href="pf.html" data-l="de" hreflang="de" lang="de">DE</a><a href="pf-en.html" data-l="en" hreflang="en" lang="en">EN</a></span></div>
   </div>
 </header>
@@ -665,39 +665,21 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
       <p class="sub rv" style="--d:.15s">Closewise prüft jede Kasse, jede Zahlung, jede Zimmerbelastung und jede Bankeinzahlung. Ein Klick, und was passt, ist erledigt.</p>
       <div class="ctas rv" style="--d:.3s">
         <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Termin buchen</a>
-        <a href="#ablauf-schritte" class="btn btn-glass">So funktioniert es</a>
+        <a href="#ablauf" class="btn btn-glass">So funktioniert es</a>
       </div>
     </div>
     <div style="position:relative">
-      <div class="tabs rv" style="--d:.45s" id="tabs">
-        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:rgba(255,255,255,.2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>Anbinden<i class="bar"></i></a>
-        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#1f7a6a"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6M12 17h.01"/></svg></span>Abgleichen<i class="bar"></i></a>
-        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#d9763f"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18l5-6 4 3 7-9"/></svg></span>Markieren<i class="bar"></i></a>
-        <a href="#ablauf-schritte" class="tab"><span class="ico" style="background:#594aff"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>Abschließen<i class="bar"></i></a>
-      </div>
       <button class="pause" id="pause" aria-label="Video anhalten"><i></i></button>
     </div>
   </div>
 </section>
 
 <main class="sheet">
-  <!-- Logo-Laufband -->
-  <div class="wrap logos-wrap">
-    <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Liest die Exporte aus</p>
-    <div class="logos" aria-label="Systeme, deren Exporte Closewise liest">
-      <div class="logos-track">
-        <!-- lightspeed.png: vom Nutzer bereitgestellt, nur zugeschnitten und freigestellt -->
-        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.png" alt="Lightspeed" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify-pos.png" alt="Shopify POS" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
-        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.png" alt="" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify-pos.png" alt="" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
-      </div>
-    </div>
-  </div>
 
-  <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
-    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Vier Systeme. Keines spricht mit dem anderen.</h2>
-    <p class="lead rv" style="--d:.2s;max-width:520px">Vier Systeme, die einander nicht kennen. Jede Nacht wird ein Mensch zur Verbindung zwischen ihnen.</p>
+    <h2 class="h2 rv" style="--d:.1s;max-width:640px">Erst rechnen. Dann erklären.</h2>
+    <p class="sol rv" style="--d:.2s">Closewise prüft zuerst die Zahlen – mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.</p>
     <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in Closewise zusammen, Differenzen werden geklärt, danach Export für den Steuerberater als DATEV-Datei oder CSV.">
       <div class="flow-stage" id="flowStage">
         <div class="flow-glow" id="fGlow"></div>
@@ -748,13 +730,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
       </div>
     </div>
-    <ol class="fsteps" id="ablauf-schritte" aria-label="So funktioniert es">
-      <li class="fs rv" style="--d:0.00s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span><span class="fs-n">01</span></div><h3>Anbinden</h3><p>Exporte einlesen</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.08s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span class="fs-n">02</span></div><h3>Abgleichen</h3><p>Regeln, kein Raten</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.16s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="fs-n">03</span></div><h3>Markieren</h3><p>Mit Betrag und Grund</p><i class="fs-bar"></i></li>
-      <li class="fs rv" style="--d:0.24s"><div class="fs-top"><span class="fs-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span class="fs-n">04</span></div><h3>Abschließen</h3><p>Export für die Buchhaltung</p><i class="fs-bar"></i></li>
-    </ol>
-    <p class="how-note rv"><b>Erst rechnen, dann erklären.</b> Regelbasierter Abgleich statt Raten – erklärt wird nur, was wirklich auffällt, in einfacher Sprache.</p>
   </section>
 
   <!-- Problem: dunkles Band, typografisch – die Uhr der Nacht -->
@@ -762,7 +737,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <div class="wrap night-in">
       <div class="night-l">
         <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Das Problem</p>
-        <div class="clock rv" style="--d:.1s" aria-hidden="true"><span>23:40</span><i><em>1 Std. 10 Min. von Hand</em></i><span>00:50</span></div>
         <h2 class="h2 rv" style="--d:.2s">Jede Nacht: eine Stunde von Hand.</h2>
       </div>
       <div class="night-r">
@@ -781,7 +755,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   <section class="ind wrap" id="branche">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Die Branche</p>
     <h2 class="h2 rv" style="--d:.1s;max-width:720px">Die Branche schließt noch von Hand ab.</h2>
-    <p class="lead rv" style="--d:.2s">Was Branchenzahlen über den Nachtabschluss sagen.</p>
     <div class="igrid">
       <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/branche-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91 %</div><blockquote>der Hotels berichten noch von Hand – auch in automatisierten Systemen.</blockquote></article>
       <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/branche-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 von 5</div><blockquote>verlieren 1–2 Tage pro Woche an Tabellen.</blockquote></article>
@@ -795,28 +768,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Mit Closewise</p>
     <h2 class="h2 rv" style="--d:.1s">Ein Klick.<br>Der Abschluss läuft.</h2>
     <p class="sol rv" style="--d:.2s">Closewise prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei. <b>Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.</b></p>
-    <p class="lead rv" style="--d:.25s">Eine repräsentative Nacht in einem mittelgroßen Haus. Ihre eigenen Zahlen werden abweichen.</p>
-    <div class="cmp rv">
-      <div class="cmp-rows">
-        <div class="cmp-row"><span class="cmp-l">Von Hand</span><div class="cmp-bar"><i style="--w:100%"></i></div><b>60–70 Min.</b></div>
-        <div class="cmp-row cw"><span class="cmp-l">Mit Closewise</span><div class="cmp-bar"><i style="--w:13%"></i></div><b>8,5 Min.</b></div>
-      </div>
-      <div class="cmp-kpis">
-        <div><b data-scramble>678 Std.</b><span>zurück pro Jahr, die bisher in den Nachtabschluss geflossen sind.</span></div>
-        <div><b data-scramble>7</b><span>Abweichungen gemeldet, statt jede Zeile von Hand zu lesen.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sicherheit: schmaler Streifen, Details auf security.html -->
-  <section class="tstrip wrap" id="vertrauen">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Sicherheit</p>
-    <ul class="ts-list">
-      <li class="rv"><b>EU · Irland</b><span>Verarbeitung in der EU</span></li>
-      <li class="rv" style="--d:.08s"><b>Nur Umsatzdaten</b><span>Keine Gästenamen, keine vollständigen Kartennummern</span></li>
-      <li class="rv" style="--d:.16s"><b>Nur lesen</b><span>Kein Schreibzugriff auf PMS, Kasse oder Bank</span></li>
-    </ul>
-    <a href="security.html" class="ts-link rv" style="--d:.2s">Mehr zur Sicherheit ›</a>
   </section>
 
   <!-- CTA -->
@@ -848,7 +799,7 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <a href="#top" class="logo"><svg class="cw-logo" viewBox="0 0 1316 219" fill="currentColor" role="img" aria-label="Closewise"><use href="#cw"/></svg></a>
         <p>Nächtlicher Kassenabschluss für Hotels und ihre Outlets.<br>Closewise sagt Ihnen nur, was nicht zusammenpasst.</p>
       </div>
-      <div class="fcol"><h4>Produkt</h4><a href="#problem">Das Problem</a><a href="#ablauf-schritte">So funktioniert es</a><a href="security.html">Sicherheit</a></div>
+      <div class="fcol"><h4>Produkt</h4><a href="#problem">Das Problem</a><a href="#ablauf">So funktioniert es</a><a href="security.html">Sicherheit</a></div>
       <div class="fcol"><h4>Unternehmen</h4><a href="mailto:info@closewise.eu">Kontakt</a><a href="faq.html">FAQ</a></div>
       <div class="fcol"><h4>Folgen</h4><a href="https://www.linkedin.com/company/closewise-eu" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/closewise.eu/" target="_blank" rel="noopener">Instagram</a></div>
     </div>
@@ -924,10 +875,10 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   });
 
   // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter
-  const tabs = [...document.querySelectorAll('.tab')];
+  const tabs = [...document.querySelectorAll('.tab')]; // Reiter gibt es seit der PDF-Fassung nicht mehr – Code bleibt harmlos
   let ti = 1, timer, paused = false;
   const setTab = i => { tabs.forEach((t,k) => t.classList.toggle('on', k === i)); ti = i; };
-  const cycle = () => { clearTimeout(timer); if (paused) return; timer = setTimeout(() => { setTab((ti + 1) % tabs.length); cycle(); }, 6000); };
+  const cycle = () => { clearTimeout(timer); if (paused || !tabs.length) return; timer = setTimeout(() => { setTab((ti + 1) % tabs.length); cycle(); }, 6000); };
   setTab(1); if (!reduce) cycle();
   tabs.forEach((t,i) => t.addEventListener('mouseenter', () => { setTab(i); cycle(); }));
   let vid = document.getElementById('heroVideo');

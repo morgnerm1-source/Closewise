@@ -272,7 +272,9 @@
     "Nur lesen": "Read only",
     "Kein Schreibzugriff auf PMS, Kasse oder Bank": "No write access to PMS, POS or bank",
     "Mehr zur Sicherheit ›": "More on security ›",
-    "Diese Stunde ist nicht nur verlorene Zeit.": "That hour is not just lost time."
+    "Diese Stunde ist nicht nur verlorene Zeit.": "That hour is not just lost time.",
+    "Erst rechnen. Dann erklären.": "Check first. Explain second.",
+    "Closewise prüft zuerst die Zahlen – mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist: in einfacher Sprache, die Sie auf einen Blick lesen.": "Closewise checks the numbers first, using straightforward, deterministic matching, not guesswork. Only once something is actually found does it explain what happened, in plain language you can read at a glance."
   },
   "js": {
     "'Video abspielen'": "'Play video'",
