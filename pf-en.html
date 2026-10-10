@@ -624,6 +624,17 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   .tstrip{padding-top:72px}
   .ts-list{grid-template-columns:1fr;gap:10px}
 }
+/* Hero: Text mittig, keine leere Fläche unten; Pause-Knopf unten rechts */
+.hero{height:88vh}
+.hero-in{justify-content:center;padding-bottom:72px}
+.hero-pause{position:absolute;right:0;bottom:32px;width:36px;height:36px}
+@media (max-width:720px){
+  .hero{height:auto;min-height:max(78svh,520px)}
+  .hero-in{min-height:inherit;padding:104px 0 76px}
+  .hero .ctas{flex-wrap:wrap}
+  .hero .ctas .btn{white-space:nowrap}
+  .hero-pause{bottom:20px}
+}
 </style>
 </head>
 <body>
@@ -668,14 +679,26 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
         <a href="#ablauf" class="btn btn-glass">How it works</a>
       </div>
     </div>
-    <div style="position:relative">
+    <div class="hero-pause">
       <button class="pause" id="pause" aria-label="Pause video"><i></i></button>
     </div>
   </div>
 </section>
 
 <main class="sheet">
+  <!-- Logo-Laufband -->
+  <div class="wrap logos-wrap">
+    <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Reads the exports from</p>
+    <div class="logos" aria-label="Systems whose exports Closewise reads">
+      <div class="logos-track">
+        <!-- lightspeed.png: vom Nutzer bereitgestellt, nur zugeschnitten und freigestellt -->
+        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.png" alt="Lightspeed" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify-pos.png" alt="Shopify POS" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
+        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.png" alt="" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify-pos.png" alt="" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span>
+      </div>
+    </div>
+  </div>
 
+  <!-- So funktioniert es -->
   <section class="how wrap" id="ablauf">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>How it works</p>
     <h2 class="h2 rv" style="--d:.1s;max-width:640px">Check first. Explain second.</h2>
