@@ -669,60 +669,29 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
   #statistics .ocard blockquote{font-size:19px;line-height:26px}
   .cta{height:260px}
 }
-/* Verbindungs-Infografik */
-.hiw{position:relative;height:420vh;margin-top:48px}
+/* Scroll-Video „Belege, die sich finden“ */
+.hiw{position:relative;height:440vh;margin-top:48px}
 .hiw-sticky{position:sticky;top:96px;height:calc(100vh - 120px);min-height:560px;display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:center}
 .hw-acc{list-style:none;display:grid;gap:6px}
-.hw-item{position:relative;display:grid;grid-template-columns:34px 1fr;gap:6px;padding:16px 0 18px;border-top:1px solid var(--line);opacity:.42;transition:opacity .4s}
+.hw-item{position:relative;display:grid;grid-template-columns:34px 1fr;gap:6px;padding:16px 0 18px;border-top:1px solid var(--line);opacity:.42;transition:opacity .4s;cursor:pointer}
 .hw-item.on{opacity:1}
 .hw-n{font:500 13px/22px Inter,sans-serif;color:var(--muted-2);font-variant-numeric:tabular-nums}
 .hw-t{display:block;font-size:20px;line-height:22px;font-weight:500}
 .hw-b{max-height:0;overflow:hidden;font-size:14px;line-height:21px;color:var(--muted);transition:max-height .5s var(--ease),margin .5s var(--ease)}
 .hw-item.on .hw-b{max-height:200px;margin-top:8px}
-.hw-bar{position:absolute;left:0;top:-1px;height:2px;width:calc(var(--q,0)*100%);background:linear-gradient(90deg,#f99d72,#27a896)}
-.dg{position:relative;height:100%;max-height:600px;display:grid;grid-template-columns:1.05fr 1.25fr .8fr;gap:44px;align-items:center;padding:28px;border-radius:20px;background:#fff;border:1px solid var(--line)}
-.dg-wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.dg-wires path{fill:none;stroke:#27a896;stroke-width:1.5;stroke-dasharray:var(--len);stroke-dashoffset:calc(var(--len)*(1 - var(--draw,0)));opacity:calc(.25 + .75*var(--draw,0))}
-.dg-srcs{list-style:none;display:grid;gap:8px;position:relative;z-index:1}
-.dg-src{display:grid;grid-template-columns:30px 1fr;column-gap:10px;align-items:center;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;opacity:calc(.3 + .7*var(--own,0));transform:translateX(calc((1 - var(--own,0))*-10px))}
-.dg-si{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--bg);color:var(--ink-2)}
-.dg-si svg{width:17px;height:17px}
-.dg-tx b{display:block;font-size:13px;line-height:17px;font-weight:500}
-.dg-tx span{font-size:12px;color:var(--muted-2)}
-.dg-ok{grid-column:2;font-size:11px;line-height:15px;color:#1f8a78;opacity:var(--own,0);margin-top:2px}
-.dg-card{position:relative;z-index:1;padding:20px;border-radius:16px;background:var(--dark);color:#fff;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
-.dg-head{display:flex;justify-content:space-between;align-items:center}
-.dg-head .wm{font-size:20px;color:#fff}
-.dg-chip{font-size:11px;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8)}
-.dg-count{margin-top:18px;font-size:13px;color:rgba(255,255,255,.65)}
-.dg-count b{font-size:28px;font-weight:400;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.dg-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.1);margin-top:10px;overflow:hidden}
-.dg-bar i{display:block;height:100%;width:calc(var(--fill,0)*100%);background:linear-gradient(90deg,#f99d72,#27a896)}
-.dg-open{margin-top:14px;font-size:12px;color:rgba(255,255,255,.65);opacity:var(--openshow,0)}
-.dg-open span:first-child{color:#f99d72;font-weight:600}
-.dg-rows{list-style:none;display:grid;gap:6px;margin-top:8px}
-.dg-row{display:grid;grid-template-columns:8px auto 1fr auto;gap:8px;align-items:center;font-size:12px;line-height:16px;padding:8px 10px;border-radius:9px;background:rgba(249,157,114,calc(.12*(1 - var(--done,0))));opacity:calc(var(--row,0)*(1 - var(--gone,0)));transform:translateY(calc((1 - var(--row,0))*8px));max-height:calc(60px*(1 - var(--gone,0)));overflow:hidden}
-.dg-row .dg-dot{width:7px;height:7px;border-radius:50%;background:color-mix(in oklab,#f99d72,#27a896 calc(var(--done,0)*100%))}
-.dg-row b{font-weight:500}
-.dg-why{color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dg-amt{font-variant-numeric:tabular-nums}
-.dg-done{margin-top:12px;font-size:14px;font-weight:500;opacity:var(--doneshow,0);color:#7fe0cf}
-.dg-tick{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#27a896;color:#fff;font-size:12px;margin-right:6px}
-.dg-exp{position:relative;z-index:1;padding:18px;border-radius:14px;border:1px solid var(--line);background:#fff;opacity:calc(.35 + .65*var(--live,0));box-shadow:0 0 0 calc(var(--live,0)*4px) rgba(39,168,150,.12)}
-.dg-exp b{display:block;font-size:14px;line-height:19px;font-weight:500}
-.dg-fmt{display:flex;gap:6px;margin-top:10px}
-.dg-fmt i{font-style:normal;font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
-@media (max-width:1180px){.hiw-sticky{grid-template-columns:1fr;gap:20px;align-content:center}.hw-acc{grid-template-columns:repeat(4,1fr);gap:12px}.hw-item .hw-b{display:none}}
+.hw-bar{position:absolute;left:0;top:-1px;height:2px;width:calc(var(--q,0)*100%);background:linear-gradient(90deg,#5ec4ee,#8a9ae6)}
+.bv{position:relative;height:100%;max-height:640px;aspect-ratio:16/9;justify-self:end;width:100%;border-radius:24px;overflow:hidden;background:#0b0a09;box-shadow:0 40px 80px -40px rgba(11,10,9,.55)}
+.bv canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bv-bar{position:absolute;left:24px;bottom:22px;width:120px;height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
+.bv-bar i{display:block;height:100%;width:calc(var(--p,0)*100%);background:#fff;border-radius:inherit}
+@media (max-width:1180px){.hiw-sticky{grid-template-columns:1fr;gap:20px;align-content:center}.hw-acc{grid-template-columns:repeat(4,1fr);gap:12px}.hw-item .hw-b{display:none}.bv{justify-self:stretch;height:auto}}
 @media (max-width:900px){
   .hiw{height:auto}
   .hiw-sticky{position:relative;top:0;height:auto;min-height:0}
-  .hw-acc{grid-template-columns:1fr}
+  .hw-acc{grid-template-columns:1fr;order:2}
   .hw-item .hw-b{display:block}
-  .dg{grid-template-columns:1fr;gap:16px;max-height:none;padding:18px}
-  .dg-wires{display:none}
-  .dg-srcs{grid-template-columns:1fr 1fr}
+  .bv{order:1;border-radius:18px}
 }
-@media (max-width:420px){.dg-srcs{grid-template-columns:1fr}}
 /* Schritt für Schritt */
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:st;position:relative}
 .steps li{position:relative;padding:26px 24px 28px;border-radius:16px;background:#fff;border:1px solid var(--line)}
@@ -743,6 +712,7 @@ html[dir="rtl"] .hero h1{line-height:1.3}
 html[dir="rtl"] .wm,html[dir="rtl"] .logos,html[dir="rtl"] .flow{direction:ltr}
 html[dir="rtl"] .flow-phase,html[dir="rtl"] .flow-row,html[dir="rtl"] .flow-export h3,html[dir="rtl"] .flow-sub{direction:rtl}
 html[dir="rtl"] .hw-bar{left:auto;right:0}
+html[dir="rtl"] .bv-bar{left:auto;right:24px}
 html[dir="rtl"] .steps li:not(:last-child)::after{right:auto;left:-16px}
 html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
@@ -877,9 +847,9 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <section class="doc wrap" id="how">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Comment ça marche</p>
     <p class="doc-p rv" style="--d:.1s">tyll.ai vérifie d’abord les chiffres, avec un rapprochement simple et déterministe, pas des suppositions. Ce n’est qu’une fois qu’il a réellement trouvé quelque chose qu’il explique ce qui s’est passé, dans un langage clair que vous lisez d’un coup d’œil.</p>
-    <!-- Verbindungs-Infografik (nach Fynns Version, im Stil dieser Seite nachgebaut).
-         Desktop: der Abschnitt steht, Scrollen spielt Connect → Match → Flag → Close.
-         Handy: kein Anhalten, die Stufen laufen, während der Abschnitt durchs Bild zieht. -->
+    <!-- Scroll-Video „Belege, die sich finden“ (Higgsfield, Leuchtband-Farben).
+         Desktop: der Abschnitt steht, Scrollen spielt das Video als Bildfolge ab;
+         links die vier Schritte nach Fynns Version. Handy: läuft ohne Anhalten mit. -->
     <div class="hiw" id="hiw">
       <div class="hiw-sticky">
         <ol class="hw-acc">
@@ -888,30 +858,9 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
           <li class="hw-item"><span class="hw-n">03</span><div><b class="hw-t">Signaler</b><p class="hw-b">Ce qui ne concorde pas revient de lui-même, avec le montant en euros en jeu et la raison écrite : le règlement jamais arrivé, l’écriture saisie deux fois. Une nuit normale, cela fait quatre lignes sur 1 214, pas un rapport à lire.</p></div><i class="hw-bar"></i></li>
           <li class="hw-item"><span class="hw-n">04</span><div><b class="hw-t">Clôturer</b><p class="hw-b">Vérifiez les quelques lignes qui ont besoin de vous, puis un seul export au format attendu par votre comptabilité. Lancez, rentrez chez vous.</p></div><i class="hw-bar"></i></li>
         </ol>
-        <div class="dg" id="dg">
-          <svg class="dg-wires" id="dgWires" aria-hidden="true"></svg>
-          <ul class="dg-srcs">
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-2.3-1.5L13.4 21 12 19.6 10.6 21 8.3 19.5 6 21z"/><path d="M9 8h6M9 12h6"/></svg></span><span class="dg-tx"><b>Caisse du restaurant</b><span>412 tickets</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-2.3-1.5L13.4 21 12 19.6 10.6 21 8.3 19.5 6 21z"/><path d="M9 8h6M9 12h6"/></svg></span><span class="dg-tx"><b>Caisse du bar</b><span>311 tickets</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5h16v10a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M8 8.5a4 4 0 0 1 8 0"/><path d="M4 12.5h16"/></svg></span><span class="dg-tx"><b>Room service (caisse)</b><span>164 commandes</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19"/><path d="M6 14.5h4"/></svg></span><span class="dg-tx"><b>Terminal de paiement</b><span>286 paiements par carte</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18V7M3 13h18v5M21 13a3 3 0 0 0-3-3h-7v3"/><circle cx="7" cy="10.5" r="1.6"/></svg></span><span class="dg-tx"><b>Compte client (PMS)</b><span>38 débits de chambre</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-            <li class="dg-src"><span class="dg-si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span><span class="dg-tx"><b>Flux bancaire</b><span>3 dépôts</span></span><span class="dg-ok">Connecté · lecture seule</span></li>
-          </ul>
-          <div class="dg-card" id="dgCard">
-            <div class="dg-head"><span class="wm">tyll.ai</span><span class="dg-chip" id="dgChip">Prêt</span></div>
-            <div class="dg-count"><b id="dgMatched">0</b> <span>lignes rapprochées sur 1 214</span></div>
-            <div class="dg-bar"><i id="dgFill"></i></div>
-            <div class="dg-open"><span id="dgOpen">0</span> <span>écarts ouverts</span></div>
-            <ul class="dg-rows">
-              <li class="dg-row"><span class="dg-dot"></span><b>Chambre 412</b><span class="dg-why">débit de chambre sans point de vente correspondant</span><span class="dg-amt">64 €</span></li>
-              <li class="dg-row"><span class="dg-dot"></span><b>Caisse 2</b><span class="dg-why">même ticket saisi deux fois</span><span class="dg-amt">58 €</span></li>
-              <li class="dg-row"><span class="dg-dot"></span><b>Bar 2</b><span class="dg-why">paiement réglé deux jours trop tard</span><span class="dg-amt">22 €</span></li>
-              <li class="dg-row"><span class="dg-dot"></span><b>Lot de cartes</b><span class="dg-why">4 € de moins que les caisses</span><span class="dg-amt">4 €</span></li>
-            </ul>
-            <div class="dg-done" id="dgDone"><span class="dg-tick">✓</span> Nuit clôturée</div>
-          </div>
-          <div class="dg-exp" id="dgExp"><b>Export pour votre comptable</b><span class="dg-fmt"><i>DATEV</i><i>CSV</i></span></div>
+        <div class="bv" id="bv" data-frames="144" aria-hidden="true">
+          <canvas id="bvCanvas"></canvas>
+          <div class="bv-bar"><i id="bvFill"></i></div>
         </div>
       </div>
     </div>
@@ -1032,64 +981,47 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   });
 
 
-  // Verbindungs-Infografik: Scroll-Fortschritt → Connect / Match / Flag / Close (nach Fynns Version)
+  // Scroll-Video: Fortschritt im Abschnitt → Bild der Folge + aktiver Schritt (4 Phasen)
   (() => {
-    const hiw = document.getElementById('hiw'); if (!hiw) return;
-    const items = [...hiw.querySelectorAll('.hw-item')], srcs = [...hiw.querySelectorAll('.dg-src')], rows = [...hiw.querySelectorAll('.dg-row')];
-    const dg = document.getElementById('dg'), card = document.getElementById('dgCard'), exp = document.getElementById('dgExp'), wires = document.getElementById('dgWires');
-    const chip = document.getElementById('dgChip'), matched = document.getElementById('dgMatched'), openEl = document.getElementById('dgOpen');
+    const hiw = document.getElementById('hiw'), bv = document.getElementById('bv'); if (!hiw || !bv) return;
+    const cv = document.getElementById('bvCanvas'), ctx = cv.getContext('2d'), fill = document.getElementById('bvFill');
+    const items = [...hiw.querySelectorAll('.hw-item')], N = +bv.dataset.frames;
     const flat = matchMedia('(max-width:900px)');
-    const L = window.T_HIW || { ready:'Prêt', matching:'Rapprochement', review:'À vérifier', closed:'Clôturé' };
+    const src = i => 'bilder/belege/b' + String(i + 1).padStart(3, '0') + '.webp';
+    const frames = new Array(N); let want = 0, shown = -1;
+    const load = i => { if (frames[i]) return frames[i]; const im = new Image(); im.decoding = 'async'; im.src = src(i); im.onload = () => { if (i === want) draw(i); }; return frames[i] = im; };
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); shown = -1; draw(want); };
+    const draw = i => {
+      // nächstes schon geladenes Bild in der Nähe nehmen, damit beim schnellen Scrollen nichts flackert
+      const ok = j => frames[j] && frames[j].complete && frames[j].naturalWidth;
+      let k = -1; for (let d = 0; d < N && k < 0; d++) { if (i - d >= 0 && ok(i - d)) k = i - d; else if (i + d < N && ok(i + d)) k = i + d; }
+      if (k < 0) return;
+      const im = frames[k]; if (k === shown) return; shown = k;
+      const s2 = Math.max(cv.width / im.naturalWidth, cv.height / im.naturalHeight), w = im.naturalWidth * s2, h = im.naturalHeight * s2;
+      ctx.drawImage(im, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+    };
     const cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
-    const band = (v, a, b) => cl((v - a) / (b - a));
-    const ease = t => t * t * (3 - 2 * t);
-    const fmt = n => Math.round(n).toLocaleString(document.documentElement.lang === 'ar' ? 'ar' : document.documentElement.lang === 'fr' ? 'fr-FR' : 'en-US');
-    const set = (el, k, v) => el.style.setProperty(k, v);
-    let paths = [];
-    const build = () => {
-      if (flat.matches) { wires.innerHTML = ''; paths = []; return; }
-      const b = dg.getBoundingClientRect(), c = card.getBoundingClientRect(), e = exp.getBoundingClientRect();
-      const rtl = document.documentElement.dir === 'rtl', d = [];
-      srcs.forEach((s, i) => { const r = s.getBoundingClientRect();
-        const x1 = (rtl ? r.left : r.right) - b.left, y1 = r.top - b.top + r.height / 2, x2 = (rtl ? c.right : c.left) - b.left, y2 = c.top - b.top + c.height * (.18 + .13 * i), m = (x1 + x2) / 2;
-        d.push('M' + x1 + ' ' + y1 + 'C' + m + ' ' + y1 + ',' + m + ' ' + y2 + ',' + x2 + ' ' + y2); });
-      const x1 = (rtl ? c.left : c.right) - b.left, y1 = c.top - b.top + c.height / 2, x2 = (rtl ? e.right : e.left) - b.left, y2 = e.top - b.top + e.height / 2, m = (x1 + x2) / 2;
-      d.push('M' + x1 + ' ' + y1 + 'C' + m + ' ' + y1 + ',' + m + ' ' + y2 + ',' + x2 + ' ' + y2);
-      wires.setAttribute('viewBox', '0 0 ' + b.width + ' ' + b.height);
-      wires.innerHTML = d.map(p => '<path d="' + p + '"/>').join('');
-      paths = [...wires.querySelectorAll('path')];
-      paths.forEach(p => set(p, '--len', p.getTotalLength().toFixed(1)));
-      paint(last < 0 ? 0 : last);
-    };
-    let last = -1;
+    const progress = () => { const r = hiw.getBoundingClientRect(), vh = innerHeight;
+      return flat.matches ? cl((vh * .8 - r.top) / (r.height + vh * .1)) : cl(-r.top / Math.max(1, r.height - vh)); };
     const paint = p => {
-      last = p;
-      const t = cl(p) * 4, k = Math.min(3, Math.floor(t)), q = cl(t - k), e = ease(q);
-      items.forEach((it, i) => { it.classList.toggle('on', i === k); set(it, '--q', i < k ? 1 : i === k ? q.toFixed(3) : 0); });
-      const connect = k === 0 ? e : 1;
-      srcs.forEach((s, i) => set(s, '--own', band(connect, i * .1, i * .1 + .25).toFixed(3)));
-      paths.slice(0, -1).forEach((w, i) => set(w, '--draw', (k === 0 ? band(e, .5 + i * .06, .75 + i * .06) : 1).toFixed(3)));
-      const run = k < 1 ? 0 : k > 1 ? 1 : ease(band(e, .1, 1));
-      set(card, '--fill', run.toFixed(3)); matched.textContent = fmt(1210 * run);
-      const fl = k === 2 ? e : k > 2 ? 1 : 0, close = k === 3 ? e : 0; let open = 0;
-      rows.forEach((r, i) => { const row = band(fl, i * .17, i * .17 + .3), done = band(close, i * .1, i * .1 + .15), gone = band(close, i * .1 + .13, i * .1 + .24);
-        set(r, '--row', row.toFixed(3)); set(r, '--done', done.toFixed(3)); set(r, '--gone', gone.toFixed(3)); if (row > .5 && done < .5) open++; });
-      set(card, '--openshow', fl > .04 && close < .75 ? 1 : 0); openEl.textContent = open;
-      chip.textContent = k < 1 ? L.ready : k < 2 ? L.matching : (k === 2 || close < .6) ? L.review : L.closed;
-      const live = k === 3 ? band(e, .64, .85) : 0;
-      set(card, '--doneshow', (k === 3 ? band(e, .56, .7) : 0).toFixed(3)); set(exp, '--live', live.toFixed(3));
-      if (paths.length) set(paths[paths.length - 1], '--draw', live.toFixed(3));
+      const t = p * 4, k = Math.min(3, Math.floor(t)), q = cl(t - k);
+      items.forEach((it, i) => { it.classList.toggle('on', i === k); it.style.setProperty('--q', i < k ? 1 : i === k ? q.toFixed(3) : 0); });
+      fill.parentElement.style.setProperty('--p', p.toFixed(3));
+      want = Math.round(p * (N - 1)); load(want); draw(want);
     };
-    const progress = () => {
-      const r = hiw.getBoundingClientRect(), vh = innerHeight;
-      return flat.matches ? cl((vh * .85 - r.top) / (r.height + vh * .2)) : cl(-r.top / Math.max(1, r.height - vh));
-    };
-    if (reduce) { items.forEach(it => it.classList.add('on')); paint(1); return; }
-    let raf = 0; const tick = () => { raf = 0; paint(progress()); };
-    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
-    new ResizeObserver(build).observe(dg); addEventListener('resize', build);
-    if (document.fonts) document.fonts.ready.then(build);
-    build(); tick();
+    // Laden: erst das erste Bild, dann der Reihe nach alle (in Ruhepausen)
+    load(0); let next = 1;
+    const pump = () => { for (let n = 0; n < 6 && next < N; n++) load(next++); if (next < N) setTimeout(pump, 120); };
+    new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { pump(); o.disconnect(); } }, { rootMargin: '1200px 0px' }).observe(hiw);
+    // Klick auf einen Schritt springt zur Phase
+    items.forEach((it, i) => it.addEventListener('click', () => {
+      if (flat.matches) return; const top = hiw.getBoundingClientRect().top + scrollY, range = hiw.offsetHeight - innerHeight;
+      const y = top + range * ((i + .5) / 4); lenis ? lenis.scrollTo(y) : scrollTo({ top: y, behavior: 'smooth' });
+    }));
+    new ResizeObserver(size).observe(cv);
+    if (reduce) { items.forEach(it => it.classList.add('on')); want = N - 1; load(N - 1); size(); return; }
+    let raf = 0; addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(progress()); }); }, { passive: true });
+    size(); paint(progress());
   })();
 
   // Hero: Reiter laufen nacheinander durch, Pause stoppt Video und Reiter

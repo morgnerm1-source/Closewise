@@ -12,7 +12,7 @@ rm -rf "$ZIEL"; mkdir -p "$ZIEL"
 [ -f build-i18n.mjs ] && node build-i18n.mjs
 cp tyll/*.html tyll/*.js tyll/favicon.svg "$ZIEL/" 2>/dev/null || cp tyll/*.html tyll/*.js "$ZIEL/"
 cp -r fonts vendor logos "$ZIEL/" && cp -r tyll/api "$ZIEL/"
-mkdir -p "$ZIEL/bilder" && cp bilder/hero-tyll.* bilder/stats-*.jpg "$ZIEL/bilder/"
+mkdir -p "$ZIEL/bilder" && cp bilder/hero-tyll.* bilder/stats-*.jpg "$ZIEL/bilder/" && cp -r bilder/belege "$ZIEL/bilder/"
 cp package.json package-lock.json "$ZIEL/"
 printf '.env*\n.vercel\n' > "$ZIEL/.vercelignore"
 echo "tyll-dist/ neu angelegt:"; ls -1 "$ZIEL" | sed 's/^/  /'
