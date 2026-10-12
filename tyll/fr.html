@@ -9,19 +9,17 @@
 <style>
 #pl{display:none}
 .pl-on{overflow:hidden}
-.pl-on #pl{display:grid;place-items:center;position:fixed;inset:0;z-index:9999;overflow:hidden;background:#1a1814;color:#fff;clip-path:inset(0 0 0 0 round 0 0 0 0);transition:clip-path .95s cubic-bezier(.76,0,.24,1)}
-#pl.out{clip-path:inset(0 0 100% 0 round 0 0 56px 56px)}
-#pl .pl-b{position:absolute;width:70vmax;height:70vmax;border-radius:50%;pointer-events:none;animation:plDrift 7s ease-in-out infinite alternate}
-#pl .pl-b.a{left:-28vmax;top:-30vmax;background:radial-gradient(closest-side,rgba(249,157,114,.28),rgba(249,157,114,0))}
-#pl .pl-b.b{right:-30vmax;bottom:-34vmax;background:radial-gradient(closest-side,rgba(39,168,150,.30),rgba(39,168,150,0));animation-direction:alternate-reverse}
-@keyframes plDrift{to{transform:translate(6vmax,4vmax) scale(1.08)}}
-#pl .pl-in{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:22px;transition:transform .9s cubic-bezier(.76,0,.24,1),opacity .6s}
-#pl.out .pl-in{transform:translateY(-48px);opacity:0}
-#pl .pl-logo{display:block;width:min(260px,58vw);height:auto;fill:currentColor;opacity:0;clip-path:inset(-10% 100% -10% 0)}
-#pl .pl-row{display:flex;align-items:center;gap:14px;width:100%}
-#pl .pl-bar{flex:1;height:1px;background:rgba(255,255,255,.14);overflow:hidden}
-#pl .pl-bar i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#f99d72,#27a896)}
-#pl .pl-n{min-width:3ch;text-align:right;font:500 12px/1 Inter,system-ui,sans-serif;letter-spacing:.04em;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums}
+.pl-on #pl{display:grid;place-items:center;position:fixed;inset:0;z-index:9999;overflow:hidden;background:#0b0a09;color:#fff;clip-path:inset(0 0 0 0 round 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1)}
+#pl.out{clip-path:inset(0 0 100% 0 round 0 0 48px 48px)}
+#pl .pl-b{position:absolute;width:80vmax;height:80vmax;border-radius:50%;pointer-events:none;opacity:0;animation:plIn 1.4s ease forwards,plDrift 8s ease-in-out infinite alternate}
+#pl .pl-b.a{left:-30vmax;top:-38vmax;background:radial-gradient(closest-side,rgba(94,196,238,.32),rgba(94,196,238,0))}
+#pl .pl-b.b{right:-34vmax;bottom:-40vmax;background:radial-gradient(closest-side,rgba(138,154,230,.30),rgba(138,154,230,0));animation-direction:normal,alternate-reverse}
+@keyframes plIn{to{opacity:1}}
+@keyframes plDrift{to{transform:translate(5vmax,4vmax) scale(1.08)}}
+#pl .pl-logo{position:relative;display:flex;font:600 min(88px,18vw)/1 Inter,system-ui,sans-serif;letter-spacing:-.05em;transition:transform 1s cubic-bezier(.76,0,.24,1),opacity .6s}
+#pl .pl-logo span{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(18px);animation:plChar .9s cubic-bezier(.22,1,.36,1) forwards;animation-delay:calc(.15s + var(--i) * .07s)}
+@keyframes plChar{to{opacity:1;filter:blur(0);transform:none}}
+#pl.out .pl-logo{transform:translateY(-60px);opacity:0}
 .pl-on:not(.pl-done) .hero .rv{opacity:0!important;transform:translateY(24px)!important;filter:blur(4px)!important}
 </style>
 <title>tyll.ai – La clôture de nuit pour les hôtels</title>
@@ -641,7 +639,6 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 .nav .logo .wm{font-size:26px}
 .flow-wm{font-size:20px;color:#101828}
 .footer .wm{font-size:30px}
-#pl .pl-logo.wm{font-size:min(64px,14vw);color:#fff;width:auto}
 /* Hero: volle Höhe – das Inhaltsblatt (weiß) erscheint erst beim Scrollen */
 .hero{height:100vh;height:100svh;min-height:600px}
 .hero-in{justify-content:center;padding-bottom:72px}
@@ -786,7 +783,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 </style>
 </head>
 <body>
-<div id="pl" aria-hidden="true" data-lenis-prevent><i class="pl-b a"></i><i class="pl-b b"></i><div class="pl-in"><span class="pl-logo wm">tyll.ai</span><div class="pl-row"><div class="pl-bar"><i></i></div><span class="pl-n">00</span></div></div></div>
+<div id="pl" aria-hidden="true" data-lenis-prevent><i class="pl-b a"></i><i class="pl-b b"></i><span class="pl-logo"><span style="--i:0">t</span><span style="--i:1">y</span><span style="--i:2">l</span><span style="--i:3">l</span><span style="--i:4">.</span><span style="--i:5">a</span><span style="--i:6">i</span></span></div>
 <script src="preloader.js"></script>
 
 <!-- Navigation -->
