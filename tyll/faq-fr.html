@@ -432,7 +432,7 @@ body{background:var(--bg)}
 .lang{display:flex;align-items:center;font-size:14px;font-weight:500;margin-right:2px}
 .lang a{padding:6px 7px;opacity:.5;transition:opacity .3s}
 .lang a:hover{opacity:.85}
-html[lang=en] .lang a[data-l=en],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
+html[lang=en] .lang a[data-l=en],html[lang=de] .lang a[data-l=de],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
 .lang-mob{font-size:16px}
 @media (max-width:720px){.nav-cta .lang{display:none}}
 
@@ -535,6 +535,10 @@ html[dir="rtl"] .steps li:not(:last-child)::after{right:auto;left:-16px}
 html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
 html[dir="rtl"] .hero-pause{right:auto;left:0}
+.footer .fbrand .wm{font-size:clamp(48px,6vw,80px)}
+.fsocial{display:flex;gap:10px;margin-top:20px}
+.fsocial a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line)}
+.fsocial svg{width:18px;height:18px}
 </style>
 </head>
 <body>
@@ -553,14 +557,14 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       <a href="faq-fr.html">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <span class="lang" aria-label="Langue"><a href="faq.html" data-l="en" hreflang="en" lang="en">EN</a><a href="faq-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="faq-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
-      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">Réserver un appel</a>
+      <span class="lang" aria-label="Langue"><a href="faq.html" data-l="en" hreflang="en" lang="en">EN</a><a href="faq-de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="faq-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="faq-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
+      <a href="book-fr.html" class="btn book">Réserver un appel</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menu">
     <nav class="mob-links"><a href="fr.html#problem">Le problème</a><a href="fr.html#solution">La solution</a><a href="fr.html#how">Comment ça marche</a><a href="security-fr.html">Sécurité</a><a href="faq-fr.html">FAQ</a></nav>
-    <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Réserver un appel</a><span class="lang lang-mob" aria-label="Langue"><a href="faq.html" data-l="en" hreflang="en" lang="en">EN</a><a href="faq-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="faq-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
+    <div class="mob-foot"><a href="book-fr.html" class="btn btn-dark">Réserver un appel</a><span class="lang lang-mob" aria-label="Langue"><a href="faq.html" data-l="en" hreflang="en" lang="en">EN</a><a href="faq-de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="faq-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="faq-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
   </div>
 </header>
 
@@ -607,7 +611,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <section class="cta-wrap" id="book">
     <div class="wrap cta rv">
       <canvas class="cta-glow" id="ctaGlow" aria-hidden="true"></canvas><span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
-      <div class="c"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white btn-xl">Réserver un appel</a></div>
+      <div class="c"><a href="book-fr.html" class="btn btn-white btn-xl">Réserver un appel</a></div>
     </div>
   </section>
 </main>
@@ -616,7 +620,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 <footer class="footer">
   <div class="wrap">
     <div class="fcols">
-      <div class="fbrand"><a href="fr.html" class="logo"><span class="wm">tyll.ai</span></a></div>
+      <div class="fbrand"><a href="fr.html" class="logo"><span class="wm">tyll.ai</span></a><div class="fsocial"><a href="https://www.linkedin.com/company/closewise-site/posts/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div>
       <div class="fcol"><a href="fr.html#problem">Le problème</a><a href="fr.html#solution">La solution</a><a href="fr.html#how">Comment ça marche</a></div>
       <div class="fcol"><a href="security-fr.html">Sécurité</a><a href="faq-fr.html">FAQ</a></div>
     </div>
@@ -674,7 +678,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   const form = document.getElementById('askForm'), input = document.getElementById('askInput'),
         btn = document.getElementById('askBtn'), list = document.getElementById('answers');
   const MAX = 10; let count = 0, busy = false;
-  const CAL = 'https://calendly.com/besher-asfari-code/new-meeting';
+  const CAL = 'book.html';
   const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { input.value = c.textContent; ask(); }));
   form.addEventListener('submit', e => { e.preventDefault(); ask(); });
@@ -711,8 +715,8 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     el.querySelector('.wait')?.remove();
     const a = document.createElement('div'); a.className = 'a'; a.textContent = text; el.append(a);
     const n = document.createElement('div'); n.className = 'note';
-    n.innerHTML = err ? '<a href="' + CAL + '" target="_blank" rel="noopener">Book a call</a>'
-                      : 'Réponse d’une IA, à partir de ce que nous avons publié. C’est l’appel qui compte – <a href="' + CAL + '" target="_blank" rel="noopener">Réserver un appel</a>.';
+    n.innerHTML = err ? '<a href="' + CAL + '">Book a call</a>'
+                      : 'Réponse d’une IA, à partir de ce que nous avons publié. C’est l’appel qui compte – <a href="' + CAL + '">Réserver un appel</a>.';
     el.append(n);
   }
 

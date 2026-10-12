@@ -14,7 +14,7 @@ const TEXTE = {
 };
 
 // Fest und unveränderlich, damit der Prompt-Cache greift: keine Zeitstempel o. Ä.
-const SYSTEM = `Sie sind der Assistent auf der FAQ-Seite von tyll.ai. Besucher sind Hoteliers, Night Auditors, F&B-Leitungen und Controller. Beantworten Sie ihre Fragen ausschließlich mit den Angaben in der Wissensbasis. Antworten Sie in der Sprache, die im Nutzerturn angegeben ist (Englisch, Arabisch oder Französisch).
+const SYSTEM = `Sie sind der Assistent auf der FAQ-Seite von tyll.ai. Besucher sind Hoteliers, Night Auditors, F&B-Leitungen und Controller. Beantworten Sie ihre Fragen ausschließlich mit den Angaben in der Wissensbasis. Antworten Sie in der Sprache, die im Nutzerturn angegeben ist (Englisch, Deutsch, Arabisch oder Französisch).
 
 Regeln:
 - Antworten Sie höflich und förmlich, in zwei bis vier Sätzen, als Fließtext ohne Markdown, Listen oder Überschriften.
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
     try { body = JSON.parse(body); } catch { body = {}; }
   }
   const frage = typeof body?.frage === "string" ? body.frage.trim() : "";
-  const lang = ["en", "ar", "fr"].includes(body?.lang) ? body.lang : "en";
+  const lang = ["en", "de", "ar", "fr"].includes(body?.lang) ? body.lang : "en";
   const T = TEXTE[lang];
   if (frage.length < 3 || frage.length > 300) {
     return res.status(400).json({ fehler: T.laenge });
@@ -93,7 +93,7 @@ export default async function handler(req, res) {
       fallbacks: "default",
       system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
       // Sprache steht im Nutzerturn, damit der gecachte System-Prompt für beide Sprachen gleich bleibt
-      messages: [{ role: "user", content: `${frage}\n\n(${{ en: "Answer in English.", ar: "أجب باللغة العربية.", fr: "Répondez en français." }[lang]})` }],
+      messages: [{ role: "user", content: `${frage}\n\n(${{ en: "Answer in English.", de: "Antworten Sie auf Deutsch.", ar: "أجب باللغة العربية.", fr: "Répondez en français." }[lang]})` }],
     });
 
     if (response.stop_reason === "refusal") {

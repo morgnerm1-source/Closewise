@@ -467,7 +467,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .lang{display:flex;align-items:center;font-size:14px;font-weight:500;margin-right:2px}
 .lang a{padding:6px 7px;opacity:.5;transition:opacity .3s}
 .lang a:hover{opacity:.85}
-html[lang=en] .lang a[data-l=en],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
+html[lang=en] .lang a[data-l=en],html[lang=de] .lang a[data-l=de],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
 .lang-mob{font-size:16px}
 @media (max-width:720px){.nav-cta .lang{display:none}}
 
@@ -718,6 +718,71 @@ html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
 html[dir="rtl"] .ph-hero{transform:scaleX(-1)}
 html[dir="rtl"] .hero-pause{right:auto;left:0}
+/* ===== Fassung 3 ===== */
+.hero .sub{font-size:20px;line-height:28px;max-width:620px}
+.blk{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0}
+.blk-dark{background:var(--dark);color:#fff}
+.blk-light{background:#fff}
+.blk-in{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center}
+.blk-in.rev .blk-tx{order:2}
+.blk-dark .eyebrow{color:rgba(255,255,255,.6)}
+.blk-h{font-size:clamp(44px,6vw,84px);line-height:1.02;font-weight:400;letter-spacing:-.035em;margin-top:18px}
+.blk-p{font-size:22px;line-height:32px;margin-top:24px;max-width:520px;opacity:.82}
+.blk-fig{position:relative;margin:0;aspect-ratio:4/3;border-radius:22px;overflow:visible}
+.blk-fig img{width:100%;height:100%;object-fit:cover;border-radius:22px;display:block}
+.note{position:absolute;display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);max-width:240px;font-size:13px;line-height:18px;backdrop-filter:blur(8px)}
+.note b{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.note span{color:var(--muted)}
+.note.warm b{color:#c4633a}
+.note.n1{top:8%;left:-36px}.note.n2{top:42%;right:-30px}.note.n3{bottom:8%;left:12%}
+.blk-dark .note{background:rgba(250,249,248,.95)}
+.hcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.hcard{padding:26px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.hcard span{font:500 13px/1 Inter,sans-serif;color:var(--muted-2)}
+.hcard b{display:block;margin-top:16px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:-.01em}
+.hcard p{margin-top:8px;font-size:15px;line-height:22px;color:var(--muted)}
+#how .logos-wrap{margin-top:56px;padding-top:0}
+.logo-g{gap:8px}
+.logo-g .logo-sub{font:600 15px/1 Inter,sans-serif;color:#3a3733;letter-spacing:-.01em;white-space:nowrap}
+#statistics .ocard{justify-content:space-between}
+#statistics .ocard .num{font-size:clamp(64px,7vw,104px);line-height:1;font-weight:300;letter-spacing:-.03em;margin:0}
+#statistics .ocard blockquote{font-size:18px;line-height:25px;font-weight:500}
+.doc-s{font-size:20px;line-height:30px;color:var(--muted);margin-top:28px;max-width:860px}
+.big15{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;margin-top:12px}
+.big15-n{font-size:clamp(96px,17vw,250px);line-height:.9;font-weight:300;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.big15-n span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
+.big15-n span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
+.big15-t p{font-size:26px;line-height:35px;letter-spacing:-.01em;max-width:520px}
+.big15-t .valid-chip{margin-top:20px}
+/* Getting started: Fokus-Karte */
+#start .steps{grid-template-columns:1fr;max-width:760px;margin:24px auto 0;gap:18px}
+#start .steps li{transform:scale(var(--sc,.94));opacity:var(--op,.55);transition:transform .45s var(--ease),opacity .45s var(--ease),box-shadow .45s;padding:30px 32px;display:grid;grid-template-columns:44px 1fr;column-gap:18px}
+#start .steps li.focus{box-shadow:0 30px 60px -30px rgba(26,24,20,.35)}
+#start .steps li::after{display:none}
+#start .steps .st-n{grid-row:1/3}
+#start .steps h3{margin-top:4px;font-size:22px}
+#start .steps p{grid-column:2}
+/* Book a call mit Foto */
+.cta-photo{background:#111}
+.cta-photo .cta-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,10,9,.72),rgba(11,10,9,.35))}
+.cta-photo .c{z-index:2}
+/* Footer */
+.footer .fbrand .wm{font-size:clamp(48px,6vw,80px)}
+.fsocial{display:flex;gap:10px;margin-top:20px}
+.fsocial a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line)}
+.fsocial svg{width:18px;height:18px}
+@media (max-width:1000px){.blk-in{grid-template-columns:1fr;gap:48px}.blk-in.rev .blk-tx{order:0}.note.n1{left:-8px}.note.n2{right:-8px}.hcards{grid-template-columns:1fr}.big15{grid-template-columns:1fr;gap:20px}}
+@media (max-width:720px){
+  .blk{padding:88px 0;min-height:auto}
+  .blk-p{font-size:18px;line-height:27px}
+  .note{position:static;margin-top:8px;max-width:none;box-shadow:none;border:1px solid var(--line)}
+  .blk-fig{aspect-ratio:auto}
+  .blk-fig img{aspect-ratio:4/3}
+  .big15-t p{font-size:20px;line-height:28px}
+  .big15-n{font-size:19vw}
+  #start .steps li{padding:22px;grid-template-columns:36px 1fr}
+}
 </style>
 </head>
 <body>
@@ -736,14 +801,14 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <span class="lang" aria-label="Language"><a href="index.html" data-l="en" hreflang="en" lang="en">EN</a><a href="ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
-      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">Book a call</a>
+      <span class="lang" aria-label="Language"><a href="index.html" data-l="en" hreflang="en" lang="en">EN</a><a href="de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
+      <a href="book.html" class="btn book">Book a call</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mob" id="mob" aria-label="Menu">
     <nav class="mob-links"><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#how">How it works</a><a href="security.html">Security</a><a href="faq.html">FAQ</a></nav>
-    <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">Book a call</a><span class="lang lang-mob" aria-label="Language"><a href="index.html" data-l="en" hreflang="en" lang="en">EN</a><a href="ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
+    <div class="mob-foot"><a href="book.html" class="btn btn-dark">Book a call</a><span class="lang lang-mob" aria-label="Language"><a href="index.html" data-l="en" hreflang="en" lang="en">EN</a><a href="de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
   </div>
 </header>
 
@@ -754,8 +819,9 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">That extra hour, gone. For good</h1>
+      <p class="sub rv" style="--d:.15s">tyll.ai checks every till, payment, room charge and bank deposit overnight – and shows you only what doesn't match.</p>
       <div class="ctas rv" style="--d:.3s">
-        <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">Book a call</a>
+        <a href="book.html" class="btn btn-white">Book a call</a>
       </div>
     </div>
     <div class="hero-pause">
@@ -765,96 +831,67 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 </section>
 
 <main class="sheet">
-  <!-- Logo-Laufband -->
-  <div class="wrap logos-wrap">
+
+  <!-- Problem: volle Höhe, dunkel; kurzer Text, Bild mit Randnotizen -->
+  <section class="blk blk-dark" id="problem">
+    <div class="wrap blk-in">
+      <div class="blk-tx">
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Problem</p>
+        <h2 class="blk-h rv" style="--d:.1s">Every night, an hour by hand.</h2>
+        <p class="blk-p rv" style="--d:.2s">Someone stops to check every till, receipt and payment, one by one. The rest of the team stays late and waits.</p>
+      </div>
+      <figure class="blk-fig rv" style="--d:.15s">
+        <img src="bilder/problem-1.jpg" alt="" loading="lazy">
+        <figcaption class="note n1"><b>1 hour+</b><span>done entirely by hand</span></figcaption>
+        <figcaption class="note n2"><b>One less</b><span>person on the floor</span></figcaption>
+        <figcaption class="note n3"><b>The real cost</b><span>Overtime · a tired team · less time for guests</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Solution: volle Höhe, hell; kurzer Text, Bild mit Randnotizen -->
+  <section class="blk blk-light" id="solution">
+    <div class="wrap blk-in rev">
+      <div class="blk-tx">
+        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Solution</p>
+        <h2 class="blk-h rv" style="--d:.1s">Click run. That's it.</h2>
+        <p class="blk-p rv" style="--d:.2s">tyll.ai matches every transaction automatically – and hands you back the one thing closing never gave you: time.</p>
+      </div>
+      <figure class="blk-fig rv" style="--d:.15s">
+        <img src="bilder/hero-tyll.jpg" alt="" loading="lazy">
+        <figcaption class="note n1"><b>Everything checked</b><span>Every till, payment, room charge and bank deposit</span></figcaption>
+        <figcaption class="note n2"><b>Matches clear</b><span>on their own</span></figcaption>
+        <figcaption class="note n3 warm"><b>Mismatches flagged</b><span>with the reason already attached</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- How it works: drei kurze Karten, Logoleiste, Scroll-Video -->
+  <section class="doc wrap" id="how">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>How it works</p>
+    <h2 class="blk-h rv" style="--d:.1s">Check first. Explain second.</h2>
+    <div class="hcards">
+      <div class="hcard rv"><span>01</span><b>Check first</b><p>Straightforward, deterministic matching – not guesswork.</p></div>
+      <div class="hcard rv" style="--d:.08s"><span>02</span><b>Explain only what's found</b><p>Nothing to read unless something is actually off.</p></div>
+      <div class="hcard rv" style="--d:.16s"><span>03</span><b>Plain language</b><p>What happened, written so you read it at a glance.</p></div>
+    </div>
+  <!-- Logo-Laufband: Systeme, mit denen tyll.ai verbunden werden kann -->
+  <div class="logos-wrap">
     <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>We can connect to</p>
     <div class="logos" aria-label="Systems tyll.ai can connect to">
       <div class="logos-track">
         <!-- lightspeed.png: vom Nutzer bereitgestellt, nur zugeschnitten und freigestellt -->
-        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.png" alt="Lightspeed" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify-pos.png" alt="Shopify POS" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><span class="logo-txt">Oracle OPERA</span></span><span><span class="logo-txt">Oracle MICROS Simphony</span></span><span><span class="logo-txt">IDS Next</span></span><span><span class="logo-txt">Shiji Infrasys</span></span><span><span class="logo-txt">Foodics</span></span><span><span class="logo-txt">Sapaad</span></span><span><span class="logo-txt">Infor HMS</span></span>
-        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.png" alt="" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify-pos.png" alt="" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><span class="logo-txt">Oracle OPERA</span></span><span aria-hidden="true"><span class="logo-txt">Oracle MICROS Simphony</span></span><span aria-hidden="true"><span class="logo-txt">IDS Next</span></span><span aria-hidden="true"><span class="logo-txt">Shiji Infrasys</span></span><span aria-hidden="true"><span class="logo-txt">Foodics</span></span><span aria-hidden="true"><span class="logo-txt">Sapaad</span></span><span aria-hidden="true"><span class="logo-txt">Infor HMS</span></span>
+        <span><img src="logos/mews.svg" alt="Mews" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/lightspeed.png" alt="Lightspeed" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/shopify-pos.png" alt="Shopify POS" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/sumup.svg" alt="SumUp" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span><img src="logos/datev.svg" alt="DATEV" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span class="logo-g"><img src="logos/oracle.svg" alt="Oracle OPERA" style="--h:20px"><span class="logo-sub">OPERA</span></span><span class="logo-g"><img src="logos/oracle.svg" alt="Oracle MICROS Simphony" style="--h:20px"><span class="logo-sub">MICROS Simphony</span></span><span class="logo-g"><img src="logos/idsnext.png" alt="IDS Next" style="--h:34px"></span><span><span class="logo-txt">Shiji Infrasys</span></span><span class="logo-g"><img src="logos/foodics.svg" alt="Foodics" style="--h:22px"></span><span><span class="logo-txt">Sapaad</span></span><span class="logo-g"><img src="logos/infor.svg" alt="Infor HMS" style="--h:30px"><span class="logo-sub">HMS</span></span>
+        <span aria-hidden="true"><img src="logos/mews.svg" alt="" data-name="Mews" style="--h:24px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/lightspeed.png" alt="" data-name="Lightspeed" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/shopify-pos.png" alt="" data-name="Shopify POS" data-fallback="logos/shopify.svg" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/sumup.svg" alt="" data-name="SumUp" style="--h:30px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span aria-hidden="true"><img src="logos/datev.svg" alt="" data-name="DATEV" style="--h:38px" onerror="const f=(this.dataset.fallback||'').split(' ').filter(Boolean);if(f.length){this.dataset.fallback=f.slice(1).join(' ');this.src=f[0]}else this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-txt',textContent:this.dataset.name}))"></span><span class="logo-g" aria-hidden="true"><img src="logos/oracle.svg" alt="" style="--h:20px"><span class="logo-sub">OPERA</span></span><span class="logo-g" aria-hidden="true"><img src="logos/oracle.svg" alt="" style="--h:20px"><span class="logo-sub">MICROS Simphony</span></span><span class="logo-g" aria-hidden="true"><img src="logos/idsnext.png" alt="" style="--h:34px"></span><span aria-hidden="true"><span class="logo-txt">Shiji Infrasys</span></span><span class="logo-g" aria-hidden="true"><img src="logos/foodics.svg" alt="" style="--h:22px"></span><span aria-hidden="true"><span class="logo-txt">Sapaad</span></span><span class="logo-g" aria-hidden="true"><img src="logos/infor.svg" alt="" style="--h:30px"><span class="logo-sub">HMS</span></span>
       </div>
     </div>
   </div>
 
-  <!-- So funktioniert es -->
-
-  <!-- Problem (Text wörtlich aus dem Doc) -->
-  <section class="doc doc-dark" id="problem">
-    <div class="wrap">
-      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Problem</p>
-      <p class="doc-p rv" style="--d:.1s">Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it's happening, there's one less person on the floor. The rest of the team ends up staying late, waiting for it to finish. That hour is not just lost time. It is overtime pay. A tired team. And hours that should have gone to guests instead.</p>
-    </div>
-  </section>
-
-  <!-- Solution -->
-  <section class="doc wrap" id="solution">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Solution</p>
-    <p class="doc-p rv" style="--d:.1s">tyll.ai checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight's close, that's it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. It hands you back the one thing closing never gave you before. Time.</p>
-    <div class="flow rv" id="flow" role="img" aria-label="Flow: till receipts, card terminal, guest ledger, POS system and bank account come together in tyll.ai, differences are cleared, then the export for your accountant as a DATEV file or CSV.">
-      <div class="flow-stage" id="flowStage">
-        <div class="flow-glow" id="fGlow"></div>
-        <svg class="flow-wires" width="1600" height="720" viewBox="0 0 1600 720" fill="none" aria-hidden="true">
-          <g stroke="#e4e7ec" stroke-width="1.5">
-            <path id="fp0" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
-            <path id="fp1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
-            <path id="fp2" d="M280 360 H500"/>
-            <path id="fp3" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
-            <path id="fp4" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
-            <path d="M980 360 H1140"/>
-          </g>
-          <g id="flowLines" stroke-width="1.5" stroke-dasharray="1 1">
-            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
-            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
-            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 360 H500"/>
-            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
-            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
-            <path stroke="#12805c" pathLength="1" stroke-dashoffset="1" d="M980 360 H1140"/>
-          </g>
-        </svg>
-        <div class="flow-dots" id="fDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="flow-src">
-          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>Till receipts</div>
-          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 10h18M7 15h3"/></svg></span>Card terminal</div>
-          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span>Guest ledger</div>
-          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM7 10V4h10v6M8 14h2M14 14h2M8 17h2M14 17h2"/></svg></span>POS system</div>
-          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span>Bank account</div>
-        </div>
-        <div class="flow-card" id="fCard">
-          <div class="flow-head"><span class="wm flow-wm">tyll.ai</span><span class="flow-tag" id="fTag">Live</span></div>
-          <div class="flow-phase" id="flowPhase">Connecting data sources …</div>
-          <div class="flow-bar"><i id="flowBar"></i><b id="fShine"></b></div>
-          <div class="flow-rows" id="flowRows">
-            <div class="flow-row"><span class="dot"></span><span class="ar">Bar</span><span class="tx">Card payment missing</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            <div class="flow-row"><span class="dot"></span><span class="ar">Restaurant</span><span class="tx">Void without approval</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            <div class="flow-row"><span class="dot"></span><span class="ar">Room service</span><span class="tx">Not posted to the room</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-          </div>
-        </div>
-        <div class="flow-chips" aria-hidden="true"><span style="background:#2f6bff">DATEV</span><span style="background:#101828">CSV</span></div>
-        <div class="flow-export" id="flowExport">
-          <div>
-            <h3>Export for your accountant</h3>
-            <div class="flow-sub" id="flowSub">Waiting for the close.</div>
-            <div class="flow-btns"><div class="flow-btn" id="flowB1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>DATEV export</div><div class="flow-btn" id="flowB2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CSV</div></div>
-          </div>
-        </div>
-        <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works: Text + Verbindungs-Infografik (nach Fynns Version) -->
-  <section class="doc wrap" id="how">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>How it works</p>
-    <p class="doc-p rv" style="--d:.1s">tyll.ai checks the numbers first, using straightforward, deterministic matching, not guesswork. Only once something is actually found does it explain what happened, in plain language you can read at a glance.</p>
-    <!-- Scroll-Video „Belege, die sich finden“ (Higgsfield, Leuchtband-Farben).
-         Desktop: der Abschnitt steht, Scrollen spielt das Video als Bildfolge ab;
-         links die vier Schritte nach Fynns Version. Handy: läuft ohne Anhalten mit. -->
     <div class="hiw" id="hiw">
       <div class="hiw-sticky">
         <ol class="hw-acc">
           <li class="hw-item on"><span class="hw-n">01</span><div><b class="hw-t">Connect</b><p class="hw-b">tyll.ai reads the exports your PMS, your POS, your card terminal and your bank already produce. Read-only. Nothing new at the point of sale, and nothing changes in the systems you already run.</p></div><i class="hw-bar"></i></li>
-          <li class="hw-item"><span class="hw-n">02</span><div><b class="hw-t">Match</b><p class="hw-b">Every till, payment, room charge and deposit is checked against the others. Rules, not guesswork: each receipt is tested against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.</p></div><i class="hw-bar"></i></li>
+          <li class="hw-item"><span class="hw-n">02</span><div><b class="hw-t">Match</b><p class="hw-b">Every till, payment, room charge and deposit is checked against the others: each receipt against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.</p></div><i class="hw-bar"></i></li>
           <li class="hw-item"><span class="hw-n">03</span><div><b class="hw-t">Flag</b><p class="hw-b">What did not balance comes back on its own, with the euro value at risk and the reason written out: the settlement that never landed, the posting raised twice. On a normal night that is four lines out of 1,214, not a report to read.</p></div><i class="hw-bar"></i></li>
           <li class="hw-item"><span class="hw-n">04</span><div><b class="hw-t">Close</b><p class="hw-b">Review the few lines that need you, then one export in the format your books expect. Click run, go home.</p></div><i class="hw-bar"></i></li>
         </ol>
@@ -866,24 +903,30 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </div>
   </section>
 
-  <!-- Statistics -->
+  <!-- Statistics: große Zahlen -->
   <section class="doc wrap" id="statistics">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Statistics</p>
     <div class="igrid">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>91% of hotels still rely on manual reporting, even inside automated systems.</blockquote></article>
-      <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/stats-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>Four in five spend one to two full days a week buried in spreadsheets.</blockquote></article>
-      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>Industry estimates put revenue leakage at 3 to 8 percent of gross revenue across travel and hospitality, with occupational fraud adding roughly 5 percent more.</blockquote></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91%</div><blockquote>of hotels still rely on manual reporting, even inside automated systems.</blockquote></article>
+      <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/stats-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 in 5</div><blockquote>spend one to two full days a week buried in spreadsheets.</blockquote></article>
+      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8%</div><blockquote>of gross revenue lost to leakage in travel and hospitality – plus roughly 5% from occupational fraud.</blockquote></article>
     </div>
-    <p class="doc-p doc-s rv">Night auditor roles at major international hotel brands still list manually comparing cashier reports and reconciling guest ledgers as part of the job.</p>
+    <p class="doc-s rv">Night auditor roles at major international hotel brands still list manually comparing cashier reports and reconciling guest ledgers as part of the job.</p>
   </section>
 
-  <!-- Validation -->
+  <!-- Validation: 15,000+ als Blickfang -->
   <section class="doc wrap" id="validation">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Validation</p>
-    <p class="doc-p rv" style="--d:.1s">tyll.ai is already live in hospitality businesses, automating the nightly close every day. The market: Germany, Austria, Switzerland, Italy, and France alone are home to over 15,000 upscale hotels, most still closing by hand.</p>
+    <div class="big15">
+      <div class="big15-n rv" data-scramble>15,000+</div>
+      <div class="big15-t rv" style="--d:.1s">
+        <p>upscale hotels in Germany, Austria, Switzerland, Italy and France – most still closing by hand.</p>
+        <span class="valid-chip"><i></i>tyll.ai is already live in hospitality businesses, automating the nightly close every day.</span>
+      </div>
+    </div>
   </section>
 
-  <!-- Schritt für Schritt (nach Fynns „Getting started“) -->
+  <!-- Getting started: Karte in der Bildmitte im Fokus -->
   <section class="doc wrap" id="start">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Getting started</p>
     <ol class="steps">
@@ -894,11 +937,11 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </ol>
   </section>
 
-  <!-- Book a call: einziger CTA -->
+  <!-- Book a call: Hintergrund = Rezeption aus dem Hero -->
   <section class="cta-wrap" id="book">
-    <div class="wrap cta rv">
-      <canvas class="cta-glow" id="ctaGlow" aria-hidden="true"></canvas><span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
-      <div class="c"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white btn-xl">Book a call</a></div>
+    <div class="wrap cta cta-photo rv">
+      <img class="cta-bg" src="bilder/hero-tyll.jpg" alt="" loading="lazy">
+      <div class="c"><a href="book.html" class="btn btn-white btn-xl">Book a call</a></div>
     </div>
   </section>
 </main>
@@ -907,7 +950,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 <footer class="footer">
   <div class="wrap">
     <div class="fcols">
-      <div class="fbrand"><a href="#top" class="logo"><span class="wm">tyll.ai</span></a></div>
+      <div class="fbrand"><a href="#top" class="logo"><span class="wm">tyll.ai</span></a><div class="fsocial"><a href="https://www.linkedin.com/company/closewise-site/posts/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div>
       <div class="fcol"><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#how">How it works</a></div>
       <div class="fcol"><a href="security.html">Security</a><a href="faq.html">FAQ</a></div>
     </div>
@@ -1073,6 +1116,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 
   // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „tyll.ai Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
+  if (flow) {
   const fSteps = [...document.querySelectorAll('#ablauf-schritte .fs')];
   const $ = id => document.getElementById(id);
   const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
@@ -1213,6 +1257,18 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
     }), {threshold:.2}).observe(flow);
   }
+  }
+
+
+  // Getting started: Karte nahe der Bildmitte im Fokus (größer), die anderen kleiner
+  (() => {
+    const cards = [...document.querySelectorAll('#start .steps li')]; if (!cards.length) return;
+    const upd = () => { const mid = innerHeight / 2;
+      cards.forEach(c => { const r = c.getBoundingClientRect(), d = Math.min(1, Math.abs(r.top + r.height / 2 - mid) / (innerHeight * .45));
+        c.style.setProperty('--sc', (1.05 - .11 * d).toFixed(3)); c.style.setProperty('--op', (1 - .45 * d).toFixed(3)); c.classList.toggle('focus', d < .25); }); };
+    if (reduce) { cards.forEach(c => { c.style.setProperty('--sc', 1); c.style.setProperty('--op', 1); }); return; }
+    let r = 0; addEventListener('scroll', () => { if (!r) r = requestAnimationFrame(() => { r = 0; upd(); }); }, { passive: true }); addEventListener('resize', upd); upd();
+  })();
 
   // Ergebnisse: Zahlen laufen verwürfelt ein
   const chars = '0123456789abcdefghijklmnopqrstuvwxyz';

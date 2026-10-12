@@ -433,7 +433,7 @@ body{background:var(--bg)}
 .lang{display:flex;align-items:center;font-size:14px;font-weight:500;margin-right:2px}
 .lang a{padding:6px 7px;opacity:.5;transition:opacity .3s}
 .lang a:hover{opacity:.85}
-html[lang=en] .lang a[data-l=en],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
+html[lang=en] .lang a[data-l=en],html[lang=de] .lang a[data-l=de],html[lang=ar] .lang a[data-l=ar],html[lang=fr] .lang a[data-l=fr]{opacity:1;font-weight:600}
 .lang-mob{font-size:16px}
 @media (max-width:720px){.nav-cta .lang{display:none}}
 
@@ -587,6 +587,10 @@ html[dir="rtl"] .steps li:not(:last-child)::after{right:auto;left:-16px}
 html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
 html[dir="rtl"] .hero-pause{right:auto;left:0}
+.footer .fbrand .wm{font-size:clamp(48px,6vw,80px)}
+.fsocial{display:flex;gap:10px;margin-top:20px}
+.fsocial a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line)}
+.fsocial svg{width:18px;height:18px}
 </style>
 </head>
 <body>
@@ -605,14 +609,14 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       <a href="faq-ar.html">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <span class="lang" aria-label="اللغة"><a href="security.html" data-l="en" hreflang="en" lang="en">EN</a><a href="security-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="security-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
-      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn book">احجز مكالمة</a>
+      <span class="lang" aria-label="اللغة"><a href="security.html" data-l="en" hreflang="en" lang="en">EN</a><a href="security-de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="security-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="security-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span>
+      <a href="book-ar.html" class="btn book">احجز مكالمة</a>
       <button class="burger" aria-label="القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mob" id="mob" aria-label="القائمة">
     <nav class="mob-links"><a href="ar.html#problem">المشكلة</a><a href="ar.html#solution">الحل</a><a href="ar.html#how">كيف يعمل</a><a href="security-ar.html">الأمان</a><a href="faq-ar.html">FAQ</a></nav>
-    <div class="mob-foot"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-dark">احجز مكالمة</a><span class="lang lang-mob" aria-label="اللغة"><a href="security.html" data-l="en" hreflang="en" lang="en">EN</a><a href="security-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="security-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
+    <div class="mob-foot"><a href="book-ar.html" class="btn btn-dark">احجز مكالمة</a><span class="lang lang-mob" aria-label="اللغة"><a href="security.html" data-l="en" hreflang="en" lang="en">EN</a><a href="security-de.html" data-l="de" hreflang="de" lang="de">DE</a><a href="security-ar.html" data-l="ar" hreflang="ar" lang="ar">العربية</a><a href="security-fr.html" data-l="fr" hreflang="fr" lang="fr">FR</a></span></div>
   </div>
 </header>
 
@@ -622,7 +626,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>الأمان</p>
       <h1 class="rv" style="--d:.1s">يقرأ أرقامك. لا شيء غير ذلك.</h1>
       <p class="sec-lead rv" style="--d:.2s">يتسلّم tyll.ai ملفات مُصدَّرة جاهزة، ويطابقها ويرفع التقارير. لا يكتب شيئًا في الأنظمة، ولا يحتاج إلى أسماء الضيوف، ولا يحتفظ بالسجل الخام.</p>
-      <a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white rv" style="--d:.3s">احجز مكالمة</a>
+      <a href="book-ar.html" class="btn btn-white rv" style="--d:.3s">احجز مكالمة</a>
     </div>
     <!-- Animation „tyll.ai Sicherheit Motiv“ aus Claude Design, als eigener Code nachgebaut; interaktiv -->
     <div class="sec-visual rv" style="--d:.2s">
@@ -651,7 +655,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </div>
     <div class="sec-duo">
       <div class="sec-glow rv"><canvas aria-hidden="true"></canvas><div class="c"><h3>لا يُحتفظ بسجلك.</h3><p>تُقرأ ليلتك وتُطابَق ويُرفع عنها تقرير. لا يُحتفظ إلا بسجل الاستثناءات: ما الذي عُلِّم، وأين، ولماذا.</p></div></div>
-      <div class="sec-glow rv" style="--d:.1s"><canvas aria-hidden="true"></canvas><div class="c"><h3>أسئلة حول الأمان؟</h3><p>أكثر الإجابات شيوعًا موجودة في الأسئلة الشائعة. وأي شيء آخر نوضّحه في مكالمة قصيرة.</p><div class="sec-btns"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white">احجز مكالمة</a></div></div></div>
+      <div class="sec-glow rv" style="--d:.1s"><canvas aria-hidden="true"></canvas><div class="c"><h3>أسئلة حول الأمان؟</h3><p>أكثر الإجابات شيوعًا موجودة في الأسئلة الشائعة. وأي شيء آخر نوضّحه في مكالمة قصيرة.</p><div class="sec-btns"><a href="book-ar.html" class="btn btn-white">احجز مكالمة</a></div></div></div>
     </div>
   </section>
 </main>
@@ -662,7 +666,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <section class="cta-wrap" id="book">
     <div class="wrap cta rv">
       <canvas class="cta-glow" id="ctaGlow" aria-hidden="true"></canvas><span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
-      <div class="c"><a href="https://calendly.com/besher-asfari-code/new-meeting" target="_blank" rel="noopener" class="btn btn-white btn-xl">احجز مكالمة</a></div>
+      <div class="c"><a href="book-ar.html" class="btn btn-white btn-xl">احجز مكالمة</a></div>
     </div>
   </section>
 </main>
@@ -671,7 +675,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 <footer class="footer">
   <div class="wrap">
     <div class="fcols">
-      <div class="fbrand"><a href="ar.html" class="logo"><span class="wm">tyll.ai</span></a></div>
+      <div class="fbrand"><a href="ar.html" class="logo"><span class="wm">tyll.ai</span></a><div class="fsocial"><a href="https://www.linkedin.com/company/closewise-site/posts/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div>
       <div class="fcol"><a href="ar.html#problem">المشكلة</a><a href="ar.html#solution">الحل</a><a href="ar.html#how">كيف يعمل</a></div>
       <div class="fcol"><a href="security-ar.html">الأمان</a><a href="faq-ar.html">FAQ</a></div>
     </div>
