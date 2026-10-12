@@ -683,12 +683,20 @@ a,button,summary,input{-webkit-tap-highlight-color:transparent;touch-action:mani
 .bv-bar i{display:block;height:100%;width:calc(var(--p,0)*100%);background:#fff;border-radius:inherit}
 @media (max-width:1180px){.hiw-sticky{grid-template-columns:1fr;gap:20px;align-content:center}.hw-acc{grid-template-columns:repeat(4,1fr);gap:12px}.hw-item .hw-b{display:none}.bv{justify-self:stretch;height:auto}}
 @media (max-width:900px){
-  .hiw{height:auto}
-  .hiw-sticky{position:relative;top:0;height:auto;min-height:0}
-  .hw-acc{grid-template-columns:1fr;order:2}
-  .hw-item .hw-b{display:block}
-  .bv{order:1;border-radius:18px}
+  /* Handy: Abschnitt bleibt stehen, oben das Video, darunter vier kompakte Reiter + Text des aktiven Schritts */
+  .hiw{height:320vh;margin-top:28px}
+  .hiw-sticky{top:84px;height:calc(100svh - 100px);min-height:0;display:flex;flex-direction:column;justify-content:center;gap:18px}
+  .bv{order:1;border-radius:18px;height:auto;width:100%;aspect-ratio:16/9;flex:none}
+  .hw-acc{order:2;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
+  .hw-item{display:block;padding:12px 0 0;opacity:.45;position:static}
+  .hw-item>div{display:block}
+  .hw-n{display:block;font-size:11px;line-height:14px}
+  .hw-t{font-size:15px;line-height:20px;margin-top:2px}
+  .hw-item .hw-b{display:block;position:absolute;left:0;right:0;top:64px;max-height:none;margin:0;opacity:0;font-size:15px;line-height:23px;transition:opacity .35s}
+  .hw-item.on .hw-b{opacity:1;margin:0}
+  .hw-acc{min-height:150px}
 }
+@media (max-width:400px){.hw-t{font-size:13px;overflow-wrap:anywhere;hyphens:auto}.hw-acc{gap:6px}}
 /* Schritt für Schritt */
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:st;position:relative}
 .steps li{position:relative;padding:26px 24px 28px;border-radius:16px;background:#fff;border:1px solid var(--line)}
@@ -771,6 +779,10 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 .fsocial svg{width:18px;height:18px}
 @media (max-width:1000px){.blk-in{grid-template-columns:1fr;gap:48px}.blk-in.rev .blk-tx{order:0}.note.n1{left:-8px}.note.n2{right:-8px}.hcards{grid-template-columns:1fr}.big15{grid-template-columns:1fr;gap:20px}}
 @media (max-width:720px){
+  .logos{height:72px}
+  .logos-track>*{padding:0 34px;height:36px}
+  .logos-track img{height:calc(var(--h,30px) * .8)}
+  .logo-g .logo-sub{font-size:13px}
   .blk{padding:88px 0;min-height:auto}
   .blk-p{font-size:18px;line-height:27px}
   .note{position:static;margin-top:8px;max-width:none;box-shadow:none;border:1px solid var(--line)}
@@ -1026,7 +1038,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     const hiw = document.getElementById('hiw'), bv = document.getElementById('bv'); if (!hiw || !bv) return;
     const cv = document.getElementById('bvCanvas'), ctx = cv.getContext('2d'), fill = document.getElementById('bvFill');
     const items = [...hiw.querySelectorAll('.hw-item')], N = +bv.dataset.frames;
-    const flat = matchMedia('(max-width:900px)');
+    const flat = { matches: false }; // auch auf dem Handy angeheftet
     const src = i => 'bilder/belege/b' + String(i + 1).padStart(3, '0') + '.webp';
     const frames = new Array(N); let want = 0, shown = -1;
     const load = i => { if (frames[i]) return frames[i]; const im = new Image(); im.decoding = 'async'; im.src = src(i); im.onload = () => { if (i === want) draw(i); }; return frames[i] = im; };
