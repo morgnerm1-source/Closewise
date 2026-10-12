@@ -777,7 +777,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 #statistics .ocard blockquote{font-size:18px;line-height:25px;font-weight:500}
 .doc-s{font-size:20px;line-height:30px;color:var(--muted);margin-top:28px;max-width:860px}
 .big15{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;margin-top:12px}
-.big15-n{font-size:clamp(96px,17vw,250px);line-height:.9;font-weight:300;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.big15-n{font-size:clamp(72px,10vw,150px);line-height:.9;font-weight:300;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
 .big15-n span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
 .big15-n span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
 .big15-t p{font-size:26px;line-height:35px;letter-spacing:-.01em;max-width:520px}
@@ -812,9 +812,11 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   .blk-fig{aspect-ratio:auto}
   .blk-fig img{aspect-ratio:4/3}
   .big15-t p{font-size:20px;line-height:28px}
-  .big15-n{font-size:19vw}
+  .big15-n{font-size:16vw}
   #start .steps li{padding:22px;grid-template-columns:36px 1fr}
 }
+/* Zahlen gleiten weich ein (statt Buchstaben-Wirbel) */
+@media (prefers-reduced-motion:no-preference){[data-scramble]{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}[data-scramble].cu-in{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -975,9 +977,9 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <section class="doc wrap" id="statistics">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Zahlen</p>
     <div class="igrid">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91%</div><blockquote>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91 %</div><blockquote>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
       <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/stats-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 von 5</div><blockquote>verbringen ein bis zwei volle Tage pro Woche in Tabellen.</blockquote></article>
-      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8%</div><blockquote>des Bruttoumsatzes gehen in Reise und Gastgewerbe verloren – dazu rund 5 % durch Betrug.</blockquote></article>
+      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8 %</div><blockquote>des Bruttoumsatzes gehen in Reise und Gastgewerbe verloren – dazu rund 5 % durch Betrug.</blockquote></article>
     </div>
     <p class="doc-s rv">Stellen für Night Auditors großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen von Gästekonten noch immer als Aufgabe.</p>
   </section>
@@ -986,7 +988,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <section class="doc wrap" id="validation">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Im Einsatz</p>
     <div class="big15">
-      <div class="big15-n rv" data-scramble>15,000+</div>
+      <div class="big15-n rv" data-scramble>15.000+</div>
       <div class="big15-t rv" style="--d:.1s">
         <p>gehobene Hotels in Deutschland, Österreich, der Schweiz, Italien und Frankreich – die meisten schließen noch von Hand ab.</p>
         <span class="valid-chip"><i></i>tyll.ai ist bereits in Betrieben im Einsatz und automatisiert jede Nacht den Abschluss.</span>
@@ -1355,23 +1357,21 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     let r = 0; addEventListener('scroll', () => { if (!r) r = requestAnimationFrame(() => { r = 0; upd(); }); }, { passive: true }); addEventListener('resize', upd); upd();
   })();
 
-  // Ergebnisse: Zahlen laufen verwürfelt ein
-  const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-  const scramble = el => {
-    const final = el.textContent; el.textContent = '';
-    const spans = [...final].map(c => { const s = document.createElement('span'); s.textContent = c === ' ' ? ' ' : c; el.append(s); return s; });
-    if (reduce) return;
-    spans.forEach((s,i) => {
-      const c = s.textContent; if (c === ' ') return;
-      s.classList.add('sc'); let n = 0;
-      const t = setInterval(() => {
-        s.textContent = chars[Math.random() * chars.length | 0];
-        if (++n > 8 + i * 2) { clearInterval(t); s.textContent = c; s.classList.remove('sc'); }
-      }, 50);
-    });
+  // Zahlen: zählen beim Erscheinen von 0 auf ihren Wert hoch und gleiten weich ein
+  const countUp = el => {
+    const final = el.textContent, m = final.match(/\d[\d.,]*/);
+    el.classList.add("cu-in");
+    if (!m || reduce) return;
+    const digits = m[0].replace(/[.,]/g, ""), n = parseInt(digits, 10), sep = (m[0].match(/[.,]/) || [""])[0];
+    if (!(n > 0)) return;
+    const fmt = v => { let t = String(v); if (sep && digits.length > 3) t = t.replace(/\B(?=(\d{3})+(?!\d))/g, sep); return final.replace(m[0], t); };
+    const t0 = performance.now(), dur = 1400;
+    const step = now => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(n * e)); if (p < 1) requestAnimationFrame(step); else el.textContent = final; };
+    el.textContent = fmt(0); requestAnimationFrame(step);
   };
-  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { scramble(e.target); so.unobserve(e.target); } }), {threshold:.6});
-  document.querySelectorAll('[data-scramble]').forEach(el => so.observe(el));
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); so.unobserve(e.target); } }), {threshold:.5});
+  document.querySelectorAll("[data-scramble]").forEach(el => so.observe(el));
 
   // Leuchtband im Abschluss-Band: Shader aus dem Design „tyll.ai Leuchtband“ (unverändert),
   // 16-s-Schleife, nur im Sichtbereich; bei reduzierter Bewegung Standbild; ohne WebGL bleiben die Farbflecken

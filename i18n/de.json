@@ -166,7 +166,10 @@
     "OPERA": "OPERA",
     "MICROS Simphony": "MICROS Simphony",
     "HMS": "HMS",
-    "Every till, payment, room charge and deposit is checked against the others. Rules, not guesswork: each receipt is tested against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.": "Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft. Regeln statt Raten: Jeder Beleg wird gegen den Terminalabschluss, das Gästekonto und den Kassenbestand getestet. Zwölfhundert Zeilen in wenigen Sekunden."
+    "Every till, payment, room charge and deposit is checked against the others. Rules, not guesswork: each receipt is tested against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.": "Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft. Regeln statt Raten: Jeder Beleg wird gegen den Terminalabschluss, das Gästekonto und den Kassenbestand getestet. Zwölfhundert Zeilen in wenigen Sekunden.",
+    "15,000+": "15.000+",
+    "91%": "91 %",
+    "3–8%": "3–8 %"
   },
   "js": {
     "'Play video'": "'Video abspielen'",
