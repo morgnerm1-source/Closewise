@@ -723,75 +723,12 @@ html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
 html[dir="rtl"] .ph-hero{transform:scaleX(-1)}
 html[dir="rtl"] .hero-pause{right:auto;left:0}
-/* ===== Fassung 3 ===== */
-.hero .sub{font-size:20px;line-height:28px;max-width:620px}
-.blk{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0}
-.blk-dark{background:var(--dark);color:#fff}
-.blk-light{background:#fff}
-.blk-in{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center}
-.blk-in.rev .blk-tx{order:2}
-.blk-dark .eyebrow{color:rgba(255,255,255,.6)}
-.blk-h{font-size:clamp(44px,6vw,84px);line-height:1.02;font-weight:400;letter-spacing:-.035em;margin-top:18px}
-.blk-p{font-size:22px;line-height:32px;margin-top:24px;max-width:520px;opacity:.82}
-.blk-fig{position:relative;margin:0;aspect-ratio:4/3;border-radius:22px;overflow:visible}
-.blk-fig img{width:100%;height:100%;object-fit:cover;border-radius:22px;display:block}
-.note{position:absolute;display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 18px 40px -18px rgba(0,0,0,.45);max-width:240px;font-size:13px;line-height:18px;backdrop-filter:blur(8px)}
-.note b{font-size:16px;font-weight:600;letter-spacing:-.01em}
-.note span{color:var(--muted)}
-.note.warm b{color:#c4633a}
-.note.n1{top:8%;left:-36px}.note.n2{top:42%;right:-30px}.note.n3{bottom:8%;left:12%}
-.blk-dark .note{background:rgba(250,249,248,.95)}
-.hcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.hcard{padding:26px;border-radius:18px;background:#fff;border:1px solid var(--line)}
-.hcard span{font:500 13px/1 Inter,sans-serif;color:var(--muted-2)}
-.hcard b{display:block;margin-top:16px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:-.01em}
-.hcard p{margin-top:8px;font-size:15px;line-height:22px;color:var(--muted)}
-#how .logos-wrap{margin-top:56px;padding-top:0}
-.logo-g{gap:8px}
-.logo-g .logo-sub{font:600 15px/1 Inter,sans-serif;color:#3a3733;letter-spacing:-.01em;white-space:nowrap}
-#statistics .ocard{justify-content:space-between}
-#statistics .ocard .num{font-size:clamp(64px,7vw,104px);line-height:1;font-weight:300;letter-spacing:-.03em;margin:0}
-#statistics .ocard blockquote{font-size:18px;line-height:25px;font-weight:500}
-.doc-s{font-size:20px;line-height:30px;color:var(--muted);margin-top:28px;max-width:860px}
-.big15{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;margin-top:12px}
-.big15-n{font-size:clamp(96px,17vw,250px);line-height:.9;font-weight:300;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
-.big15-n span{display:inline-block;transition:opacity .3s,transform .5s var(--ease),filter .5s}
-.big15-n span.sc{opacity:.4;filter:blur(2px);transform:translateY(-10px)}
-.big15-t p{font-size:26px;line-height:35px;letter-spacing:-.01em;max-width:520px}
-.big15-t .valid-chip{margin-top:20px}
-/* Getting started: Fokus-Karte */
-#start .steps{grid-template-columns:1fr;max-width:760px;margin:24px auto 0;gap:18px}
-#start .steps li{transform:scale(var(--sc,.94));opacity:var(--op,.55);transition:transform .45s var(--ease),opacity .45s var(--ease),box-shadow .45s;padding:30px 32px;display:grid;grid-template-columns:44px 1fr;column-gap:18px}
-#start .steps li.focus{box-shadow:0 30px 60px -30px rgba(26,24,20,.35)}
-#start .steps li::after{display:none}
-#start .steps .st-n{grid-row:1/3}
-#start .steps h3{margin-top:4px;font-size:22px}
-#start .steps p{grid-column:2}
-/* Book a call mit Foto */
-.cta-photo{background:#111}
-.cta-photo .cta-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cta-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,10,9,.72),rgba(11,10,9,.35))}
-.cta-photo .c{z-index:2}
-/* Footer */
-.footer .fbrand .wm{font-size:clamp(48px,6vw,80px)}
 .fsocial{display:flex;gap:10px;margin-top:20px}
 .fsocial a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line)}
 .fsocial svg{width:18px;height:18px}
-@media (max-width:1000px){.blk-in{grid-template-columns:1fr;gap:48px}.blk-in.rev .blk-tx{order:0}.note.n1{left:-8px}.note.n2{right:-8px}.hcards{grid-template-columns:1fr}.big15{grid-template-columns:1fr;gap:20px}}
-@media (max-width:720px){
-  .logos{height:72px}
-  .logos-track>*{padding:0 34px;height:36px}
-  .logos-track img{height:calc(var(--h,30px) * .8)}
-  .logo-g .logo-sub{font-size:13px}
-  .blk{padding:88px 0;min-height:auto}
-  .blk-p{font-size:18px;line-height:27px}
-  .note{position:static;margin-top:8px;max-width:none;box-shadow:none;border:1px solid var(--line)}
-  .blk-fig{aspect-ratio:auto}
-  .blk-fig img{aspect-ratio:4/3}
-  .big15-t p{font-size:20px;line-height:28px}
-  .big15-n{font-size:19vw}
-  #start .steps li{padding:22px;grid-template-columns:36px 1fr}
-}
+.logo-g{gap:8px}
+.logo-g .logo-sub{font:600 15px/1 Inter,sans-serif;color:#3a3733;letter-spacing:-.01em;white-space:nowrap}
+@media (max-width:720px){.logos{height:72px}.logos-track>*{padding:0 34px;height:36px}.logos-track img{height:calc(var(--h,30px) * .8)}.logo-g .logo-sub{font-size:13px}}
 </style>
 </head>
 <body>
@@ -828,7 +765,6 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   <div class="wrap hero-in">
     <div>
       <h1 class="rv">Die zusätzliche Stunde: endgültig vorbei</h1>
-      <p class="sub rv" style="--d:.15s">tyll.ai prüft über Nacht jede Kasse, jede Zahlung, jede Zimmerbelastung und jede Bankeinzahlung – und zeigt Ihnen nur, was nicht passt.</p>
       <div class="ctas rv" style="--d:.3s">
         <a href="book-de.html" class="btn btn-white">Termin buchen</a>
       </div>
@@ -840,52 +776,8 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 </section>
 
 <main class="sheet">
-
-  <!-- Problem: volle Höhe, dunkel; kurzer Text, Bild mit Randnotizen -->
-  <section class="blk blk-dark" id="problem">
-    <div class="wrap blk-in">
-      <div class="blk-tx">
-        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Problem</p>
-        <h2 class="blk-h rv" style="--d:.1s">Jede Nacht: eine Stunde von Hand.</h2>
-        <p class="blk-p rv" style="--d:.2s">Jemand lässt alles stehen und prüft jede Kasse, jeden Beleg und jede Zahlung einzeln. Der Rest des Teams bleibt länger und wartet.</p>
-      </div>
-      <figure class="blk-fig rv" style="--d:.15s">
-        <img src="bilder/problem-1.jpg" alt="" loading="lazy">
-        <figcaption class="note n1"><b>1 Stunde+</b><span>komplett von Hand</span></figcaption>
-        <figcaption class="note n2"><b>Eine Person weniger</b><span>im Service</span></figcaption>
-        <figcaption class="note n3"><b>Die echten Kosten</b><span>Überstunden · ein müdes Team · weniger Zeit für Gäste</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Solution: volle Höhe, hell; kurzer Text, Bild mit Randnotizen -->
-  <section class="blk blk-light" id="solution">
-    <div class="wrap blk-in rev">
-      <div class="blk-tx">
-        <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Lösung</p>
-        <h2 class="blk-h rv" style="--d:.1s">Ein Klick. Das war’s.</h2>
-        <p class="blk-p rv" style="--d:.2s">tyll.ai gleicht jede Transaktion automatisch ab – und gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.</p>
-      </div>
-      <figure class="blk-fig rv" style="--d:.15s">
-        <img src="bilder/hero-tyll.jpg" alt="" loading="lazy">
-        <figcaption class="note n1"><b>Alles geprüft</b><span>Jede Kasse, Zahlung, Zimmerbelastung und Bankeinzahlung</span></figcaption>
-        <figcaption class="note n2"><b>Was passt, ist erledigt</b><span>von selbst</span></figcaption>
-        <figcaption class="note n3 warm"><b>Abweichungen markiert</b><span>mit dem Grund gleich dabei</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- How it works: drei kurze Karten, Logoleiste, Scroll-Video -->
-  <section class="doc wrap" id="how">
-    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
-    <h2 class="blk-h rv" style="--d:.1s">Erst rechnen. Dann erklären.</h2>
-    <div class="hcards">
-      <div class="hcard rv"><span>01</span><b>Erst rechnen</b><p>Klarer, regelbasierter Abgleich – kein Raten.</p></div>
-      <div class="hcard rv" style="--d:.08s"><span>02</span><b>Nur erklären, was gefunden wurde</b><p>Nichts zu lesen, solange nichts wirklich abweicht.</p></div>
-      <div class="hcard rv" style="--d:.16s"><span>03</span><b>Einfache Sprache</b><p>Was passiert ist – so geschrieben, dass Sie es auf einen Blick lesen.</p></div>
-    </div>
-  <!-- Logo-Laufband: Systeme, mit denen tyll.ai verbunden werden kann -->
-  <div class="logos-wrap">
+  <!-- Logo-Laufband -->
+  <div class="wrap logos-wrap">
     <p class="eyebrow"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Wir können uns verbinden mit</p>
     <div class="logos" aria-label="Systeme, mit denen sich tyll.ai verbinden kann">
       <div class="logos-track">
@@ -896,11 +788,84 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </div>
   </div>
 
+  <!-- So funktioniert es -->
+
+  <!-- Problem (Text wörtlich aus dem Doc) -->
+  <section class="doc doc-dark" id="problem">
+    <div class="wrap">
+      <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Problem</p>
+      <p class="doc-p rv" style="--d:.1s">Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen. Kassen, Belege und Zahlungen vergleichen, eins nach dem anderen. Das dauert eine Stunde oder länger, komplett von Hand. Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist. Diese Stunde ist nicht nur verlorene Zeit. Sie bedeutet bezahlte Überstunden. Ein müdes Team. Und Stunden, die eigentlich den Gästen gehören.</p>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section class="doc wrap" id="solution">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Lösung</p>
+    <p class="doc-p rv" style="--d:.1s">tyll.ai prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Starten Sie den heutigen Abschluss, das ist alles. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei. Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.</p>
+    <div class="flow rv" id="flow" role="img" aria-label="Ablauf: Kassenbelege, Kartenterminal, Gästekonto, Kassensystem und Bankkonto laufen in tyll.ai zusammen, Differenzen werden geklärt, danach der Export als DATEV-Datei oder CSV.">
+      <div class="flow-stage" id="flowStage">
+        <div class="flow-glow" id="fGlow"></div>
+        <svg class="flow-wires" width="1600" height="720" viewBox="0 0 1600 720" fill="none" aria-hidden="true">
+          <g stroke="#e4e7ec" stroke-width="1.5">
+            <path id="fp0" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path id="fp1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path id="fp2" d="M280 360 H500"/>
+            <path id="fp3" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path id="fp4" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
+            <path d="M980 360 H1140"/>
+          </g>
+          <g id="flowLines" stroke-width="1.5" stroke-dasharray="1 1">
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 160 H360 Q400 160 400 200 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 260 H360 Q400 260 400 300 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 460 H360 Q400 460 400 420 V360 H500"/>
+            <path stroke="#2f6bff" pathLength="1" stroke-dashoffset="1" d="M280 560 H360 Q400 560 400 520 V360 H500"/>
+            <path stroke="#12805c" pathLength="1" stroke-dashoffset="1" d="M980 360 H1140"/>
+          </g>
+        </svg>
+        <div class="flow-dots" id="fDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="flow-src">
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span>Kassenbelege</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 10h18M7 15h3"/></svg></span>Kartenterminal</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span>Gästekonto</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM7 10V4h10v6M8 14h2M14 14h2M8 17h2M14 17h2"/></svg></span>Kassensystem</div>
+          <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span>Bankkonto</div>
+        </div>
+        <div class="flow-card" id="fCard">
+          <div class="flow-head"><span class="wm flow-wm">tyll.ai</span><span class="flow-tag" id="fTag">Live</span></div>
+          <div class="flow-phase" id="flowPhase">Verbinde Datenquellen …</div>
+          <div class="flow-bar"><i id="flowBar"></i><b id="fShine"></b></div>
+          <div class="flow-rows" id="flowRows">
+            <div class="flow-row"><span class="dot"></span><span class="ar">Bar</span><span class="tx">Kartenzahlung fehlt</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Restaurant</span><span class="tx">Storno ohne Freigabe</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <div class="flow-row"><span class="dot"></span><span class="ar">Zimmerservice</span><span class="tx">Nicht aufs Zimmer gebucht</span><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0"><path d="M2 5.2 L4.2 7.2 L8 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+        </div>
+        <div class="flow-chips" aria-hidden="true"><span style="background:#2f6bff">DATEV</span><span style="background:#101828">CSV</span></div>
+        <div class="flow-export" id="flowExport">
+          <div>
+            <h3>Export für Ihre Buchhaltung</h3>
+            <div class="flow-sub" id="flowSub">Wartet auf den Abschluss.</div>
+            <div class="flow-btns"><div class="flow-btn" id="flowB1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>DATEV-Export</div><div class="flow-btn" id="flowB2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CSV</div></div>
+          </div>
+        </div>
+        <div class="flow-cursor" id="fCur" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M2 2 L2 20 L7 15.5 L10.5 23 L14 21.5 L10.5 14 L17 14 Z" fill="#101828" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works: Text + Verbindungs-Infografik (nach Fynns Version) -->
+  <section class="doc wrap" id="how">
+    <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So funktioniert es</p>
+    <p class="doc-p rv" style="--d:.1s">tyll.ai prüft zuerst die Zahlen – mit klarem, regelbasiertem Abgleich statt Raten. Erst wenn wirklich etwas gefunden ist, erklärt es, was passiert ist, in einfacher Sprache.</p>
+    <!-- Scroll-Video „Belege, die sich finden“ (Higgsfield, Leuchtband-Farben).
+         Desktop: der Abschnitt steht, Scrollen spielt das Video als Bildfolge ab;
+         links die vier Schritte nach Fynns Version. Handy: läuft ohne Anhalten mit. -->
     <div class="hiw" id="hiw">
       <div class="hiw-sticky">
         <ol class="hw-acc">
           <li class="hw-item on"><span class="hw-n">01</span><div><b class="hw-t">Anbinden</b><p class="hw-b">tyll.ai liest die Exporte, die Ihr PMS, Ihre Kasse, Ihr Kartenterminal und Ihre Bank ohnehin erzeugen. Nur lesend. Nichts Neues an der Kasse, und an Ihren Systemen ändert sich nichts.</p></div><i class="hw-bar"></i></li>
-          <li class="hw-item"><span class="hw-n">02</span><div><b class="hw-t">Abgleichen</b><p class="hw-b">Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft: jeder Beleg gegen den Terminalabschluss, das Gästekonto und den Kassenbestand. Zwölfhundert Zeilen in wenigen Sekunden.</p></div><i class="hw-bar"></i></li>
+          <li class="hw-item"><span class="hw-n">02</span><div><b class="hw-t">Abgleichen</b><p class="hw-b">Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft. Regeln statt Raten: Jeder Beleg wird gegen den Terminalabschluss, das Gästekonto und den Kassenbestand getestet. Zwölfhundert Zeilen in wenigen Sekunden.</p></div><i class="hw-bar"></i></li>
           <li class="hw-item"><span class="hw-n">03</span><div><b class="hw-t">Markieren</b><p class="hw-b">Was nicht aufgeht, kommt von selbst zurück – mit dem gefährdeten Eurobetrag und dem Grund: die Abrechnung, die nie ankam, die doppelt erfasste Buchung. In einer normalen Nacht sind das vier Zeilen von 1.214, kein Bericht zum Durchlesen.</p></div><i class="hw-bar"></i></li>
           <li class="hw-item"><span class="hw-n">04</span><div><b class="hw-t">Abschließen</b><p class="hw-b">Prüfen Sie die wenigen Zeilen, die Sie brauchen, dann ein Export im Format Ihrer Buchhaltung. Starten, Feierabend.</p></div><i class="hw-bar"></i></li>
         </ol>
@@ -912,30 +877,24 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </div>
   </section>
 
-  <!-- Statistics: große Zahlen -->
+  <!-- Statistics -->
   <section class="doc wrap" id="statistics">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Zahlen</p>
     <div class="igrid">
-      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>91%</div><blockquote>der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
-      <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/stats-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>4 von 5</div><blockquote>verbringen ein bis zwei volle Tage pro Woche in Tabellen.</blockquote></article>
-      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="num" data-scramble>3–8%</div><blockquote>des Bruttoumsatzes gehen in Reise und Gastgewerbe verloren – dazu rund 5 % durch Betrug.</blockquote></article>
+      <article class="ocard rv"><div class="ph" aria-hidden="true"><img src="bilder/stats-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>91 % der Hotels setzen weiter auf manuelle Berichte – auch in automatisierten Systemen.</blockquote></article>
+      <article class="ocard rv" style="--d:.08s"><div class="ph" aria-hidden="true"><img src="bilder/stats-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>Vier von fünf verbringen ein bis zwei volle Tage pro Woche in Tabellen.</blockquote></article>
+      <article class="ocard rv" style="--d:.16s"><div class="ph" aria-hidden="true"><img src="bilder/stats-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><blockquote>Branchenschätzungen beziffern den Umsatzverlust in Reise und Gastgewerbe auf 3 bis 8 Prozent des Bruttoumsatzes, Betrug am Arbeitsplatz kommt mit rund 5 Prozent hinzu.</blockquote></article>
     </div>
-    <p class="doc-s rv">Stellen für Night Auditors großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen von Gästekonten noch immer als Aufgabe.</p>
+    <p class="doc-p doc-s rv">Stellen für Night Auditors großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen von Gästekonten noch immer als Aufgabe.</p>
   </section>
 
-  <!-- Validation: 15,000+ als Blickfang -->
+  <!-- Validation -->
   <section class="doc wrap" id="validation">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>Im Einsatz</p>
-    <div class="big15">
-      <div class="big15-n rv" data-scramble>15,000+</div>
-      <div class="big15-t rv" style="--d:.1s">
-        <p>gehobene Hotels in Deutschland, Österreich, der Schweiz, Italien und Frankreich – die meisten schließen noch von Hand ab.</p>
-        <span class="valid-chip"><i></i>tyll.ai ist bereits in Betrieben im Einsatz und automatisiert jede Nacht den Abschluss.</span>
-      </div>
-    </div>
+    <p class="doc-p rv" style="--d:.1s">tyll.ai ist bereits in Betrieben der Hotellerie im Einsatz und automatisiert jede Nacht den Abschluss. Der Markt: Allein Deutschland, Österreich, die Schweiz, Italien und Frankreich zählen über 15.000 gehobene Hotels, die meisten schließen noch von Hand ab.</p>
   </section>
 
-  <!-- Getting started: Karte in der Bildmitte im Fokus -->
+  <!-- Schritt für Schritt (nach Fynns „Getting started“) -->
   <section class="doc wrap" id="start">
     <p class="eyebrow rv"><dot-loader variant="snake" size="3" aria-hidden="true"></dot-loader>So fangen Sie an</p>
     <ol class="steps">
@@ -946,10 +905,10 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
     </ol>
   </section>
 
-  <!-- Book a call: Hintergrund = Rezeption aus dem Hero -->
+  <!-- Book a call: einziger CTA -->
   <section class="cta-wrap" id="book">
-    <div class="wrap cta cta-photo rv">
-      <img class="cta-bg" src="bilder/hero-tyll.jpg" alt="" loading="lazy">
+    <div class="wrap cta rv">
+      <canvas class="cta-glow" id="ctaGlow" aria-hidden="true"></canvas><span class="blob a"></span><span class="blob b"></span><span class="blob d"></span>
       <div class="c"><a href="book-de.html" class="btn btn-white btn-xl">Termin buchen</a></div>
     </div>
   </section>
@@ -1125,7 +1084,6 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 
   // Ablauf-Animation v2: Zeitachse 11 s in Schleife, Tempo 1,5 – Werte wie im Design „tyll.ai Ablauf“
   const flow = document.getElementById('flow'), stage = document.getElementById('flowStage');
-  if (flow) {
   const fSteps = [...document.querySelectorAll('#ablauf-schritte .fs')];
   const $ = id => document.getElementById(id);
   const lines = [...document.querySelectorAll('#flowLines path')], linesG = $('flowLines');
@@ -1266,18 +1224,6 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
       else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
     }), {threshold:.2}).observe(flow);
   }
-  }
-
-
-  // Getting started: Karte nahe der Bildmitte im Fokus (größer), die anderen kleiner
-  (() => {
-    const cards = [...document.querySelectorAll('#start .steps li')]; if (!cards.length) return;
-    const upd = () => { const mid = innerHeight / 2;
-      cards.forEach(c => { const r = c.getBoundingClientRect(), d = Math.min(1, Math.abs(r.top + r.height / 2 - mid) / (innerHeight * .45));
-        c.style.setProperty('--sc', (1.05 - .11 * d).toFixed(3)); c.style.setProperty('--op', (1 - .45 * d).toFixed(3)); c.classList.toggle('focus', d < .25); }); };
-    if (reduce) { cards.forEach(c => { c.style.setProperty('--sc', 1); c.style.setProperty('--op', 1); }); return; }
-    let r = 0; addEventListener('scroll', () => { if (!r) r = requestAnimationFrame(() => { r = 0; upd(); }); }, { passive: true }); addEventListener('resize', upd); upd();
-  })();
 
   // Ergebnisse: Zahlen laufen verwürfelt ein
   const chars = '0123456789abcdefghijklmnopqrstuvwxyz';

@@ -16,8 +16,8 @@
     "Pause video": "Video anhalten",
     "We can connect to": "Wir können uns verbinden mit",
     "Systems tyll.ai can connect to": "Systeme, mit denen sich tyll.ai verbinden kann",
-    "Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it's happening, there's one less person on the floor. The rest of the team ends up staying late, waiting for it to finish. That hour is not just lost time. It is overtime pay. A tired team. And hours that should have gone to guests instead.": "Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen.",
-    "tyll.ai checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight's close, that's it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. It hands you back the one thing closing never gave you before. Time.": "tyll.ai prüft jede Transaktion für Sie.",
+    "Every night, someone has to stop and manually check the numbers. Comparing tills, receipts, and payments, one by one. That takes an hour or more, done entirely by hand. While it's happening, there's one less person on the floor. The rest of the team ends up staying late, waiting for it to finish. That hour is not just lost time. It is overtime pay. A tired team. And hours that should have gone to guests instead.": "Jede Nacht muss jemand alles stehen lassen und die Zahlen von Hand prüfen. Kassen, Belege und Zahlungen vergleichen, eins nach dem anderen. Das dauert eine Stunde oder länger, komplett von Hand. Solange das läuft, fehlt eine Person im Service. Der Rest des Teams bleibt länger und wartet, bis es fertig ist. Diese Stunde ist nicht nur verlorene Zeit. Sie bedeutet bezahlte Überstunden. Ein müdes Team. Und Stunden, die eigentlich den Gästen gehören.",
+    "tyll.ai checks every transaction for you, every till, every payment, every room charge, every bank deposit. All matched automatically. Click run on tonight's close, that's it. What matches gets cleared on its own, what does not gets flagged, with the reason already attached. It hands you back the one thing closing never gave you before. Time.": "tyll.ai prüft jede Transaktion für Sie: jede Kasse, jede Zahlung, jede Zimmerbelastung, jede Bankeinzahlung. Alles automatisch abgeglichen. Starten Sie den heutigen Abschluss, das ist alles. Was passt, wird von selbst freigegeben. Was nicht passt, wird markiert, mit dem Grund gleich dabei. Es gibt Ihnen zurück, was der Abschluss Ihnen nie gegeben hat: Zeit.",
     "Till receipts": "Kassenbelege",
     "Card terminal": "Kartenterminal",
     "Guest ledger": "Gästekonto",
@@ -73,7 +73,7 @@
     "Industry estimates put revenue leakage at 3 to 8 percent of gross revenue across travel and hospitality, with occupational fraud adding roughly 5 percent more.": "Branchenschätzungen beziffern den Umsatzverlust in Reise und Gastgewerbe auf 3 bis 8 Prozent des Bruttoumsatzes, Betrug am Arbeitsplatz kommt mit rund 5 Prozent hinzu.",
     "Night auditor roles at major international hotel brands still list manually comparing cashier reports and reconciling guest ledgers as part of the job.": "Stellen für Night Auditors großer internationaler Hotelmarken nennen das manuelle Vergleichen von Kassenberichten und das Abgleichen von Gästekonten noch immer als Aufgabe.",
     "Validation": "Im Einsatz",
-    "tyll.ai is already live in hospitality businesses, automating the nightly close every day. The market: Germany, Austria, Switzerland, Italy, and France alone are home to over 15,000 upscale hotels, most still closing by hand.": "tyll.ai ist bereits in Betrieben im Einsatz.",
+    "tyll.ai is already live in hospitality businesses, automating the nightly close every day. The market: Germany, Austria, Switzerland, Italy, and France alone are home to over 15,000 upscale hotels, most still closing by hand.": "tyll.ai ist bereits in Betrieben der Hotellerie im Einsatz und automatisiert jede Nacht den Abschluss. Der Markt: Allein Deutschland, Österreich, die Schweiz, Italien und Frankreich zählen über 15.000 gehobene Hotels, die meisten schließen noch von Hand ab.",
     "Getting started": "So fangen Sie an",
     "Twenty minutes. We take one night from your property and show you exactly what tyll.ai would have cleared.": "Zwanzig Minuten. Wir nehmen eine Nacht aus Ihrem Haus und zeigen genau, was tyll.ai erledigt hätte.",
     "We connect your systems": "Wir binden Ihre Systeme an",
@@ -165,7 +165,8 @@
     "Instagram": "Instagram",
     "OPERA": "OPERA",
     "MICROS Simphony": "MICROS Simphony",
-    "HMS": "HMS"
+    "HMS": "HMS",
+    "Every till, payment, room charge and deposit is checked against the others. Rules, not guesswork: each receipt is tested against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.": "Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft. Regeln statt Raten: Jeder Beleg wird gegen den Terminalabschluss, das Gästekonto und den Kassenbestand getestet. Zwölfhundert Zeilen in wenigen Sekunden."
   },
   "js": {
     "'Play video'": "'Video abspielen'",
