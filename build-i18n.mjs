@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(here, "tyll");
-const PAGES = ["index.html", "faq.html", "security.html", "book.html"];
+const PAGES = ["index.html", "faq.html", "security.html", "book.html", "reviews.html"];
 const LANGS = { de: { dir: "ltr" }, ar: { dir: "rtl" }, fr: { dir: "ltr" } };
 const ATTRS = ["alt", "aria-label", "placeholder", "title", "content", "label"];
 // Wörter/Namen, die in allen Sprachen gleich bleiben (Marken, Systeme, Formate)
@@ -35,7 +35,7 @@ function translate(html, dict, lang, page) {
     p = p.replace(new RegExp(`(\\s(?:${ATTRS.join("|")})=")([^"]*)(")`, "g"), (m, a, v, b) => (v in T ? a + T[v] + b : m));
     // interne Links auf die Sprachfassung (nicht der Sprachumschalter)
     p = p.replace(/<a\b[^>]*>/g, tag => /\sdata-l="/.test(tag) ? tag :
-      tag.replace(/href="(index|faq|security|book)\.html(#[^"]*)?"/, (m, n, h = "") => `href="${outName(n + ".html", lang)}${h}"`));
+      tag.replace(/href="(index|faq|security|book|reviews)\.html(#[^"]*)?"/, (m, n, h = "") => `href="${outName(n + ".html", lang)}${h}"`));
     return p;
   });
   let out = parts.join("");
