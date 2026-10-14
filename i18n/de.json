@@ -169,7 +169,11 @@
     "Every till, payment, room charge and deposit is checked against the others. Rules, not guesswork: each receipt is tested against the terminal batch, the guest ledger and the drawer count. Twelve hundred lines in a few seconds.": "Jede Kasse, Zahlung, Zimmerbelastung und Einzahlung wird gegen die anderen geprüft. Regeln statt Raten: Jeder Beleg wird gegen den Terminalabschluss, das Gästekonto und den Kassenbestand getestet. Zwölfhundert Zeilen in wenigen Sekunden.",
     "15,000+": "15.000+",
     "91%": "91 %",
-    "3–8%": "3–8 %"
+    "3–8%": "3–8 %",
+    "Success stories": "Erfolgsgeschichten",
+    "Read the story": "Zur Geschichte",
+    "Previous story": "Vorherige Geschichte",
+    "Next story": "Nächste Geschichte"
   },
   "js": {
     "'Play video'": "'Video abspielen'",
@@ -192,7 +196,8 @@
     "tyll.ai is thinking …": "tyll.ai denkt nach …",
     "label=\"Loading answer\"": "label=\"Antwort wird geladen\"",
     "'Answer by an AI, based on what we have published. The call is what counts – <a href=\"'": "'Antwort einer KI auf Grundlage dessen, was wir veröffentlicht haben. Entscheidend ist das Gespräch – <a href=\"'",
-    ">Book a call</a>.'": ">Termin buchen</a>.'"
+    ">Book a call</a>.'": ">Termin buchen</a>.'",
+    ".join(\" at \")": ".join(\" bei \")"
   },
   "keep": {
     "DE": true,

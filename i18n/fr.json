@@ -169,7 +169,11 @@
     "HMS": "HMS",
     "15,000+": "15 000+",
     "91%": "91 %",
-    "3–8%": "3–8 %"
+    "3–8%": "3–8 %",
+    "Success stories": "Témoignages",
+    "Read the story": "Lire l’histoire",
+    "Previous story": "Histoire précédente",
+    "Next story": "Histoire suivante"
   },
   "js": {
     "'Play video'": "'Lire la vidéo'",
@@ -192,7 +196,8 @@
     "tyll.ai is thinking …": "tyll.ai réfléchit …",
     "label=\"Loading answer\"": "label=\"Chargement de la réponse\"",
     "'Answer by an AI, based on what we have published. The call is what counts – <a href=\"'": "'Réponse d’une IA, à partir de ce que nous avons publié. C’est l’appel qui compte – <a href=\"'",
-    ">Book a call</a>.'": ">Réserver un appel</a>.'"
+    ">Book a call</a>.'": ">Réserver un appel</a>.'",
+    ".join(\" at \")": ".join(\" chez \")"
   },
   "keep": {
     "Menu": true,

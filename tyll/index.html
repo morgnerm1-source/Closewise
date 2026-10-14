@@ -741,6 +741,7 @@ html[dir="rtl"] .hero h1{line-height:1.3}
 html[dir="rtl"] .wm,html[dir="rtl"] .logos,html[dir="rtl"] .flow{direction:ltr}
 html[dir="rtl"] .flow-phase,html[dir="rtl"] .flow-row,html[dir="rtl"] .flow-export h3,html[dir="rtl"] .flow-sub{direction:rtl}
 html[dir="rtl"] .hw-bar{left:auto;right:0}
+html[dir="rtl"] .rev-nav svg{transform:scaleX(-1)}
 html[dir="rtl"] .steps li:not(:last-child)::after{right:auto;left:-16px}
 html[dir="rtl"] .eyebrow dot-loader{margin-left:8px;margin-right:0}
 html[dir="rtl"] .hero::after{transform:scaleX(-1)}
@@ -823,6 +824,29 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 .flow-head .tl-logo{height:18px;color:#101828}
 #pl .tl-logo{height:min(96px,18vw);color:#fff;opacity:0;filter:blur(14px);transform:translateY(18px);animation:plChar 1s cubic-bezier(.22,1,.36,1) .15s forwards}
 @media (max-width:720px){.nav .tl-logo{height:26px}.footer .tl-logo{height:44px}}
+/* Kundenstimmen */
+.rev[hidden]{display:none}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;min-height:620px}
+.rev-card{display:flex;flex-direction:column;padding:28px 28px 32px;border-radius:18px;background:#f1efec}
+.rev-top{display:flex;justify-content:space-between;align-items:center}
+.rev-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;font-size:14px;font-weight:500}
+.rev-chip i{width:7px;height:7px;border-radius:50%;background:#27a896}
+.rev-nav{display:flex;gap:10px}
+.rev-nav button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--ink);border-radius:8px;background:transparent;color:var(--ink);cursor:pointer;transition:background .3s,color .3s}
+.rev-nav button:hover{background:var(--ink);color:#fff}
+.rev-nav svg{width:18px;height:18px}
+.rev-body{display:flex;flex-direction:column;flex:1;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.rev-body.out,.rev-photo.out img{opacity:0;transform:translateY(10px)}
+.rev-quote{margin-top:56px;font-size:clamp(26px,2.6vw,38px);line-height:1.18;font-weight:500;letter-spacing:-.025em;color:var(--ink)}
+.rev-who{margin-top:24px;font-size:15px;color:var(--ink-2)}
+.rev-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:auto;padding-top:48px}
+.rev-stats span{display:block;font-size:14px;line-height:19px;color:var(--ink-2)}
+.rev-stats b{display:block;margin-top:10px;font-size:clamp(48px,5vw,72px);line-height:1;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.rev-link{display:inline-flex;align-items:center;gap:8px;margin-top:36px;font-size:16px;font-weight:500;text-decoration:underline;text-underline-offset:4px;min-height:44px}
+.rev-link svg{width:18px;height:18px}
+.rev-photo{margin:0;border-radius:18px;overflow:hidden;background:#1a1814}
+.rev-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+@media (max-width:900px){.rev-grid{grid-template-columns:1fr;min-height:0}.rev-photo{order:-1;aspect-ratio:4/3}.rev-quote{margin-top:32px}}
 </style>
 </head>
 <body>
@@ -999,6 +1023,27 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
         <p>upscale hotels in Germany, Austria, Switzerland, Italy and France – most still closing by hand.</p>
         <span class="valid-chip"><i></i>tyll.ai is already live in hospitality businesses, automating the nightly close every day.</span>
       </div>
+    </div>
+  </section>
+
+  <!-- Kundenstimmen: Inhalte stehen im JSON-Block #reviews-data (leer = Abschnitt bleibt versteckt).
+       Pro Eintrag: quote, name, role, company, image (Pfad in bilder/), stats [{label, value}], link (optional). -->
+  <script type="application/json" id="reviews-data">[]</script>
+  <section class="doc wrap rev" id="reviews" hidden>
+    <div class="rev-grid">
+      <article class="rev-card">
+        <div class="rev-top">
+          <span class="rev-chip"><i></i>Success stories</span>
+          <div class="rev-nav"><button type="button" class="rev-prev" aria-label="Previous story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" class="rev-next" aria-label="Next story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+        </div>
+        <div class="rev-body">
+          <blockquote class="rev-quote"></blockquote>
+          <p class="rev-who"></p>
+          <div class="rev-stats"></div>
+          <a class="rev-link" hidden><span>Read the story</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M10 8l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+      <figure class="rev-photo"><img alt="" loading="lazy"></figure>
     </div>
   </section>
 
@@ -1378,6 +1423,37 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
   };
   const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); so.unobserve(e.target); } }), {threshold:.5});
   document.querySelectorAll("[data-scramble]").forEach(el => so.observe(el));
+  // Kundenstimmen: aus #reviews-data rendern; leer = Abschnitt bleibt versteckt
+  (() => {
+    const sec = document.getElementById("reviews"), data = document.getElementById("reviews-data"); if (!sec || !data) return;
+    let list = []; try { list = JSON.parse(data.textContent) || []; } catch (e) { list = []; }
+    if (!list.length) return;
+    sec.hidden = false;
+    const q = sec.querySelector(".rev-quote"), who = sec.querySelector(".rev-who"), st = sec.querySelector(".rev-stats"),
+      link = sec.querySelector(".rev-link"), img = sec.querySelector(".rev-photo img"), body = sec.querySelector(".rev-body"), fig = sec.querySelector(".rev-photo");
+    const nav = sec.querySelector(".rev-nav"); if (list.length < 2) nav.hidden = true;
+    let k = 0;
+    const show = (i, anim) => {
+      const r = list[i];
+      const fill = () => {
+        q.textContent = r.quote || ""; who.textContent = "— " + [r.name, [r.role, r.company].filter(Boolean).join(" at ")].filter(Boolean).join(", ");
+        st.innerHTML = ""; (r.stats || []).slice(0, 2).forEach(x => { const d = document.createElement("div"), l = document.createElement("span"), b = document.createElement("b");
+          l.textContent = x.label; b.textContent = x.value; d.append(l, b); st.append(d); if (anim) countUp(b); });
+        if (r.link) { link.hidden = false; link.href = r.link; } else link.hidden = true;
+        if (r.image) img.src = r.image; img.alt = r.company || "";
+        body.classList.remove("out"); fig.classList.remove("out");
+      };
+      if (!anim || reduce) return fill();
+      body.classList.add("out"); fig.classList.add("out"); setTimeout(fill, 300);
+    };
+    const go = d => { k = (k + d + list.length) % list.length; show(k, true); };
+    sec.querySelector(".rev-prev").addEventListener("click", () => go(-1));
+    sec.querySelector(".rev-next").addEventListener("click", () => go(1));
+    let x0 = null; sec.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+    sec.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); x0 = null; });
+    show(0, false);
+  })();
+
 
   // Leuchtband im Abschluss-Band: Shader aus dem Design „tyll.ai Leuchtband“ (unverändert),
   // 16-s-Schleife, nur im Sichtbereich; bei reduzierter Bewegung Standbild; ohne WebGL bleiben die Farbflecken

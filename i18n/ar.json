@@ -166,7 +166,11 @@
     "Instagram": "Instagram",
     "OPERA": "OPERA",
     "MICROS Simphony": "MICROS Simphony",
-    "HMS": "HMS"
+    "HMS": "HMS",
+    "Success stories": "قصص نجاح",
+    "Read the story": "اقرأ القصة",
+    "Previous story": "القصة السابقة",
+    "Next story": "القصة التالية"
   },
   "js": {
     "'Play video'": "'تشغيل الفيديو'",
@@ -189,7 +193,8 @@
     "tyll.ai is thinking …": "tyll.ai يفكر …",
     "label=\"Loading answer\"": "label=\"جارٍ تحميل الإجابة\"",
     "'Answer by an AI, based on what we have published. The call is what counts – <a href=\"'": "'إجابة من ذكاء اصطناعي، استنادًا إلى ما نشرناه. المكالمة هي الأهم – <a href=\"'",
-    ">Book a call</a>.'": ">احجز مكالمة</a>.'"
+    ">Book a call</a>.'": ">احجز مكالمة</a>.'",
+    ".join(\" at \")": ".join(\" في \")"
   },
   "keep": {
     "Failed to fetch": true,
