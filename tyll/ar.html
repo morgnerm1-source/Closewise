@@ -817,16 +817,22 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 }
 /* Zahlen gleiten weich ein (statt Buchstaben-Wirbel) */
 @media (prefers-reduced-motion:no-preference){[data-scramble]{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}[data-scramble].cu-in{opacity:1;transform:none}}
+/* Logo (Haken + Tyll) */
+.tl-logo{display:block;width:auto;height:30px}
+.footer .tl-logo{height:56px}
+.flow-head .tl-logo{height:18px;color:#101828}
+#pl .tl-logo{height:min(96px,18vw);color:#fff;opacity:0;filter:blur(14px);transform:translateY(18px);animation:plChar 1s cubic-bezier(.22,1,.36,1) .15s forwards}
+@media (max-width:720px){.nav .tl-logo{height:26px}.footer .tl-logo{height:44px}}
 </style>
 </head>
 <body>
-<div id="pl" aria-hidden="true" data-lenis-prevent><i class="pl-b a"></i><i class="pl-b b"></i><span class="pl-logo"><span style="--i:0">t</span><span style="--i:1">y</span><span style="--i:2">l</span><span style="--i:3">l</span><span style="--i:4">.</span><span style="--i:5">a</span><span style="--i:6">i</span></span></div>
+<div id="pl" aria-hidden="true" data-lenis-prevent><i class="pl-b a"></i><i class="pl-b b"></i><svg class="tl-logo" viewBox="0 0 224 81" fill="currentColor" role="img" aria-label="tyll.ai"><path d="M53.9312 48.2028H33.5463L53.0695 1.96355C53.572 0.773501 54.7382 0 56.03 0H72.034C74.3466 0 75.9021 2.36931 74.9826 4.49124L56.8798 46.267C56.3705 47.4422 55.212 48.2028 53.9312 48.2028Z"/><path d="M17.0355 68.4862L0.43289 39.6292C-0.799691 37.4869 0.746682 34.8131 3.2183 34.8131H19.4402C20.5517 34.8131 21.5843 35.3876 22.1705 36.332L29.9621 48.8851C30.5283 49.7973 30.6016 50.9321 30.1573 51.9096L22.7464 68.2134C21.6637 70.5954 18.3404 70.7541 17.0355 68.4862Z"/><path d="M136.089 5.99569V14.7385H121.698V60H110.867V14.7385H96.4758V5.99569H136.089Z"/><path d="M184.999 17.137L158.461 80.271H146.933L156.217 58.9168L139.041 17.137H151.188L162.252 47.0792L173.471 17.137H184.999Z"/><path d="M201.67 2.74615V60H190.838V2.74615H201.67Z"/><path d="M223.203 2.74615V60H212.371V2.74615H223.203Z"/></svg></div>
 <script src="preloader.js"></script>
 
 <!-- Navigation -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#" class="logo" aria-label="الصفحة الرئيسية لـ tyll.ai"><span class="wm">tyll.ai</span></a>
+    <a href="#" class="logo" aria-label="الصفحة الرئيسية لـ tyll.ai"><svg class="tl-logo" viewBox="0 0 224 81" fill="currentColor" role="img" aria-label="tyll.ai"><path d="M53.9312 48.2028H33.5463L53.0695 1.96355C53.572 0.773501 54.7382 0 56.03 0H72.034C74.3466 0 75.9021 2.36931 74.9826 4.49124L56.8798 46.267C56.3705 47.4422 55.212 48.2028 53.9312 48.2028Z"/><path d="M17.0355 68.4862L0.43289 39.6292C-0.799691 37.4869 0.746682 34.8131 3.2183 34.8131H19.4402C20.5517 34.8131 21.5843 35.3876 22.1705 36.332L29.9621 48.8851C30.5283 49.7973 30.6016 50.9321 30.1573 51.9096L22.7464 68.2134C21.6637 70.5954 18.3404 70.7541 17.0355 68.4862Z"/><path d="M136.089 5.99569V14.7385H121.698V60H110.867V14.7385H96.4758V5.99569H136.089Z"/><path d="M184.999 17.137L158.461 80.271H146.933L156.217 58.9168L139.041 17.137H151.188L162.252 47.0792L173.471 17.137H184.999Z"/><path d="M201.67 2.74615V60H190.838V2.74615H201.67Z"/><path d="M223.203 2.74615V60H212.371V2.74615H223.203Z"/></svg></a>
     <nav class="nav-links" aria-label="التنقل الرئيسي">
       <a href="#problem">المشكلة</a>
       <a href="#solution">الحل</a>
@@ -951,7 +957,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
           <div><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="#2f6bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 21h18"/></svg></span>الحساب البنكي</div>
         </div>
         <div class="flow-card" id="fCard">
-          <div class="flow-head"><span class="wm flow-wm">tyll.ai</span><span class="flow-tag" id="fTag">مباشر</span></div>
+          <div class="flow-head"><svg class="tl-logo flow-logo" viewBox="0 0 224 81" fill="currentColor" role="img" aria-label="tyll.ai"><path d="M53.9312 48.2028H33.5463L53.0695 1.96355C53.572 0.773501 54.7382 0 56.03 0H72.034C74.3466 0 75.9021 2.36931 74.9826 4.49124L56.8798 46.267C56.3705 47.4422 55.212 48.2028 53.9312 48.2028Z"/><path d="M17.0355 68.4862L0.43289 39.6292C-0.799691 37.4869 0.746682 34.8131 3.2183 34.8131H19.4402C20.5517 34.8131 21.5843 35.3876 22.1705 36.332L29.9621 48.8851C30.5283 49.7973 30.6016 50.9321 30.1573 51.9096L22.7464 68.2134C21.6637 70.5954 18.3404 70.7541 17.0355 68.4862Z"/><path d="M136.089 5.99569V14.7385H121.698V60H110.867V14.7385H96.4758V5.99569H136.089Z"/><path d="M184.999 17.137L158.461 80.271H146.933L156.217 58.9168L139.041 17.137H151.188L162.252 47.0792L173.471 17.137H184.999Z"/><path d="M201.67 2.74615V60H190.838V2.74615H201.67Z"/><path d="M223.203 2.74615V60H212.371V2.74615H223.203Z"/></svg><span class="flow-tag" id="fTag">مباشر</span></div>
           <div class="flow-phase" id="flowPhase">جارٍ ربط مصادر البيانات …</div>
           <div class="flow-bar"><i id="flowBar"></i><b id="fShine"></b></div>
           <div class="flow-rows" id="flowRows">
@@ -1020,7 +1026,7 @@ html[dir="rtl"] .hero-pause{right:auto;left:0}
 <footer class="footer">
   <div class="wrap">
     <div class="fcols">
-      <div class="fbrand"><a href="#top" class="logo"><span class="wm">tyll.ai</span></a><div class="fsocial"><a href="https://www.linkedin.com/company/closewise-site/posts/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div>
+      <div class="fbrand"><a href="#top" class="logo"><svg class="tl-logo" viewBox="0 0 224 81" fill="currentColor" role="img" aria-label="tyll.ai"><path d="M53.9312 48.2028H33.5463L53.0695 1.96355C53.572 0.773501 54.7382 0 56.03 0H72.034C74.3466 0 75.9021 2.36931 74.9826 4.49124L56.8798 46.267C56.3705 47.4422 55.212 48.2028 53.9312 48.2028Z"/><path d="M17.0355 68.4862L0.43289 39.6292C-0.799691 37.4869 0.746682 34.8131 3.2183 34.8131H19.4402C20.5517 34.8131 21.5843 35.3876 22.1705 36.332L29.9621 48.8851C30.5283 49.7973 30.6016 50.9321 30.1573 51.9096L22.7464 68.2134C21.6637 70.5954 18.3404 70.7541 17.0355 68.4862Z"/><path d="M136.089 5.99569V14.7385H121.698V60H110.867V14.7385H96.4758V5.99569H136.089Z"/><path d="M184.999 17.137L158.461 80.271H146.933L156.217 58.9168L139.041 17.137H151.188L162.252 47.0792L173.471 17.137H184.999Z"/><path d="M201.67 2.74615V60H190.838V2.74615H201.67Z"/><path d="M223.203 2.74615V60H212.371V2.74615H223.203Z"/></svg></a><div class="fsocial"><a href="https://www.linkedin.com/company/closewise-site/posts/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div></div>
       <div class="fcol"><a href="#problem">المشكلة</a><a href="#solution">الحل</a><a href="#how">كيف يعمل</a></div>
       <div class="fcol"><a href="security-ar.html">الأمان</a><a href="faq-ar.html">FAQ</a></div>
     </div>
